@@ -4,14 +4,53 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
-  background-color: #333;
+  background-color: #111;
 }
 
 header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   min-height: 100vh;
 }
 
-#robot {
-  height: 50vmin;
+.robot {
+  flex-basis: 30%;
+}
+
+.typing {
+  flex-basis: 50%;
+}
+
+.typing p {
+  font-size: 2.6rem;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+  color: #adff2f;
+  text-shadow: 0 0 2px #adff2f;
+}
+
+.typing p::before {
+  content: "> ";
+}
+
+.typing p:nth-last-of-type(1)::after {
+  content: "_";
+  animation: cursor 0.3s infinite alternate;
+}
+
+@keyframes cursor {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
 }
