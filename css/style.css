@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #111;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
+}
+
+.robot {
+  -ms-flex-preferred-size: 30%;
+      flex-basis: 30%;
+}
+
+.typing {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.typing p {
+  font-size: 2.6rem;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+  color: #adff2f;
+  text-shadow: 0 0 2px #adff2f;
+}
+
+.typing p::before {
+  content: "> ";
+}
+
+.typing p:nth-last-of-type(1)::after {
+  content: "_";
+  -webkit-animation: cursor 0.3s infinite alternate;
+          animation: cursor 0.3s infinite alternate;
+}
+
+@-webkit-keyframes cursor {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cursor {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=style.css.map */
