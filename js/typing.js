@@ -1,4 +1,4 @@
-const typingBox = document.querySelector('.typing');
+const typingBox = document.querySelector('.header__typing');
 let sentenceIndex = 0;
 let textIndex = 0;
 let oldTime = 0;

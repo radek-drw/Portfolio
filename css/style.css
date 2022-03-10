@@ -9,11 +9,7 @@ html {
   font-size: 10px;
 }
 
-body {
-  background-color: #111;
-}
-
-header {
+.header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,19 +20,20 @@ header {
       -ms-flex-align: center;
           align-items: center;
   min-height: 100vh;
+  background-color: #111;
 }
 
-.robot {
+.header .header__robot {
   -ms-flex-preferred-size: 30%;
       flex-basis: 30%;
 }
 
-.typing {
+.header .header__typing {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
 }
 
-.typing p {
+.header .header__typing > p {
   font-size: 2.6rem;
   font-family: "Roboto Mono", monospace;
   font-weight: 700;
@@ -44,11 +41,11 @@ header {
   text-shadow: 0 0 2px #adff2f;
 }
 
-.typing p::before {
+.header .header__typing > p::before {
   content: "> ";
 }
 
-.typing p:nth-last-of-type(1)::after {
+.header .header__typing > p:nth-last-of-type(1)::after {
   content: "_";
   -webkit-animation: cursor 0.3s infinite alternate;
           animation: cursor 0.3s infinite alternate;
