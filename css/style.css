@@ -13,9 +13,10 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -24,17 +25,19 @@ html {
 }
 
 .header .header__robot {
-  -ms-flex-preferred-size: 30%;
-      flex-basis: 30%;
+  width: 75%;
+  margin-top: 30px;
 }
 
 .header .header__typing {
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%;
+  width: 100%;
+  margin-top: 30px;
+  min-height: 50%;
 }
 
 .header .header__typing > p {
-  font-size: 2.6rem;
+  font-size: 1.6rem;
+  padding: 6%;
   font-family: "Roboto Mono", monospace;
   font-weight: 700;
   color: #adff2f;
