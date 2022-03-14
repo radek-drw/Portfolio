@@ -24,19 +24,18 @@ html {
   background-color: #111;
 }
 
-.header .header__robot {
+.header__robot {
   width: 70%;
-  margin-top: 30px;
+  margin: 20px 0;
 }
 
-.header .header__typing {
+.header__typing {
   width: 100%;
-  margin-top: 25px;
   min-height: 50%;
 }
 
-.header .header__typing > p {
-  font-size: 1.6rem;
+.header__typing > p {
+  font-size: 1.8rem;
   padding: 6%;
   font-family: "Roboto Mono", monospace;
   font-weight: 700;
@@ -44,11 +43,11 @@ html {
   text-shadow: 0 0 2px #adff2f;
 }
 
-.header .header__typing > p::before {
+.header__typing > p::before {
   content: "> ";
 }
 
-.header .header__typing > p:nth-last-of-type(1)::after {
+.header__typing > p:nth-last-of-type(1)::after {
   content: "_";
   -webkit-animation: cursor 0.3s infinite alternate;
           animation: cursor 0.3s infinite alternate;
