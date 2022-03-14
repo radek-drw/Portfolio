@@ -17,7 +17,7 @@ const typing = newTime => {
         textIndex++;
         sentenceIndex = 0;
         requestAnimationFrame(typing)
-      }, 2000); // Wait between typing new sentence
+      }, 2000); // Wait time between typing new sentence
     } else if (sentenceIndex === 0) {
       const p = document.createElement('p');
       typingBox.appendChild(p);
