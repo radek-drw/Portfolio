@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/82e3298cb6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
   <title>Radek Drweski</title>
 </head>
 
@@ -14,26 +15,48 @@
   <div class="container">
     <header class="header">
 
+      <!-- NAVIGATION -->
       <nav class="header__menu">
+        <div class="header__menu-hamburger">
+          <span class="hamburger__line1"></span>
+          <span class="hamburger__line2"></span>
+          <span class="hamburger__line3"></span>
+        </div>
         <ul class="header__menu-list">
           <li class="header__menu-list-item">
-            <a href="#" class="header__menu-link">source code</a>
+            <a href="https://github.com/radek-drw/Portfolio" class="header__menu-link">
+              <i class="fa-solid fa-code"></i>
+              source code
+            </a>
           </li>
           <li class="header__menu-list-item">
-            <a href="https://www.linkedin.com/in/radek-drweski/" class="header__menu-link">linkedIn</a>
+            <a href="https://www.linkedin.com/in/radek-drweski/" class="header__menu-link">
+              <i class="fa-brands fa-linkedin-in"></i>
+              linkedIn
+            </a>
           </li>
           <li class="header__menu-list-item">
-            <a href="https://github.com/radek-drw" class="header__menu-link">gitHub</a>
+            <a href="https://github.com/radek-drw" class="header__menu-link">
+              <i class="fa-brands fa-github"></i>
+              gitHub
+            </a>
           </li>
           <li class="header__menu-list-item">
-            <a href="mailto:rdrweski@gmail.com" class="header__menu-link">Send Email</a>
+            <a href="mailto:rdrweski@gmail.com" class="header__menu-link">
+              <i class="fa-solid fa-envelope"></i>
+              Send Email
+            </a>
           </li>
           <li class="header__menu-list-item">
-            <a href="tel:0858112473" class="header__menu-link">085 811 2473</a>
+            <a href="tel:0858112473" class="header__menu-link header__menu-link--last">
+              <i class="fa-solid fa-phone"></i>
+              085 811 2473
+            </a>
           </li>
         </ul>
       </nav>
 
+      <!-- ROBOT ANIMATION -->
       <div class="header__robot">
         <svg id="robot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
           <title>robot-responsive</title>
@@ -148,7 +171,11 @@
         </svg>
       </div>
 
-      <div class="header__typing"></div>
+      <!-- TYPING ANIMATION -->
+      <div class="header__typing">
+        <p>I'm currently looking for the right oportunity to work in an environment that will help me progress into a
+          full-stack role</p>
+      </div>
     </header>
   </div>
 

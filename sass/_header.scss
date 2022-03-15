@@ -5,6 +5,10 @@
   min-height: 100vh;
   background-color: #111;
 
+  overflow: hidden;
+  position: relative;
+  border: 2px solid red;
+
   &__robot {
     width: 70%;
     margin: 20px 0;
