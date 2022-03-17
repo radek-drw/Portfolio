@@ -4,10 +4,22 @@
   align-items: center;
   min-height: 100vh;
   background-color: #111;
+  transition: $transition-hamburger-menu;
 
-  overflow: hidden;
-  position: relative;
-  border: 2px solid red;
+  &__blurry-bg {
+    position: absolute;
+    transition: $transition-hamburger-menu;
+
+    // Class for use in JS
+    &.blur {
+      backdrop-filter: blur(2px);
+      background-color: rgba(0, 0, 0, 0.3);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
 
   &__robot {
     width: 70%;
