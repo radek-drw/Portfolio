@@ -1,3 +1,11 @@
 html {
   font-size: 10px;
+
+  @include media(small) {
+    font-size: 14px;
+  }
+
+  @include media(medium) {
+    font-size: 18px;
+  }
 }
