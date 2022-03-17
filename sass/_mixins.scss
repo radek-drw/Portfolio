@@ -1,0 +1,10 @@
+@mixin media($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+  @if ($size) {
+    @media #{$size} {
+      @content;
+    }
+  } @else {
+    @error "'#{$breakpoint}' - I don't recognize this size";
+  }
+}
