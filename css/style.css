@@ -22,14 +22,14 @@ html {
           align-items: center;
   min-height: 100vh;
   background-color: #111;
-  -webkit-transition: 1.4s;
-  transition: 1.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .header__blurry-bg {
   position: absolute;
-  -webkit-transition: 1.4s;
-  transition: 1.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .header__blurry-bg.blur {
@@ -103,8 +103,8 @@ html {
   right: 0;
   height: 50%;
   background-color: #fff;
-  -webkit-transition: 1.4s;
-  transition: 1.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .header__menu.show {
@@ -172,15 +172,11 @@ html {
 }
 
 .header__menu-hamburger {
-  position: absolute;
+  position: fixed;
   left: 3%;
-  top: 104%;
+  top: 3%;
   width: 30px;
   height: 20px;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
 }
 
 .header__menu-hamburger > span {
@@ -188,12 +184,14 @@ html {
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 2px;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
-  -webkit-transition: 0.25s ease-in-out;
-  transition: 0.25s ease-in-out;
+  -webkit-transition: background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
 }
 
 .header__menu-hamburger span:nth-child(1) {
@@ -210,27 +208,29 @@ html {
 
 .header__menu-hamburger span:nth-child(4) {
   top: calc(100% - 4px);
+  -webkit-transition: 0s 0.2s;
+  transition: 0s 0.2s;
 }
 
 .header__menu-hamburger.open span:nth-child(1) {
-  top: calc(50% - 2px);
-  left: 50%;
-  width: 0%;
+  opacity: 0;
 }
 
 .header__menu-hamburger.open span:nth-child(2) {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+  background-color: #111;
 }
 
 .header__menu-hamburger.open span:nth-child(3) {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
+  background-color: #111;
 }
 
 .header__menu-hamburger.open span:nth-child(4) {
-  top: calc(50% - 2px);
-  left: 50%;
-  width: 0%;
+  opacity: 0;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 /*# sourceMappingURL=style.css.map */
