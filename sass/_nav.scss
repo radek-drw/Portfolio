@@ -2,36 +2,15 @@
   display: flex;
   position: absolute;
   left: 0;
-  top: 0;
+  top: -50%;
   right: 0;
   height: 50%;
   background-color: #fff;
+  transition: $transition-hamburger-menu;
 
-  &-hamburger {
-    position: absolute;
-    left: 5px;
-    top: 105%;
-    width: 40px;
-    height: 40px;
-
-    & > * {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: $burger-line-height;
-      background-color: red;
-      border-radius: $burger-line-height / 2;
-    }
-
-    .hamburger__line-top {
-      top: 0;
-    }
-    .hamburger__line-middle {
-      top: calc(50% - #{$burger-line-height / 2});
-    }
-    .hamburger__line-bottom {
-      bottom: 0;
-    }
+  // Class for use in JS
+  &.show {
+    top: 0;
   }
 
   &-list {
@@ -44,8 +23,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      // height: 46px;
-      border: 2px solid blueviolet;
       flex-grow: 1;
     }
   }
@@ -53,27 +30,84 @@
   &-link {
     display: flex;
     align-items: center;
-    // justify-content: center;
     align-self: stretch;
-    padding-left: 10px;
-    border: 2px solid red;
     width: 60%;
+    padding-left: 10px;
     font-size: 1.3rem;
-    // text-align: center;
-    // font-family: tahoma;
-    // letter-spacing: 1px;
-    // text-decoration: none;
-    // text-transform: capitalize;
-    // font-style: normal;
-    // color: #555;
+    border-bottom: 1px solid #ccc;
+    letter-spacing: 1px;
+    font-family: tahoma;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-style: normal;
+    color: #555;
 
-    & > i {
+    & i {
       width: 22px;
+      margin-right: 5px;
       text-align: center;
     }
 
     &--last {
       border-bottom: none;
+    }
+  }
+
+  &-hamburger {
+    position: absolute;
+    left: 3%;
+    top: 104%;
+    width: 30px;
+    height: 20px;
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+
+    & > span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: $burger-line-height;
+      background-color: white;
+      border-radius: $burger-line-height / 2;
+      transform: rotate(0deg);
+      transition: 0.25s ease-in-out;
+    }
+
+    & span:nth-child(1) {
+      top: 0;
+    }
+
+    & span:nth-child(2) {
+      top: calc(50% - #{$burger-line-height / 2});
+    }
+
+    & span:nth-child(3) {
+      top: calc(50% - #{$burger-line-height / 2});
+    }
+
+    & span:nth-child(4) {
+      top: calc(100% - #{$burger-line-height});
+    }
+
+    &.open span:nth-child(1) {
+      top: calc(50% - #{$burger-line-height / 2});
+      left: 50%;
+      width: 0%;
+    }
+
+    // Class for use in JS
+    &.open span:nth-child(2) {
+      transform: rotate(45deg);
+    }
+    // Class for use in JS
+    &.open span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+    // Class for use in JS
+    &.open span:nth-child(4) {
+      top: calc(50% - #{$burger-line-height / 2});
+      left: 50%;
+      width: 0%;
     }
   }
 }
