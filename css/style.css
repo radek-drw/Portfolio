@@ -188,10 +188,8 @@ html {
   border-radius: 2px;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
-  -webkit-transition: background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  transition: background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  -webkit-transition: 0.4s 0.4s ease-in-out;
+  transition: 0.4s 0.4s ease-in-out;
 }
 
 .header__menu-hamburger span:nth-child(1) {
@@ -208,8 +206,6 @@ html {
 
 .header__menu-hamburger span:nth-child(4) {
   top: calc(100% - 4px);
-  -webkit-transition: 0s 0.2s;
-  transition: 0s 0.2s;
 }
 
 .header__menu-hamburger.open span:nth-child(1) {
@@ -230,7 +226,5 @@ html {
 
 .header__menu-hamburger.open span:nth-child(4) {
   opacity: 0;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
 }
 /*# sourceMappingURL=style.css.map */

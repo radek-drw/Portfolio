@@ -68,8 +68,10 @@
       background-color: #fff;
       border-radius: $burger-line-height / 2;
       transform: rotate(0deg);
-      transition: transform $transition-hamburger-menu ease-in-out,
-        background-color $transition-hamburger-menu ease-in-out;
+      // transition: transform $transition-hamburger-menu ease-in-out,
+      //   background-color $transition-hamburger-menu ease-in-out;
+      transition: $transition-hamburger-menu $transition-hamburger-menu
+        ease-in-out;
     }
 
     & span:nth-child(1) {
@@ -86,7 +88,7 @@
 
     & span:nth-child(4) {
       top: calc(100% - #{$burger-line-height});
-      transition: 0s $transition-hamburger-menu / 2;
+      // transition: 0s $transition-hamburger-menu / 2;
     }
 
     // Class for use in JS
@@ -106,7 +108,7 @@
     // Class for use in JS
     &.open span:nth-child(4) {
       opacity: 0;
-      transition: $transition-hamburger-menu / 2;
+      // transition: $transition-hamburger-menu / 2;
     }
   }
 }
