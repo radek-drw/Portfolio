@@ -6,6 +6,15 @@
   background-color: #111;
   transition: $transition-hamburger-menu;
 
+  @include media(large) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: c;
+    // justify-content: center;
+    // align-content: center;
+    align-items: flex-end;
+  }
+
   &__blurry-bg {
     position: absolute;
     transition: $transition-hamburger-menu;
@@ -22,17 +31,31 @@
   }
 
   &__robot {
-    width: 70%;
-    margin: 20px 0;
+    width: 50%;
+    margin-top: 50px;
+
+    @include media(small) {
+      width: 35%;
+    }
+
+    @include media(large) {
+      margin-top: 0;
+      width: 30%;
+      align-self: flex-start;
+    }
   }
 
   &__typing {
-    width: 100%;
-    min-height: 50%;
+    // align-self: stretch;
+
+    @include media(large) {
+      width: 70%;
+      // align-self: flex-start;
+    }
 
     & > p {
-      font-size: 1.8rem;
       padding: 6%;
+      font-size: 1.8rem;
       font-family: "Roboto Mono", monospace;
       font-weight: 700;
       color: #adff2f;
