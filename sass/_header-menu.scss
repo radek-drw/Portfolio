@@ -1,0 +1,160 @@
+.header__menu {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: -50%;
+  right: 0;
+  height: 50%;
+  background-color: #fff;
+  transition: $transition-hamburger-menu;
+
+  // Class for use in JS
+  &.show {
+    top: 0;
+  }
+
+  @include media(large) {
+    display: block;
+    align-self: flex-start;
+    // margin: 0 auto;
+    position: static;
+    height: 10%;
+    background-color: transparent;
+    // margin-top: 10px;
+    width: 96%;
+    max-width: 1400px;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    list-style-type: none;
+
+    @include media(large) {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 0;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+
+      @include media(large) {
+        flex-grow: 1;
+        flex-basis: 0;
+      }
+    }
+  }
+
+  &-link {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    padding-left: 10px;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #ccc;
+    letter-spacing: 1px;
+    font-family: tahoma;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-style: normal;
+    color: #555;
+
+    &--last {
+      border-bottom: none;
+    }
+
+    @include media(large) {
+      display: block;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #ddd;
+      border-bottom: none;
+      padding-left: 0;
+      width: auto;
+    }
+
+    & i {
+      width: 22px;
+      margin-right: 5px;
+      text-align: center;
+
+      @include media(medium) {
+        margin-right: 20px;
+        // width: auto;
+      }
+
+      @include media(large) {
+        margin-right: 2px;
+        width: auto;
+      }
+    }
+  }
+
+  &-hamburger {
+    position: fixed;
+    left: 3%;
+    top: 3%;
+    width: 30px;
+    height: 20px;
+
+    @include media(medium) {
+      width: 40px;
+      height: 30px;
+    }
+
+    @include media(large) {
+      display: none;
+    }
+
+    & > span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: $burger-line-height;
+      background-color: #fff;
+      border-radius: $burger-line-height / 2;
+      transform: rotate(0deg);
+      transition: $transition-hamburger-menu 0.2s ease-in-out;
+    }
+
+    & span:nth-child(1) {
+      top: 0;
+    }
+
+    & span:nth-child(2) {
+      top: calc(50% - #{$burger-line-height / 2});
+    }
+
+    & span:nth-child(3) {
+      top: calc(50% - #{$burger-line-height / 2});
+    }
+
+    & span:nth-child(4) {
+      top: calc(100% - #{$burger-line-height});
+    }
+
+    // Class for use in JS
+    &.open span:nth-child(1) {
+      transform: scale(0);
+    }
+    // Class for use in JS
+    &.open span:nth-child(2) {
+      transform: rotate(45deg);
+      background-color: #111;
+    }
+    // Class for use in JS
+    &.open span:nth-child(3) {
+      transform: rotate(-45deg);
+      background-color: #111;
+    }
+    // Class for use in JS
+    &.open span:nth-child(4) {
+      transform: scale(0);
+    }
+  }
+}
