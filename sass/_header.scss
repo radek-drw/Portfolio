@@ -3,16 +3,13 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: #111;
+  background-color: $header-main-color;
   transition: $transition-hamburger-menu;
 
   @include media(large) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: c;
-    // justify-content: center;
-    // align-content: center;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: 50px 1fr;
   }
 
   &__blurry-bg {
@@ -21,45 +18,43 @@
 
     // Class for use in JS
     &.blur {
-      backdrop-filter: blur(2px);
-      background-color: rgba(0, 0, 0, 0.3);
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
     }
   }
 
   &__robot {
-    width: 50%;
-    margin-top: 50px;
-
-    @include media(small) {
-      width: 35%;
-    }
+    margin: 50px 0 20px;
+    width: 60%;
 
     @include media(large) {
-      margin-top: 0;
-      width: 30%;
-      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 20px;
     }
   }
 
   &__typing {
-    // align-self: stretch;
-
     @include media(large) {
-      width: 70%;
-      // align-self: flex-start;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
     }
 
     & > p {
       padding: 6%;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-family: "Roboto Mono", monospace;
       font-weight: 700;
       color: #adff2f;
-      text-shadow: 0 0 2px #adff2f;
+      text-shadow: 0 0px 2px #adff2f;
 
       &::before {
         content: "> ";
@@ -68,18 +63,20 @@
       &:nth-last-of-type(1)::after {
         content: "_";
         animation: cursor 0.3s infinite alternate;
+
+        @keyframes cursor {
+          0%,
+          30% {
+            color: transparent;
+            text-shadow: none;
+          }
+          70%,
+          100% {
+            color: rgba(173, 255, 47, 1);
+            text-shadow: 0 0 2px #adff2f;
+          }
+        }
       }
     }
-  }
-}
-
-@keyframes cursor {
-  0%,
-  30% {
-    opacity: 0;
-  }
-  70%,
-  100% {
-    opacity: 1;
   }
 }
