@@ -1,11 +1,10 @@
-const burgerMenu = document.querySelector('.header__menu-hamburger');
-const headerMenu = document.querySelector('.header__menu');
-const header = document.querySelector('.header');
+const burgerMenu = document.querySelector('.menu__hamburger');
+const headerMenu = document.querySelector('.menu');
 const blurryBg = document.querySelector('.header__blurry-bg');
 
 burgerMenu.addEventListener('click', () => {
-  burgerMenu.classList.toggle('open');
-  headerMenu.classList.toggle('show');
+  burgerMenu.classList.toggle('menu__hamburger--open');
+  headerMenu.classList.toggle('menu--show');
   blurryBg.classList.toggle('blur');
 });
 
