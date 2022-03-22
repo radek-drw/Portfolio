@@ -68,8 +68,8 @@ const blink = () => {
   return tl;
 }
 
-const master = new TimelineMax();
-master.add('start');
-master.add(bars(), 'start');
-master.add(move(), 'start');
-master.add(blink(), 'start');
+// const master = new TimelineMax();
+// master.add('start');
+// master.add(bars(), 'start');
+// master.add(move(), 'start');
+// master.add(blink(), 'start');
