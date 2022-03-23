@@ -65,13 +65,13 @@ html {
           backdrop-filter: blur(2px);
 }
 
-.header__robot {
+.header .robot {
   margin: 50px 0 20px;
   width: 60%;
 }
 
 @media (min-width: 1024px) {
-  .header__robot {
+  .header .robot {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -87,7 +87,7 @@ html {
 }
 
 @media (min-width: 1024px) {
-  .header__typing {
+  .header .typing {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -101,7 +101,7 @@ html {
   }
 }
 
-.header__typing > p {
+.header .typing > p {
   padding: 6%;
   font-size: 2rem;
   font-family: "Roboto Mono", monospace;
@@ -110,11 +110,11 @@ html {
   text-shadow: 0 0px 2px #adff2f;
 }
 
-.header__typing > p::before {
+.header .typing > p::before {
   content: "> ";
 }
 
-.header__typing > p:nth-last-of-type(1)::after {
+.header .typing > p:nth-last-of-type(1)::after {
   content: "_";
   -webkit-animation: cursor 0.3s infinite alternate;
           animation: cursor 0.3s infinite alternate;

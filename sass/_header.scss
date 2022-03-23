@@ -27,7 +27,7 @@
     }
   }
 
-  &__robot {
+  .robot {
     margin: 50px 0 20px;
     width: 60%;
 
@@ -40,7 +40,7 @@
     }
   }
 
-  &__typing {
+  .typing {
     @include media(large) {
       display: flex;
       flex-wrap: wrap;
