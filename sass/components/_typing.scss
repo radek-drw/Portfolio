@@ -1,0 +1,37 @@
+.typing {
+  align-self: stretch;
+
+  @include media(large) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+  }
+  & > p {
+    padding: 6%;
+    font-size: 2rem;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    color: #adff2f;
+    text-shadow: 0 0px 2px #adff2f;
+    &::before {
+      content: "> ";
+    }
+    &:nth-last-of-type(1)::after {
+      content: "_";
+      animation: cursor 0.3s infinite alternate;
+      @keyframes cursor {
+        0%,
+        30% {
+          color: transparent;
+          text-shadow: none;
+        }
+        70%,
+        100% {
+          color: rgba(173, 255, 47, 1);
+          text-shadow: 0 0 2px #adff2f;
+        }
+      }
+    }
+  }
+}

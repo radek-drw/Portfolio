@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $header-main-color;
+  transition: $transition-time-mobile-menu;
+  @include media(large) {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: 50px 1fr;
+  }
+  &__blurry-bg {
+    position: absolute;
+    transition: $transition-time-mobile-menu;
+    // Class for use in JS (hamburger.js)
+    &.blur {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+    }
+  }
+}

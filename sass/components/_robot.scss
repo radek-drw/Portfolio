@@ -1,0 +1,11 @@
+.robot {
+  margin: 50px 0 20px;
+  width: 60%;
+  @include media(large) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+  }
+}

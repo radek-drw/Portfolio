@@ -10,7 +10,7 @@ burgerMenu.addEventListener('click', () => {
 
 // Click blur background (when menu is open) to hide menu, change burger icon and remove blur
 blurryBg.addEventListener('click', () => {
-  burgerMenu.classList.remove('open');
-  headerMenu.classList.remove('show');
+  burgerMenu.classList.remove('menu__hamburger--open');
+  headerMenu.classList.remove('menu--show');
   blurryBg.classList.remove('blur');
 })

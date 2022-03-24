@@ -5,8 +5,7 @@
   right: 0;
   height: 50%;
   background-color: #fff;
-  transition: $transition-hamburger-menu;
-
+  transition: $transition-time-mobile-menu;
   // Class for use in JS
   &--show {
     top: 0;
@@ -18,23 +17,19 @@
     height: auto;
     background-color: transparent;
   }
-
   &__hamburger {
     position: fixed;
     left: 3%;
     top: 3%;
     width: 30px;
     height: 20px;
-
     @include media(medium) {
       width: 40px;
       height: 30px;
     }
-
     @include media(large) {
       display: none;
     }
-
     & > span {
       position: absolute;
       left: 0;
@@ -43,25 +38,20 @@
       background-color: #fff;
       border-radius: $burger-line-height / 2;
       transform: rotate(0deg);
-      transition: $transition-hamburger-menu 0.2s ease-in-out;
+      transition: $transition-time-mobile-menu 0.2s ease-in-out;
     }
-
     & span:nth-child(1) {
       top: 0;
     }
-
     & span:nth-child(2) {
       top: calc(50% - #{$burger-line-height / 2});
     }
-
     & span:nth-child(3) {
       top: calc(50% - #{$burger-line-height / 2});
     }
-
     & span:nth-child(4) {
       top: calc(100% - #{$burger-line-height});
     }
-
     // Class for use in JS
     &--open span:nth-child(1) {
       transform: scale(0);
@@ -81,13 +71,11 @@
       transform: scale(0);
     }
   }
-
   &__list {
     display: flex;
     flex-direction: column;
     height: 100%;
     list-style-type: none;
-
     @include media(large) {
       justify-content: space-evenly;
       align-items: center;
@@ -96,13 +84,11 @@
       flex-direction: row;
     }
   }
-
   &__item {
     display: flex;
     justify-content: center;
     flex-grow: 1;
   }
-
   &__link {
     display: flex;
     align-items: center;
@@ -116,11 +102,9 @@
     text-transform: capitalize;
     border-bottom: 1px solid #ccc;
     transition: 0.2s;
-
     &--last {
       border-bottom: none;
     }
-
     @include media(large) {
       display: block;
       width: auto;
@@ -132,7 +116,6 @@
       }
     }
   }
-
   &__icon {
     margin-right: 5px;
     width: 22px;
