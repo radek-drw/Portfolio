@@ -1,11 +1,12 @@
 .robot {
-  margin: 50px 0 20px;
+  margin: 70px 0 40px;
   width: 60%;
+  @include media(small) {
+    margin-top: 120px;
+  }
   @include media(large) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
+    margin: 0;
+    width: 80%;
+    max-width: 540px;
   }
 }

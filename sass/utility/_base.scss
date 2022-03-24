@@ -2,10 +2,14 @@ html {
   font-size: 10px;
 
   @include media(small) {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   @include media(medium) {
-    font-size: 18px;
+    font-size: 22px;
+  }
+
+  @include media(large) {
+    font-size: 13px;
   }
 }
