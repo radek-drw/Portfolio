@@ -83,8 +83,6 @@
     height: 100%;
     list-style-type: none;
     @include media(large) {
-      // justify-content: space-evenly;
-      // align-items: center;
       margin: 0 auto;
       max-width: 1300px;
       flex-direction: row;
@@ -94,6 +92,12 @@
     display: flex;
     justify-content: center;
     flex-grow: 1;
+    @include media(large) {
+      border-right: 1px solid #ccc;
+      &--last {
+        border-right: none;
+      }
+    }
   }
   &__link {
     display: flex;
@@ -114,11 +118,12 @@
     @include media(large) {
       display: block;
       width: auto;
+      padding-left: 0;
       border-bottom: none;
       color: $font-color-menu-desktop;
       &:hover {
-        color: #fff;
-        text-shadow: 0 0 3px #fff;
+        color: #f9e0af;
+        text-shadow: 0 0 2px #f9e0af;
       }
       &--last:hover {
         color: $font-color-menu-desktop;

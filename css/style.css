@@ -230,6 +230,15 @@ html {
           flex-grow: 1;
 }
 
+@media (min-width: 1024px) {
+  .menu__item {
+    border-right: 1px solid #ccc;
+  }
+  .menu__item--last {
+    border-right: none;
+  }
+}
+
 .menu__link {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -258,12 +267,13 @@ html {
   .menu__link {
     display: block;
     width: auto;
+    padding-left: 0;
     border-bottom: none;
     color: #ddd;
   }
   .menu__link:hover {
-    color: #fff;
-    text-shadow: 0 0 3px #fff;
+    color: #f9e0af;
+    text-shadow: 0 0 2px #f9e0af;
   }
   .menu__link--last:hover {
     color: #ddd;
