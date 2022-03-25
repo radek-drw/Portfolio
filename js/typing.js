@@ -31,4 +31,4 @@ const typing = newTime => {
   requestAnimationFrame(typing);
 }
 
-typing();
+// typing();
