@@ -209,12 +209,12 @@ html {
 
 @media (min-width: 1024px) {
   .menu__list {
-    margin: 0 auto;
-    max-width: 1300px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    margin: 0 auto;
+    max-width: 1300px;
   }
 }
 

@@ -83,9 +83,9 @@
     height: 100%;
     list-style-type: none;
     @include media(large) {
+      flex-direction: row;
       margin: 0 auto;
       max-width: 1300px;
-      flex-direction: row;
     }
   }
   &__item {
