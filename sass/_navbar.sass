@@ -1,7 +1,7 @@
 nav
   display: flex
   justify-content: space-between
-  padding: 30px 0
+  padding: 70px 0
   font-size: 1.8rem
 
   span
@@ -14,12 +14,12 @@ ul.main-nav
   flex-basis: 40%
   list-style: none
   a
+    @include buttons-transition
     display: block
     padding: 5px 10px
     overflow: hidden
     color: $white
     text-decoration: none
-    transition: all 0.25s ease-in-out
     &:hover
       text-shadow: 0 0 10px
   .active
