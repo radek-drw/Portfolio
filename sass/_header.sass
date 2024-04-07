@@ -5,3 +5,35 @@ header
   width: 100%
   height: 100vh
   z-index: -1
+  .intro
+    position: absolute
+    top: 30%
+    left: 0
+    width: 50%
+    .intro-text
+      line-height: 1.2
+      font-size: 5.4rem
+      font-weight: 400
+      color: $primary
+  .description
+    margin: 40px 0 110px 0
+    line-height: 2
+    font-weight: 300
+    font-size: 1.6rem
+  .cta-button
+    @include header-buttons($secondary, $primary)
+    @include buttons-transition
+    border: none
+    box-shadow: 0 0 20px $primary
+    span i
+      margin-left: 15px
+    &:hover
+      @include header-buttons-animation
+  .cv-button
+    @include header-buttons($primary,$secondary)
+    @include buttons-transition
+    border: 1px solid $primary
+    &:hover
+      @include header-buttons-animation
+    span i
+      margin-left: 10px
