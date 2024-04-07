@@ -20,7 +20,6 @@ body {
   position: relative;
   width: 1480px;
   margin: 0 auto;
-  text-align: center;
 }
 
 nav {
@@ -30,7 +29,7 @@ nav {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 30px 0;
+  padding: 70px 0;
   font-size: 1.8rem;
 }
 nav span {
@@ -50,13 +49,13 @@ ul.main-nav {
   list-style: none;
 }
 ul.main-nav a {
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
   display: block;
   padding: 5px 10px;
   overflow: hidden;
   color: #fff;
   text-decoration: none;
-  -webkit-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
 }
 ul.main-nav a:hover {
   text-shadow: 0 0 10px;
@@ -72,4 +71,70 @@ header {
   width: 100%;
   height: 100vh;
   z-index: -1;
+}
+header .intro {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 50%;
+}
+header .intro .intro-text {
+  line-height: 1.2;
+  font-size: 5.4rem;
+  font-weight: 400;
+  color: #12f7d6;
+}
+header .description {
+  margin: 40px 0 110px 0;
+  line-height: 2;
+  font-weight: 300;
+  font-size: 1.6rem;
+}
+header .cta-button {
+  margin-right: 40px;
+  padding: 19px 24px;
+  border-radius: 40px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #1a1e23;
+  background-color: #12f7d6;
+  font-family: "IBM Plex Mono";
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  border: none;
+  -webkit-box-shadow: 0 0 20px #12f7d6;
+          box-shadow: 0 0 20px #12f7d6;
+}
+header .cta-button span i {
+  margin-left: 15px;
+}
+header .cta-button:hover {
+  color: #12f7d6;
+  background-color: #1a1e23;
+  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 20px #12f7d6;
+          box-shadow: inset 0 0 5px #12f7d6, 0 0 20px #12f7d6;
+}
+header .cv-button {
+  margin-right: 40px;
+  padding: 19px 24px;
+  border-radius: 40px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #12f7d6;
+  background-color: #1a1e23;
+  font-family: "IBM Plex Mono";
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  border: 1px solid #12f7d6;
+}
+header .cv-button:hover {
+  color: #12f7d6;
+  background-color: #1a1e23;
+  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 20px #12f7d6;
+          box-shadow: inset 0 0 5px #12f7d6, 0 0 20px #12f7d6;
+}
+header .cv-button span i {
+  margin-left: 10px;
 }/*# sourceMappingURL=style.css.map */
