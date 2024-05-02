@@ -1,26 +1,36 @@
 .navbar
+  position: relative
   display: flex
   justify-content: space-between
-  padding: 70px 0
+  padding: 70px 0 30px
   font-size: 1.8rem
-
+  margin-bottom: 30px
+  .line
+    height: 2px
+    position: absolute
+    bottom: 0
+    background-color: $primary
+    border-radius: 1px
   span
     margin-right: 15px
     color: $primary
 
-ul.main-nav
-  display: flex
-  justify-content: space-between
-  flex-basis: 40%
-  list-style: none
-  a
-    @include buttons-transition
-    display: block
-    padding: 5px 10px
-    overflow: hidden
-    color: $white
-    text-decoration: none
-    &:hover
-      color: $primary
-  .active // Color of item/link when current section is displayed (default 'Hi')
-    color: $primary
+  ul.main-nav
+    display: flex
+    justify-content: space-between
+    flex-basis: 40%
+    list-style: none
+    li
+      opacity: .4
+      transition: all 0.4s ease
+      &:hover
+        opacity: .7
+      &.active
+        opacity: 1
+      a
+        // @include buttons-transition
+        display: block
+        padding: 5px 10px
+        overflow: hidden
+        color: $white
+        text-decoration: none
