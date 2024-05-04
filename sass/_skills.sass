@@ -1,0 +1,46 @@
+section.skills
+  .title
+    @include title-style
+  .skills-list
+    display: flex
+    // flex-wrap: wrap
+    // padding: 120px 0
+    // display: flex
+    // flex-wrap: nowrap
+    // overflow-x: auto
+    // animation: slide 10s infinite
+    // overflow-x: auto
+    // width: 500px
+    white-space: nowrap
+    .skill
+      // flex-basis: 300px
+      display: inline-block
+      width: 300px
+      height: 130px
+      // display: flex
+      // display: inline-block
+      // flex-direction: column
+      // justify-content: space-between
+      // align-items: center
+    // Fix some SVG's positioning
+    .nodejs img
+      position: relative
+      top: 35%
+    .jquery img
+      position: relative
+      top: 32%
+    .sass img
+      position: relative
+      top: 10%
+    .stylus img
+      position: relative
+      top: 15%
+    p
+      font-size: 1.8rem
+      font-family: $font
+
+@keyframes slide
+  from
+    transform: translateX(0)
+  to
+    transform: translateX(-100%)

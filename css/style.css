@@ -20,6 +20,8 @@ body {
   position: relative;
   width: 1480px;
   margin: 0 auto;
+  border: 1px solid lightgrey;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -157,4 +159,75 @@ body {
 }
 .about .cv-button span i {
   margin-left: 10px;
+}
+
+section.skills .title {
+  font-size: 5.4rem;
+  color: #12f7d6;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+}
+section.skills .title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 125%;
+  width: 600%;
+  height: 1px;
+  background-color: #12f7d6;
+}
+section.skills .skills-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  white-space: nowrap;
+}
+section.skills .skills-list .skill {
+  display: inline-block;
+  width: 300px;
+  height: 130px;
+}
+section.skills .skills-list .nodejs img {
+  position: relative;
+  top: 35%;
+}
+section.skills .skills-list .jquery img {
+  position: relative;
+  top: 32%;
+}
+section.skills .skills-list .sass img {
+  position: relative;
+  top: 10%;
+}
+section.skills .skills-list .stylus img {
+  position: relative;
+  top: 15%;
+}
+section.skills .skills-list p {
+  font-size: 1.8rem;
+  font-family: "IBM Plex Mono";
+}
+
+@-webkit-keyframes slide {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes slide {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
 }/*# sourceMappingURL=style.css.map */
