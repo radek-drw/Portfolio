@@ -16,3 +16,20 @@
 
 @mixin buttons-transition
   transition: all 0.25s ease-in-out
+
+// Title style
+@mixin title-style
+  font-size: 5.4rem
+  color: $primary
+  font-family: $font
+  font-weight: 400
+  position: relative
+  display: inline-block
+  &::after
+    content: ''
+    position: absolute
+    bottom: 0
+    left: 125%
+    width: 600%
+    height: 1px
+    background-color: $primary
