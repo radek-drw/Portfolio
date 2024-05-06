@@ -17,21 +17,21 @@
       </div>
       <ul class="main-nav">
         <li class="active">
-          <a href="#">Hi</a>
+          <a href="#about">Hi</a>
         </li>
         <li>
-          <a href="#">Skills</a>
+          <a href="#skills">Skills</a>
         </li>
         <li>
-          <a href="#">Portfolio</a>
+          <a href="#portfolio">Portfolio</a>
         </li>
         <li>
-          <a href="#">Contact</a>
+          <a href="#contact">Contact</a>
         </li>
       </ul>
     </nav>
     <!-- ABOUT -->
-    <header class="about">
+    <header class="about" id="about">
       <div class="intro">
         <h1 class="intro-text">Hi, I'm Radek</h1>
         <h1 class="intro-text">a Front end Developer</h1>
@@ -49,7 +49,7 @@
       </div>
     </header>
     <!-- SKILLS -->
-    <section class="skills">
+    <section class="skills" id="skills">
       <h1 class="title">My skills</h1>
       <div class="skills-list">
         <div class="skill html">
@@ -116,16 +116,21 @@
           <img src="./src/Git.svg" alt="Git">
           <p>Git</p>
         </div>
+
+        <!-- Progress bar -->
+        <div class="progress-bar"></div>
       </div>
     </section>
   </div>
 
 
+  <!-- jQuery for Navbar Links Animation -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <script src="./js/header-animation.js"></script>
   <script src="./js/navbar-links-animation.js"></script>
+  <script src="./js/navbar-links-scroll.js"></script>
   <script src="./js/skills-slider.js"></script>
 </body>
 
