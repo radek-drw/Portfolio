@@ -1,7 +1,7 @@
-const canvas = document.querySelector("canvas");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const animation = document.querySelector(".animation");
+const animation = document.querySelector(".about__animation");
 
 canvas.width = animation.offsetWidth * window.devicePixelRatio;
 canvas.height = animation.offsetHeight * window.devicePixelRatio;

@@ -1,34 +1,37 @@
 .navbar
-  position: relative
+  position: sticky
+  background-color: $secondary
+  z-index: 1
+  top: 0
+  left: 0
+  width: 100%
   display: flex
   justify-content: space-between
-  padding: 70px 0 30px
+  padding: 60px 0 30px
   font-size: 1.8rem
   margin-bottom: 30px
-  .line
+  &--line
     height: 2px
     position: absolute
     bottom: 0
     background-color: $primary
     border-radius: 1px
-  span
+  &__name span
     margin-right: 15px
     color: $primary
-
-  ul.main-nav
+  &__main-nav
     display: flex
     justify-content: space-between
     flex-basis: 40%
     list-style: none
-    li
+    &-item
       opacity: .4
       transition: all 0.4s ease
       &:hover
         opacity: .7
-      &.active
+      &--active
         opacity: 1
-      a
-        // @include buttons-transition
+      >a
         display: block
         padding: 5px 10px
         overflow: hidden
