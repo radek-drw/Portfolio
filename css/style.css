@@ -154,10 +154,10 @@ body {
           clip-path: polygon(100% 100%, 0 88%, 45% 77%, 15% 70%, 42% 49%, 34% 27%, 8% 19%, 55% 16%, 14% 6%, 100% 0);
 }
 
-section.skills {
+.skills {
   overflow-x: hidden;
 }
-section.skills .title {
+.skills__title {
   font-size: 5.4rem;
   color: #12f7d6;
   font-family: "IBM Plex Mono";
@@ -165,7 +165,7 @@ section.skills .title {
   position: relative;
   display: inline-block;
 }
-section.skills .title::after {
+.skills__title::after {
   content: "";
   position: absolute;
   bottom: 1px;
@@ -174,7 +174,7 @@ section.skills .title::after {
   height: 1px;
   background-color: #12f7d6;
 }
-section.skills .skills-list {
+.skills__list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -182,11 +182,10 @@ section.skills .skills-list {
       flex-wrap: wrap;
   padding: 100px 0;
   position: relative;
-  overflow: hidden;
 }
-section.skills .skills-list .skill {
-  -ms-flex-preferred-size: 24%;
-      flex-basis: 24%;
+.skills__list-item {
+  -ms-flex-preferred-size: 21%;
+      flex-basis: 21%;
   height: 150px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -200,7 +199,11 @@ section.skills .skills-list .skill {
           align-items: center;
   display: none;
 }
-section.skills .skills-list .skill.active-skill {
+.skills__list-item > p {
+  font-size: 1.8rem;
+  font-family: "IBM Plex Mono";
+}
+.skills__list-item--active {
   display: block;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -209,7 +212,22 @@ section.skills .skills-list .skill.active-skill {
   -webkit-animation: fadeIn 3.5s linear;
           animation: fadeIn 3.5s linear;
 }
-section.skills .skills-list .progress-bar {
+.skills__list-item--nodejs > img, .skills__list-item--jquery > img, .skills__list-item--sass > img, .skills__list-item--stylus > img {
+  position: relative;
+}
+.skills__list-item--nodejs > img {
+  top: 30%;
+}
+.skills__list-item--jquery > img {
+  top: 32%;
+}
+.skills__list-item--sass > img {
+  top: 10%;
+}
+.skills__list-item--stylus > img {
+  top: 15%;
+}
+.skills__progress-bar {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -230,43 +248,24 @@ section.skills .skills-list .progress-bar {
       -ms-flex-align: center;
           align-items: center;
 }
-section.skills .skills-list .progress-bar .dot {
+.skills__progress-bar-dot {
   width: 20px;
   height: 20px;
   border: 1px solid #12f7d6;
   border-radius: 50%;
   cursor: pointer;
 }
-section.skills .skills-list .progress-bar .dot.active-dot {
+.skills__progress-bar-dot--active {
   background-color: #12f7d6;
   -webkit-box-shadow: 0 0 10px #12f7d6;
           box-shadow: 0 0 10px #12f7d6;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-section.skills .skills-list .progress-bar .line {
+.skills__progress-bar-line {
   width: 1px;
   height: 50px;
   background-color: #12f7d6;
-}
-section.skills .skills-list .nodejs img, section.skills .skills-list .jquery img, section.skills .skills-list .sass img, section.skills .skills-list .stylus img {
-  position: relative;
-}
-section.skills .skills-list .nodejs img {
-  top: 30%;
-}
-section.skills .skills-list .jquery img {
-  top: 32%;
-}
-section.skills .skills-list .sass img {
-  top: 10%;
-}
-section.skills .skills-list .stylus img {
-  top: 15%;
-}
-section.skills .skills-list p {
-  font-size: 1.8rem;
-  font-family: "IBM Plex Mono";
 }
 
 @-webkit-keyframes fadeIn {
