@@ -11,109 +11,113 @@
 
 <body>
   <div class="container">
-    <!-- NAVBAR -->
+
     <nav class="navbar">
-      <div class="name"><span>&ltC/&gt</span>Radek Drweski
+      <div class="navbar__name"><span>&ltC/></span>Radek Drweski
       </div>
-      <ul class="main-nav">
-        <li class="active">
+      <ul class="navbar__main-nav">
+        <li class="navbar__main-nav-item navbar__main-nav-item--active">
           <a href="#about">Hi</a>
         </li>
-        <li>
+        <li class="navbar__main-nav-item">
           <a href="#skills">Skills</a>
         </li>
-        <li>
+        <li class="navbar__main-nav-item">
           <a href="#portfolio">Portfolio</a>
         </li>
-        <li>
+        <li class="navbar__main-nav-item">
           <a href="#contact">Contact</a>
         </li>
       </ul>
     </nav>
-    <!-- ABOUT -->
-    <header class="about" id="about">
-      <div class="intro">
-        <h1 class="intro-text">Hi, I'm Radek</h1>
-        <h1 class="intro-text">a Front end Developer</h1>
-        <p class="description">I specialize in creating responsive, user-friendly, and visually appealing websites.
+
+    <!-- ABOUT SECTION -->
+    <div class="about" id="about">
+      <div class="about__intro">
+        <h1 class="about__intro-title">Hi, I'm Radek, a Front end Developer</h1>
+        <p class="about__intro-description">I specialize in creating responsive, user-friendly, and visually appealing
+          websites.
           With a keen eye for design and a love for clean code,
           I transform ideas into pixel-perfect interfaces.</p>
-        <div class="buttons">
-          <button class="cta-button">Let's Talk <span><i class="fa-regular fa-envelope"></i></span></button>
-          <button class="cv-button">CV <span><i class="fa-solid fa-download"></i></span></button>
+        <div class="about__intro-buttons">
+          <button class="about__button about__button--talk">Let's Talk <span><i
+                class="fa-regular fa-envelope"></i></span></button>
+          <a href="./src/Radek Drweski CV.pdf" download><button class="about__button about__button--cv">CV <span><i
+                  class="fa-solid fa-download"></i></span></button>
+          </a>
         </div>
       </div>
-
-      <div class="animation">
+      <div class="about__animation">
         <canvas id="canvas"></canvas>
       </div>
-    </header>
-    <!-- SKILLS -->
+    </div>
+
+    <!-- SKILLS SECTION -->
     <section class="skills" id="skills">
       <h1 class="title">My skills</h1>
       <div class="skills-list">
         <div class="skill html">
-          <img src="./src/HTML.svg" alt="HTML">
+          <img src="./src/images/HTML.svg" alt="HTML">
           <p>HTML 5</p>
         </div>
         <div class="skill css">
-          <img src="./src/CSS.svg" alt="CSS">
+          <img src="./src/images/CSS.svg" alt="CSS">
           <p>CSS</p>
         </div>
         <div class="skill javascript">
-          <img src="./src/JS.svg" alt="JavaScript">
+          <img src="./src/images/JS.svg" alt="JavaScript">
           <p>Java Script</p>
         </div>
         <div class="skill react">
-          <img src="./src/React.svg" alt="React">
+          <img src="./src/images/React.svg" alt="React">
           <p>React</p>
         </div>
         <div class="skill typescript">
-          <img src="./src/TypeScript.svg" alt="TypeScript">
+          <img src="./src/images/TypeScript.svg" alt="TypeScript">
           <p>Type Script</p>
         </div>
         <div class="skill nodejs">
-          <img src="./src/NodeJs.svg" alt="NodeJS">
+          <img src="./src/images/NodeJs.svg" alt="NodeJS">
           <p>Node.js</p>
         </div>
         <div class="skill jquery">
-          <img src="./src/jQuery.svg" alt="jQuery">
+          <img src="./src/images/jQuery.svg" alt="jQuery">
           <p>jQuery</p>
         </div>
         <div class="skill sass">
-          <img src="./src/Sass.svg" alt="Sass">
+          <img src="./src/images/Sass.svg" alt="Sass">
           <p>Sass</p>
         </div>
         <div class="skill stylus">
-          <img src="./src/Stylus.svg" alt="Stylus">
+          <img src="./src/images/Stylus.svg" alt="Stylus">
           <p>Stylus</p>
         </div>
         <div class="skill redux">
-          <img src="./src/Redux.svg" alt="Redux">
+          <img src="./src/images/Redux.svg" alt="Redux">
           <p>Redux</p>
         </div>
         <div class="skill wordpress">
-          <img src="./src/WordPress.svg" alt="Wordpress">
+          <img src="./src/images/WordPress.svg" alt="Wordpress">
           <p>WordPress</p>
         </div>
         <div class="skill webpack">
-          <img src="./src/Webpack.svg" alt="Webpack">
+          <img src="./src/images/Webpack.svg" alt="Webpack">
           <p>Webpack</p>
         </div>
         <div class="skill figma">
-          <img src="./src/Figma.svg" alt="Figma">
+          <img src="./src/images/Figma.svg" alt="Figma">
           <p>Figma</p>
         </div>
         <div class="skill adobe-photoshop">
-          <img src="./src/AdobePhotoshop.svg" alt="Adobe Photoshop">
+          <img src="./src/images/AdobePhotoshop.svg" alt="Adobe Photoshop">
           <p>Adobe Photoshop</p>
         </div>
         <div class="skill github">
-          <img src="./src/Github.svg" alt="Github">
+          <img src="./src/images/Github.svg" alt="Github">
           <p>Github</p>
         </div>
         <div class="skill git">
-          <img src="./src/Git.svg" alt="Git">
+          <img src="./src/images/Git.svg" alt="Git">
           <p>Git</p>
         </div>
 
@@ -130,8 +134,78 @@
 
   <script src="./js/header-animation.js"></script>
   <script src="./js/navbar-links-animation.js"></script>
-  <script src="./js/navbar-links-scroll.js"></script>
+  <!-- <script src="./js/navbar-links-scroll.js"></script> -->
   <script src="./js/skills-slider.js"></script>
 </body>
 
 </html>
+<!-- ========= -->
+
+<!-- 
+<body>
+  <div class="container">
+    NAVBAR
+    <nav class="navbar">
+      Name and logo
+      <div class="navbar__name"><span>&ltC/></span>Radek Drweski
+      </div>
+
+      Navigation links
+      <ul class="navbar__main-nav">
+        <li class="navbar__main-nav-item navbar__main-nav-item--active">
+          <a href="#about">Hi</a>
+        </li>
+        <li class="navbar__main-nav-item">
+          <a href="#skills">Skills</a>
+        </li>
+        <li class="navbar__main-nav-item">
+          <a href="#portfolio">Portfolio</a>
+        </li>
+        <li class="navbar__main-nav-item">
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    ABOUT SECTION
+    <header class="about" id="about">
+      <div class="about__intro">
+        Introduction text
+        <h1 class="about__intro-text">Hi, I'm Radek</h1>
+        <h1 class="about__intro-text">a Front end Developer</h1>
+
+        Description
+        <p class="about__description">I specialize in creating responsive, user-friendly, and visually appealing
+          websites.
+          With a keen eye for design and a love for clean code,
+          I transform ideas into pixel-perfect interfaces.</p>
+
+        Buttons
+        <div class="about__buttons">
+          <button class="about__cta-button">Let's Talk <span><i class="fa-regular fa-envelope"></i></span></button>
+          <button class="about__cv-button">CV <span><i class="fa-solid fa-download"></i></span></button>
+        </div>
+      </div>
+
+      Animation
+      <div class="about__animation">
+        <canvas id="canvas"></canvas>
+      </div>
+    </header>
+
+    SKILLS SECTION
+    <section class="skills" id="skills">
+      <h1 class="skills__title">My skills</h1>
+      <div class="skills__list">
+        List of skills
+        Each skill has an image and a description
+        ...
+
+        Progress bar
+        <div class="skills__progress-bar"></div>
+      </div>
+    </section>
+  </div>
+
+
+  </html> -->
