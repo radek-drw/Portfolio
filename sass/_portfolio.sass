@@ -1,33 +1,70 @@
 .portfolio
+  overflow: hidden
   &__title
-    // styles for portfolio title
-
+    @include title-style
   &__project
+    display: flex
+    padding: 150px 0
     &-thumbnail
-      // styles for project thumbnail
+      position: relative
+      .decorative
+        position: absolute
+        top: -40px
+        left: 0
+        line-height: 40px
+        width: 100%
+        padding-left: 20px
+        border-radius: $border-radius $border-radius 0 0
+        background-color: #2C3037
+        span
+          display: inline-block
+          width: 8px
+          height: 8px
+          background-color: #d9d9d9
+          border-radius: 50%
       img
-        // styles for img inside thumbnail
-
+        border-radius: 0 0 $border-radius $border-radius
     &-info
-      &__title
-        // styles for project title
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      margin-left: 100px
+      .project-info
+        &__title
+          font-size: 2rem
+          font-weight: 700
+        &__summary
+          margin-top: -50px
+          width: 60%
+          line-height: 2
+          font-size: 1.6rem
 
-      &__summary
-        // styles for project summary
+        &__implementation
+          .implementation
+            &__label
+              padding-bottom: 50px
+              font-size: 1.6rem
 
-      &__implementation
-        &__label
-          // styles for implementation label
+            &__tools
+              display: flex
+              align-items: center
+              img
+                max-width: 10%
+                height: 30px
+                margin-right: 50px
+        &__buttons
+          .project-button
+            display: inline-block
+            padding: 20px 40px
+            font-size: 1.8rem
+            background-color: $primary
+            border-radius: 30px
+            color: $secondary
+            text-decoration: none
+            transition: .2s
+            &:hover
+              background-color: lighten($primary, 20% )
+              box-shadow: 0 0 7px lighten($primary, 20%)
 
-        &__tools
-          img
-            // styles for img inside tools
-
-      &__buttons
-        .project-button
-          // styles for project button
-          &--live
-            // styles for live project button
-
-          &--source
-            // styles for source code button
+            &--live
+              margin-right: 40px

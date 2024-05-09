@@ -296,4 +296,112 @@ body {
   100% {
     opacity: 0;
   }
+}
+.portfolio {
+  overflow: hidden;
+}
+.portfolio__title {
+  font-size: 5.4rem;
+  color: #12f7d6;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+}
+.portfolio__title::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 125%;
+  width: 600%;
+  height: 1px;
+  background-color: #12f7d6;
+}
+.portfolio__project {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 150px 0;
+}
+.portfolio__project-thumbnail {
+  position: relative;
+}
+.portfolio__project-thumbnail .decorative {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  line-height: 40px;
+  width: 100%;
+  padding-left: 20px;
+  border-radius: 12px 12px 0 0;
+  background-color: #2C3037;
+}
+.portfolio__project-thumbnail .decorative span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+}
+.portfolio__project-thumbnail img {
+  border-radius: 0 0 12px 12px;
+}
+.portfolio__project-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-left: 100px;
+}
+.portfolio__project-info .project-info__title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.portfolio__project-info .project-info__summary {
+  margin-top: -50px;
+  width: 60%;
+  line-height: 2;
+  font-size: 1.6rem;
+}
+.portfolio__project-info .project-info__implementation .implementation__label {
+  padding-bottom: 50px;
+  font-size: 1.6rem;
+}
+.portfolio__project-info .project-info__implementation .implementation__tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.portfolio__project-info .project-info__implementation .implementation__tools img {
+  max-width: 10%;
+  height: 30px;
+  margin-right: 50px;
+}
+.portfolio__project-info .project-info__buttons .project-button {
+  display: inline-block;
+  padding: 20px 40px;
+  font-size: 1.8rem;
+  background-color: #12f7d6;
+  border-radius: 30px;
+  color: #1a1e23;
+  text-decoration: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.portfolio__project-info .project-info__buttons .project-button:hover {
+  background-color: #75fae7;
+  -webkit-box-shadow: 0 0 7px #75fae7;
+          box-shadow: 0 0 7px #75fae7;
+}
+.portfolio__project-info .project-info__buttons .project-button--live {
+  margin-right: 40px;
 }/*# sourceMappingURL=style.css.map */
