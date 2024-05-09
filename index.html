@@ -12,6 +12,7 @@
 <body>
   <div class="container">
 
+    <!-- NAV/MENU SECTION -->
     <nav class="navbar">
       <div class="navbar__name"><span>&ltC/></span>Radek Drweski
       </div>
@@ -32,7 +33,7 @@
     </nav>
 
     <!-- ABOUT SECTION -->
-    <div class="about" id="about">
+    <section class="about" id="about">
       <div class="about__intro">
         <h1 class="about__intro-title">Hi, I'm Radek, a Front end Developer</h1>
         <p class="about__intro-description">I specialize in creating responsive, user-friendly, and visually appealing
@@ -40,17 +41,21 @@
           With a keen eye for design and a love for clean code,
           I transform ideas into pixel-perfect interfaces.</p>
         <div class="about__intro-buttons">
-          <button class="about__button about__button--talk">Let's Talk <span><i
-                class="fa-regular fa-envelope"></i></span></button>
-          <a href="./src/Radek Drweski CV.pdf" download><button class="about__button about__button--cv">CV <span><i
-                  class="fa-solid fa-download"></i></span></button>
+          <button class="about__button about__button--talk">
+            Let's Talk <span><i class="fa-regular fa-envelope"></i></span>
+          </button>
+          <a href="./src/Radek Drweski CV.pdf" download>
+            <button class="about__button about__button--cv">
+              CV
+              <span><i class="fa-solid fa-download"></i></span>
+            </button>
           </a>
         </div>
       </div>
       <div class="about__animation">
         <canvas id="canvas"></canvas>
       </div>
-    </div>
+    </section>
 
     <!-- SKILLS SECTION -->
     <section class="skills" id="skills">
@@ -123,6 +128,38 @@
 
         <!-- Progress bar -->
         <div class="skills__progress-bar"></div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section class="portfolio" id="portfolio">
+      <h1 class="portfolio__title">Recent works</h1>
+      <div class="portfolio__project">
+        <div class="portfolio__project-thumbnail">
+          <img src="./src/images/pet-idea.jpg" alt="Pet Idea portfolio">
+        </div>
+        <div class="portfolio__project-info">
+          <h1 class="project-info__title">Website Pet Shop - PetIdea</h1>
+          <p class="project-info__summary">description of project</p>
+          <div class="project-info__implementation">
+            <p class="implementation__label">Implementation:</p>
+            <div class="implementation__tools">
+              <img src="./src/images/HTML.svg" alt="HTML">
+              <img src="./src/images/CSS.svg" alt="CSS">
+              <img src="./src/images/JS.svg" alt="JavaScript">
+              <img src="./src/images/jQuery.svg" alt="jQuery">
+              <img src="./src/images/Figma.svg" alt="Figma">
+            </div>
+          </div>
+          <div class="project-info__buttons">
+            <a href="#">
+              <button class="project-button project-button--live">View Project</button>
+            </a>
+            <a href="#">
+              <button class="project-button project-button--source">Source Code</button>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
