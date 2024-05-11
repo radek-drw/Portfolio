@@ -1,12 +1,15 @@
 .portfolio
   overflow: hidden
+  // background-color: grey
   &__title
     @include title-style
   &__project
     display: flex
     padding: 150px 0
+    position: relative
     &-thumbnail
       position: relative
+      flex-basis: 49%
       .decorative
         position: absolute
         top: -40px
@@ -24,17 +27,19 @@
           border-radius: 50%
       img
         border-radius: 0 0 $border-radius $border-radius
+        width: 100%
     &-info
       display: flex
       flex-direction: column
       justify-content: space-between
-      margin-left: 100px
+      flex-basis: 51%
+      margin-left: 5%
       .project-info
         &__title
           font-size: 2rem
           font-weight: 700
         &__summary
-          margin-top: -50px
+          margin-top: -40px
           width: 60%
           line-height: 2
           font-size: 1.6rem
@@ -55,16 +60,17 @@
         &__buttons
           .project-button
             display: inline-block
-            padding: 20px 40px
+            padding: 3% 5%
             font-size: 1.8rem
             background-color: $primary
-            border-radius: 30px
+            border-radius: 50px
             color: $secondary
             text-decoration: none
             transition: .2s
             &:hover
               background-color: lighten($primary, 20% )
               box-shadow: 0 0 7px lighten($primary, 20%)
-
             &--live
               margin-right: 40px
+    &-progress-bar
+      @include progress-bar(26.6%)
