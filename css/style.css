@@ -227,6 +227,46 @@ body {
 .skills__list-item--stylus > img {
   top: 15%;
 }
+.skills__list-progress-bar {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 30px;
+  height: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.skills__list-progress-bar .progress-bar-dot {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #12f7d6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.skills__list-progress-bar .progress-bar-dot--active {
+  background-color: #12f7d6;
+  -webkit-box-shadow: 0 0 10px #12f7d6;
+          box-shadow: 0 0 10px #12f7d6;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.skills__list-progress-bar .progress-bar-line {
+  width: 1px;
+  height: 20.5%;
+  background-color: #12f7d6;
+}
 
 @-webkit-keyframes fadeIn {
   0% {
