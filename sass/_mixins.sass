@@ -1,3 +1,4 @@
+// Section title
 @mixin title-style
   font-size: 5.4rem
   color: $primary
@@ -13,3 +14,30 @@
     width: 600%
     height: 1px
     background-color: $primary
+
+// Progress bar
+@mixin progress-bar($line-height)
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  right: 30px
+  height: 60%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+  .progress-bar
+    &-dot
+      width: 20px
+      height: 20px
+      border: 1px solid $primary
+      border-radius: 50%
+      cursor: pointer
+      &--active
+        background-color: $primary
+        box-shadow: 0 0 10px $primary
+        transition: .5s
+    &-line
+      width: 1px
+      height: $line-height
+      background-color: $primary

@@ -18,7 +18,7 @@ body {
 
 .container {
   position: relative;
-  width: 1480px;
+  max-width: 1480px;
   margin: 0 auto;
   border: 1px solid lightgrey;
 }
@@ -227,46 +227,6 @@ body {
 .skills__list-item--stylus > img {
   top: 15%;
 }
-.skills__progress-bar {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  right: 30px;
-  height: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.skills__progress-bar-dot {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #12f7d6;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.skills__progress-bar-dot--active {
-  background-color: #12f7d6;
-  -webkit-box-shadow: 0 0 10px #12f7d6;
-          box-shadow: 0 0 10px #12f7d6;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-}
-.skills__progress-bar-line {
-  width: 1px;
-  height: 50px;
-  background-color: #12f7d6;
-}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -322,9 +282,12 @@ body {
   display: -ms-flexbox;
   display: flex;
   padding: 150px 0;
+  position: relative;
 }
 .portfolio__project-thumbnail {
   position: relative;
+  -ms-flex-preferred-size: 49%;
+      flex-basis: 49%;
 }
 .portfolio__project-thumbnail .decorative {
   position: absolute;
@@ -345,6 +308,7 @@ body {
 }
 .portfolio__project-thumbnail img {
   border-radius: 0 0 12px 12px;
+  width: 100%;
 }
 .portfolio__project-info {
   display: -webkit-box;
@@ -357,14 +321,16 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-left: 100px;
+  -ms-flex-preferred-size: 51%;
+      flex-basis: 51%;
+  margin-left: 5%;
 }
 .portfolio__project-info .project-info__title {
   font-size: 2rem;
   font-weight: 700;
 }
 .portfolio__project-info .project-info__summary {
-  margin-top: -50px;
+  margin-top: -40px;
   width: 60%;
   line-height: 2;
   font-size: 1.6rem;
@@ -388,10 +354,10 @@ body {
 }
 .portfolio__project-info .project-info__buttons .project-button {
   display: inline-block;
-  padding: 20px 40px;
+  padding: 3% 5%;
   font-size: 1.8rem;
   background-color: #12f7d6;
-  border-radius: 30px;
+  border-radius: 50px;
   color: #1a1e23;
   text-decoration: none;
   -webkit-transition: 0.2s;
@@ -404,4 +370,44 @@ body {
 }
 .portfolio__project-info .project-info__buttons .project-button--live {
   margin-right: 40px;
+}
+.portfolio__project-progress-bar {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 30px;
+  height: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.portfolio__project-progress-bar .progress-bar-dot {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #12f7d6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.portfolio__project-progress-bar .progress-bar-dot--active {
+  background-color: #12f7d6;
+  -webkit-box-shadow: 0 0 10px #12f7d6;
+          box-shadow: 0 0 10px #12f7d6;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.portfolio__project-progress-bar .progress-bar-line {
+  width: 1px;
+  height: 26.6%;
+  background-color: #12f7d6;
 }/*# sourceMappingURL=style.css.map */
