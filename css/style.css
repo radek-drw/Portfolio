@@ -14,13 +14,13 @@ body {
   font-family: "IBM Plex Mono";
   color: #fff;
   background-color: #1a1e23;
+  overflow-x: hidden;
 }
 
 .container {
   position: relative;
   max-width: 1480px;
   margin: 0 auto;
-  border: 1px solid lightgrey;
 }
 
 .navbar {
@@ -36,7 +36,10 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 60px 0 30px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 40px 0 30px;
   font-size: 1.8rem;
   margin-bottom: 30px;
 }
@@ -186,7 +189,7 @@ body {
 .skills__list-item {
   -ms-flex-preferred-size: 21%;
       flex-basis: 21%;
-  height: 150px;
+  height: 120px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -198,6 +201,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   display: none;
+}
+.skills__list-item img {
+  width: 60px;
 }
 .skills__list-item > p {
   font-size: 1.8rem;
@@ -216,10 +222,12 @@ body {
   position: relative;
 }
 .skills__list-item--nodejs > img {
-  top: 30%;
+  top: 20%;
+  width: 80px;
 }
 .skills__list-item--jquery > img {
-  top: 32%;
+  top: 22%;
+  width: 80px;
 }
 .skills__list-item--sass > img {
   top: 10%;
@@ -232,7 +240,7 @@ body {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  right: 30px;
+  right: 0;
   height: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -249,11 +257,13 @@ body {
           align-items: center;
 }
 .skills__list-progress-bar .progress-bar-dot {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   border: 1px solid #12f7d6;
   border-radius: 50%;
   cursor: pointer;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 .skills__list-progress-bar .progress-bar-dot--active {
   background-color: #12f7d6;
@@ -264,7 +274,7 @@ body {
 }
 .skills__list-progress-bar .progress-bar-line {
   width: 1px;
-  height: 20.5%;
+  height: 100%;
   background-color: #12f7d6;
 }
 
@@ -416,7 +426,7 @@ body {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  right: 30px;
+  right: 0;
   height: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -433,11 +443,13 @@ body {
           align-items: center;
 }
 .portfolio__project-progress-bar .progress-bar-dot {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   border: 1px solid #12f7d6;
   border-radius: 50%;
   cursor: pointer;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 .portfolio__project-progress-bar .progress-bar-dot--active {
   background-color: #12f7d6;
@@ -448,6 +460,6 @@ body {
 }
 .portfolio__project-progress-bar .progress-bar-line {
   width: 1px;
-  height: 26.6%;
+  height: 100%;
   background-color: #12f7d6;
 }/*# sourceMappingURL=style.css.map */
