@@ -23,6 +23,9 @@ html .container button {
   cursor: pointer;
   font-family: "IBM Plex Mono";
 }
+html .container a {
+  text-decoration: none;
+}
 
 .navbar {
   position: sticky;
@@ -635,4 +638,29 @@ html .container button {
 }
 .contact__form-button > img {
   margin-left: 10px;
+}
+
+.footer {
+  padding: 80px 0 130px;
+  font-size: 1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.footer__link {
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+}
+.footer__link-image {
+  margin-right: 15px;
+  vertical-align: bottom;
+}
+.footer__copyright {
+  margin-left: auto;
 }/*# sourceMappingURL=style.css.map */
