@@ -64,12 +64,12 @@
             font-size: 1.8rem
             background-color: $primary
             border-radius: 50px
+            border: 1px solid $primary
             color: $secondary
             text-decoration: none
-            transition: .2s
+            transition: all $btn-trns-time ease-in-out
             &:hover
-              background-color: lighten($primary, 20% )
-              box-shadow: 0 0 7px lighten($primary, 20%)
+              @include filled-btn-hover
             &--live
               margin-right: 40px
     &-progress-bar
