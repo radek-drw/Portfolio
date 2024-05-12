@@ -1,0 +1,120 @@
+.contact
+  overflow-x: hidden
+  &__title
+    @include title-style
+  &__info-block
+    display: flex
+    padding-top: 150px
+    // height: 200px
+    // background-color: grey
+  &__info
+    flex-basis: 38%
+    &-item
+      margin-bottom: 35px
+      font-size: 1.6rem
+      &>img
+        margin-right: 40px
+      &>a
+        text-decoration: none
+        display: inline-block
+        color: $white
+      &:last-child
+        margin: 0
+
+  // Form
+  %label-movement
+    font-size: 1.6rem
+    color: $primary
+    top: -40px
+    transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
+
+  &__form
+    flex-grow: 1
+    display: flex
+    justify-content: space-between
+
+    &-inputs
+      position: relative
+      flex-basis: 74%
+      display: flex
+      flex-wrap: wrap
+      align-content: space-between
+      justify-content: space-between
+      &-item
+        position: relative
+        label
+          color: #d1d1d1
+          padding: 10px
+          position: absolute
+          top: 0
+          left: 0
+          font-size: 1.6rem
+          transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1)
+          pointer-events: none
+        input
+          padding: 10px
+          border-radius: 4px
+          width: 100%
+          font-size: 1.6rem
+          background-color: lighten($secondary, 10% )
+          border: none
+          color: $white
+          font-family: $font
+          ~ span
+            display: block
+            width: 0
+            height: 3px
+            background: $primary
+            position: absolute
+            bottom: 0
+            left: 0
+            transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
+          &:focus
+            outline: 0
+            ~ label
+              @extend %label-movement
+            ~ span
+              width: 100%
+              transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
+          &:valid
+            ~ label
+              @extend %label-movement
+
+        &--name
+          flex-basis: 35%
+        &--email
+          flex-basis: 55%
+        &--message
+          flex-basis: 100%
+
+      // ERROR INFO
+    &-error-info
+      position: absolute
+      // background-color: grey
+      top: 50%
+      right: 0
+      text-align: right
+      transform: translateY(-50%)
+      p
+        display: none
+        font-size: 1.6rem
+        color: #ff0000
+        font-family: $font
+      h2
+        display: none
+        font-size: 1.6rem
+        font-family: $font
+
+    &-button
+      align-self: flex-end
+      background-color: $secondary
+      color: $primary
+      border: 1px solid $primary
+      border-radius: 50px
+      font-size: 1.8rem
+      padding: 21px 45px
+      transition: box-shadow $btn-trns-time ease-in-out
+      &:hover
+        @include empty-btn-hover
+      &>img
+        margin-left: 10px
