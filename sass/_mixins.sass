@@ -16,11 +16,11 @@
     background-color: $primary
 
 // Progress bar
-@mixin progress-bar($line-height)
+@mixin progress-bar
   position: absolute
   top: 50%
   transform: translateY(-50%)
-  right: 30px
+  right: 0
   height: 60%
   display: flex
   flex-direction: column
@@ -28,16 +28,17 @@
   align-items: center
   .progress-bar
     &-dot
-      width: 20px
-      height: 20px
+      width: 17px
+      height: 17px
       border: 1px solid $primary
       border-radius: 50%
       cursor: pointer
+      flex-shrink: 0
       &--active
         background-color: $primary
         box-shadow: 0 0 10px $primary
         transition: .5s
     &-line
       width: 1px
-      height: $line-height
+      height: 100%
       background-color: $primary
