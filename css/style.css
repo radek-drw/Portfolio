@@ -9,18 +9,19 @@
 html {
   font-size: 10px;
 }
-
-body {
+html body {
   font-family: "IBM Plex Mono";
   color: #fff;
   background-color: #1a1e23;
-  overflow-x: hidden;
 }
-
-.container {
+html .container {
   position: relative;
   max-width: 1480px;
   margin: 0 auto;
+}
+html .container button {
+  cursor: pointer;
+  font-family: "IBM Plex Mono";
 }
 
 .navbar {
@@ -116,10 +117,8 @@ body {
   border-radius: 40px;
   font-size: 1.8rem;
   font-weight: 500;
-  font-family: "IBM Plex Mono";
-  cursor: pointer;
-  -webkit-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .about__intro-buttons .about__button:hover {
   -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
@@ -408,15 +407,15 @@ body {
   font-size: 1.8rem;
   background-color: #12f7d6;
   border-radius: 50px;
+  border: 1px solid #12f7d6;
   color: #1a1e23;
   text-decoration: none;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .portfolio__project-info .project-info__buttons .project-button:hover {
-  background-color: #75fae7;
-  -webkit-box-shadow: 0 0 7px #75fae7;
-          box-shadow: 0 0 7px #75fae7;
+  color: #12f7d6;
+  background-color: #1a1e23;
 }
 .portfolio__project-info .project-info__buttons .project-button--live {
   margin-right: 40px;
@@ -462,4 +461,178 @@ body {
   width: 1px;
   height: 100%;
   background-color: #12f7d6;
+}
+
+.contact {
+  overflow-x: hidden;
+}
+.contact__title {
+  font-size: 5.4rem;
+  color: #12f7d6;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+}
+.contact__title::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 125%;
+  width: 600%;
+  height: 1px;
+  background-color: #12f7d6;
+}
+.contact__info-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 150px;
+}
+.contact__info {
+  -ms-flex-preferred-size: 38%;
+      flex-basis: 38%;
+}
+.contact__info-item {
+  margin-bottom: 35px;
+  font-size: 1.6rem;
+}
+.contact__info-item > img {
+  margin-right: 40px;
+}
+.contact__info-item > a {
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+}
+.contact__info-item:last-child {
+  margin: 0;
+}
+.contact .contact__form-inputs-item input:valid ~ label, .contact__form-inputs-item .contact input:valid ~ label, .contact .contact__form-inputs-item input:focus ~ label, .contact__form-inputs-item .contact input:focus ~ label {
+  font-size: 1.6rem;
+  color: #12f7d6;
+  top: -40px;
+  -webkit-transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+  transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+}
+.contact__form {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.contact__form-inputs {
+  position: relative;
+  -ms-flex-preferred-size: 74%;
+      flex-basis: 74%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.contact__form-inputs-item {
+  position: relative;
+}
+.contact__form-inputs-item label {
+  color: #d1d1d1;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.6rem;
+  -webkit-transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+  pointer-events: none;
+}
+.contact__form-inputs-item input {
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 1.6rem;
+  background-color: #303740;
+  border: none;
+  color: #fff;
+  font-family: "IBM Plex Mono";
+}
+.contact__form-inputs-item input ~ span {
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #12f7d6;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+  transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+}
+.contact__form-inputs-item input:focus {
+  outline: 0;
+}
+.contact__form-inputs-item input:focus ~ span {
+  width: 100%;
+  -webkit-transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+  transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+}
+.contact__form-inputs-item--name {
+  -ms-flex-preferred-size: 35%;
+      flex-basis: 35%;
+}
+.contact__form-inputs-item--email {
+  -ms-flex-preferred-size: 55%;
+      flex-basis: 55%;
+}
+.contact__form-inputs-item--message {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+.contact__form-error-info {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  text-align: right;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.contact__form-error-info p {
+  display: none;
+  font-size: 1.6rem;
+  color: #ff0000;
+  font-family: "IBM Plex Mono";
+}
+.contact__form-error-info h2 {
+  display: none;
+  font-size: 1.6rem;
+  font-family: "IBM Plex Mono";
+}
+.contact__form-button {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  background-color: #1a1e23;
+  color: #12f7d6;
+  border: 1px solid #12f7d6;
+  border-radius: 50px;
+  font-size: 1.8rem;
+  padding: 21px 45px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+}
+.contact__form-button:hover {
+  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
+          box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
+}
+.contact__form-button > img {
+  margin-left: 10px;
 }/*# sourceMappingURL=style.css.map */

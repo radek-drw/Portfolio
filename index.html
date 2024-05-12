@@ -35,15 +35,17 @@
     <!-- ABOUT SECTION -->
     <section class="about" id="about">
       <div class="about__intro">
-        <h1 class="about__intro-title">Hi, I'm Radek, a Front end Developer</h1>
+        <h1 class="about__intro-title">Hi, I'm Radek,<br>a Front end Developer</h1>
         <p class="about__intro-description">I specialize in creating responsive, user-friendly, and visually appealing
           websites.
           With a keen eye for design and a love for clean code,
           I transform ideas into pixel-perfect interfaces.</p>
         <div class="about__intro-buttons">
-          <button class="about__button about__button--talk">
-            Let's Talk <span><i class="fa-regular fa-envelope"></i></span>
-          </button>
+          <a href="#contact">
+            <button class="about__button about__button--talk">
+              Let's Talk <span><i class="fa-regular fa-envelope"></i></span>
+            </button>
+          </a>
           <a href="./src/Radek Drweski CV.pdf" download>
             <button class="about__button about__button--cv">
               CV
@@ -59,7 +61,7 @@
 
     <!-- SKILLS SECTION -->
     <section class="skills" id="skills">
-      <h1 class="skills__title">My skills</h1>
+      <h3 class="skills__title">My skills</h3>
       <div class="skills__list">
         <div class="skills__list-item skills__list-item--html">
           <img src="./src/images/HTML.svg" alt="HTML">
@@ -181,6 +183,65 @@
       </div>
     </section>
 
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+      <h3 class="contact__title">Contact</h3>
+      <div class="contact__info-block">
+        <div class="contact__info">
+          <div class="contact__info-item">
+            <img src="./src/images/envelope-email.svg" alt="Email">
+            <a href="mailto:rdrweski@gmail.com" alt="Email">rdrweski@gmiail.com</a>
+          </div>
+          <div class="contact__info-item">
+            <img src="./src/images/phone.svg" alt="Phone" />
+            <span>085 811 2473</span>
+          </div>
+          <div class="contact__info-item">
+            <img src="./src/images/location-pin.svg" alt="Location" />
+            <span>Swords, Co. Dublin</span>
+          </div>
+          <div class="contact__info-item">
+            <img src="./src/images/website-link.svg" alt="Website link" />
+            <a href="http://www.radekdrweski.com">www.radekdrweski.com</a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form class="contact__form" id="myForm" action="#" method="post" novalidate>
+          <div class="contact__form-inputs">
+            <div class="contact__form-inputs-item contact__form-inputs-item--name">
+              <input type="text" id="name" name="name" required>
+              <label>Name</label>
+              <span></span>
+            </div>
+            <div class="contact__form-inputs-item contact__form-inputs-item--email">
+              <input type="email" id="email" name="email" required>
+              <label>E-mail</label>
+              <span></span>
+            </div>
+            <div class="contact__form-error-info">
+              <p class="contact__form-error-name">"Please enter a name"
+              </p>
+              <p class="contact__form-error-email">"Please enter a valid email"
+              </p>
+              <p class="contact__form-error-message">"Please enter a message"</p>
+              <h2 class="contact__form-success-message">✅ Form sent successfully!</h2>
+            </div>
+            <div class="contact__form-inputs-item contact__form-inputs-item--message">
+              <input type="text" id="message" name="message" required>
+              <label>Message</label>
+              <span></span>
+            </div>
+          </div>
+
+          <button class="contact__form-button" type="submit">Send
+            <img class="contact__form-button-icon" src="./src/images/arrow-send-form.svg" alt="Send">
+          </button>
+        </form>
+      </div>
+
+    </section>
+
 
   </div>
 
@@ -193,6 +254,7 @@
   <script src="./js/navbar-links-animation.js"></script>
   <script src="./js/navbar-links-scroll.js"></script>
   <script src="./js/skills-slider.js"></script>
+  <script src="./js/form-validation.js"></script>
 </body>
 
 </html>
