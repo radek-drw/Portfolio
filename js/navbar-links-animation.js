@@ -1,4 +1,5 @@
 const nav = $(".navbar");
+
 const line = $("<div />").addClass("navbar--line");
 
 line.appendTo(nav);
