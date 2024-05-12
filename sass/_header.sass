@@ -22,19 +22,16 @@
         border-radius: 40px
         font-size: 1.8rem
         font-weight: 500
-        font-family: 'IBM Plex Mono'
-        cursor: pointer
-        transition: all 0.25s ease-in-out
+        transition: all $btn-trns-time ease-in-out
         &:hover
-          box-shadow: inset 0 0 5px $primary, 0 0 16px $primary
+          @include empty-btn-hover
         &--talk
           border: none
           box-shadow: 0 0 16px $primary
           color: $secondary
           background-color: $primary
           &:hover
-            color: $primary
-            background-color: $secondary
+            @include filled-btn-hover
           &>span i
             margin-left: 15px
         &--cv
