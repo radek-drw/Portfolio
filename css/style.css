@@ -29,24 +29,13 @@ html .container a {
 }
 
 .navbar {
-  position: sticky;
-  background-color: #1a1e23;
-  z-index: 1;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  background-color: #1a1e23;
+  z-index: 1;
   padding: 40px 0 30px;
-  font-size: 1.8rem;
-  margin-bottom: 30px;
 }
 .navbar--line {
   height: 2px;
@@ -55,20 +44,21 @@ html .container a {
   background-color: #12f7d6;
   border-radius: 1px;
 }
-.navbar__name span {
-  margin-right: 15px;
-  color: #12f7d6;
-}
 .navbar__main-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-preferred-size: 40%;
-      flex-basis: 40%;
+  font-size: 1.8rem;
   list-style: none;
+  width: 1480px;
+  margin: 0 auto;
+}
+.navbar__main-nav-name {
+  margin-right: auto;
+}
+.navbar__main-nav-name span {
+  margin-right: 15px;
+  color: #12f7d6;
 }
 .navbar__main-nav-item {
   opacity: 0.4;
@@ -98,6 +88,7 @@ html .container a {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  margin-top: 102px;
 }
 .about__intro {
   -ms-flex-preferred-size: 50%;
@@ -125,8 +116,8 @@ html .container a {
   transition: all 0.2s ease-in-out;
 }
 .about__intro-buttons .about__button:hover {
-  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
-          box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
+  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 12px #12f7d6;
+          box-shadow: inset 0 0 5px #12f7d6, 0 0 12px #12f7d6;
 }
 .about__intro-buttons .about__button--talk {
   border: none;
@@ -174,7 +165,7 @@ html .container a {
 .skills__title::after {
   content: "";
   position: absolute;
-  bottom: 1px;
+  bottom: 12px;
   left: 125%;
   width: 600%;
   height: 1px;
@@ -324,7 +315,7 @@ html .container a {
 .portfolio__title::after {
   content: "";
   position: absolute;
-  bottom: 1px;
+  bottom: 12px;
   left: 125%;
   width: 600%;
   height: 1px;
@@ -469,6 +460,7 @@ html .container a {
 
 .contact {
   overflow-x: hidden;
+  padding-bottom: 12px;
 }
 .contact__title {
   font-size: 5.4rem;
@@ -481,7 +473,7 @@ html .container a {
 .contact__title::after {
   content: "";
   position: absolute;
-  bottom: 1px;
+  bottom: 12px;
   left: 125%;
   width: 600%;
   height: 1px;
@@ -627,15 +619,16 @@ html .container a {
   border: 1px solid #12f7d6;
   border-radius: 50px;
   font-size: 1.8rem;
-  padding: 21px 45px;
+  padding: 17px 40px;
+  margin-right: 9px;
   -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
   transition: -webkit-box-shadow 0.2s ease-in-out;
   transition: box-shadow 0.2s ease-in-out;
   transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
 }
 .contact__form-button:hover {
-  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
-          box-shadow: inset 0 0 5px #12f7d6, 0 0 16px #12f7d6;
+  -webkit-box-shadow: inset 0 0 5px #12f7d6, 0 0 12px #12f7d6;
+          box-shadow: inset 0 0 5px #12f7d6, 0 0 12px #12f7d6;
 }
 .contact__form-button > img {
   margin-left: 10px;
