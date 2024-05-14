@@ -33,9 +33,23 @@ html .container a {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #1a1e23;
   z-index: 1;
+  background-color: #1a1e23;
+}
+.navbar__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 40px 0 30px;
+  font-size: 1.8rem;
+  width: 1480px;
+  margin: 0 auto;
 }
 .navbar--line {
   height: 2px;
@@ -44,21 +58,20 @@ html .container a {
   background-color: #12f7d6;
   border-radius: 1px;
 }
+.navbar__name span {
+  margin-right: 15px;
+  color: #12f7d6;
+}
 .navbar__main-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-size: 1.8rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
   list-style: none;
-  width: 1480px;
-  margin: 0 auto;
-}
-.navbar__main-nav-name {
-  margin-right: auto;
-}
-.navbar__main-nav-name span {
-  margin-right: 15px;
-  color: #12f7d6;
 }
 .navbar__main-nav-item {
   opacity: 0.4;

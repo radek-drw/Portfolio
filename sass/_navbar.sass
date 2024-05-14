@@ -3,36 +3,32 @@
   top: 0
   left: 0
   width: 100%
-  background-color: $secondary
   z-index: 1
-  // display: flex
-  // justify-content: space-between
-  // align-items: center
-  padding: 40px 0 30px
-
-  // margin-bottom: 30px
+  background-color: $secondary
+  &__container
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 40px 0 30px
+    font-size: 1.8rem
+    width: 1480px
+    margin: 0 auto
   &--line
     height: 2px
     position: absolute
     bottom: 0
     background-color: $primary
     border-radius: 1px
+  &__name span
+    margin-right: 15px
+    color: $primary
   &__main-nav
     display: flex
-    font-size: 1.8rem
-    // justify-content: flex-end
-    // flex-basis: 40%
+    justify-content: space-between
+    flex-basis: 40%
     list-style: none
-    width: 1480px
-    margin: 0 auto
-    &-name
-      margin-right: auto
-      & span
-        margin-right: 15px
-        color: $primary
     &-item
       opacity: .4
-
       transition: all 0.4s ease
       &:hover
         opacity: .7
