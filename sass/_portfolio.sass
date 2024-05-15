@@ -1,6 +1,5 @@
 .portfolio
   overflow: hidden
-  // background-color: grey
   &__title
     @include title-style
   &__project
@@ -14,20 +13,20 @@
         position: absolute
         top: -40px
         left: 0
-        line-height: 40px
         width: 100%
         padding-left: 20px
+        line-height: 40px
         border-radius: $border-radius $border-radius 0 0
         background-color: #2C3037
         span
           display: inline-block
           width: 8px
           height: 8px
-          background-color: #d9d9d9
           border-radius: 50%
+          background-color: #d9d9d9
       img
-        border-radius: 0 0 $border-radius $border-radius
         width: 100%
+        border-radius: 0 0 $border-radius $border-radius
     &-info
       display: flex
       flex-direction: column
@@ -39,8 +38,8 @@
           font-size: 2rem
           font-weight: 700
         &__summary
-          margin-top: -40px
           width: 60%
+          margin-top: -40px
           line-height: 2
           font-size: 1.6rem
 
