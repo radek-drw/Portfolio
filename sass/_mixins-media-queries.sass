@@ -1,0 +1,20 @@
+$breakpoint-mobile-small: 350px
+$breakpoint-mobile-large: 480px
+$breakpoint-tablet: 768px
+$breakpoint-laptop: 1280px
+
+@mixin mobile-small
+  @media (max-width: $breakpoint-mobile-small)
+    @content
+
+@mixin mobile-large
+  @media (max-width: $breakpoint-mobile-large)
+    @content
+
+@mixin tablet
+  @media (min-width: #{$breakpoint-mobile-large + 1px}) and (max-width: $breakpoint-tablet)
+    @content
+
+@mixin laptop
+  @media (max-width: $breakpoint-laptop)
+    @content
