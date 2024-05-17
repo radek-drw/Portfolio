@@ -29,6 +29,8 @@
     justify-content: space-between
     flex-basis: 40%
     list-style: none
+    @include tablet
+      display: none
     &-item
       opacity: .4
       transition: all 0.4s ease
@@ -42,3 +44,47 @@
         overflow: hidden
         color: $white
         text-decoration: none
+  &__mobile-nav
+    display: none
+    @include tablet
+      display: block
+      position: absolute
+      top: 0
+      left: 100%
+      width: 65%
+      background-color: #ddd
+      list-style-type: none
+      border-radius: 0 0 0 20px
+      transition: transform .2s
+      &--active
+        transform: translateX(-100%)
+      &-item
+        text-align: center
+        padding: 50px
+        font-size: 3rem
+        border-bottom: 1px solid #999
+        &:last-child
+          border: none
+    .mobile-nav-toggle
+      position: absolute
+      top: 30px
+      left: -90px
+      width: 60px
+      height: 45px
+      // background-color: grey
+      span
+        position: absolute
+        top: 0
+        right: 0
+        height: 4px
+        background-color: #fff
+      .menu-top
+        width: 100%
+      .menu-middle
+        width: 70%
+        top: 50%
+        transform: translateY(-50%)
+      .menu-bottom
+        width: 40%
+        top: 100%
+        transform: translateY(-100%)

@@ -7,6 +7,9 @@
   margin-top: 102px
   &__intro
     flex-basis: 50%
+    @include tablet
+      flex-basis: 100%
+      text-align: center
     &-title
       font-size: 5.4rem
       line-height: 1.2
@@ -17,10 +20,13 @@
       line-height: 2
       font-weight: 300
       font-size: 1.6rem
+      @include tablet
+        width: 60%
+        margin: 40px auto 60px
     &-buttons
       .about__button
         margin-right: 40px
-        padding: 1.2em 1.4em
+        padding: .9em 1.2em
         border-radius: 40px
         font-size: 1.8rem
         font-weight: 500
@@ -49,6 +55,5 @@
     bottom: 0
     width: 120%
     clip-path: polygon(100% 100%, 0 88%, 45% 77%, 15% 70%, 42% 49%, 34% 27%, 8% 19%, 55% 16%, 14% 6%, 100% 0)
-    @include laptop
-      // bottom: 20%
-      // clip-path: polygon(100% 100%, 0 88%, 45% 77%, 15% 70%, 42% 49%, 64% 87%, 8% 10%, 55% 16%, 14% 6%, 100% 0)
+    @include tablet
+      display: none

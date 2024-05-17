@@ -9,7 +9,7 @@
 html {
   font-size: 10px;
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 1480px) {
   html {
     font-size: 7px;
   }
@@ -25,7 +25,7 @@ html .container {
   max-width: 1480px;
   margin: 0 auto;
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 1480px) {
   html .container {
     padding: 0 5%;
   }
@@ -38,6 +38,11 @@ html .container a {
   text-decoration: none;
 }
 
+.blur {
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -46,7 +51,7 @@ html .container a {
   z-index: 1;
   background-color: #1a1e23;
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 1480px) {
   .navbar {
     padding: 0 2%;
   }
@@ -88,6 +93,11 @@ html .container a {
       flex-basis: 40%;
   list-style: none;
 }
+@media screen and (max-width: 1024px) {
+  .navbar__main-nav {
+    display: none;
+  }
+}
 .navbar__main-nav-item {
   opacity: 0.4;
   -webkit-transition: all 0.4s ease;
@@ -106,6 +116,67 @@ html .container a {
   color: #fff;
   text-decoration: none;
 }
+.navbar__mobile-nav {
+  display: none;
+}
+@media screen and (max-width: 1024px) {
+  .navbar__mobile-nav {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 65%;
+    background-color: #ddd;
+    list-style-type: none;
+    border-radius: 0 0 0 20px;
+    -webkit-transition: -webkit-transform 0.2s;
+    transition: -webkit-transform 0.2s;
+    transition: transform 0.2s;
+    transition: transform 0.2s, -webkit-transform 0.2s;
+  }
+  .navbar__mobile-nav--active {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  .navbar__mobile-nav-item {
+    text-align: center;
+    padding: 50px;
+    font-size: 3rem;
+    border-bottom: 1px solid #999;
+  }
+  .navbar__mobile-nav-item:last-child {
+    border: none;
+  }
+}
+.navbar__mobile-nav .mobile-nav-toggle {
+  position: absolute;
+  top: 30px;
+  left: -90px;
+  width: 60px;
+  height: 45px;
+}
+.navbar__mobile-nav .mobile-nav-toggle span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 4px;
+  background-color: #fff;
+}
+.navbar__mobile-nav .mobile-nav-toggle .menu-top {
+  width: 100%;
+}
+.navbar__mobile-nav .mobile-nav-toggle .menu-middle {
+  width: 70%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.navbar__mobile-nav .mobile-nav-toggle .menu-bottom {
+  width: 40%;
+  top: 100%;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
 
 .about {
   display: -webkit-box;
@@ -122,6 +193,13 @@ html .container a {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
 }
+@media screen and (max-width: 1024px) {
+  .about__intro {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    text-align: center;
+  }
+}
 .about__intro-title {
   font-size: 5.4rem;
   line-height: 1.2;
@@ -134,9 +212,15 @@ html .container a {
   font-weight: 300;
   font-size: 1.6rem;
 }
+@media screen and (max-width: 1024px) {
+  .about__intro-description {
+    width: 60%;
+    margin: 40px auto 60px;
+  }
+}
 .about__intro-buttons .about__button {
   margin-right: 40px;
-  padding: 1.2em 1.4em;
+  padding: 0.9em 1.2em;
   border-radius: 40px;
   font-size: 1.8rem;
   font-weight: 500;
@@ -178,6 +262,12 @@ html .container a {
   -webkit-clip-path: polygon(100% 100%, 0 88%, 45% 77%, 15% 70%, 42% 49%, 34% 27%, 8% 19%, 55% 16%, 14% 6%, 100% 0);
           clip-path: polygon(100% 100%, 0 88%, 45% 77%, 15% 70%, 42% 49%, 34% 27%, 8% 19%, 55% 16%, 14% 6%, 100% 0);
 }
+@media screen and (max-width: 1024px) {
+  .about__animation {
+    display: none;
+  }
+}
+
 .skills {
   overflow-x: hidden;
 }
@@ -406,7 +496,7 @@ html .container a {
   line-height: 2;
   font-size: 1.6rem;
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 1480px) {
   .portfolio__project-info .project-info__summary {
     margin-top: 0;
   }
@@ -415,7 +505,7 @@ html .container a {
   padding-bottom: 50px;
   font-size: 1.6rem;
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 1480px) {
   .portfolio__project-info .project-info__implementation .implementation__label {
     padding-bottom: 20px;
   }
@@ -435,7 +525,7 @@ html .container a {
 }
 .portfolio__project-info .project-info__buttons .project-button {
   display: inline-block;
-  padding: 1.1em 1.3em;
+  padding: 1em 1.2em;
   font-size: 1.8rem;
   background-color: #12f7d6;
   border-radius: 50px;
@@ -656,7 +746,7 @@ html .container a {
   border: 1px solid #12f7d6;
   border-radius: 50px;
   font-size: 1.8rem;
-  padding: 17px 40px;
+  padding: 1em 1.1em;
   margin-right: 9px;
   -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
   transition: -webkit-box-shadow 0.2s ease-in-out;
