@@ -1,3 +1,7 @@
+$transition-time: .5s
+$transition-delay: .5s
+$animation-time: 1s
+
 .navbar
   position: fixed
   top: 0
@@ -28,7 +32,6 @@
     display: flex
     justify-content: space-between
     flex-basis: 40%
-    list-style: none
     @include tablet
       display: none
     &-item
@@ -53,9 +56,8 @@
       left: 100%
       width: 65%
       background-color: #ddd
-      list-style-type: none
       border-radius: 0 0 0 20px
-      transition: transform .2s
+      transition: transform .4s
       &--active
         transform: translateX(-100%)
       &-item
@@ -65,26 +67,60 @@
         border-bottom: 1px solid #999
         &:last-child
           border: none
-    .mobile-nav-toggle
+    &-toggle
       position: absolute
       top: 30px
       left: -90px
+      height: 40px
       width: 60px
-      height: 45px
-      // background-color: grey
-      span
+      position: relative
+      transition: all $transition-time
+      &--active
+        transform: rotate(180deg)
+        left: 0
+      .toggle__line
         position: absolute
-        top: 0
         right: 0
-        height: 4px
+        left: 0
+        height: 3px
         background-color: #fff
-      .menu-top
-        width: 100%
-      .menu-middle
-        width: 70%
-        top: 50%
-        transform: translateY(-50%)
-      .menu-bottom
-        width: 40%
-        top: 100%
-        transform: translateY(-100%)
+        border-radius: 2px
+        transition: top $transition-time, transform $transition-time $transition-delay, transform-origin $transition-time, width $transition-time, left $transition-time
+        &-top
+          width: 100%
+          top: 0
+          &--active
+            top: 50%
+            transform: translateY(-50%) rotate(-30deg)
+            transform-origin: left center
+            left: 0
+            width: 30%
+            background-color: #333
+            animation: anime $animation-time
+        &-middle
+          width: 70%
+          top: 50%
+          transform: translateY(-50%)
+          &--active
+            left: -1px
+            background-color: #333
+        &-bottom
+          width: 40%
+          top: 100%
+          transform: translateY(-100%)
+          &--active
+            top: 50%
+            transform: translateY(-50%) rotate(30deg)
+            transform-origin: left center
+            left: 0
+            width: 30%
+            background-color: #333
+            animation: anime $animation-time
+
+@keyframes anime
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 1

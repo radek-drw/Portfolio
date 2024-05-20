@@ -1,9 +1,61 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-* {
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
+*, *::before, *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, dl, dd, ol, ul, figure, hr, fieldset, legend {
   margin: 0;
   padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.blur {
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
 }
 
 html {
@@ -15,32 +67,23 @@ html {
   }
 }
 html body {
-  font-family: "IBM Plex Mono";
+  font-family: "IBM Plex Mono", monospace;
   color: #fff;
+}
+
+body {
   background-color: #1a1e23;
   overflow-x: hidden;
 }
-html .container {
+body .container {
   position: relative;
   max-width: 1480px;
   margin: 0 auto;
 }
 @media screen and (max-width: 1480px) {
-  html .container {
+  body .container {
     padding: 0 5%;
   }
-}
-html .container button {
-  cursor: pointer;
-  font-family: "IBM Plex Mono";
-}
-html .container a {
-  text-decoration: none;
-}
-
-.blur {
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
 }
 
 .navbar {
@@ -91,7 +134,6 @@ html .container a {
           justify-content: space-between;
   -ms-flex-preferred-size: 40%;
       flex-basis: 40%;
-  list-style: none;
 }
 @media screen and (max-width: 1024px) {
   .navbar__main-nav {
@@ -127,12 +169,11 @@ html .container a {
     left: 100%;
     width: 65%;
     background-color: #ddd;
-    list-style-type: none;
     border-radius: 0 0 0 20px;
-    -webkit-transition: -webkit-transform 0.2s;
-    transition: -webkit-transform 0.2s;
-    transition: transform 0.2s;
-    transition: transform 0.2s, -webkit-transform 0.2s;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    transition: transform 0.4s, -webkit-transform 0.4s;
   }
   .navbar__mobile-nav--active {
     -webkit-transform: translateX(-100%);
@@ -148,36 +189,101 @@ html .container a {
     border: none;
   }
 }
-.navbar__mobile-nav .mobile-nav-toggle {
+.navbar__mobile-nav-toggle {
   position: absolute;
   top: 30px;
   left: -90px;
+  height: 40px;
   width: 60px;
-  height: 45px;
+  position: relative;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-.navbar__mobile-nav .mobile-nav-toggle span {
+.navbar__mobile-nav-toggle--active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  left: 0;
+}
+.navbar__mobile-nav-toggle .toggle__line {
   position: absolute;
-  top: 0;
   right: 0;
-  height: 4px;
+  left: 0;
+  height: 3px;
   background-color: #fff;
+  border-radius: 2px;
+  -webkit-transition: top 0.5s, width 0.5s, left 0.5s, -webkit-transform 0.5s 0.5s, -webkit-transform-origin 0.5s;
+  transition: top 0.5s, width 0.5s, left 0.5s, -webkit-transform 0.5s 0.5s, -webkit-transform-origin 0.5s;
+  transition: top 0.5s, transform 0.5s 0.5s, transform-origin 0.5s, width 0.5s, left 0.5s;
+  transition: top 0.5s, transform 0.5s 0.5s, transform-origin 0.5s, width 0.5s, left 0.5s, -webkit-transform 0.5s 0.5s, -webkit-transform-origin 0.5s;
 }
-.navbar__mobile-nav .mobile-nav-toggle .menu-top {
+.navbar__mobile-nav-toggle .toggle__line-top {
   width: 100%;
+  top: 0;
 }
-.navbar__mobile-nav .mobile-nav-toggle .menu-middle {
+.navbar__mobile-nav-toggle .toggle__line-top--active {
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-30deg);
+          transform: translateY(-50%) rotate(-30deg);
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  left: 0;
+  width: 30%;
+  background-color: #333;
+  -webkit-animation: anime 1s;
+          animation: anime 1s;
+}
+.navbar__mobile-nav-toggle .toggle__line-middle {
   width: 70%;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
-.navbar__mobile-nav .mobile-nav-toggle .menu-bottom {
+.navbar__mobile-nav-toggle .toggle__line-middle--active {
+  left: -1px;
+  background-color: #333;
+}
+.navbar__mobile-nav-toggle .toggle__line-bottom {
   width: 40%;
   top: 100%;
   -webkit-transform: translateY(-100%);
           transform: translateY(-100%);
 }
+.navbar__mobile-nav-toggle .toggle__line-bottom--active {
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(30deg);
+          transform: translateY(-50%) rotate(30deg);
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  left: 0;
+  width: 30%;
+  background-color: #333;
+  -webkit-animation: anime 1s;
+          animation: anime 1s;
+}
 
+@-webkit-keyframes anime {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes anime {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .about {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -209,7 +315,6 @@ html .container a {
 .about__intro-description {
   margin: 40px 0 110px 0;
   line-height: 2;
-  font-weight: 300;
   font-size: 1.6rem;
 }
 @media screen and (max-width: 1024px) {
@@ -274,7 +379,6 @@ html .container a {
 .skills__title {
   font-size: 5.4rem;
   color: #12f7d6;
-  font-family: "IBM Plex Mono";
   font-weight: 400;
   position: relative;
   display: inline-block;
@@ -318,7 +422,6 @@ html .container a {
 }
 .skills__list-item > p {
   font-size: 1.8rem;
-  font-family: "IBM Plex Mono";
 }
 .skills__list-item--active {
   display: block;
@@ -424,7 +527,6 @@ html .container a {
 .portfolio__title {
   font-size: 5.4rem;
   color: #12f7d6;
-  font-family: "IBM Plex Mono";
   font-weight: 400;
   position: relative;
   display: inline-block;
@@ -592,7 +694,6 @@ html .container a {
 .contact__title {
   font-size: 5.4rem;
   color: #12f7d6;
-  font-family: "IBM Plex Mono";
   font-weight: 400;
   position: relative;
   display: inline-block;
@@ -686,7 +787,6 @@ html .container a {
   background-color: #303740;
   border: none;
   color: #fff;
-  font-family: "IBM Plex Mono";
 }
 .contact__form-inputs-item input ~ span {
   display: block;
@@ -731,12 +831,10 @@ html .container a {
   display: none;
   font-size: 1.6rem;
   color: #ff0000;
-  font-family: "IBM Plex Mono";
 }
 .contact__form-error-info h2 {
   display: none;
   font-size: 1.6rem;
-  font-family: "IBM Plex Mono";
 }
 .contact__form-button {
   -ms-flex-item-align: end;
