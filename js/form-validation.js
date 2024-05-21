@@ -43,19 +43,18 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
     // Clear the input fields
 
     fields.forEach((field) => {
-      const inputElement = document.querySelector(`.${field.inputClass}`);
+      console.log("sent form");
+      const inputElement = document.querySelector(`.${field.inputClass}>input`);
       inputElement.value = "";
     });
 
     // Display the success message
-
     const successMessage = document.querySelector(
       ".contact__form-success-message"
     );
     successMessage.style.display = "block";
 
     // Hide the success message after 3 seconds
-
     setTimeout(function () {
       successMessage.style.display = "none";
     }, 3000);
