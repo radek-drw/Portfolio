@@ -13,8 +13,8 @@
     &-thumbnail
       position: relative
       flex-basis: 49%
-      @include  mobile
-      flex-basis: 90%
+      @include mobile
+        flex-basis: 90%
       .decorative
         position: absolute
         top: -40px
@@ -31,7 +31,6 @@
           border-radius: 50%
           background-color: #d9d9d9
       img
-        width: 100%
         border-radius: 0 0 $border-radius $border-radius
     &-info
       display: flex

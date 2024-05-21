@@ -527,13 +527,22 @@ body .container {
   cursor: pointer;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: background-color 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+}
+.skills__list-progress-bar .progress-bar-dot:hover {
+  background-color: #43f9df;
+  -webkit-box-shadow: 0 0 12px #75fae7;
+          box-shadow: 0 0 12px #75fae7;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 .skills__list-progress-bar .progress-bar-dot--active {
   background-color: #12f7d6;
   -webkit-box-shadow: 0 0 10px #12f7d6;
           box-shadow: 0 0 10px #12f7d6;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
 }
 .skills__list-progress-bar .progress-bar-line {
   width: 1px;
@@ -618,8 +627,12 @@ body .container {
   position: relative;
   -ms-flex-preferred-size: 49%;
       flex-basis: 49%;
-  -ms-flex-preferred-size: 90%;
-      flex-basis: 90%;
+}
+@media (max-width: 480px) {
+  .portfolio__project-thumbnail {
+    -ms-flex-preferred-size: 90%;
+        flex-basis: 90%;
+  }
 }
 .portfolio__project-thumbnail .decorative {
   position: absolute;
@@ -639,7 +652,6 @@ body .container {
   background-color: #d9d9d9;
 }
 .portfolio__project-thumbnail img {
-  width: 100%;
   border-radius: 0 0 12px 12px;
 }
 .portfolio__project-info {
@@ -779,13 +791,22 @@ body .container {
   cursor: pointer;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: background-color 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, -webkit-box-shadow 0.3s, -webkit-transform 0.3s;
+}
+.portfolio__project-progress-bar .progress-bar-dot:hover {
+  background-color: #43f9df;
+  -webkit-box-shadow: 0 0 12px #75fae7;
+          box-shadow: 0 0 12px #75fae7;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 .portfolio__project-progress-bar .progress-bar-dot--active {
   background-color: #12f7d6;
   -webkit-box-shadow: 0 0 10px #12f7d6;
           box-shadow: 0 0 10px #12f7d6;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
 }
 .portfolio__project-progress-bar .progress-bar-line {
   width: 1px;
