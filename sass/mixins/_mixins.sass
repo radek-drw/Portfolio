@@ -46,10 +46,14 @@
       border-radius: 50%
       cursor: pointer
       flex-shrink: 0
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s
+      &:hover
+        background-color: lighten($primary, 10%)
+        box-shadow: 0 0 12px lighten($primary, 20%)
+        transform: scale(1.1)
       &--active
         background-color: $primary
         box-shadow: 0 0 10px $primary
-        transition: .5s
     &-line
       width: 1px
       height: 100%
