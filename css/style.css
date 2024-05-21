@@ -478,8 +478,8 @@ body .container {
   display: -ms-flexbox;
   display: flex;
   opacity: 0;
-  -webkit-animation: fadeIn 3.5s linear;
-          animation: fadeIn 3.5s linear;
+  -webkit-animation: fadeIn 4s linear;
+          animation: fadeIn 4s linear;
 }
 .skills__list-item--nodejs > img, .skills__list-item--jquery > img, .skills__list-item--sass > img, .skills__list-item--stylus > img {
   position: relative;
