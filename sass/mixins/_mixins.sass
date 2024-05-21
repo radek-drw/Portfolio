@@ -5,14 +5,18 @@
   font-weight: $font-weight-regular
   position: relative
   display: inline-block
+  @include mobile
+    font-size: 4.6rem
   &::after
     content: ''
     position: absolute
-    bottom: 12px
+    bottom: 8px
     left: 125%
     width: 600%
     height: 1px
     background-color: $primary
+    @include mobile
+      left: 110%
 
 // Empty buttons hover
 @mixin empty-btn-hover

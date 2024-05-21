@@ -7,6 +7,10 @@
     flex-wrap: wrap
     padding: 100px 0
     position: relative
+    @include mobile
+      min-height: 400px
+      padding: 70px 0
+      align-content: space-between
     &-item
       flex-basis: 21%
       height: 120px
@@ -14,6 +18,9 @@
       justify-content: space-between
       align-items: center
       display: none
+      @include mobile
+        flex-basis: 46%
+        height: 90px
       img
         width: 6rem
       &>p
