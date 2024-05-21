@@ -1,4 +1,4 @@
-const intervalTime = 3500;
+const intervalTime = 4000;
 const itemsPerPage = 4;
 let currentIndex = 0;
 const skills = document.querySelectorAll(".skills__list-item");
@@ -37,28 +37,14 @@ function updateSkillsAndDots() {
 // Function to start the automatic scroll
 function startInterval() {
   intervalId = setInterval(() => {
-    updateSkillsAndDots();
     // Move to the next set of skills
     currentIndex += itemsPerPage;
     // If we've reached the end, go back to the start
     if (currentIndex >= skills.length) {
       currentIndex = 0;
     }
+    updateSkillsAndDots();
   }, intervalTime);
-
-  const dots = document.querySelectorAll(
-    ".skills__list-progress-bar > .progress-bar-dot"
-  );
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      clearInterval(intervalId);
-      // Move to the clicked dot's set of skills
-      currentIndex = index * itemsPerPage;
-      updateSkillsAndDots();
-      // Restart the automatic scroll
-      startInterval();
-    });
-  });
 }
 
 // Initialization
@@ -70,13 +56,13 @@ for (let i = 0; i < itemsPerPage; i++) {
 }
 
 // Create the dots and lines in the progress bar
-for (let i = 0; i < skills.length / itemsPerPage; i++) {
+for (let i = 0; i < Math.ceil(skills.length / itemsPerPage); i++) {
   const dot = document.createElement("span");
   dot.classList.add("progress-bar-dot");
   progressBar.appendChild(dot);
 
   // Don't add a line after the last dot
-  if (i < skills.length / itemsPerPage - 1) {
+  if (i < Math.ceil(skills.length / itemsPerPage) - 1) {
     const line = document.createElement("span");
     line.classList.add("progress-bar-line");
     progressBar.appendChild(line);
@@ -87,4 +73,21 @@ for (let i = 0; i < skills.length / itemsPerPage; i++) {
     dot.classList.add("progress-bar-dot--active");
   }
 }
+
+// Add click event listeners to dots
+const dots = document.querySelectorAll(
+  ".skills__list-progress-bar > .progress-bar-dot"
+);
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    clearInterval(intervalId);
+    // Move to the clicked dot's set of skills
+    currentIndex = index * itemsPerPage;
+    updateSkillsAndDots();
+    // Restart the automatic scroll
+    startInterval();
+  });
+});
+
+// Start the interval immediately
 startInterval();
