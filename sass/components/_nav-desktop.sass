@@ -1,0 +1,47 @@
+.navbar
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 1
+  background-color: $secondary
+  @include laptop
+    padding: 0 2%
+  &__container
+    display: flex
+    justify-content: space-between
+    align-items: center
+    max-width: 1480px
+    margin: 0 auto
+    padding: 30px 0
+    font-size: 1.8rem
+  &--line
+    position: absolute
+    bottom: 0
+    height: 2px
+    background-color: $primary
+    border-radius: 1px
+  &__name
+    @include mobile
+      margin-left: 25px
+    span
+      margin-right: 15px
+      color: $primary
+  &__main-nav
+    display: flex
+    justify-content: space-between
+    flex-basis: 40%
+    @include tablet
+      display: none
+    &-item
+      opacity: .4
+      transition: all 0.4s ease
+      &:hover
+        opacity: .7
+      &--active
+        opacity: 1
+      >a
+        display: block
+        padding: 5px 10px
+        overflow: hidden
+        color: $white
