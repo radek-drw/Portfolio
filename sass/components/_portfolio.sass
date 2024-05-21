@@ -6,9 +6,15 @@
     display: flex
     padding: 150px 0
     position: relative
+    @include mobile
+      flex-wrap: wrap
+      padding-top: 100px
+      padding-bottom: 60px
     &-thumbnail
       position: relative
       flex-basis: 49%
+      @include  mobile
+      flex-basis: 90%
       .decorative
         position: absolute
         top: -40px
@@ -32,35 +38,50 @@
       flex-direction: column
       justify-content: space-between
       flex-basis: 51%
+      min-height: 550px
       margin-left: 5%
+      @include mobile
+        margin: 0
+        min-height: auto
+        flex-basis: 90%
       .project-info
         &__title
           font-size: 2rem
           font-weight: $font-weight-bold
+          @include mobile
+            margin: 20px 0 40px
+            text-align: center
         &__summary
-          width: 60%
-          margin-top: -40px
-          line-height: 2
+          width: 80%
+          line-height: 1.8
           font-size: 1.6rem
           @include laptop
             margin-top: 0
+          @include mobile
+            width: 100%
 
         &__implementation
-
           .implementation
             &__label
               padding-bottom: 50px
               font-size: 1.6rem
               @include laptop
                 padding-bottom: 20px
+              @include mobile
+                padding: 30px 0 20px
             &__tools
               display: flex
               align-items: center
+              @include mobile
+                justify-content: center
               img
                 max-width: 10%
                 height: 30px
                 margin-right: 50px
         &__buttons
+          @include mobile
+            margin-top: 30px
+            text-align: center
           .project-button
             display: inline-block
             padding: 1em 1.2em

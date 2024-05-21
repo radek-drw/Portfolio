@@ -1,31 +1,39 @@
 .about
   display: flex
   align-items: center
-  // min-height: 75vh
   padding: 60px 0 80px
   position: relative
   margin-top: 102px
+  @include tablet
+    margin-top: 60px
   &__intro
     flex-basis: 50%
     @include tablet
       flex-basis: 100%
       text-align: center
+      // background-color: grey
     &-title
       font-size: 5.4rem
       line-height: 1.2
       font-weight: $font-weight-regular
       color: $primary
+      @include mobile
+        font-size: 4.4rem
     &-description
       margin: 40px 0 110px 0
       line-height: 2
       font-size: 1.6rem
+      // background-color: red
       @include tablet
         width: 60%
         margin: 40px auto 60px
+      @include mobile
+        width: 85%
+        margin-bottom: 50px
     &-buttons
       .about__button
         margin-right: 40px
-        padding: .9em 1.2em
+        padding: 1em 1.2em
         border-radius: 40px
         font-size: 1.8rem
         font-weight: $font-weight-medium
