@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === "production";
+  // const isProduction = argv.mode === "production";
 
   return {
     entry: "./src/js/index.js",
@@ -20,6 +20,6 @@ module.exports = (env, argv) => {
         },
       ],
     },
-    mode: isProduction ? "production" : "development",
+    // mode: isProduction ? "production" : "development",
   };
 };
