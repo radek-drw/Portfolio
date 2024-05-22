@@ -1,5 +1,5 @@
 const intervalTime = 4000;
-// const itemsPerPage = 4;
+const itemsPerPage = 4;
 let currentIndex = 0;
 const skills = document.querySelectorAll(".skills__list-item");
 const progressBar = document.querySelector(".skills__list-progress-bar");
