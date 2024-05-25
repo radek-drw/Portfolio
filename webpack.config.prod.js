@@ -23,6 +23,17 @@ module.exports = {
         test: /\.(sass|scss)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-proposal-class-properties"],
+          },
+        },
+      },
     ],
   },
   plugins: [
