@@ -12,6 +12,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@babel/core": "^7.24.6",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
