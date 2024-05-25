@@ -1,4 +1,4 @@
-// import $ from "jquery";
+import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", function () {
   const nav = $(".navbar");
