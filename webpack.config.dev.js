@@ -10,6 +10,7 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -42,5 +43,10 @@ module.exports = {
   ],
   devServer: {
     open: true,
+    static: {
+      directory: path.join(__dirname, "src"),
+    },
+    compress: true,
+    port: 9000,
   },
 };
