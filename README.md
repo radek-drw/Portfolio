@@ -77,18 +77,25 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 ### Steps
 
 1. **Clone the Repository**:
-   git clone https://github.com/radek-drw/Portfolio.git
-   cd radek-drweski-portfolio
+
+   - git clone https://github.com/radek-drw/Portfolio.git
+   - cd radek-drweski-portfolio
+
 2. **Install dependencies**:
-   npm install
+
+   - npm install
+
 3. **Start the Development Server**:
-   npm start
+
+   - npm start
 
    This will start the development server and open the website in your default browser.
 
 4. **Build for Production**:
+
    - npm run build
-     This will create an optimized production build in the dist folder.
+
+   This will create an optimized production build in the dist folder.
 
 ## Usage
 
