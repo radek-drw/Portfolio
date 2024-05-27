@@ -1,1 +1,13 @@
-node_modules
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env
+*.class
+*.pyc
+.vscode/
+.idea/
+*.tmp
+*.swp
