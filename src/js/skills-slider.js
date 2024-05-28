@@ -5,21 +5,17 @@ const skills = document.querySelectorAll(".skills__list-item");
 const progressBar = document.querySelector(".skills__list-progress-bar");
 let intervalId;
 
-// Function to update the displayed skills and the active dot
 function updateSkillsAndDots() {
-  // Get all currently active skills and dots
   const activeSkills = document.querySelectorAll(".skills__list-item--active");
   const activeDots = document.querySelectorAll(
     ".skills__list-progress-bar > .progress-bar-dot--active"
   );
 
-  // Remove the active class from all currently active skills and dots
   activeSkills.forEach((skill) =>
     skill.classList.remove("skills__list-item--active")
   );
   activeDots.forEach((dot) => dot.classList.remove("progress-bar-dot--active"));
 
-  // Add the active class to the next set of skills
   for (let i = 0; i < itemsPerPage; i++) {
     if (skills[currentIndex + i]) {
       skills[currentIndex + i].classList.add("skills__list-item--active");
@@ -34,7 +30,6 @@ function updateSkillsAndDots() {
   dots[activeDotIndex].classList.add("progress-bar-dot--active");
 }
 
-// Function to start the automatic scroll
 function startInterval() {
   intervalId = setInterval(() => {
     // Move to the next set of skills
@@ -74,7 +69,7 @@ for (let i = 0; i < Math.ceil(skills.length / itemsPerPage); i++) {
   }
 }
 
-// Add click event listeners to dots
+// Add click event listeners to dots for manual navigation
 const dots = document.querySelectorAll(
   ".skills__list-progress-bar > .progress-bar-dot"
 );
@@ -84,10 +79,8 @@ dots.forEach((dot, index) => {
     // Move to the clicked dot's set of skills
     currentIndex = index * itemsPerPage;
     updateSkillsAndDots();
-    // Restart the automatic scroll
     startInterval();
   });
 });
 
-// Start the interval immediately
 startInterval();

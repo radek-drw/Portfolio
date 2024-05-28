@@ -1,8 +1,9 @@
 const mobileToggle = document.querySelector(".navbar__mobile-nav-toggle");
 const mobileNav = document.querySelector(".navbar__mobile-nav");
+
 const elementsToBlur = document.querySelectorAll(
   ".navbar__name, .about, .skills, .portfolio, .contact, .footer"
-); // Add all sections or elements you want to blur
+);
 
 const toggleLines = Array.from(mobileToggle.querySelectorAll(".toggle__line"));
 
@@ -12,6 +13,7 @@ const applyBlurEffect = (apply) => {
   });
 };
 
+// Function to toggle the active state of the mobile navigation and its elements
 const toggleNavActiveState = (isActive) => {
   mobileNav.classList.toggle("navbar__mobile-nav--active", isActive);
   mobileToggle.classList.toggle("navbar__mobile-nav-toggle--active", isActive);
@@ -30,10 +32,11 @@ mobileToggle.addEventListener("click", () => {
   toggleNavActiveState(isActive);
 });
 
-document.addEventListener("click", (event) => {
+// Add click event listener to the document to close mobile nav if clicked outside
+document.addEventListener("click", (e) => {
   if (
-    !mobileNav.contains(event.target) &&
-    !mobileToggle.contains(event.target)
+    !mobileNav.contains(e.target) && // Check if the click is outside the mobile nav
+    !mobileToggle.contains(e.target) // Check if the click is outside the toggle button
   ) {
     if (mobileNav.classList.contains("navbar__mobile-nav--active")) {
       toggleNavActiveState(false);
@@ -41,6 +44,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
+// Add click event listener to the mobile nav to close it when an item is clicked
 mobileNav.addEventListener("click", (event) => {
   if (event.target.closest(".navbar__mobile-nav-item")) {
     toggleNavActiveState(false);
