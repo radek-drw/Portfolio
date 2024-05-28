@@ -29,15 +29,14 @@
       &:last-child
         margin: 0
 
-  // Form
+  // Form styles
   %label-movement
+    top: -40px
     font-size: 1.6rem
     color: $primary
-    top: -40px
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
     @include mobile
       top: -25px
-
   &__form
     flex-grow: 1
     display: flex
@@ -57,18 +56,18 @@
       &-item
         position: relative
         label
-          color: #d1d1d1
-          padding: 10px
           position: absolute
           top: 0
           left: 0
+          padding: 10px
           font-size: 1.6rem
+          color: #d1d1d1
           transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1)
           pointer-events: none
         input
           padding: 10px
-          border-radius: 4px
           width: 100%
+          border-radius: 4px
           font-size: 1.6rem
           background-color: lighten($secondary, 10% )
           border: none
@@ -76,13 +75,13 @@
           @include mobile
             margin-bottom: 20px
           ~ span
+            position: absolute
             display: block
+            bottom: 0
+            left: 0
             width: 0
             height: 3px
             background: $primary
-            position: absolute
-            bottom: 0
-            left: 0
             transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
             @include mobile
               bottom: 20px
@@ -104,7 +103,7 @@
         &--message
           flex-basis: 100%
 
-      // ERROR INFO
+      // Error info styles
     &-error-info
       position: absolute
       top: 50%
@@ -113,8 +112,8 @@
       transform: translateY(-50%)
       @include mobile
         top: 100%
-        transform: translateY(0)
         right: 34%
+        transform: translateY(0)
       p
         display: none
         font-size: 1.6rem
@@ -125,17 +124,17 @@
 
     &-button
       align-self: flex-end
-      background-color: $secondary
-      color: $primary
-      border: 1px solid $primary
-      border-radius: 50px
-      font-size: 1.8rem
       padding: 1em 1.1em
       margin-right: 9px
+      font-size: 1.8rem
+      border: 1px solid $primary
+      border-radius: 50px
+      background-color: $secondary
+      color: $primary
       transition: box-shadow $btn-trns-time ease-in-out
       @include mobile
-        margin-right: 12px
         justify-self: flex-end
+        margin-right: 12px
       &:hover
         @include empty-btn-hover
       &>img
