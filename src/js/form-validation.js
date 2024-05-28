@@ -1,5 +1,5 @@
-document.getElementById("myForm").addEventListener("submit", function (event) {
-  event.preventDefault();
+document.getElementById("myForm").addEventListener("submit", (e) => {
+  e.preventDefault();
 
   const fields = [
     {
@@ -7,14 +7,12 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
       errorClass: "contact__form-error-name",
       inputClass: "contact__form-inputs-item--name",
     },
-
     {
       id: "email",
       errorClass: "contact__form-error-email",
       inputClass: "contact__form-inputs-item--email",
       pattern: /^[^ ]+@[^ ]+\.[a-z]{2,3}$/,
     },
-
     {
       id: "message",
       errorClass: "contact__form-error-message",
@@ -24,41 +22,39 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
 
   let formIsValid = true;
 
+  // Loop through each field to validate
   fields.forEach((field) => {
     const value = document.getElementById(field.id).value;
-    // const inputElement = document.querySelector(`.${field.inputClass}>label`);
     const errorElement = document.querySelector(`.${field.errorClass}`);
 
+    // Check if the field is empty or doesn't match the pattern (if applicable)
     if (value === "" || (field.pattern && !field.pattern.test(value))) {
-      // inputElement.classList.add("error");
       errorElement.style.display = "block";
       formIsValid = false;
     } else {
-      // inputElement.classList.remove("error");
       errorElement.style.display = "none";
     }
   });
 
+  // If the form is valid, proceed to clear the fields and show success message
   if (formIsValid) {
-    // Clear the input fields
-
     fields.forEach((field) => {
-      console.log("sent form");
+      console.log("sent form"); // Log form submission for debugging
       const inputElement = document.querySelector(`.${field.inputClass}>input`);
       inputElement.value = "";
     });
 
-    // Display the success message
     const successMessage = document.querySelector(
       ".contact__form-success-message"
     );
     successMessage.style.display = "block";
 
     // Hide the success message after 3 seconds
-    setTimeout(function () {
+    setTimeout(() => {
       successMessage.style.display = "none";
     }, 3000);
   } else {
+    // If the form is invalid, stop further actions
     return false;
   }
 });
