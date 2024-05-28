@@ -16,9 +16,9 @@ $animation-time: .8s
     &--active
       transform: translateX(-100%)
     &-item
-      text-align: center
       padding: 14% 0
       font-size: 2.4rem
+      text-align: center
       border-bottom: 1px solid #888
       &:last-child
         border: none
@@ -28,49 +28,48 @@ $animation-time: .8s
       position: absolute
       top: 30px
       left: -70px
-      height: 25px
       width: 45px
-      position: relative
+      height: 25px
       transition: all $transition-time
       &--active
-        transform: rotate(180deg)
         left: 0
+        transform: rotate(180deg)
       .toggle__line
         position: absolute
-        right: 0
         left: 0
+        right: 0
         height: 3px
         background-color: #fff
         border-radius: 2px
         transition: top $transition-time, transform $transition-time $transition-delay, transform-origin $transition-time, width $transition-time, left $transition-time
         &-top
-          width: 100%
           top: 0
+          width: 100%
           &--active
             top: 50%
-            transform: translateY(-50%) rotate(-30deg)
-            transform-origin: left center
             left: 0
             width: 30%
+            transform: translateY(-50%) rotate(-30deg)
+            transform-origin: left center
             background-color: #333
             animation: anime $animation-time
         &-middle
-          width: 70%
           top: 50%
+          width: 70%
           transform: translateY(-50%)
           &--active
             left: -1px
             background-color: #333
         &-bottom
-          width: 40%
           top: 100%
+          width: 40%
           transform: translateY(-100%)
           &--active
             top: 50%
-            transform: translateY(-50%) rotate(30deg)
-            transform-origin: left center
             left: 0
             width: 30%
+            transform: translateY(-50%) rotate(30deg)
+            transform-origin: left center
             background-color: $secondary
             animation: anime $animation-time
 
