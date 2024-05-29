@@ -9,8 +9,19 @@
     "dev": "webpack --config webpack.config.dev.js",
     "deploy": "gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Frontend",
+    "Web Development",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Webpack",
+    "Babel",
+    "SASS",
+    "jQuery",
+    "Responsive Design"
+  ],
+  "author": "Radek Drweski",
   "license": "ISC",
   "browserslist": [
     "> 0.5%",
