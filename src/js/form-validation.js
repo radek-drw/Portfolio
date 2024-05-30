@@ -1,4 +1,4 @@
-document.getElementById("myForm").addEventListener("submit", (e) => {
+document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
 
   const fields = [
