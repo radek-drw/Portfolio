@@ -47,6 +47,12 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "jquery": "^3.7.1"
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "jquery": "^3.7.1",
+    "nodemailer": "^6.9.13",
+    "sanitize-html": "^2.13.0"
   }
 }
