@@ -23,19 +23,24 @@ app.post("/send-email", (req, res) => {
   }
 
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: "ssl0.ovh.net",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
+      pass: EMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
   // Set up email data
   const mailOptions = {
     from: email,
-    to: "rdrweski@gmail.com",
-    subject: "New Contact Form Submission",
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    to: process.env.EMAIL_USER,
+    subject: `Contact Form Submission from ${name}`,
+    text: message,
   };
 
   // Send email
