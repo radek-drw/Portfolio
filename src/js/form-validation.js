@@ -46,8 +46,10 @@ document
 
     // If the form is valid, proceed to send data to the server
     if (formIsValid) {
+      // Show loading animation
+      toggleLoading(true);
+
       try {
-        // Get form data
         const formData = new FormData(document.getElementById("contact-form"));
 
         // Send form data to the server
@@ -57,8 +59,8 @@ document
         });
 
         if (response.ok) {
-          // Handle successful response
           handleSuccessResponse();
+          toggleLoading(false);
         } else {
           // Handle server errors
           console.error("Server error:", response.status);
@@ -73,14 +75,29 @@ document
               "An error occurred while sending the form. Please try again later."
             );
           }
+          toggleLoading(false);
         }
       } catch (error) {
         // Handle network errors and other client-side errors
         console.error("Error:", error);
         showErrorToast("An unexpected error occurred. Please try again later.");
+        toggleLoading(false);
       }
     }
   });
+
+function toggleLoading(isLoading) {
+  const loading = document.getElementById("loader");
+  const loadingContainer = document.getElementById("dark-background");
+
+  if (isLoading) {
+    loading.style.display = "block";
+    loadingContainer.style.display = "block";
+  } else {
+    loading.style.display = "none";
+    loadingContainer.style.display = "none";
+  }
+}
 
 function handleSuccessResponse() {
   // Clear form fields
