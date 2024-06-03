@@ -3,27 +3,25 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Load Composer's autoloader
 require 'vendor/autoload.php';
+
+$config = require '../../config.php';
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Form fields validation
+
     $errors = array();
 
-    // Check the "name" field
     if (empty($_POST['name'])) {
         $errors['name'] = 'Name is required';
     }
 
-    // Check the "email" field
     if (empty($_POST['email'])) {
         $errors['email'] = 'Email is required';
     } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Invalid email format';
     }
 
-    // Check the "message" field
     if (empty($_POST['message'])) {
         $errors['message'] = 'Message is required';
     }
@@ -39,22 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Create a new PHPMailer object
     $mail = new PHPMailer(true);
 
     try {
         // Server settings
         $mail->SMTPDebug = 0;
         $mail->isSMTP();
-        $mail->Host = 'ssl0.ovh.net';
+        $mail->Host = $config['smtp_host'];
         $mail->SMTPAuth = true;
-        $mail->Username = 'contact@radek-drweski.com';
-        $mail->Password = 'zq+9AMq5z9.QFq+';
+        $mail->Username = $config['smtp_username'];
+        $mail->Password = $config['smtp_password'];
         $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->Port = $config['smtp_port'];
 
         // Recipients
-        $mail->setFrom('contact@radek-drweski.com', $name);
+        $mail->setFrom($config['smtp_username'], $name);
         $mail->addAddress('rdrweski@gmail.com');
         $mail->addReplyTo($email, $name);
 
