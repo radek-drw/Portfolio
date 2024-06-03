@@ -2,7 +2,7 @@
 .blur
   filter: blur(3px)
 
-// Toast element for errors
+// Toast element for sending form errors (server side)
 .toast
   display: none
   position: fixed
@@ -15,3 +15,35 @@
   border-radius: 5px
   z-index: 9999
   font-size: 1.4rem
+
+// Loader animation element while waiting for server response 
+.loader
+  position: fixed
+  top: 50%
+  left: 50%
+  width: 120px
+  height: 120px
+  display: none
+  border: 10px solid #f3f3f3
+  border-top: 10px solid #3498db
+  border-radius: 50%
+  animation: spin 1.4s linear infinite
+  transform: translate(-50%, -50%)
+  z-index: 9999
+
+@keyframes spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+// Container to darken background while waiting for server response
+.dark-background
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  z-index: 999
+  display: none
+  background-color: rgba(0 ,0 ,0, .8 )
