@@ -1,5 +1,5 @@
 <?php
-// Import PHPMailer classes
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -7,40 +7,40 @@ require 'vendor/autoload.php';
 
 $config = require '../../config.php';
 
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+function sanitizeString($input) {
+    return filter_var(trim($input), FILTER_SANITIZE_STRING);
+}
 
+function sanitizeEmail($email) {
+    return filter_var(trim($email), FILTER_SANITIZE_EMAIL);
+}
+
+function validateInput($name, $email, $message) {
     $errors = array();
 
-    if (empty($_POST['name'])) {
+    if (empty($name)) {
         $errors['name'] = 'Name is required';
     }
 
-    if (empty($_POST['email'])) {
+    if (empty($email)) {
         $errors['email'] = 'Email is required';
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Invalid email format';
     }
 
-    if (empty($_POST['message'])) {
+    if (empty($message)) {
         $errors['message'] = 'Message is required';
     }
 
-    // If there are errors, return them to the client
-    if (!empty($errors)) {
-        echo json_encode(array('success' => false, 'errors' => $errors));
-        exit;
-    }
+    return $errors;
+}
 
-    // Get data from the form
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
-
+// Function to send email using PHPMailer
+function sendEmail($name, $email, $message, $config) {
     $mail = new PHPMailer(true);
 
     try {
-        // Server settings
+        // Configure SMTP settings
         $mail->SMTPDebug = 0;
         $mail->isSMTP();
         $mail->Host = $config['smtp_host'];
@@ -50,23 +50,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPSecure = 'tls';
         $mail->Port = $config['smtp_port'];
 
-        // Recipients
+        // Set email recipients and content
         $mail->setFrom($config['smtp_username'], $name);
         $mail->addAddress('rdrweski@gmail.com');
         $mail->addReplyTo($email, $name);
-
-        // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = $message;
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = 'Contact Form Submission';
+        $mail->Body    = htmlspecialchars($message);
+        $mail->AltBody = htmlspecialchars($message);
 
-        // Send the message
+        // Send the email
         $mail->send();
-        echo json_encode(array('success' => true));
+        return array('success' => true);
     } catch (Exception $e) {
-        // Error handling
-        echo json_encode(array('success' => false, 'error' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo));
+        // Log error if email sending fails
+        error_log('Mailer Error: ' . $mail->ErrorInfo);
+        return array('success' => false, 'error' => 'Message could not be sent. Please try again later.');
     }
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = sanitizeString($_POST['name']);
+    $email = sanitizeEmail($_POST['email']);
+    $message = sanitizeString($_POST['message']);
+
+    $errors = validateInput($name, $email, $message);
+
+    // If there are validation errors, display them as an HTML list
+    if (!empty($errors)) {
+        echo '<ul>';
+        foreach ($errors as $error) {
+            echo '<li>' . htmlspecialchars($error) . '</li>';
+        }
+        echo '</ul>';
+        exit;
+    }
+
+    $result = sendEmail($name, $email, $message, $config);
+}
+
 ?>
