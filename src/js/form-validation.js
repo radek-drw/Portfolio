@@ -17,112 +17,111 @@ const fields = [
   },
 ];
 
-document
-  .getElementById("contact-form")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
+const ERROR_MESSAGES = {
+  NO_INTERNET: "No internet connection!",
+  FORM_SEND_ERROR:
+    "An error occurred while sending the form. Please try again later.",
+  RESOURCE_NOT_FOUND: "The requested resource was not found.",
+  SERVER_ERROR: "An internal server error occurred. Please try again later.",
+  UNEXPECTED_ERROR: "An unexpected error occurred. Please try again later.",
+};
 
-    let formIsValid = true;
+const form = document.getElementById("contact-form");
+const loader = document.getElementById("loader");
+const loadingOverlay = document.getElementById("loading-overlay");
+const successMessage = document.querySelector(".contact__form-success-message");
+const toast = document.getElementById("toast");
 
-    // Check for internet connection
-    if (!navigator.onLine) {
-      showErrorToast("No internet connection!");
-      return;
-    }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    // Loop through each field to validate
-    fields.forEach((field) => {
-      const value = document.getElementById(field.id).value;
-      const errorElement = document.querySelector(`.${field.errorClass}`);
+  // Check for internet connectivity
+  if (!navigator.onLine) {
+    showErrorToast(ERROR_MESSAGES.NO_INTERNET);
+    return;
+  }
 
-      // Check if the field is empty or doesn't match the pattern (if applicable)
-      if (value === "" || (field.pattern && !field.pattern.test(value))) {
-        errorElement.style.display = "block";
-        formIsValid = false;
+  // Validate form fields before sending the form
+  if (validateForm()) {
+    toggleLoading(true); // Show loading indicator
+    try {
+      const formData = new FormData(form);
+      const response = await fetch("send_email.php", {
+        method: "POST",
+        body: formData,
+      }); // Send form data to server
+      if (response.ok) {
+        handleSuccessResponse();
       } else {
-        errorElement.style.display = "none";
+        handleServerError(response.status);
       }
-    });
+    } catch (error) {
+      handleError(error); // Handle network or unexpected errors
+    } finally {
+      toggleLoading(false); // Hide loading indicator
+    }
+  }
+});
 
-    // If the form is valid, proceed to send data to the server
-    if (formIsValid) {
-      // Show loading animation
-      toggleLoading(true);
+function validateForm() {
+  let formIsValid = true;
+  fields.forEach((field) => {
+    const value = document.getElementById(field.id).value;
+    const errorElement = document.querySelector(`.${field.errorClass}`);
 
-      try {
-        const formData = new FormData(document.getElementById("contact-form"));
-
-        // Send form data to the server
-        const response = await fetch("send_email.php", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          handleSuccessResponse();
-          toggleLoading(false);
-        } else {
-          // Handle server errors
-          console.error("Server error:", response.status);
-          if (response.status === 404) {
-            showErrorToast("The requested resource was not found.");
-          } else if (response.status >= 500) {
-            showErrorToast(
-              "An internal server error occurred. Please try again later."
-            );
-          } else {
-            showErrorToast(
-              "An error occurred while sending the form. Please try again later."
-            );
-          }
-          toggleLoading(false);
-        }
-      } catch (error) {
-        // Handle network errors and other client-side errors
-        console.error("Error:", error);
-        showErrorToast("An unexpected error occurred. Please try again later.");
-        toggleLoading(false);
-      }
+    if (value === "" || (field.pattern && !field.pattern.test(value))) {
+      errorElement.style.display = "block";
+      errorElement.setAttribute("aria-live", "assertive");
+      formIsValid = false;
+    } else {
+      errorElement.style.display = "none";
     }
   });
-
-function toggleLoading(isLoading) {
-  const loading = document.getElementById("loader");
-  const loadingContainer = document.getElementById("dark-background");
-
-  if (isLoading) {
-    loading.style.display = "block";
-    loadingContainer.style.display = "block";
-  } else {
-    loading.style.display = "none";
-    loadingContainer.style.display = "none";
-  }
+  return formIsValid;
 }
 
+// Function to toggle loading state
+function toggleLoading(isLoading) {
+  loadingOverlay.style.display = isLoading ? "block" : "none";
+  loader.style.display = isLoading ? "block" : "none";
+}
+
+// Function to handle successful form submission
 function handleSuccessResponse() {
-  // Clear form fields
   fields.forEach((field) => {
     const inputElement =
       document.querySelector(`.${field.inputClass} input`) ||
       document.querySelector(`.${field.inputClass} textarea`);
     inputElement.value = "";
   });
-
-  // Show success message
-  const successMessage = document.querySelector(
-    ".contact__form-success-message"
-  );
   successMessage.style.display = "block";
   setTimeout(() => {
     successMessage.style.display = "none";
   }, 4000);
 }
 
+// Function to show error toast with specified message
 function showErrorToast(message) {
-  const toast = document.getElementById("toast");
   toast.style.display = "block";
   toast.textContent = message;
   setTimeout(() => {
     toast.style.display = "none";
   }, 8000);
+}
+
+// Function to handle server errors based on status code
+function handleServerError(status) {
+  let message = ERROR_MESSAGES.FORM_SEND_ERROR;
+  if (status === 404) {
+    message = ERROR_MESSAGES.RESOURCE_NOT_FOUND;
+  } else if (status >= 500) {
+    message = ERROR_MESSAGES.SERVER_ERROR;
+  }
+  showErrorToast(message);
+}
+
+// Function to handle unexpected errors
+function handleError(error) {
+  console.error("Error:", error);
+  showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
