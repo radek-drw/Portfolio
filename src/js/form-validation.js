@@ -24,6 +24,12 @@ document
 
     let formIsValid = true;
 
+    // Check for internet connection
+    if (!navigator.onLine) {
+      showErrorToast("No internet connection!");
+      return;
+    }
+
     // Loop through each field to validate
     fields.forEach((field) => {
       const value = document.getElementById(field.id).value;
@@ -33,19 +39,18 @@ document
       if (value === "" || (field.pattern && !field.pattern.test(value))) {
         errorElement.style.display = "block";
         formIsValid = false;
-        // errorMessage = "Please fill in all required fields correctly.";
       } else {
         errorElement.style.display = "none";
       }
     });
 
-    // If the form is valid, proceed to send data to server
+    // If the form is valid, proceed to send data to the server
     if (formIsValid) {
       try {
         // Get form data
         const formData = new FormData(document.getElementById("contact-form"));
 
-        // Send form data to server
+        // Send form data to the server
         const response = await fetch("send_email.php", {
           method: "POST",
           body: formData,
@@ -80,7 +85,9 @@ document
 function handleSuccessResponse() {
   // Clear form fields
   fields.forEach((field) => {
-    const inputElement = document.querySelector(`.${field.inputClass}>input`);
+    const inputElement =
+      document.querySelector(`.${field.inputClass} input`) ||
+      document.querySelector(`.${field.inputClass} textarea`);
     inputElement.value = "";
   });
 
@@ -98,7 +105,6 @@ function showErrorToast(message) {
   const toast = document.getElementById("toast");
   toast.style.display = "block";
   toast.textContent = message;
-  toast.style.backgroundColor = "#f44336";
   setTimeout(() => {
     toast.style.display = "none";
   }, 8000);
