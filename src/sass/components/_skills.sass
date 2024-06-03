@@ -7,7 +7,7 @@ $skills-animation-time: 4s
   &__list
     display: flex
     flex-wrap: wrap
-    padding: 100px 0
+    padding: 140px 0
     position: relative
     @include mobile
       min-height: 400px
@@ -24,9 +24,9 @@ $skills-animation-time: 4s
         flex-basis: 46%
         height: 90px
       img
-        width: 6rem
+        width: 5.5rem
       &>p
-        font-size: 1.8rem
+        font-size: 1.6rem
       &--active
         display: block
         display: flex
@@ -49,6 +49,8 @@ $skills-animation-time: 4s
         top: 10%
       &--stylus>img
         top: 15%
+      &--php>img
+        width: 90px
 
     &-progress-bar
       @include progress-bar
