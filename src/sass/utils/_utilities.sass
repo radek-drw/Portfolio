@@ -21,29 +21,33 @@
   position: fixed
   top: 50%
   left: 50%
+  transform: translate(-50%, -50%)
   width: 120px
   height: 120px
-  display: none
+  display: block
   border: 10px solid #f3f3f3
   border-top: 10px solid #3498db
   border-radius: 50%
-  animation: spin 1.4s linear infinite
-  transform: translate(-50%, -50%)
+  animation: spin 1.8s linear infinite
   z-index: 9999
+  @include mobile
+    width: 80px
+    height: 80px
+    border-width: 6px
 
 @keyframes spin
   from
-    transform: rotate(0deg)
+    transform: translate(-50%, -50%) rotate(0deg)
   to
-    transform: rotate(360deg)
+    transform: translate(-50%, -50%) rotate(360deg)
 
 // Container to darken background while waiting for server response
-.dark-background
+.loading-overlay
   position: fixed
   top: 0
   left: 0
   width: 100vw
   height: 100vh
   z-index: 999
-  display: none
+  display: block
   background-color: rgba(0 ,0 ,0, .8 )
