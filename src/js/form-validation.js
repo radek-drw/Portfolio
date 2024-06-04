@@ -80,13 +80,11 @@ function validateForm() {
   return formIsValid;
 }
 
-// Function to toggle loading state
 function toggleLoading(isLoading) {
   loadingOverlay.style.display = isLoading ? "block" : "none";
   loader.style.display = isLoading ? "block" : "none";
 }
 
-// Function to handle successful form submission
 function handleSuccessResponse() {
   fields.forEach((field) => {
     const inputElement =
@@ -100,7 +98,6 @@ function handleSuccessResponse() {
   }, 4000);
 }
 
-// Function to show error toast with specified message
 function showErrorToast(message) {
   toast.style.display = "block";
   toast.textContent = message;
@@ -109,7 +106,6 @@ function showErrorToast(message) {
   }, 8000);
 }
 
-// Function to handle server errors based on status code
 function handleServerError(status) {
   let message = ERROR_MESSAGES.FORM_SEND_ERROR;
   if (status === 404) {
