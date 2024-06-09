@@ -54,10 +54,18 @@ Welcome to my personal portfolio website. This website is designed to showcase m
   - If an input is not filled, a message is displayed indicating which input needs attention.
   - Inputs have placeholders that move to the top when clicked (using CSS focus).
   - If an input is not filled and loses focus, the placeholder and bottom border return to their original state.
+- **Form Submission**:
+  - When all fields are filled, the form submission is sent to the website owner's email address using PHP and PHPMailer with Composer.
+  - The form is checked on the server side again for validation to ensure all fields are correctly filled.
+  - In case of server errors, the user receives a message displayed as a 'toast' (popup message).
+  - If there is no internet connection when the form is submitted, the user gets a warning message displayed as a 'toast'.
+  - An animation is shown while waiting for the server response during form submission. Once a positive response is received, the animation disappears.
+  - All sensitive data in the PHP file is hidden in a `config.php` file.
 
 ### General
 
 - **Responsive Design**: The website is fully responsive and works on all devices.
+- **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms.
 - **Webpack Configuration**: The project uses Webpack for bundling.
 
 ## Technologies Used
@@ -67,23 +75,30 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - **JavaScript (ES6+)**
 - **jQuery**
 - **Webpack**
+- **PHP**
+- **PHPMailer**
+- **Composer**
 
 ## Installation
 
 ### Prerequisites
 
-- Ensure you have Node.js and npm installed on your machine.
+- Ensure you have Node.js, npm, PHP, and Composer installed on your machine.
 
 ### Steps
 
 1. **Clone the Repository**:
 
+   ```bash
    - git clone https://github.com/radek-drw/Portfolio.git
    - cd radek-drweski-portfolio
+
+   ```
 
 2. **Install dependencies**:
 
    - npm install
+   - composer install
 
 3. **Start the Development Server**:
 
