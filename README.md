@@ -68,16 +68,10 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms.
 - **Webpack Configuration**: The project uses Webpack for bundling.
 
-## Technologies Used
-
-- **HTML5**
-- **SASS**
-- **JavaScript (ES6+)**
-- **jQuery**
-- **Webpack**
-- **PHP**
-- **PHPMailer**
-- **Composer**
+## Technology Stack
+- **Frontend**: HTML, CSS, JavaScript, jQuery
+- **Backend**: PHP, PHPMailer, Composer
+- **Build Tool**: Webpack
 
 ## Installation
 
