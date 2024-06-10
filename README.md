@@ -4,6 +4,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ## Table of Contents
 
+- [Project Overview](#project-overview)
 - [Features](#features)
   - [Navigation](#navigation)
   - [Header](#header)
@@ -16,6 +17,10 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+
+## Project Overview
+
+![PetShop Website Screenshot](page_screenshot.png)
 
 ## Features
 
