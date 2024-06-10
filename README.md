@@ -108,9 +108,9 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 4. **Build for Production**:
 
-```bash
- npm run build
-```
+   ```bash
+   npm run build
+   ```
 
 This will create an optimized production build in the dist folder.
 
