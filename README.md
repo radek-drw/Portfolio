@@ -10,8 +10,8 @@ Welcome to my personal portfolio website. This website is designed to showcase m
   - [Skills Section](#skills-section)
   - [Projects Section](#projects-section)
   - [Contact Section](#contact-section)
-- [Technologies Used](#technologies-used)
-- [Installation](#setup)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -49,18 +49,20 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ### Contact Section
 
-- **Form Validation**:
-  - Each input is validated upon clicking the submit button.
-  - If an input is not filled, a message is displayed indicating which input needs attention.
-  - Inputs have placeholders that move to the top when clicked (using CSS focus).
-  - If an input is not filled and loses focus, the placeholder and bottom border return to their original state.
-- **Form Submission**:
-  - When all fields are filled, the form submission is sent to the website owner's email address using PHP and PHPMailer with Composer.
-  - The form is checked on the server side again for validation to ensure all fields are correctly filled.
-  - In case of server errors, the user receives a message displayed as a 'toast' (popup message).
-  - If there is no internet connection when the form is submitted, the user gets a warning message displayed as a 'toast'.
-  - An animation is shown while waiting for the server response during form submission. Once a positive response is received, the animation disappears.
-  - All sensitive data in the PHP file is hidden in a `config.php` file.
+#### Form Validation
+
+- Each input is validated upon clicking the submit button.
+- If an input is not filled, a message is displayed indicating which input needs attention.
+- Inputs have placeholders that move to the top when clicked (using CSS focus).
+- If an input is not filled and loses focus, the placeholder and bottom border return to their original state.
+
+#### Form Submission
+
+- **Email Submission**: When all fields are filled, the form submission is sent to the website owner's email address using PHP and PHPMailer with Composer.
+- **SMTP Integration**: All sensitive data in the PHP file is storred in a `config.php` file.
+- **Server-Side Validation**: The form undergoes server-side validation to ensure all fields are correctly filled, mirroring client-side validation.
+- **Error Handling**: Users receive toast messages for server errors or internet connection issues.
+- **Submission Animation**: An animation is shown while waiting for the server response during form submission. Once a positive response is received, the animation disappears.
 
 ### General
 
@@ -69,6 +71,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - **Webpack Configuration**: The project uses Webpack for bundling.
 
 ## Technology Stack
+
 - **Frontend**: HTML, CSS, JavaScript, jQuery
 - **Backend**: PHP, PHPMailer, Composer
 - **Build Tool**: Webpack
@@ -84,27 +87,32 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 1. **Clone the Repository**:
 
    ```bash
-   - git clone https://github.com/radek-drw/Portfolio.git
-   - cd radek-drweski-portfolio
-
+   git clone https://github.com/radek-drw/Portfolio.git
+   cd radek-drweski-portfolio
    ```
 
 2. **Install dependencies**:
 
-   - npm install
-   - composer install
+   ```bash
+   npm install
+   composer install
+   ```
 
 3. **Start the Development Server**:
 
-   - npm start
+   ```bash
+   npm start
+   ```
 
    This will start the development server and open the website in your default browser.
 
 4. **Build for Production**:
 
-   - npm run build
+```bash
+ npm run build
+```
 
-   This will create an optimized production build in the dist folder.
+This will create an optimized production build in the dist folder.
 
 ## Usage
 
