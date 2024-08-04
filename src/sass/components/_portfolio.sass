@@ -4,8 +4,12 @@
     @include title-style
   &__project
     display: flex
-    padding: 150px 0
+    padding: 140px 0 100px 0
     position: relative
+    font-size: 1.6rem
+    border-bottom: 1px solid #ccc
+    &:last-child
+      border-bottom: none
     @include mobile
       flex-wrap: wrap
       padding-top: 100px
@@ -24,6 +28,8 @@
         line-height: 40px
         border-radius: $border-radius $border-radius 0 0
         background-color: #2C3037
+        &--weather-app
+          background: #4E535D
         span
           display: inline-block
           width: 8px
@@ -35,34 +41,35 @@
     &-info
       display: flex
       flex-direction: column
-      justify-content: space-between
+      // justify-content: space-between
       flex-basis: 51%
-      min-height: 550px
-      margin-left: 5%
+      // min-height: 550px
+      margin-left: 4%
       @include laptop
-        min-height: auto
+        // min-height: auto
       @include mobile
         margin: 0
-        min-height: auto
+        // min-height: auto
         flex-basis: 90%
       .project-info
         &__title
-          font-size: 2.2rem
+          font-size: 2.4rem
           font-weight: $font-weight-bold
+          margin-bottom: 25px
           @include mobile
             margin: 20px 0 40px
             text-align: center
         &__summary
-          width: 80%
+          // width: 95%
           line-height: 1.8
-          font-size: 1.6rem
+          margin-bottom: 35px
           @include mobile
             width: 100%
         &__implementation
+          margin-bottom: 50px
           .implementation
             &__label
-              padding-bottom: 50px
-              font-size: 1.6rem
+              margin-bottom: 25px
               @include laptop
                 padding: 20px 0
               @include mobile
