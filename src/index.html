@@ -1,453 +1,618 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-K0VF923Y47"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0VF923Y47"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+      gtag("config", "G-K0VF923Y47");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Radek Drweski - Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites."
+    />
+    <meta
+      name="keywords"
+      content="Radek Drweski, Front End Developer, Web Development, Responsive Design, User-friendly websites, HTML, CSS, JavaScript, React, TypeScript, SASS, jQuery, Webpack, WordPress, Redux, PHP, Node.js, Figma, AdobePhotoshop, Git, GitHub"
+    />
+    <meta name="author" content="Radek Drweski" />
+    <meta property="og:title" content="Radek Drweski" />
+    <meta
+      property="og:description"
+      content="Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.radek-drweski.com/" />
+    <meta
+      property="og:image"
+      content="./assets/images/portfolio-homepage.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Radek Drweski" />
+    <meta
+      name="twitter:description"
+      content="Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites."
+    />
+    <meta
+      name="twitter:image"
+      content="./assets/images/portfolio-homepage.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicons/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicons/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicons/favicon-48x48.png"
+      sizes="48x48"
+    />
 
-    gtag('config', 'G-K0VF923Y47');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Radek Drweski - Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites.">
-  <meta name="keywords"
-    content="Radek Drweski, Front End Developer, Web Development, Responsive Design, User-friendly websites, HTML, CSS, JavaScript, React, TypeScript, SASS, jQuery, Webpack, WordPress, Redux, PHP, Node.js, Figma, AdobePhotoshop, Git, GitHub">
-  <meta name="author" content="Radek Drweski">
-  <meta property="og:title" content="Radek Drweski">
-  <meta property="og:description"
-    content="Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.radek-drweski.com/">
-  <meta property="og:image" content="./assets/images/portfolio-homepage.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Radek Drweski">
-  <meta name="twitter:description"
-    content="Front End Developer specializing in creating responsive, user-friendly, and visually appealing websites.">
-  <meta name="twitter:image" content="./assets/images/portfolio-homepage.png">
-  <link rel="icon" type="image/png" href="./assets/images/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="./assets/images/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="./assets/images/favicons/favicon-48x48.png" sizes="48x48">
+    <script
+      src="https://kit.fontawesome.com/82e3298cb6.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Radek Drweski - Front End Developer</title>
+    <meta name="msvalidate.01" content="4DCDC11FC521A2FD26E6E87588B9E4EF" />
+    <meta
+      name="google-site-verification"
+      content="_tgK9Aw2LqsjGE1ADUdaoI4XesJRJEKmyzP5OX3sXco"
+    />
+  </head>
 
-  <script src="https://kit.fontawesome.com/82e3298cb6.js" crossorigin="anonymous"></script>
-  <title>Radek Drweski - Front End Developer</title>
-  <meta name="msvalidate.01" content="4DCDC11FC521A2FD26E6E87588B9E4EF" />
-  <meta name="google-site-verification" content="_tgK9Aw2LqsjGE1ADUdaoI4XesJRJEKmyzP5OX3sXco" />
-</head>
+  <body>
+    <!-- Toast element for sending form errors (server side) -->
+    <div id="toast" class="toast"></div>
 
-<body>
-  <!-- Toast element for sending form errors (server side) -->
-  <div id="toast" class="toast"></div>
+    <!-- Loader animation element while waiting for server response  -->
+    <div id="loader" class="loader"></div>
 
-  <!-- Loader animation element while waiting for server response  -->
-  <div id="loader" class="loader"></div>
+    <!-- Container to darken background while waiting for server response -->
+    <div id="loading-overlay" class="loading-overlay"></div>
 
-  <!-- Container to darken background while waiting for server response -->
-  <div id="loading-overlay" class="loading-overlay"></div>
-
-  <div class="container">
-
-    <!-- NAV/MENU SECTION -->
-    <nav class="navbar">
-      <div class="navbar__container">
-        <div class="navbar__name"><span>&ltC/></span>Radek Drweski
+    <div class="container">
+      <!-- NAV/MENU SECTION -->
+      <nav class="navbar">
+        <div class="navbar__container">
+          <div class="navbar__name"><span>&ltC/></span>Radek Drweski</div>
+          <ul class="navbar__mobile-nav">
+            <div class="navbar__mobile-nav-toggle">
+              <span class="toggle__line toggle__line-top"></span>
+              <span class="toggle__line toggle__line-middle"></span>
+              <span class="toggle__line toggle__line-bottom"></span>
+            </div>
+            <li class="navbar__mobile-nav-item">
+              <a href="#about">Hi</a>
+            </li>
+            <li class="navbar__mobile-nav-item">
+              <a href="#skills">Skills</a>
+            </li>
+            <li class="navbar__mobile-nav-item">
+              <a href="#portfolio">Portfolio</a>
+            </li>
+            <li class="navbar__mobile-nav-item">
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+          <ul class="navbar__main-nav">
+            <li class="navbar__main-nav-item navbar__main-nav-item--active">
+              <a href="#about">Hi</a>
+            </li>
+            <li class="navbar__main-nav-item">
+              <a href="#skills">Skills</a>
+            </li>
+            <li class="navbar__main-nav-item">
+              <a href="#portfolio">Portfolio</a>
+            </li>
+            <li class="navbar__main-nav-item">
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
         </div>
-        <ul class="navbar__mobile-nav">
-          <div class="navbar__mobile-nav-toggle">
-            <span class="toggle__line toggle__line-top"></span>
-            <span class="toggle__line toggle__line-middle"></span>
-            <span class="toggle__line toggle__line-bottom"></span>
-          </div>
-          <li class="navbar__mobile-nav-item">
-            <a href="#about">Hi</a>
-          </li>
-          <li class="navbar__mobile-nav-item">
-            <a href="#skills">Skills</a>
-          </li>
-          <li class="navbar__mobile-nav-item">
-            <a href="#portfolio">Portfolio</a>
-          </li>
-          <li class="navbar__mobile-nav-item">
-            <a href="#contact">Contact</a>
-          </li>
-        </ul>
-        <ul class="navbar__main-nav">
-          <li class="navbar__main-nav-item navbar__main-nav-item--active">
-            <a href="#about">Hi</a>
-          </li>
-          <li class="navbar__main-nav-item">
-            <a href="#skills">Skills</a>
-          </li>
-          <li class="navbar__main-nav-item">
-            <a href="#portfolio">Portfolio</a>
-          </li>
-          <li class="navbar__main-nav-item">
-            <a href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      </nav>
 
-    <!-- ABOUT SECTION -->
-    <header class="about" id="about">
-      <div class="about__intro">
-        <h1 class="about__intro-title">Hi, I'm Radek,<br>a Front end Developer</h1>
-        <p class="about__intro-description">I specialize in creating responsive, user-friendly, and visually appealing
-          websites.
-          With a keen eye for design and a love for clean code,
-          I transform ideas into pixel-perfect interfaces.</p>
-        <div class="about__intro-buttons">
-          <a href="#contact">
-            <button class="about__button about__button--talk">
-              Let's Talk <span><i class="fa-regular fa-envelope"></i></span>
-            </button>
-          </a>
-          <a href="./assets/docs/Radek Drweski CV.pdf" download>
-            <button class="about__button about__button--cv">
-              CV
-              <span><i class="fa-solid fa-download"></i></span>
-            </button>
-          </a>
-        </div>
-      </div>
-      <div class="about__animation">
-        <canvas id="canvas"></canvas>
-      </div>
-    </header>
-
-    <main>
-      <!-- SKILLS SECTION -->
-      <section class="skills" id="skills">
-        <h2 class="skills__title">My skills</h2>
-        <div class="skills__list">
-          <div class="skills__list-item skills__list-item--html">
-            <img src="./assets/images/HTML.svg" alt="HTML">
-            <p>HTML 5</p>
-          </div>
-          <div class="skills__list-item skills__list-item--css">
-            <img src="./assets/images/CSS.svg" alt="CSS">
-            <p>CSS</p>
-          </div>
-          <div class="skills__list-item skills__list-item--javascript">
-            <img src="./assets/images/JS.svg" alt="JavaScript">
-            <p>Java Script</p>
-          </div>
-          <div class="skills__list-item skills__list-item--react">
-            <img src="./assets/images/React.svg" alt="React">
-            <p>React</p>
-          </div>
-          <div class="skills__list-item skills__list-item--typescript">
-            <img src="./assets/images/TypeScript.svg" alt="TypeScript">
-            <p>Type Script</p>
-          </div>
-          <div class="skills__list-item skills__list-item--nodejs">
-            <img src="./assets/images/NodeJs.svg" alt="NodeJS">
-            <p>Node.js</p>
-          </div>
-          <div class="skills__list-item skills__list-item--php">
-            <img src="./assets/images/PHP.svg" alt="PHP">
-            <p>PHP</p>
-          </div>
-          <div class="skills__list-item skills__list-item--jquery">
-            <img src="./assets/images/jQuery.svg" alt="jQuery">
-            <p>jQuery</p>
-          </div>
-          <div class="skills__list-item skills__list-item--sass">
-            <img src="./assets/images/Sass.svg" alt="Sass">
-            <p>Sass</p>
-          </div>
-          <div class="skills__list-item skills__list-item--stylus">
-            <img src="./assets/images/Stylus.svg" alt="Stylus">
-            <p>Stylus</p>
-          </div>
-          <div class="skills__list-item skills__list-item--redux">
-            <img src="./assets/images/Redux.svg" alt="Redux">
-            <p>Redux</p>
-          </div>
-          <div class="skills__list-item skills__list-item--wordpress">
-            <img src="./assets/images/WordPress.svg" alt="Wordpress">
-            <p>WordPress</p>
-          </div>
-          <div class="skills__list-item skills__list-item--webpack">
-            <img src="./assets/images/Webpack.svg" alt="Webpack">
-            <p>Webpack</p>
-          </div>
-          <div class="skills__list-item skills__list-item--figma">
-            <img src="./assets/images/Figma.svg" alt="Figma">
-            <p>Figma</p>
-          </div>
-          <div class="skills__list-item skills__list-item--adobe-photoshop">
-            <img src="./assets/images/AdobePhotoshop.svg" alt="Adobe Photoshop">
-            <p>Adobe Photoshop</p>
-          </div>
-          <div class="skills__list-item skills__list-item--github">
-            <img src="./assets/images/Github.svg" alt="Github">
-            <p>Github</p>
-          </div>
-          <div class="skills__list-item skills__list-item--git">
-            <img src="./assets/images/Git.svg" alt="Git">
-            <p>Git</p>
-          </div>
-          <div class="skills__list-item skills__list-item--jest">
-            <img src="./assets/images/Jest.svg" alt="Jest">
-            <p>Jest</p>
-          </div>
-
-          <!-- Progress bar -->
-          <div class="skills__list-progress-bar">
+      <!-- ABOUT SECTION -->
+      <header class="about" id="about">
+        <div class="about__intro">
+          <h1 class="about__intro-title">
+            Hi, I'm Radek,<br />a Front end Developer
+          </h1>
+          <p class="about__intro-description">
+            I specialize in creating responsive, user-friendly, and visually
+            appealing websites. With a keen eye for design and a love for clean
+            code, I transform ideas into pixel-perfect interfaces.
+          </p>
+          <div class="about__intro-buttons">
+            <a href="#contact">
+              <button class="about__button about__button--talk">
+                Let's Talk <span><i class="fa-regular fa-envelope"></i></span>
+              </button>
+            </a>
+            <a href="./assets/docs/Radek Drweski CV.pdf" download>
+              <button class="about__button about__button--cv">
+                CV
+                <span><i class="fa-solid fa-download"></i></span>
+              </button>
+            </a>
           </div>
         </div>
-      </section>
-
-      <!-- PORTFOLIO SECTION -->
-      <section class="portfolio" id="portfolio">
-        <h2 class="portfolio__title">Recent works</h2>
-
-        <!-- React weather app -->
-        <div class="portfolio__project">
-          <div class="portfolio__project-thumbnail">
-            <div class="decorative decorative--weather-app">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <img src="./assets/images/react-weather-app.png" alt="React weather app" loading="lazy">
-          </div>
-          <div class="portfolio__project-info">
-            <h3 class="project-info__title">Global Weather Tracker</h3>
-            <p class="project-info__summary">Global Weather Tracker is a robust React application providing real-time weather 
-              information for any location on the globe. Leveraging the Google Maps API, it delivers precise location details, 
-              including country, state, and county. The app features an intuitive search function with city suggestions and location 
-              details to ensure accuracy, even for cities with the same name. Users can toggle between light and dark themes, switch 
-              temperature units between Celsius and Fahrenheit, and choose from seven languages for the app interface. Additional 
-              features include weather forecasts for the next five days, hourly forecasts in three-hour intervals, and dynamic sky 
-              condition images. The app also offers a current location weather feature and comprehensive error handling for a seamless 
-              user experience.</p>
-            <div class="project-info__implementation">
-              <p class="implementation__label">Implementation:</p>
-              <div class="implementation__tools">
-                <img src="./assets/images/HTML.svg" alt="HTML">
-                <img src="./assets/images/CSS.svg" alt="CSS">
-                <img src="./assets/images/JS.svg" alt="JavaScript">
-                <img src="./assets/images/React.svg" alt="React">
-                <img src="./assets/images/TypeScript.svg" alt="TypeScript">
-                <img src="./assets/images/Jest.svg" alt="Jest">
-              </div>
-            </div>
-            <div class="project-info__buttons">
-              <a href="https://radek-drw.github.io/weather-app/" target="_blank"
-                class="project-button project-button--live">
-                View Project
-              </a>
-              <a href="https://github.com/radek-drw/weather-app" target="_blank"
-                class="project-button project-button--source">
-                Source Code
-              </a>
-            </div>
-          </div>
+        <div class="about__animation">
+          <canvas id="canvas"></canvas>
         </div>
+      </header>
 
-        <!-- PetIdea shop -->
-        <div class="portfolio__project">
-          <div class="portfolio__project-thumbnail">
-            <div class="decorative">
-              <span></span>
-              <span></span>
-              <span></span>
+      <main>
+        <!-- SKILLS SECTION -->
+        <section class="skills" id="skills">
+          <h2 class="skills__title">My skills</h2>
+          <div class="skills__list">
+            <div class="skills__list-item skills__list-item--html">
+              <img src="./assets/images/HTML.svg" alt="HTML" />
+              <p>HTML 5</p>
             </div>
-            <img src="./assets/images/pet-idea.jpg" alt="Pet Idea portfolio" loading="lazy">
+            <div class="skills__list-item skills__list-item--css">
+              <img src="./assets/images/CSS.svg" alt="CSS" />
+              <p>CSS</p>
+            </div>
+            <div class="skills__list-item skills__list-item--javascript">
+              <img src="./assets/images/JS.svg" alt="JavaScript" />
+              <p>Java Script</p>
+            </div>
+            <div class="skills__list-item skills__list-item--react">
+              <img src="./assets/images/React.svg" alt="React" />
+              <p>React</p>
+            </div>
+            <div class="skills__list-item skills__list-item--typescript">
+              <img src="./assets/images/TypeScript.svg" alt="TypeScript" />
+              <p>Type Script</p>
+            </div>
+            <div class="skills__list-item skills__list-item--nodejs">
+              <img src="./assets/images/NodeJs.svg" alt="NodeJS" />
+              <p>Node.js</p>
+            </div>
+            <div class="skills__list-item skills__list-item--php">
+              <img src="./assets/images/PHP.svg" alt="PHP" />
+              <p>PHP</p>
+            </div>
+            <div class="skills__list-item skills__list-item--jquery">
+              <img src="./assets/images/jQuery.svg" alt="jQuery" />
+              <p>jQuery</p>
+            </div>
+            <div class="skills__list-item skills__list-item--sass">
+              <img src="./assets/images/Sass.svg" alt="Sass" />
+              <p>Sass</p>
+            </div>
+            <div class="skills__list-item skills__list-item--stylus">
+              <img src="./assets/images/Stylus.svg" alt="Stylus" />
+              <p>Stylus</p>
+            </div>
+            <div class="skills__list-item skills__list-item--redux">
+              <img src="./assets/images/Redux.svg" alt="Redux" />
+              <p>Redux</p>
+            </div>
+            <div class="skills__list-item skills__list-item--wordpress">
+              <img src="./assets/images/WordPress.svg" alt="Wordpress" />
+              <p>WordPress</p>
+            </div>
+            <div class="skills__list-item skills__list-item--webpack">
+              <img src="./assets/images/Webpack.svg" alt="Webpack" />
+              <p>Webpack</p>
+            </div>
+            <div class="skills__list-item skills__list-item--figma">
+              <img src="./assets/images/Figma.svg" alt="Figma" />
+              <p>Figma</p>
+            </div>
+            <div class="skills__list-item skills__list-item--adobe-photoshop">
+              <img
+                src="./assets/images/AdobePhotoshop.svg"
+                alt="Adobe Photoshop"
+              />
+              <p>Adobe Photoshop</p>
+            </div>
+            <div class="skills__list-item skills__list-item--github">
+              <img src="./assets/images/Github.svg" alt="Github" />
+              <p>Github</p>
+            </div>
+            <div class="skills__list-item skills__list-item--git">
+              <img src="./assets/images/Git.svg" alt="Git" />
+              <p>Git</p>
+            </div>
+            <div class="skills__list-item skills__list-item--jest">
+              <img src="./assets/images/Jest.svg" alt="Jest" />
+              <p>Jest</p>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="skills__list-progress-bar"></div>
           </div>
-          <div class="portfolio__project-info">
-            <h3 class="project-info__title">Website Pet Shop - PetIdea</h3>
-            <p class="project-info__summary">Collaborating closely with a graphic designer, I developed PetIdea
-              shop, an intuitive e-commerce platform for pet lovers. Despite tight deadlines, we crafted a visually
-              appealing and user-friendly website with curated categories for pet food and toys. Our focus on modern
-              design and responsiveness ensures an enjoyable shopping experience across all devices. Explore Pet
-              Idea Shop for a seamless blend of creativity and functionality that caters to both pets and their
-              owners.</p>
-            <div class="project-info__implementation">
-              <p class="implementation__label">Implementation:</p>
-              <div class="implementation__tools">
-                <img src="./assets/images/HTML.svg" alt="HTML">
-                <img src="./assets/images/CSS.svg" alt="CSS">
-                <img src="./assets/images/JS.svg" alt="JavaScript">
-                <img src="./assets/images/Figma.svg" alt="Figma">
-                <img src="./assets/images/Webpack.svg" alt="Webpack">
-                <img src="./assets/images/NodeJs.svg" alt="NodeJS">
-              </div>
-            </div>
-            <div class="project-info__buttons">
-              <a href="https://radek-drw.github.io/pet-idea/" target="_blank"
-                class="project-button project-button--live">
-                View Project
-              </a>
-              <a href="https://github.com/radek-drw/pet-idea" target="_blank"
-                class="project-button project-button--source">
-                Source Code
-              </a>
-            </div>
-          </div>
-        </div>
+        </section>
 
-         <!-- Interactive Web Games and Tools -->
-         <div class="portfolio__project">
-          <div class="portfolio__project-thumbnail">
-            <div class="decorative">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <img src="./assets/images/interactive_webgames_and_tools.jpeg" alt="Interactive Web Games and Tools" loading="lazy">
-          </div>
+        <!-- PORTFOLIO SECTION -->
+        <section class="portfolio" id="portfolio">
+          <h2 class="portfolio__title">Recent works</h2>
 
-          <div class="portfolio__project-info">
-            <h2 class="project-info__title">Interactive Web Games and Tools</h2>
-
-            <!-- Rock-Paper-Scissors Game -->
-            <div class="project-info__app">
-              <h3 class="project-info__sub-title">Rock-Paper-Scissors Game</h3>
-              <p class="project-info__summary">A web-based Rock-Paper-Scissors game where you play against an AI. Select Rock, Paper, or Scissors, click "LET'S PLAY," and see the results. The game tracks your wins, losses, and draws.</p>
-              <div class="project-info__buttons project-info__buttons--apps">
-                <a href="https://radek-drw.github.io/pet-idea/" target="_blank"
-                  class="project-button project-button--live">
-                  View Project
-                </a>
-                <a href="https://github.com/radek-drw/pet-idea" target="_blank"
-                  class="project-button project-button--source">
-                  Source Code
-                </a>
-              </div>
-            </div>
-
-            <!-- Timer Application -->
-            <div class="project-info__app">
-              <h3 class="project-info__sub-title">Timer Application</h3>
-              <p class="project-info__summary">A web-based countdown timer that allows users to set a duration, start or pause the countdown, and reset the timer. Includes an alarm that sounds when the timer reaches zero.</p>
-              <div class="project-info__buttons">
-                <a href="https://radek-drw.github.io/pet-idea/" target="_blank"
-                  class="project-button project-button--live">
-                  View Project
-                </a>
-                <a href="https://github.com/radek-drw/pet-idea" target="_blank"
-                  class="project-button project-button--source">
-                  Source Code
-                </a>
-              </div>
-            </div>
-            
-            <!-- Memory game -->
-            <div class="project-info__app">
-              <h3 class="project-info__sub-title">Memory Game</h3>
-              <p class="project-info__summary">Match pairs of hidden colored cards to win. Features include randomized card setup, a brief preview of card positions, and interactive gameplay. </p>
-              <div class="project-info__buttons">
-                <a href="https://radek-drw.github.io/pet-idea/" target="_blank"
-                  class="project-button project-button--live">
-                  View Project
-                </a>
-                <a href="https://github.com/radek-drw/pet-idea" target="_blank"
-                  class="project-button project-button--source">
-                  Source Code
-                </a>
-              </div>
-            </div>
-
-            <!-- Jackpot Game -->
-            <div class="project-info__app">
-              <h3 class="project-info__sub-title">Jackpot Game</h3>
-              <p class="project-info__summary">The Jackpot Game is a simple color-matching betting game. Players wager money on three randomly drawn colors. Winning occurs if all colors match or if all are different. The game features a wallet system, statistics tracking, and a basic user interface. Players can potentially triple their bet on each win.</p>
-              <div class="project-info__buttons">
-                <a href="https://radek-drw.github.io/pet-idea/" target="_blank"
-                  class="project-button project-button--live">
-                  View Project
-                </a>
-                <a href="https://github.com/radek-drw/pet-idea" target="_blank"
-                  class="project-button project-button--source">
-                  Source Code
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT SECTION -->
-      <section class="contact" id="contact">
-        <h2 class="contact__title">Contact</h2>
-        <div class="contact__info-block">
-          <div class="contact__info">
-            <div class="contact__info-item">
-              <img src="./assets/images/envelope-email.svg" alt="Email">
-              <a href="mailto:rdrweski@gmail.com" alt="Email">rdrweski@gmail.com</a>
-            </div>
-            <div class="contact__info-item">
-              <img src="./assets/images/phone.svg" alt="Phone" />
-              <span>085 811 2473</span>
-            </div>
-            <div class="contact__info-item">
-              <img src="./assets/images/location-pin.svg" alt="Location" />
-              <span>Swords, Co. Dublin</span>
-            </div>
-            <div class="contact__info-item">
-              <img src="./assets/images/website-link.svg" alt="Website link" />
-              <a href="https://www.radek-drweski.com/" target="_blank">www.radek-drweski.com</a>
-            </div>
-          </div>
-
-          <!-- Form -->
-          <form class="contact__form" id="contact-form" action="send_email.php" method="POST" novalidate>
-            <div class="contact__form-inputs">
-              <div class="contact__form-inputs-item contact__form-inputs-item--name">
-                <input type="text" id="name" name="name" required>
-                <label>Name</label>
+          <!-- React weather app -->
+          <div class="portfolio__project">
+            <div class="portfolio__project-thumbnail">
+              <div class="decorative decorative--weather-app">
+                <span></span>
+                <span></span>
                 <span></span>
               </div>
-              <div class="contact__form-inputs-item contact__form-inputs-item--email">
-                <input type="email" id="email" name="email" required>
-                <label>E-mail</label>
+              <img
+                src="./assets/images/react-weather-app.png"
+                alt="React weather app"
+                loading="lazy"
+              />
+            </div>
+            <div class="portfolio__project-info">
+              <h3 class="project-info__title">Global Weather Tracker</h3>
+              <p class="project-info__summary">
+                Global Weather Tracker is a robust React application providing
+                real-time weather information for any location on the globe.
+                Leveraging the Google Maps API, it delivers precise location
+                details, including country, state, and county. The app features
+                an intuitive search function with city suggestions and location
+                details to ensure accuracy, even for cities with the same name.
+                Users can toggle between light and dark themes, switch
+                temperature units between Celsius and Fahrenheit, and choose
+                from seven languages for the app interface. Additional features
+                include weather forecasts for the next five days, hourly
+                forecasts in three-hour intervals, and dynamic sky condition
+                images. The app also offers a current location weather feature
+                and comprehensive error handling for a seamless user experience.
+              </p>
+              <div class="project-info__implementation">
+                <p class="implementation__label">Implementation:</p>
+                <div class="implementation__tools">
+                  <img src="./assets/images/HTML.svg" alt="HTML" />
+                  <img src="./assets/images/CSS.svg" alt="CSS" />
+                  <img src="./assets/images/JS.svg" alt="JavaScript" />
+                  <img src="./assets/images/React.svg" alt="React" />
+                  <img src="./assets/images/TypeScript.svg" alt="TypeScript" />
+                  <img src="./assets/images/Jest.svg" alt="Jest" />
+                </div>
+              </div>
+              <div class="project-info__buttons">
+                <a
+                  href="https://radek-drw.github.io/weather-app/"
+                  target="_blank"
+                  class="project-button project-button--live"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/radek-drw/weather-app"
+                  target="_blank"
+                  class="project-button project-button--source"
+                >
+                  Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- PetIdea shop -->
+          <div class="portfolio__project">
+            <div class="portfolio__project-thumbnail">
+              <div class="decorative">
+                <span></span>
+                <span></span>
                 <span></span>
               </div>
-              <div class="contact__form-error-info">
-                <p class="contact__form-error-name">"Please enter a name"
+              <img
+                src="./assets/images/pet-idea.jpg"
+                alt="Pet Idea portfolio"
+                loading="lazy"
+              />
+            </div>
+            <div class="portfolio__project-info">
+              <h3 class="project-info__title">Website Pet Shop - PetIdea</h3>
+              <p class="project-info__summary">
+                Collaborating closely with a graphic designer, I developed
+                PetIdea shop, an intuitive e-commerce platform for pet lovers.
+                Despite tight deadlines, we crafted a visually appealing and
+                user-friendly website with curated categories for pet food and
+                toys. Our focus on modern design and responsiveness ensures an
+                enjoyable shopping experience across all devices. Explore Pet
+                Idea Shop for a seamless blend of creativity and functionality
+                that caters to both pets and their owners.
+              </p>
+              <div class="project-info__implementation">
+                <p class="implementation__label">Implementation:</p>
+                <div class="implementation__tools">
+                  <img src="./assets/images/HTML.svg" alt="HTML" />
+                  <img src="./assets/images/CSS.svg" alt="CSS" />
+                  <img src="./assets/images/JS.svg" alt="JavaScript" />
+                  <img src="./assets/images/Figma.svg" alt="Figma" />
+                  <img src="./assets/images/Webpack.svg" alt="Webpack" />
+                  <img src="./assets/images/NodeJs.svg" alt="NodeJS" />
+                </div>
+              </div>
+              <div class="project-info__buttons">
+                <a
+                  href="https://radek-drw.github.io/pet-idea/"
+                  target="_blank"
+                  class="project-button project-button--live"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/radek-drw/pet-idea"
+                  target="_blank"
+                  class="project-button project-button--source"
+                >
+                  Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Web Games and Tools -->
+          <div class="portfolio__project">
+            <div class="portfolio__project-thumbnail">
+              <div class="decorative">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img
+                src="./assets/images/interactive_webgames_and_tools.jpeg"
+                alt="Interactive Web Games and Tools"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="portfolio__project-info">
+              <h2 class="project-info__title">
+                Interactive Web Games and Tools
+              </h2>
+
+              <!-- Rock-Paper-Scissors Game -->
+              <div class="project-info__app">
+                <h3 class="project-info__sub-title">
+                  Rock-Paper-Scissors Game
+                </h3>
+                <p class="project-info__summary">
+                  A web-based Rock-Paper-Scissors game where you play against an
+                  AI. Select Rock, Paper, or Scissors, click "LET'S PLAY," and
+                  see the results. The game tracks your wins, losses, and draws.
                 </p>
-                <p class="contact__form-error-email">"Please enter a valid email"
-                </p>
-                <p class="contact__form-error-message">"Please enter a message"</p>
-                <h2 class="contact__form-success-message">✅ Form sent successfully!</h2>
+                <div class="project-info__buttons project-info__buttons--apps">
+                  <a
+                    href="https://radek-drw.github.io/pet-idea/"
+                    target="_blank"
+                    class="project-button project-button--live"
+                  >
+                    View Project
+                  </a>
+                  <a
+                    href="https://github.com/radek-drw/pet-idea"
+                    target="_blank"
+                    class="project-button project-button--source"
+                  >
+                    Source Code
+                  </a>
+                </div>
               </div>
-              <div class="contact__form-inputs-item contact__form-inputs-item--message">
-                <input type="text" id="message" name="message" required>
-                <label>Message</label>
-                <span></span>
+
+              <!-- Timer Application -->
+              <div class="project-info__app">
+                <h3 class="project-info__sub-title">Timer Application</h3>
+                <p class="project-info__summary">
+                  A web-based countdown timer that allows users to set a
+                  duration, start or pause the countdown, and reset the timer.
+                  Includes an alarm that sounds when the timer reaches zero.
+                </p>
+                <div class="project-info__buttons">
+                  <a
+                    href="https://radek-drw.github.io/pet-idea/"
+                    target="_blank"
+                    class="project-button project-button--live"
+                  >
+                    View Project
+                  </a>
+                  <a
+                    href="https://github.com/radek-drw/pet-idea"
+                    target="_blank"
+                    class="project-button project-button--source"
+                  >
+                    Source Code
+                  </a>
+                </div>
+              </div>
+
+              <!-- Memory game -->
+              <div class="project-info__app">
+                <h3 class="project-info__sub-title">Memory Game</h3>
+                <p class="project-info__summary">
+                  Match pairs of hidden colored cards to win. Features include
+                  randomized card setup, a brief preview of card positions, and
+                  interactive gameplay.
+                </p>
+                <div class="project-info__buttons">
+                  <a
+                    href="https://radek-drw.github.io/pet-idea/"
+                    target="_blank"
+                    class="project-button project-button--live"
+                  >
+                    View Project
+                  </a>
+                  <a
+                    href="https://github.com/radek-drw/pet-idea"
+                    target="_blank"
+                    class="project-button project-button--source"
+                  >
+                    Source Code
+                  </a>
+                </div>
+              </div>
+
+              <!-- Jackpot Game -->
+              <div class="project-info__app">
+                <h3 class="project-info__sub-title">Jackpot Game</h3>
+                <p class="project-info__summary">
+                  The Jackpot Game is a simple color-matching betting game.
+                  Players wager money on three randomly drawn colors. Winning
+                  occurs if all colors match or if all are different. The game
+                  features a wallet system, statistics tracking, and a basic
+                  user interface. Players can potentially triple their bet on
+                  each win.
+                </p>
+                <div class="project-info__buttons">
+                  <a
+                    href="https://radek-drw.github.io/pet-idea/"
+                    target="_blank"
+                    class="project-button project-button--live"
+                  >
+                    View Project
+                  </a>
+                  <a
+                    href="https://github.com/radek-drw/pet-idea"
+                    target="_blank"
+                    class="project-button project-button--source"
+                  >
+                    Source Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="contact" id="contact">
+          <h2 class="contact__title">Contact</h2>
+          <div class="contact__info-block">
+            <div class="contact__info">
+              <div class="contact__info-item">
+                <img src="./assets/images/envelope-email.svg" alt="Email" />
+                <a href="mailto:rdrweski@gmail.com" alt="Email"
+                  >rdrweski@gmail.com</a
+                >
+              </div>
+              <div class="contact__info-item">
+                <img src="./assets/images/phone.svg" alt="Phone" />
+                <span>085 811 2473</span>
+              </div>
+              <div class="contact__info-item">
+                <img src="./assets/images/location-pin.svg" alt="Location" />
+                <span>Swords, Co. Dublin</span>
+              </div>
+              <div class="contact__info-item">
+                <img
+                  src="./assets/images/website-link.svg"
+                  alt="Website link"
+                />
+                <a href="https://www.radek-drweski.com/" target="_blank"
+                  >www.radek-drweski.com</a
+                >
               </div>
             </div>
 
-            <button class="contact__form-button" type="submit">Send
-              <img class="contact__form-button-icon" src="./assets/images/arrow-send-form.svg" alt="Send">
-            </button>
-          </form>
-        </div>
-      </section>
-    </main>
+            <!-- Form -->
+            <form
+              class="contact__form"
+              id="contact-form"
+              action="send_email.php"
+              method="POST"
+              novalidate
+            >
+              <div class="contact__form-inputs">
+                <div
+                  class="contact__form-inputs-item contact__form-inputs-item--name"
+                >
+                  <input type="text" id="name" name="name" required />
+                  <label>Name</label>
+                  <span></span>
+                </div>
+                <div
+                  class="contact__form-inputs-item contact__form-inputs-item--email"
+                >
+                  <input type="email" id="email" name="email" required />
+                  <label>E-mail</label>
+                  <span></span>
+                </div>
+                <div class="contact__form-error-info">
+                  <p class="contact__form-error-name">"Please enter a name"</p>
+                  <p class="contact__form-error-email">
+                    "Please enter a valid email"
+                  </p>
+                  <p class="contact__form-error-message">
+                    "Please enter a message"
+                  </p>
+                  <h2 class="contact__form-success-message">
+                    ✅ Form sent successfully!
+                  </h2>
+                </div>
+                <div
+                  class="contact__form-inputs-item contact__form-inputs-item--message"
+                >
+                  <input type="text" id="message" name="message" required />
+                  <label>Message</label>
+                  <span></span>
+                </div>
+              </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <a href="https://www.linkedin.com/in/radek-drweski/" target="_blank" class="footer__link">
-        <img src="./assets/images/linkedIn.svg" alt="LinkedIn" class="footer__link-image">
-        LinkedIn
-      </a>
-      <a href="https://github.com/radek-drw/Portfolio" target="_blank" class="footer__link">
-        <img src="./assets/images/github-small.svg" alt="Github" class="footer__link-image">
-        Source Code (GitHub)
-      </a>
-      <span class="footer__copyright">© 2024 Radek Drweski</span>
-    </footer>
+              <button class="contact__form-button" type="submit">
+                Send
+                <img
+                  class="contact__form-button-icon"
+                  src="./assets/images/arrow-send-form.svg"
+                  alt="Send"
+                />
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
 
-  </div>
-</body>
-
+      <!-- FOOTER -->
+      <footer class="footer">
+        <a
+          href="https://www.linkedin.com/in/radek-drweski/"
+          target="_blank"
+          class="footer__link"
+        >
+          <img
+            src="./assets/images/linkedIn.svg"
+            alt="LinkedIn"
+            class="footer__link-image"
+          />
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/radek-drw/Portfolio"
+          target="_blank"
+          class="footer__link"
+        >
+          <img
+            src="./assets/images/github-small.svg"
+            alt="Github"
+            class="footer__link-image"
+          />
+          Source Code (GitHub)
+        </a>
+        <span class="footer__copyright">© 2024 Radek Drweski</span>
+      </footer>
+    </div>
+  </body>
 </html>
