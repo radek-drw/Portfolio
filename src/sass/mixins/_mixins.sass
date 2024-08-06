@@ -1,4 +1,3 @@
-// Section title
 @mixin title-style
   position: relative
   display: inline-block
@@ -20,16 +19,13 @@
     @include mobile
       left: 110%
 
-// Empty buttons hover
 @mixin empty-btn-hover
   box-shadow: inset 0 0 5px $primary, 0 0 12px $primary
 
-// Filled buttons hover
 @mixin filled-btn-hover
   color: $primary
   background-color: $secondary
 
-// Progress bar
 @mixin progress-bar
   position: absolute
   top: 50%
@@ -60,3 +56,15 @@
       width: 1px
       height: 100%
       background-color: $primary
+
+@mixin button-styles
+  display: inline-block
+  font-size: 1.8rem
+  background-color: $primary
+  border-radius: 50px
+  border: 1px solid $primary
+  color: $secondary
+  text-decoration: none
+  transition: all $btn-trns-time ease-in-out
+  &:hover
+    @include filled-btn-hover
