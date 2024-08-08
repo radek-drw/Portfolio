@@ -9,36 +9,10 @@
   transition: all $btn-trns-time ease-in-out
   &:hover
     @include filled-btn-hover
-%project-padding
-  padding: 140px 0 100px 0
-%thumbnail
-  flex-basis: 49%
-  position: relative
-%thumbnail-decorative
-  position: absolute
-  top: -40px
-  left: 0
-  width: 100%
-  padding-left: 20px
-  line-height: 40px
-  border-radius: $border-radius $border-radius 0 0
-  background-color: #2C3037
-%thumbnail-decorative-spans
-  display: inline-block
-  width: 8px
-  height: 8px
-  border-radius: 50%
-  background-color: #d9d9d9
 %right-panel-size-and-position
   flex-basis: 51%
   margin-left: 4%
-%project-title
-  font-size: 2.4rem
-  font-weight: $font-weight-bold
-%summary
-  line-height: 1.8
-%implemenation-label
-  margin-bottom: 25px
+
 .portfolio
   overflow: hidden
   font-size: 1.6rem
@@ -50,22 +24,38 @@
     @include title-style
   &__project
     display: flex
-    @extend %project-padding
+    padding: 140px 0 100px 0
     position: relative
     @include mobile
       flex-wrap: wrap
       padding-top: 100px
       padding-bottom: 60px
+      &--apps
+        position: static
+        display: block
+
     &-thumbnail
-      @extend %thumbnail
+      flex-basis: 49%
+      position: relative
       @include mobile
         flex-basis: 90%
       .decorative
-        @extend %thumbnail-decorative
+        position: absolute
+        top: -40px
+        left: 0
+        width: 100%
+        padding-left: 20px
+        line-height: 40px
+        border-radius: $border-radius $border-radius 0 0
+        background-color: #2C3037
         &--weather-app
           background: #4E535D
         span
-          @extend %thumbnail-decorative-spans
+          display: inline-block
+          width: 8px
+          height: 8px
+          border-radius: 50%
+          background-color: #d9d9d9
       img
         border-radius: 0 0 $border-radius $border-radius
     &-info
@@ -75,20 +65,23 @@
         flex-basis: 90%
       .project-info
         &__title
-          @extend %project-title
+          font-size: 2.4rem
+          font-weight: $font-weight-bold
           @include mobile
             margin: 20px 0 40px
             text-align: center
         &__summary
-          @extend %summary
+          line-height: 1.8
           margin: 25px 0 35px 0
           @include mobile
             width: 100%
+          &--apps
+            margin: 10px 0 20px 0
         &__implementation
           margin-bottom: 50px
           .implementation
             &__label
-              @extend %implemenation-label
+              margin-bottom: 25px
               @include laptop
                 padding: 20px 0
               @include mobile
@@ -104,6 +97,8 @@
                 max-width: 10%
                 height: 30px
                 margin-right: 8%
+          &--apps
+            margin-top: 35px
         &__buttons
           @include mobile
             margin-top: 30px
@@ -115,37 +110,7 @@
               @include filled-btn-hover
             &--live
               margin-right: 4%
-
-    // Styles for Interactive Web Games and Tools
-  .portfolio-apps
-    @extend %project-padding
-    &__info
-      display: flex
-      position: relative
-    &__thumbnail
-      @extend %thumbnail
-      .thumbnail__decorative
-        @extend %thumbnail-decorative
-        span
-          @extend %thumbnail-decorative-spans
-        img
-          border-radius: 0 0 $border-radius $border-radius
-    &__description
-      @extend %right-panel-size-and-position
-      .description__title
-        @extend %project-title
-      .description__implementation
-        margin-top: 35px
-        .implementation__label
-          @extend %implemenation-label
-        .implementation__tools
-          display: flex
-          align-items: center
-          img
-            max-width: 10%
-            height: 30px
-            margin-right: 8%
-    &__projects
+    &__apps
       display: flex
       flex-wrap: wrap
       margin-top: 40px
@@ -161,9 +126,21 @@
           margin-bottom: 0
         &__title
           font-size: 2rem
-        &__summary
-          @extend %summary
-          margin: 10px 0 20px 0
+    // Styles for Interactive Web Games and Tools
+    &__info
+      display: flex
+      position: relative
+
+    &__description
+      @extend %right-panel-size-and-position
+      .implementation__tools
+        display: flex
+        align-items: center
+        img
+          max-width: 10%
+          height: 30px
+          margin-right: 8%
+
         &__buttons
           .project__button
             @extend %button-styles
