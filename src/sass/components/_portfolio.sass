@@ -22,42 +22,19 @@
     border-bottom: none
   &__title
     @include title-style
+  &__project-info-box
+    display: flex
   &__project
     display: flex
     padding: 140px 0 100px 0
-    position: relative
+    // position: relative
     @include mobile
       flex-wrap: wrap
       padding-top: 100px
       padding-bottom: 60px
-      &--apps
-        position: static
-        display: block
-
-    &-thumbnail
-      flex-basis: 49%
-      position: relative
-      @include mobile
-        flex-basis: 90%
-      .decorative
-        position: absolute
-        top: -40px
-        left: 0
-        width: 100%
-        padding-left: 20px
-        line-height: 40px
-        border-radius: $border-radius $border-radius 0 0
-        background-color: #2C3037
-        &--weather-app
-          background: #4E535D
-        span
-          display: inline-block
-          width: 8px
-          height: 8px
-          border-radius: 50%
-          background-color: #d9d9d9
-      img
-        border-radius: 0 0 $border-radius $border-radius
+    &--apps
+      position: static
+      display: block
     &-info
       @extend %right-panel-size-and-position
       @include mobile
@@ -110,7 +87,35 @@
               @include filled-btn-hover
             &--live
               margin-right: 4%
-    &__apps
+      &-apps
+        display: flex
+    &-thumbnail
+      flex-basis: 49%
+      position: relative
+      @include mobile
+        flex-basis: 90%
+      .decorative
+        position: absolute
+        top: -40px
+        left: 0
+        width: 100%
+        padding-left: 20px
+        line-height: 40px
+        border-radius: $border-radius $border-radius 0 0
+        background-color: #2C3037
+        &--weather-app
+          background: #4E535D
+        span
+          display: inline-block
+          width: 8px
+          height: 8px
+          border-radius: 50%
+          background-color: #d9d9d9
+      img
+        border-radius: 0 0 $border-radius $border-radius
+    &-description
+      @extend %right-panel-size-and-position
+    &-apps-container
       display: flex
       flex-wrap: wrap
       margin-top: 40px
@@ -126,24 +131,3 @@
           margin-bottom: 0
         &__title
           font-size: 2rem
-    // Styles for Interactive Web Games and Tools
-    &__info
-      display: flex
-      position: relative
-
-    &__description
-      @extend %right-panel-size-and-position
-      .implementation__tools
-        display: flex
-        align-items: center
-        img
-          max-width: 10%
-          height: 30px
-          margin-right: 8%
-
-        &__buttons
-          .project__button
-            @extend %button-styles
-            padding: .6em .8em
-            &--live
-              margin-right: 4%
