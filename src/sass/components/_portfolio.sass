@@ -1,3 +1,44 @@
+%button-styles
+  display: inline-block
+  font-size: 1.8rem
+  background-color: $primary
+  border-radius: 50px
+  border: 1px solid $primary
+  color: $secondary
+  text-decoration: none
+  transition: all $btn-trns-time ease-in-out
+  &:hover
+    @include filled-btn-hover
+%project-padding
+  padding: 140px 0 100px 0
+%thumbnail
+  flex-basis: 49%
+  position: relative
+%thumbnail-decorative
+  position: absolute
+  top: -40px
+  left: 0
+  width: 100%
+  padding-left: 20px
+  line-height: 40px
+  border-radius: $border-radius $border-radius 0 0
+  background-color: #2C3037
+%thumbnail-decorative-spans
+  display: inline-block
+  width: 8px
+  height: 8px
+  border-radius: 50%
+  background-color: #d9d9d9
+%right-panel-size-and-position
+  flex-basis: 51%
+  margin-left: 4%
+%project-title
+  font-size: 2.4rem
+  font-weight: $font-weight-bold
+%summary
+  line-height: 1.8
+%implemenation-label
+  margin-bottom: 25px
 .portfolio
   overflow: hidden
   font-size: 1.6rem
@@ -9,62 +50,45 @@
     @include title-style
   &__project
     display: flex
-    padding: 140px 0 100px 0
+    @extend %project-padding
     position: relative
     @include mobile
       flex-wrap: wrap
       padding-top: 100px
       padding-bottom: 60px
     &-thumbnail
-      position: relative
-      flex-basis: 49%
+      @extend %thumbnail
       @include mobile
         flex-basis: 90%
       .decorative
-        position: absolute
-        top: -40px
-        left: 0
-        width: 100%
-        padding-left: 20px
-        line-height: 40px
-        border-radius: $border-radius $border-radius 0 0
-        background-color: #2C3037
+        @extend %thumbnail-decorative
         &--weather-app
           background: #4E535D
         span
-          display: inline-block
-          width: 8px
-          height: 8px
-          border-radius: 50%
-          background-color: #d9d9d9
+          @extend %thumbnail-decorative-spans
       img
         border-radius: 0 0 $border-radius $border-radius
     &-info
-      display: flex
-      flex-direction: column
-      flex-basis: 51%
-      margin-left: 4%
+      @extend %right-panel-size-and-position
       @include mobile
         margin: 0
         flex-basis: 90%
       .project-info
         &__title
-          font-size: 2.4rem
-          font-weight: $font-weight-bold
-          margin-bottom: 25px
+          @extend %project-title
           @include mobile
             margin: 20px 0 40px
             text-align: center
         &__summary
-          line-height: 1.8
-          margin-bottom: 35px
+          @extend %summary
+          margin: 25px 0 35px 0
           @include mobile
             width: 100%
         &__implementation
           margin-bottom: 50px
           .implementation
             &__label
-              margin-bottom: 25px
+              @extend %implemenation-label
               @include laptop
                 padding: 20px 0
               @include mobile
@@ -85,7 +109,7 @@
             margin-top: 30px
             text-align: center
           .project-button
-            @include button-styles
+            @extend %button-styles
             padding: .8em 1em
             &:hover
               @include filled-btn-hover
@@ -93,70 +117,56 @@
               margin-right: 4%
 
     // Styles for Interactive Web Games and Tools
-  .portfolio-apps__container
-    padding: 140px 0 100px 0
-    .portfolio-apps__info
+  .portfolio-apps
+    @extend %project-padding
+    &__info
       display: flex
       position: relative
-      &-thumbnail
-        flex-basis: 49%
-        position: relative
-        .decorative
-          position: absolute
-          top: -40px
-          left: 0
-          width: 100%
-          padding-left: 20px
-          line-height: 40px
-          border-radius: $border-radius $border-radius 0 0
-          background-color: #2C3037
+    &__thumbnail
+      @extend %thumbnail
+      .thumbnail__decorative
+        @extend %thumbnail-decorative
         span
-          display: inline-block
-          width: 8px
-          height: 8px
-          border-radius: 50%
-          background-color: #d9d9d9
+          @extend %thumbnail-decorative-spans
         img
           border-radius: 0 0 $border-radius $border-radius
-      &-description
-        margin-left: 4%
-        &-title
-          font-size: 2.4rem
-          flex-basis: 51%
-
-          &__implementation
-            margin-bottom: 25px
-        .implementation
-          &__tools
-            display: flex
-            align-items: center
-            img
-              max-width: 10%
-              height: 30px
-              margin-right: 8%
-    .project-apps
+    &__description
+      @extend %right-panel-size-and-position
+      .description__title
+        @extend %project-title
+      .description__implementation
+        margin-top: 35px
+        .implementation__label
+          @extend %implemenation-label
+        .implementation__tools
+          display: flex
+          align-items: center
+          img
+            max-width: 10%
+            height: 30px
+            margin-right: 8%
+    &__projects
       display: flex
       flex-wrap: wrap
       margin-top: 40px
       justify-content: space-between
-      .project-app
+      .project
         flex-basis: 48%
-        // background-color: cadetblue
-        margin-bottom: 20px
-        align-content: flex-end
+        margin-bottom: 40px
+        display: flex
+        flex-direction: column
+        justify-content: space-between
         &:nth-last-of-type(1),
         &:nth-last-of-type(2)
           margin-bottom: 0
         &__title
           font-size: 2rem
-        .project-app__button
-          @include button-styles
-          padding: .6em .8em
-          flex-basis: 50%
-        &__title
-          font-size: 2rem
         &__summary
+          @extend %summary
           margin: 10px 0 20px 0
-        .project-app__button
-          @include button-styles
-          padding: .6em .8em
+        &__buttons
+          .project__button
+            @extend %button-styles
+            padding: .6em .8em
+            &--live
+              margin-right: 4%
