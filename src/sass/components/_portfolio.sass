@@ -24,14 +24,14 @@
     @include title-style
   &__project-info-box
     display: flex
+    @include mobile
+      display: block
   &__project
     display: flex
     padding: 140px 0 100px 0
-    // position: relative
     @include mobile
       flex-wrap: wrap
-      padding-top: 100px
-      padding-bottom: 60px
+      padding: 100px 0 45px 0
     &--apps
       position: static
       display: block
@@ -39,7 +39,7 @@
       @extend %right-panel-size-and-position
       @include mobile
         margin: 0
-        flex-basis: 90%
+        flex-basis: 100%
       .project-info
         &__title
           font-size: 2.4rem
@@ -57,21 +57,19 @@
           .implementation
             &__label
               margin-bottom: 25px
-              @include laptop
-                padding: 20px 0
               @include mobile
-                padding: 30px 0 20px
+                padding: 0
             &__tools
               display: flex
               align-items: center
-              @include laptop
-                padding-bottom: 4%
               @include mobile
-                justify-content: center
+                padding: 0
               img
                 max-width: 10%
                 height: 30px
                 margin-right: 8%
+                &:last-child
+                  margin: 0
           &--apps
             margin-top: 35px
         &__buttons
@@ -85,13 +83,15 @@
               @include filled-btn-hover
             &--live
               margin-right: 4%
+              @include mobile
+                margin-right: 7%
       &-apps
         display: flex
     &-thumbnail
       flex-basis: 49%
       position: relative
       @include mobile
-        flex-basis: 90%
+        flex-basis: 100%
       .decorative
         position: absolute
         top: -40px
@@ -129,6 +129,10 @@
         &:nth-last-of-type(1),
         &:nth-last-of-type(2)
           margin-bottom: 0
+        @include mobile
+          flex-basis: 100%
+          &:nth-last-of-type(2)
+            margin-bottom: 40px
         &__title
           font-size: 2rem
         &__summary
