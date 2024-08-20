@@ -42,7 +42,6 @@ function startInterval() {
   }, intervalTime);
 }
 
-// Initialization
 // Display the first set of skills
 for (let i = 0; i < itemsPerPage; i++) {
   if (skills[i]) {
