@@ -1,42 +1,90 @@
-const { showErrorToast } = require("../src/js/form-validation");
+import {
+  validateForm,
+  toggleLoading,
+  handleSuccessResponse,
+  showErrorToast,
+  handleServerError,
+  handleError,
+} from "../src/js/form-validation";
 
-describe("Contact Form Functionality", () => {
-  test("showErrorToast displays the correct message", () => {
-    const errorMessage = "An error occurred";
-    global.document = {
-      getElementById: jest.fn(() => ({
-        style: {
-          display: "none",
-        },
-        textContent: "",
-      })),
-    };
+describe("Form Validation Tests", () => {
+  document.body.innerHTML = `
+    <form id="contact-form">
+      <input id="name" value="" />
+      <input id="email" value="" />
+      <textarea id="message"></textarea>
+      <div class="contact__form-error-name"></div>
+      <div class="contact__form-error-email"></div>
+      <div class="contact__form-error-message"></div>
+      <div id="loader"></div>
+      <div id="loading-overlay"></div>
+      <div class="contact__form-success-message"></div>
+      <div id="toast"></div>
+    </form>
+  `;
 
-    showErrorToast(errorMessage);
-
-    expect(global.document.getElementById).toHaveBeenCalledWith("toast");
-    expect(global.document.getElementById().textContent).toBe(errorMessage);
-    expect(global.document.getElementById().style.display).toBe("block");
+  test("validateForm should return false if fields are empty", () => {
+    expect(validateForm()).toBe(false);
   });
 
-  test("showErrorToast hides the toast after 8 seconds", () => {
-    const errorMessage = "An error occurred";
-    const originalTimeout = global.setTimeout;
-    global.setTimeout = jest.fn();
-    global.document = {
-      getElementById: jest.fn(() => ({
-        style: {
-          display: "none",
-        },
-        textContent: "",
-      })),
-    };
+  test("toggleLoading should show/hide loading elements", () => {
+    toggleLoading(true);
+    expect(document.getElementById("loading-overlay").style.display).toBe(
+      "block"
+    );
+    expect(document.getElementById("loader").style.display).toBe("block");
 
-    showErrorToast(errorMessage);
+    toggleLoading(false);
+    expect(document.getElementById("loading-overlay").style.display).toBe(
+      "none"
+    );
+    expect(document.getElementById("loader").style.display).toBe("none");
+  });
 
-    expect(global.setTimeout).toHaveBeenCalledWith(expect.any(Function), 8000);
-    global.setTimeout.mock.calls[0][0]();
-    expect(global.document.getElementById().style.display).toBe("none");
-    global.setTimeout = originalTimeout;
+  test("handleSuccessResponse should clear input fields and show success message", () => {
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "john@example.com";
+    document.getElementById("message").value = "Hello";
+
+    handleSuccessResponse();
+
+    expect(document.getElementById("name").value).toBe("");
+    expect(document.getElementById("email").value).toBe("");
+    expect(document.getElementById("message").value).toBe("");
+    expect(
+      document.querySelector(".contact__form-success-message").style.display
+    ).toBe("block");
+  });
+
+  test("showErrorToast should display toast with message", () => {
+    showErrorToast("Test error message");
+    expect(document.getElementById("toast").style.display).toBe("block");
+    expect(document.getElementById("toast").textContent).toBe(
+      "Test error message"
+    );
+  });
+
+  test("handleServerError should display appropriate error message", () => {
+    handleServerError(404);
+    expect(document.getElementById("toast").textContent).toBe(
+      "The requested resource was not found."
+    );
+
+    handleServerError(500);
+    expect(document.getElementById("toast").textContent).toBe(
+      "An internal server error occurred. Please try again later."
+    );
+  });
+
+  test("handleError should log error and show unexpected error message", () => {
+    console.error = jest.fn();
+    handleError(new Error("Test error"));
+    expect(console.error).toHaveBeenCalledWith(
+      "Error:",
+      new Error("Test error")
+    );
+    expect(document.getElementById("toast").textContent).toBe(
+      "An unexpected error occurred. Please try again later."
+    );
   });
 });
