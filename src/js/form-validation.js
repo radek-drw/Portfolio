@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const fields = [
     {
       id: "name",
@@ -124,4 +124,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Error:", error);
     showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
   }
+
+  module.exports = {
+    validateForm,
+    toggleLoading,
+    handleSuccessResponse,
+    showErrorToast,
+    handleServerError,
+    handleError,
+  };
 });
