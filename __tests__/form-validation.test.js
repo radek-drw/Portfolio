@@ -10,9 +10,15 @@ import {
 describe("Form Validation Tests", () => {
   document.body.innerHTML = `
     <form id="contact-form">
-      <input id="name" value="" />
-      <input id="email" value="" />
-      <textarea id="message"></textarea>
+      <div class="contact__form-inputs-item--name">
+        <input id="name" value="" />
+      </div>
+      <div class="contact__form-inputs-item--email">
+        <input id="email" value="" />
+      </div>
+      <div class="contact__form-inputs-item--message">
+        <textarea id="message"></textarea>
+      </div>
       <div class="contact__form-error-name"></div>
       <div class="contact__form-error-email"></div>
       <div class="contact__form-error-message"></div>
@@ -42,6 +48,7 @@ describe("Form Validation Tests", () => {
   });
 
   test("handleSuccessResponse should clear input fields and show success message", () => {
+    // Set initial values for the inputs
     document.getElementById("name").value = "John Doe";
     document.getElementById("email").value = "john@example.com";
     document.getElementById("message").value = "Hello";
@@ -51,6 +58,7 @@ describe("Form Validation Tests", () => {
     expect(document.getElementById("name").value).toBe("");
     expect(document.getElementById("email").value).toBe("");
     expect(document.getElementById("message").value).toBe("");
+
     expect(
       document.querySelector(".contact__form-success-message").style.display
     ).toBe("block");
@@ -58,6 +66,7 @@ describe("Form Validation Tests", () => {
 
   test("showErrorToast should display toast with message", () => {
     showErrorToast("Test error message");
+
     expect(document.getElementById("toast").style.display).toBe("block");
     expect(document.getElementById("toast").textContent).toBe(
       "Test error message"
@@ -78,7 +87,9 @@ describe("Form Validation Tests", () => {
 
   test("handleError should log error and show unexpected error message", () => {
     console.error = jest.fn();
+
     handleError(new Error("Test error"));
+
     expect(console.error).toHaveBeenCalledWith(
       "Error:",
       new Error("Test error")
