@@ -1,8 +1,11 @@
 const intervalTime = 4000;
 const itemsPerPage = 4;
+let currentIndex = 0;
+const skills = document.querySelectorAll(".skills__list-item");
+const progressBar = document.querySelector(".skills__list-progress-bar");
 let intervalId;
 
-export function updateSkillsAndDots(currentIndex, skills, progressBar) {
+function updateSkillsAndDots() {
   const activeSkills = document.querySelectorAll(".skills__list-item--active");
   const activeDots = document.querySelectorAll(
     ".skills__list-progress-bar > .progress-bar-dot--active"
@@ -19,51 +22,64 @@ export function updateSkillsAndDots(currentIndex, skills, progressBar) {
     }
   }
 
+  // Add the active class to the corresponding dot
   const activeDotIndex = Math.floor(currentIndex / itemsPerPage);
-  const dots = progressBar.querySelectorAll(".progress-bar-dot");
+  const dots = document.querySelectorAll(
+    ".skills__list-progress-bar > .progress-bar-dot"
+  );
   dots[activeDotIndex].classList.add("progress-bar-dot--active");
 }
 
-export function startInterval(
-  currentIndex,
-  skills,
-  progressBar,
-  setCurrentIndex
-) {
+function startInterval() {
   intervalId = setInterval(() => {
+    // Move to the next set of skills
     currentIndex += itemsPerPage;
+    // If we've reached the end, go back to the start
     if (currentIndex >= skills.length) {
       currentIndex = 0;
     }
-    setCurrentIndex(currentIndex);
-    updateSkillsAndDots(currentIndex, skills, progressBar);
+    updateSkillsAndDots();
   }, intervalTime);
 }
 
-export function initializeSkillsSlider(skills, progressBar) {
-  for (let i = 0; i < itemsPerPage; i++) {
-    if (skills[i]) {
-      skills[i].classList.add("skills__list-item--active");
-    }
+// Display the first set of skills
+for (let i = 0; i < itemsPerPage; i++) {
+  if (skills[i]) {
+    skills[i].classList.add("skills__list-item--active");
   }
-
-  for (let i = 0; i < Math.ceil(skills.length / itemsPerPage); i++) {
-    const dot = document.createElement("span");
-    dot.classList.add("progress-bar-dot");
-    progressBar.appendChild(dot);
-
-    if (i < Math.ceil(skills.length / itemsPerPage) - 1) {
-      const line = document.createElement("span");
-      line.classList.add("progress-bar-line");
-      progressBar.appendChild(line);
-    }
-
-    if (i === 0) {
-      dot.classList.add("progress-bar-dot--active");
-    }
-  }
-
-  return {
-    currentIndex: 0, // Initial index
-  };
 }
+
+// Create the dots and lines in the progress bar
+for (let i = 0; i < Math.ceil(skills.length / itemsPerPage); i++) {
+  const dot = document.createElement("span");
+  dot.classList.add("progress-bar-dot");
+  progressBar.appendChild(dot);
+
+  // Don't add a line after the last dot
+  if (i < Math.ceil(skills.length / itemsPerPage) - 1) {
+    const line = document.createElement("span");
+    line.classList.add("progress-bar-line");
+    progressBar.appendChild(line);
+  }
+
+  // Make the first dot active
+  if (i === 0) {
+    dot.classList.add("progress-bar-dot--active");
+  }
+}
+
+// Add click event listeners to dots for manual navigation
+const dots = document.querySelectorAll(
+  ".skills__list-progress-bar > .progress-bar-dot"
+);
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    clearInterval(intervalId);
+    // Move to the clicked dot's set of skills
+    currentIndex = index * itemsPerPage;
+    updateSkillsAndDots();
+    startInterval();
+  });
+});
+
+startInterval();
