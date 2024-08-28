@@ -98,4 +98,36 @@ describe("Form Validation Tests", () => {
       "An unexpected error occurred. Please try again later."
     );
   });
+
+  test("validateForm should return false if email format is incorrect", () => {
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "invalid-email";
+    document.getElementById("message").value = "Hello";
+
+    expect(validateForm()).toBe(false);
+
+    // Check that the error message for email is displayed
+    expect(
+      document.querySelector(".contact__form-error-email").style.display
+    ).toBe("block");
+  });
+
+  test("validateForm should return true if all fields are valid", () => {
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "john@example.com";
+    document.getElementById("message").value = "Hello";
+
+    expect(validateForm()).toBe(true);
+
+    // Check that no error messages are displayed
+    expect(
+      document.querySelector(".contact__form-error-name").style.display
+    ).toBe("none");
+    expect(
+      document.querySelector(".contact__form-error-email").style.display
+    ).toBe("none");
+    expect(
+      document.querySelector(".contact__form-error-message").style.display
+    ).toBe("none");
+  });
 });
