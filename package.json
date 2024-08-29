@@ -7,7 +7,7 @@
     "start": "webpack serve --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack --config webpack.config.dev.js",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [
     "Frontend",
@@ -44,7 +44,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^24.1.1",
     "mini-css-extract-plugin": "^2.9.0",
-    "sass-loader": "^14.2.1",
+    "sass": "^1.77.8",
+    "sass-loader": "^16.0.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.91.0",
