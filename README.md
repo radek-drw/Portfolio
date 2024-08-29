@@ -1,4 +1,4 @@
-# Radek Drweski Portfolio Website
+# Personal Portfolio Website
 
 Welcome to my personal portfolio website. This website is designed to showcase my skills, projects, and provide a way to contact me. Below you'll find a detailed description of the website's features and how to set it up on your local machine.
 
