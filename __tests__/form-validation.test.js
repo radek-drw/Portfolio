@@ -130,4 +130,22 @@ describe("Form Validation Tests", () => {
       document.querySelector(".contact__form-error-message").style.display
     ).toBe("none");
   });
+
+  test("handleSuccessResponse should hide success message after delay", async () => {
+    jest.useFakeTimers();
+
+    handleSuccessResponse();
+
+    expect(
+      document.querySelector(".contact__form-success-message").style.display
+    ).toBe("block");
+
+    jest.advanceTimersByTime(4000);
+
+    expect(
+      document.querySelector(".contact__form-success-message").style.display
+    ).toBe("none");
+
+    jest.useRealTimers();
+  });
 });
