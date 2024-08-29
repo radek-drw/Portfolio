@@ -1,3 +1,12 @@
+const ERROR_MESSAGES = {
+  NO_INTERNET: "No internet connection!",
+  FORM_SEND_ERROR:
+    "An error occurred while sending the form. Please try again later.",
+  RESOURCE_NOT_FOUND: "The requested resource was not found.",
+  SERVER_ERROR: "An internal server error occurred. Please try again later.",
+  UNEXPECTED_ERROR: "An unexpected error occurred. Please try again later.",
+};
+
 const fields = [
   {
     id: "name",
@@ -17,53 +26,8 @@ const fields = [
   },
 ];
 
-const ERROR_MESSAGES = {
-  NO_INTERNET: "No internet connection!",
-  FORM_SEND_ERROR:
-    "An error occurred while sending the form. Please try again later.",
-  RESOURCE_NOT_FOUND: "The requested resource was not found.",
-  SERVER_ERROR: "An internal server error occurred. Please try again later.",
-  UNEXPECTED_ERROR: "An unexpected error occurred. Please try again later.",
-};
-
-const form = document.getElementById("contact-form");
-const loader = document.getElementById("loader");
-const loadingOverlay = document.getElementById("loading-overlay");
-const successMessage = document.querySelector(".contact__form-success-message");
-const toast = document.getElementById("toast");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Check for internet connectivity
-  if (!navigator.onLine) {
-    showErrorToast(ERROR_MESSAGES.NO_INTERNET);
-    return;
-  }
-
-  // Validate form fields before sending the form
-  if (validateForm()) {
-    toggleLoading(true); // Show loading indicator
-    try {
-      const formData = new FormData(form);
-      const response = await fetch("send_email.php", {
-        method: "POST",
-        body: formData,
-      }); // Send form data to server
-      if (response.ok) {
-        handleSuccessResponse();
-      } else {
-        handleServerError(response.status);
-      }
-    } catch (error) {
-      handleError(error); // Handle network or unexpected errors
-    } finally {
-      toggleLoading(false); // Hide loading indicator
-    }
-  }
-});
-
-function validateForm() {
+// Exported functions
+export function validateForm() {
   let formIsValid = true;
   fields.forEach((field) => {
     const value = document.getElementById(field.id).value;
@@ -80,25 +44,33 @@ function validateForm() {
   return formIsValid;
 }
 
-function toggleLoading(isLoading) {
+export function toggleLoading(isLoading) {
+  const loadingOverlay = document.getElementById("loading-overlay");
+  const loader = document.getElementById("loader");
   loadingOverlay.style.display = isLoading ? "block" : "none";
   loader.style.display = isLoading ? "block" : "none";
 }
 
-function handleSuccessResponse() {
+export function handleSuccessResponse() {
   fields.forEach((field) => {
     const inputElement =
       document.querySelector(`.${field.inputClass} input`) ||
       document.querySelector(`.${field.inputClass} textarea`);
-    inputElement.value = "";
+    if (inputElement) {
+      inputElement.value = "";
+    }
   });
+  const successMessage = document.querySelector(
+    ".contact__form-success-message"
+  );
   successMessage.style.display = "block";
   setTimeout(() => {
     successMessage.style.display = "none";
   }, 4000);
 }
 
-function showErrorToast(message) {
+export function showErrorToast(message) {
+  const toast = document.getElementById("toast");
   toast.style.display = "block";
   toast.textContent = message;
   setTimeout(() => {
@@ -106,7 +78,7 @@ function showErrorToast(message) {
   }, 8000);
 }
 
-function handleServerError(status) {
+export function handleServerError(status) {
   let message = ERROR_MESSAGES.FORM_SEND_ERROR;
   if (status === 404) {
     message = ERROR_MESSAGES.RESOURCE_NOT_FOUND;
@@ -116,8 +88,41 @@ function handleServerError(status) {
   showErrorToast(message);
 }
 
-// Function to handle unexpected errors
-function handleError(error) {
+export function handleError(error) {
   console.error("Error:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
+
+// Setup event listener
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!navigator.onLine) {
+      showErrorToast(ERROR_MESSAGES.NO_INTERNET);
+      return;
+    }
+
+    if (validateForm()) {
+      toggleLoading(true);
+      try {
+        const formData = new FormData(form);
+        const response = await fetch("send_email.php", {
+          method: "POST",
+          body: formData,
+        });
+        if (response.ok) {
+          handleSuccessResponse();
+        } else {
+          handleServerError(response.status);
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        toggleLoading(false);
+      }
+    }
+  });
+});

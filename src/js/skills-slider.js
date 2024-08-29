@@ -40,6 +40,7 @@ function startInterval() {
     }
     updateSkillsAndDots();
   }, intervalTime);
+  return intervalId;
 }
 
 // Display the first set of skills
@@ -83,3 +84,4 @@ dots.forEach((dot, index) => {
 });
 
 startInterval();
+export { updateSkillsAndDots, startInterval };
