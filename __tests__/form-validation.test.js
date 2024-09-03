@@ -148,4 +148,21 @@ describe("Form Validation Tests", () => {
 
     jest.useRealTimers();
   });
+
+  test("showErrorToast should hide toast message after timeout", async () => {
+    jest.useFakeTimers();
+
+    showErrorToast("Test error message");
+
+    expect(document.getElementById("toast").style.display).toBe("block");
+    expect(document.getElementById("toast").textContent).toBe(
+      "Test error message"
+    );
+
+    jest.advanceTimersByTime(8000);
+
+    expect(document.getElementById("toast").style.display).toBe("none");
+
+    jest.useRealTimers();
+  });
 });
