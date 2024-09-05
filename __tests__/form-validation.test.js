@@ -106,7 +106,6 @@ describe("Form Validation Tests", () => {
 
     expect(validateForm()).toBe(false);
 
-    // Check that the error message for email is displayed
     expect(
       document.querySelector(".contact__form-error-email").style.display
     ).toBe("block");
@@ -119,9 +118,20 @@ describe("Form Validation Tests", () => {
 
     expect(validateForm()).toBe(false);
 
-    // Check that the error message for name is displayed
     expect(
       document.querySelector(".contact__form-error-name").style.display
+    ).toBe("block");
+  });
+
+  test("validateForm should return false if message field is empty", () => {
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "john@example.com";
+    document.getElementById("message").value = "";
+
+    expect(validateForm()).toBe(false);
+
+    expect(
+      document.querySelector(".contact__form-error-message").style.display
     ).toBe("block");
   });
 
