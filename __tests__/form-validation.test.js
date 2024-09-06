@@ -135,6 +135,18 @@ describe("Form Validation Tests", () => {
     ).toBe("block");
   });
 
+  test("validateForm should return false if email field is empty", () => {
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "Hello";
+
+    expect(validateForm()).toBe(false);
+
+    expect(
+      document.querySelector(".contact__form-error-email").style.display
+    ).toBe("block");
+  });
+
   test("validateForm should return true if all fields are valid", () => {
     document.getElementById("name").value = "John Doe";
     document.getElementById("email").value = "john@example.com";
