@@ -212,4 +212,42 @@ describe("Form Validation Tests", () => {
 
     jest.useRealTimers();
   });
+
+  test("Form submission should handle server error (500) and display the correct error message", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
+
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "john@example.com";
+    document.getElementById("message").value = "Hello";
+
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+
+    const form = document.getElementById("contact-form");
+
+    const submitEvent = new Event("submit", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    const preventDefaultSpy = jest.spyOn(submitEvent, "preventDefault");
+
+    form.dispatchEvent(submitEvent);
+
+    await Promise.resolve();
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+
+    expect(document.getElementById("toast").style.display).toBe("block");
+    expect(document.getElementById("toast").textContent).toBe(
+      "An internal server error occurred. Please try again later."
+    );
+
+    global.fetch.mockRestore();
+    preventDefaultSpy.mockRestore();
+  });
 });
