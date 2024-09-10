@@ -32,9 +32,7 @@ function updateSkillsAndDots() {
 
 function startInterval() {
   intervalId = setInterval(() => {
-    // Move to the next set of skills
     currentIndex += itemsPerPage;
-    // If we've reached the end, go back to the start
     if (currentIndex >= skills.length) {
       currentIndex = 0;
     }
@@ -84,4 +82,3 @@ dots.forEach((dot, index) => {
 });
 
 startInterval();
-export { updateSkillsAndDots, startInterval };
