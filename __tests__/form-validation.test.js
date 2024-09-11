@@ -250,4 +250,47 @@ describe("Form Validation Tests", () => {
     global.fetch.mockRestore();
     preventDefaultSpy.mockRestore();
   });
+
+  test("Form submission should display no internet connection error when offline", async () => {
+    // Simulate the user being offline
+    Object.defineProperty(navigator, "onLine", {
+      value: false,
+      writable: true,
+    });
+
+    document.getElementById("name").value = "John Doe";
+    document.getElementById("email").value = "john@example.com";
+    document.getElementById("message").value = "Hello";
+
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+
+    const form = document.getElementById("contact-form");
+
+    const submitEvent = new Event("submit", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    const preventDefaultSpy = jest.spyOn(submitEvent, "preventDefault");
+
+    form.dispatchEvent(submitEvent);
+
+    await Promise.resolve();
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+
+    // Check that the no internet connection error is displayed
+    expect(document.getElementById("toast").style.display).toBe("block");
+    expect(document.getElementById("toast").textContent).toBe(
+      "No internet connection!"
+    );
+
+    // Restore online status
+    Object.defineProperty(navigator, "onLine", {
+      value: true,
+      writable: true,
+    });
+
+    preventDefaultSpy.mockRestore();
+  });
 });
