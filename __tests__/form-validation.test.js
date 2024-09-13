@@ -252,7 +252,6 @@ describe("Form Validation Tests", () => {
   });
 
   test("Form submission should display no internet connection error when offline", async () => {
-    // Simulate the user being offline
     Object.defineProperty(navigator, "onLine", {
       value: false,
       writable: true,
@@ -279,18 +278,57 @@ describe("Form Validation Tests", () => {
 
     expect(preventDefaultSpy).toHaveBeenCalled();
 
-    // Check that the no internet connection error is displayed
     expect(document.getElementById("toast").style.display).toBe("block");
     expect(document.getElementById("toast").textContent).toBe(
       "No internet connection!"
     );
 
-    // Restore online status
     Object.defineProperty(navigator, "onLine", {
       value: true,
       writable: true,
     });
 
+    preventDefaultSpy.mockRestore();
+  });
+
+  test("Form submission should handle successful response and display success message", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+      })
+    );
+
+    document.getElementById("name").value = "Jane Doe";
+    document.getElementById("email").value = "jane@example.com";
+    document.getElementById("message").value = "This is a test message";
+
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+
+    const form = document.getElementById("contact-form");
+
+    const submitEvent = new Event("submit", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    const preventDefaultSpy = jest.spyOn(submitEvent, "preventDefault");
+
+    form.dispatchEvent(submitEvent);
+
+    await Promise.resolve();
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+
+    expect(
+      document.querySelector(".contact__form-success-message").style.display
+    ).toBe("block");
+
+    expect(document.getElementById("name").value).toBe("");
+    expect(document.getElementById("email").value).toBe("");
+    expect(document.getElementById("message").value).toBe("");
+
+    global.fetch.mockRestore();
     preventDefaultSpy.mockRestore();
   });
 });
