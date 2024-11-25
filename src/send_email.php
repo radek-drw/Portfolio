@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -13,6 +12,15 @@ function sanitizeString($input) {
 
 function sanitizeEmail($email) {
     return filter_var(trim($email), FILTER_SANITIZE_EMAIL);
+}
+
+function validateRecaptcha($token, $config) {
+    // $recaptcha_secret = $config['recaptcha_secret_key'];
+    $recaptcha_secret = '';
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptcha_secret}&response={$token}");
+    $captcha_result = json_decode($verify);
+
+    return $captcha_result->success && $captcha_result->score > 0.5;
 }
 
 function validateInput($name, $email, $message) {
@@ -35,12 +43,10 @@ function validateInput($name, $email, $message) {
     return $errors;
 }
 
-// Function to send email using PHPMailer
 function sendEmail($name, $email, $message, $config) {
     $mail = new PHPMailer(true);
 
     try {
-        // Configure SMTP settings
         $mail->SMTPDebug = 0;
         $mail->isSMTP();
         $mail->Host = $config['smtp_host'];
@@ -50,7 +56,6 @@ function sendEmail($name, $email, $message, $config) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = $config['smtp_port'];
 
-        // Set email recipients and content
         $mail->setFrom($config['smtp_username'], $name);
         $mail->addAddress('rdrweski@gmail.com');
         $mail->addReplyTo($email, $name);
@@ -59,35 +64,33 @@ function sendEmail($name, $email, $message, $config) {
         $mail->Body    = htmlspecialchars($message);
         $mail->AltBody = htmlspecialchars($message);
 
-        // Send the email
         $mail->send();
         return array('success' => true);
     } catch (Exception $e) {
-        // Log error if email sending fails
         error_log('Mailer Error: ' . $mail->ErrorInfo);
         return array('success' => false, 'error' => 'Message could not be sent. Please try again later.');
     }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     $name = sanitizeString($_POST['name']);
     $email = sanitizeEmail($_POST['email']);
     $message = sanitizeString($_POST['message']);
+    $recaptcha_token = $_POST['g-recaptcha-response'];
 
     $errors = validateInput($name, $email, $message);
 
-    // If there are validation errors, display them as an HTML list
     if (!empty($errors)) {
-        echo '<ul>';
-        foreach ($errors as $error) {
-            echo '<li>' . htmlspecialchars($error) . '</li>';
-        }
-        echo '</ul>';
+        echo json_encode(['success' => false, 'errors' => $errors]);
+        exit;
+    }
+
+    if (!validateRecaptcha($recaptcha_token, $config)) {
+        echo json_encode(['success' => false, 'errors' => ['recaptcha' => 'Verification failed']]);
         exit;
     }
 
     $result = sendEmail($name, $email, $message, $config);
+    echo json_encode($result);
 }
-
 ?>
