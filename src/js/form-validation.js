@@ -108,16 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (validateForm()) {
       toggleLoading(true);
       try {
-        const formData = new FormData(form);
-        const response = await fetch("send_email.php", {
-          method: "POST",
-          body: formData,
+        const siteKey = "6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP";
+
+        await grecaptcha.ready(async () => {
+          const token = await grecaptcha.execute(siteKey, { action: "submit" });
+
+          const formData = new FormData(form);
+          formData.append("recaptchaToken", token);
+
+          const response = await fetch("send_email.php", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            handleSuccessResponse();
+          } else {
+            handleServerError(response.status);
+          }
         });
-        if (response.ok) {
-          handleSuccessResponse();
-        } else {
-          handleServerError(response.status);
-        }
       } catch (error) {
         handleError(error);
       } finally {
