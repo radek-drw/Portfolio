@@ -1,9 +1,7 @@
 grecaptcha.ready(function () {
   grecaptcha
-    .execute("""", {
-      action: "contact_form",
-    })
+    .execute("""", { action: "submit" })
     .then(function (token) {
-      document.getElementById("g-recaptcha-response").value = token;
+      document.getElementById("recaptchaToken").value = token;
     });
 });
