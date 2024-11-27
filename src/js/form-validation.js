@@ -93,7 +93,6 @@ export function handleError(error) {
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
-// Setup event listener
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
 
@@ -107,26 +106,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (validateForm()) {
       toggleLoading(true);
+
       try {
-        const siteKey = "6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP";
-
-        await grecaptcha.ready(async () => {
-          const token = await grecaptcha.execute(siteKey, { action: "submit" });
-
-          const formData = new FormData(form);
-          formData.append("recaptchaToken", token);
-
-          const response = await fetch("send_email.php", {
-            method: "POST",
-            body: formData,
+        // Execute reCAPTCHA to get the token
+        const token = await new Promise((resolve, reject) => {
+          grecaptcha.ready(() => {
+            grecaptcha
+              .execute("6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP", {
+                action: "submit",
+              })
+              .then(resolve)
+              .catch(reject);
           });
-
-          if (response.ok) {
-            handleSuccessResponse();
-          } else {
-            handleServerError(response.status);
-          }
         });
+
+        // Add the token to the form data
+        const formData = new FormData(form);
+        formData.append("recaptcha_token", token);
+
+        const response = await fetch("send_email.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          handleSuccessResponse();
+        } else {
+          handleServerError(response.status);
+        }
       } catch (error) {
         handleError(error);
       } finally {
