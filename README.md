@@ -77,7 +77,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ## Technology Stack
 
-- **Frontend**: HTML, CSS, JavaScript, jQuery
+- **Frontend**: HTML, CSS, SASS, JavaScript, jQuery
 - **Backend**: PHP, PHPMailer, Composer
 - **Build Tool**: Webpack
 
