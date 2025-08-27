@@ -88,7 +88,7 @@ function handleServerError(status) {
 }
 
 function handleError(error) {
-  console.error("Error:", error);
+  console.error("Eror:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
