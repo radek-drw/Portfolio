@@ -1,3 +1,4 @@
+// ERROR MESSAGES CONSTANTS
 const ERROR_MESSAGES = {
   NO_INTERNET: "No internet connection!",
   FORM_SEND_ERROR:
@@ -26,6 +27,7 @@ const fields = [
   },
 ];
 
+// FORM VALIDATION FUNCTIONS
 function validateForm() {
   let formIsValid = true;
   fields.forEach((field) => {
@@ -92,6 +94,7 @@ function handleError(error) {
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
+// EVENT LISTENER
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
 
