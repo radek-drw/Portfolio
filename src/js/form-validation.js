@@ -26,8 +26,7 @@ const fields = [
   },
 ];
 
-// Exported functions
-export function validateForm() {
+function validateForm() {
   let formIsValid = true;
   fields.forEach((field) => {
     const value = document.getElementById(field.id).value;
@@ -44,14 +43,14 @@ export function validateForm() {
   return formIsValid;
 }
 
-export function toggleLoading(isLoading) {
+function toggleLoading(isLoading) {
   const loadingOverlay = document.getElementById("loading-overlay");
   const loader = document.getElementById("loader");
   loadingOverlay.style.display = isLoading ? "block" : "none";
   loader.style.display = isLoading ? "block" : "none";
 }
 
-export function handleSuccessResponse() {
+function handleSuccessResponse() {
   fields.forEach((field) => {
     const inputElement =
       document.querySelector(`.${field.inputClass} input`) ||
@@ -69,7 +68,7 @@ export function handleSuccessResponse() {
   }, 4000);
 }
 
-export function showErrorToast(message) {
+function showErrorToast(message) {
   const toast = document.getElementById("toast");
   toast.style.display = "block";
   toast.textContent = message;
@@ -78,7 +77,7 @@ export function showErrorToast(message) {
   }, 8000);
 }
 
-export function handleServerError(status) {
+function handleServerError(status) {
   let message = ERROR_MESSAGES.FORM_SEND_ERROR;
   if (status === 404) {
     message = ERROR_MESSAGES.RESOURCE_NOT_FOUND;
@@ -88,7 +87,7 @@ export function handleServerError(status) {
   showErrorToast(message);
 }
 
-export function handleError(error) {
+function handleError(error) {
   console.error("Error:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
