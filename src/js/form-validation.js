@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // ERROR MESSAGES CONSTANTS
 const ERROR_MESSAGES = {
   NO_INTERNET: "No internet connection!",
@@ -123,15 +125,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Add the token to the form data
-        const formData = new FormData(form);
-        formData.append("recaptcha_token", token);
+        const formData = Object.fromEntries(new FormData(form));
+        formData.recaptcha_token = token;
 
-        const response = await fetch("send_email.php", {
-          method: "POST",
-          body: formData,
-        });
+        const response = await axios.post(
+          "http://localhost:5000/send_email",
+          formData
+        );
 
-        if (response.ok) {
+        if (response.status === 200) {
           handleSuccessResponse();
         } else {
           handleServerError(response.status);
