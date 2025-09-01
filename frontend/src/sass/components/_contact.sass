@@ -1,31 +1,37 @@
+@use "sass:color"
+
+@use '../mixins/mixins-media-queries' as mq
+@use '../utils/variables' as vars
+@use '../mixins/mixins' as mix
+
 .contact
   overflow-x: hidden
   padding-bottom: 12px
   &__title
-    @include title-style
+    @include mix.title-style
   &__info-block
     display: flex
     padding-top: 150px
-    @include mobile
+    @include mq.mobile
       flex-wrap: wrap
       padding-top: 50px
   &__info
     flex-basis: 38%
-    @include mobile
+    @include mq.mobile
       flex-basis: 100%
       margin-bottom: 60px
     &-item
       margin-bottom: 35px
       font-size: 1.6rem
-      @include mobile
+      @include mq.mobile
         margin-bottom: 20px
       &>img
         margin-right: 40px
-        @include mobile
+        @include mq.mobile
           margin-right: 20px
       & a
         display: inline-block
-        color: $white
+        color: vars.$white
       &:last-child
         margin: 0
     &-link
@@ -36,15 +42,15 @@
   %label-movement
     top: -40px
     font-size: 1.6rem
-    color: $primary
+    color: vars.$primary
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
-    @include mobile
+    @include mq.mobile
       top: -25px
   &__form
     flex-grow: 1
     display: flex
     justify-content: space-between
-    @include mobile
+    @include mq.mobile
       flex-wrap: wrap
       justify-content: flex-end // for 'Submit button'
     &-inputs
@@ -54,7 +60,7 @@
       flex-wrap: wrap
       align-content: space-between
       justify-content: space-between
-      @include mobile
+      @include mq.mobile
         flex-basis: 100%
       &-item
         position: relative
@@ -72,10 +78,10 @@
           width: 100%
           border-radius: 4px
           font-size: 1.6rem
-          background-color: lighten($secondary, 10% )
+          background-color: color.adjust(vars.$secondary, $lightness: 10%)
           border: none
-          color: $white
-          @include mobile
+          color: vars.$white
+          @include mq.mobile
             margin-bottom: 20px
           ~ span
             position: absolute
@@ -84,9 +90,9 @@
             left: 0
             width: 0
             height: 3px
-            background: $primary
+            background: vars.$primary
             transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
-            @include mobile
+            @include mq.mobile
               bottom: 20px
           &:focus
             outline: 0
@@ -113,7 +119,7 @@
       right: 0
       text-align: right
       transform: translateY(-50%)
-      @include mobile
+      @include mq.mobile
         top: 100%
         right: 34%
         transform: translateY(0)
@@ -130,15 +136,15 @@
       padding: 1em 1.1em
       margin-right: 9px
       font-size: 1.8rem
-      border: 1px solid $primary
+      border: 1px solid vars.$primary
       border-radius: 50px
-      background-color: $secondary
-      color: $primary
-      transition: box-shadow $btn-trns-time ease-in-out
-      @include mobile
+      background-color: vars.$secondary
+      color: vars.$primary
+      transition: box-shadow vars.$btn-trns-time ease-in-out
+      @include mq.mobile
         justify-self: flex-end
         margin-right: 12px
       &:hover
-        @include empty-btn-hover
+        @include mix.empty-btn-hover
       &>img
         margin-left: 10px

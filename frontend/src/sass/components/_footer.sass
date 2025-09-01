@@ -1,26 +1,29 @@
+@use '../mixins/mixins-media-queries' as mq
+@use '../utils/variables' as vars
+
 .footer
   display: flex
   align-items: center
   padding: 80px 0 50px 0
   font-size: 1.6rem
-  @include mobile
+  @include mq.mobile
     padding: 40px 0
     font-size: 1.2rem
   &__link
     flex-basis: 20%
     padding: 10px 0
-    color: $white
+    color: vars.$white
     cursor: pointer
     transition: .2s
     &:hover
       color: #ccc
-    @include mobile
+    @include mq.mobile
       flex-basis: 30%
       text-align: center
     &-image
       margin-right: 15px
       vertical-align: bottom
-      @include mobile
+      @include mq.mobile
         margin: 0
   &__copyright
     margin-left: auto
