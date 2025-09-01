@@ -1,31 +1,36 @@
+@use '../mixins/mixins-media-queries' as mq
+@use '../base/typography' as typo
+@use '../utils/variables' as vars
+@use '../mixins/mixins' as mix
+
 .about
   display: flex
   align-items: center
   padding: 60px 0 80px
   margin-top: 102px
   position: relative
-  @include tablet
+  @include mq.tablet
     margin-top: 60px
   &__intro
     flex-basis: 50%
-    @include tablet
+    @include mq.tablet
       flex-basis: 100%
       text-align: center
     &-title
       font-size: 5.4rem
       line-height: 1.2
-      font-weight: $font-weight-regular
-      color: $primary
-      @include mobile
+      font-weight: typo.$font-weight-regular
+      color: vars.$primary
+      @include mq.mobile
         font-size: 4.4rem
     &-description
       margin: 40px 0 110px 0
       line-height: 2
       font-size: 1.6rem
-      @include tablet
+      @include mq.tablet
         width: 60%
         margin: 40px auto 60px
-      @include mobile
+      @include mq.mobile
         width: 85%
         margin-bottom: 50px
     &-buttons
@@ -34,23 +39,23 @@
         padding: 1em 1.2em
         border-radius: 40px
         font-size: 1.8rem
-        font-weight: $font-weight-medium
-        transition: all $btn-trns-time ease-in-out
+        font-weight: typo.$font-weight-medium
+        transition: all vars.$btn-trns-time ease-in-out
         &:hover
-          @include empty-btn-hover
+          @include mix.empty-btn-hover
         &--talk
           border: none
-          box-shadow: 0 0 16px $primary
-          color: $secondary
-          background-color: $primary
+          box-shadow: 0 0 16px vars.$primary
+          color: vars.$secondary
+          background-color: vars.$primary
           &:hover
-            @include filled-btn-hover
+            @include mix.filled-btn-hover
           &>span i
             margin-left: 15px
         &--cv
-          border: 1px solid $primary
-          color: $primary
-          background-color: $secondary
+          border: 1px solid vars.$primary
+          color: vars.$primary
+          background-color: vars.$secondary
           &>span i
             margin-left: 10px
   &__animation
@@ -60,5 +65,5 @@
     bottom: 0
     width: 120%
     clip-path: polygon(4% 5%, 100% 0, 100% 100%, 0 95%, 14% 63%, 31% 48%, 29% 28%)
-    @include tablet
+    @include mq.tablet
       display: none

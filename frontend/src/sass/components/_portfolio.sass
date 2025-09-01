@@ -1,14 +1,19 @@
+@use '../utils/variables' as vars
+@use '../mixins/mixins' as mix
+@use '../mixins/mixins-media-queries' as mq
+@use '../base/typography' as typo
+
 %button-styles
   display: inline-block
   font-size: 1.8rem
-  background-color: $primary
+  background-color: vars.$primary
   border-radius: 50px
-  border: 1px solid $primary
-  color: $secondary
+  border: 1px solid vars.$primary
+  color: vars.$secondary
   text-decoration: none
-  transition: all $btn-trns-time ease-in-out
+  transition: all vars.$btn-trns-time ease-in-out
   &:hover
-    @include filled-btn-hover
+    @include mix.filled-btn-hover
 %right-panel-size-and-position
   flex-basis: 51%
   margin-left: 4%
@@ -21,15 +26,15 @@
   & >:last-child
     border-bottom: none
   &__title
-    @include title-style
+    @include mix.title-style
   &__project-info-box
     display: flex
-    @include mobile
+    @include mq.mobile
       display: block
   &__project
     display: flex
     padding: 140px 0 100px 0
-    @include mobile
+    @include mq.mobile
       flex-wrap: wrap
       padding: 100px 0 45px 0
     &--apps
@@ -37,33 +42,33 @@
       display: block
     &-info
       @extend %right-panel-size-and-position
-      @include mobile
+      @include mq.mobile
         margin: 0
         flex-basis: 100%
       .project-info
         &__title
           font-size: 2.4rem
-          font-weight: $font-weight-bold
+          font-weight: typo.$font-weight-bold
           text-shadow: 0 0 2px white
-          @include mobile
+          @include mq.mobile
             margin: 20px 0 40px
             text-align: center
         &__summary
           line-height: 1.8
           margin: 25px 0 35px 0
-          @include mobile
+          @include mq.mobile
             width: 100%
         &__implementation
           margin-bottom: 50px
           .implementation
             &__label
               margin-bottom: 25px
-              @include mobile
+              @include mq.mobile
                 padding: 0
             &__tools
               display: flex
               align-items: center
-              @include mobile
+              @include mq.mobile
                 padding: 0
                 flex-wrap: wrap
                 row-gap: 20px
@@ -76,17 +81,17 @@
           &--apps
             margin-top: 35px
         &__buttons
-          @include mobile
+          @include mq.mobile
             margin-top: 30px
             text-align: center
           .project-button
             @extend %button-styles
             padding: .8em 1em
             &:hover
-              @include filled-btn-hover
+              @include mix.filled-btn-hover
             &--live
               margin-right: 4%
-              @include mobile
+              @include mq.mobile
                 margin-right: 7%
       &-apps
         display: flex
@@ -99,7 +104,7 @@
     &-thumbnail
       flex-basis: 49%
       position: relative
-      @include mobile
+      @include mq.mobile
         flex-basis: 100%
       .decorative
         position: absolute
@@ -108,7 +113,7 @@
         width: 100%
         padding-left: 20px
         line-height: 40px
-        border-radius: $border-radius $border-radius 0 0
+        border-radius: vars.$border-radius vars.$border-radius 0 0
         background-color: #2C3037
         &--weather-app
           background: #4E535D
@@ -119,7 +124,7 @@
           border-radius: 50%
           background-color: #d9d9d9
       img
-        border-radius: 0 0 $border-radius $border-radius
+        border-radius: 0 0 vars.$border-radius vars.$border-radius
     &-description
       @extend %right-panel-size-and-position
 
@@ -138,7 +143,7 @@
         &:nth-last-of-type(1),
         &:nth-last-of-type(2)
           margin-bottom: 0
-        @include mobile
+        @include mq.mobile
           flex-basis: 100%
           &:nth-last-of-type(2)
             margin-bottom: 40px

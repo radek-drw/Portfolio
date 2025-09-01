@@ -1,3 +1,5 @@
+@use '../mixins/mixins-media-queries' as mq
+
 // Blur for background for mobile nav menu when opened
 .blur
   filter: blur(3px)
@@ -30,7 +32,7 @@
   border-radius: 50%
   animation: spin 1.5s linear infinite
   z-index: 9999
-  @include mobile
+  @include mq.mobile
     width: 60px
     height: 60px
     border-width: 6px
