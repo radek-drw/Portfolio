@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+   
+  }
+}
