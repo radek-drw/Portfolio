@@ -1,12 +1,18 @@
+@use "sass:color"
+
+@use '../utils/variables' as vars
+@use '../mixins/mixins-media-queries' as mq
+@use '../base/typography' as typo
+
 @mixin title-style
   position: relative
   display: inline-block
   font-size: 5.4rem
-  color: $primary
-  font-weight: $font-weight-regular
-  @include mobile
+  color: vars.$primary
+  font-weight: typo.$font-weight-regular
+  @include mq.mobile
     font-size: 4.6rem
-  @include mobile-small
+  @include mq.mobile-small
     font-size: 3.6rem
   &::after
     content: ''
@@ -15,16 +21,16 @@
     left: 125%
     width: 600%
     height: 1px
-    background-color: $primary
-    @include mobile
+    background-color: vars.$primary
+    @include mq.mobile
       left: 110%
 
 @mixin empty-btn-hover
-  box-shadow: inset 0 0 5px $primary, 0 0 12px $primary
+  box-shadow: inset 0 0 5px vars.$primary, 0 0 12px vars.$primary
 
 @mixin filled-btn-hover
-  color: $primary
-  background-color: $secondary
+  color: vars.$primary
+  background-color: vars.$secondary
 
 @mixin progress-bar
   position: absolute
@@ -40,19 +46,19 @@
     &-dot
       width: 1.7rem
       height: 1.7rem
-      border: 1px solid $primary
+      border: 1px solid vars.$primary
       border-radius: 50%
       cursor: pointer
       flex-shrink: 0
       transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s
       &:hover
-        background-color: lighten($primary, 10%)
-        box-shadow: 0 0 12px lighten($primary, 20%)
+        background-color: color.adjust(vars.$primary, $lightness: 10%)
+        box-shadow: 0 0 12px color.adjust(vars.$primary, $lightness: 20%)
         transform: scale(1.1)
       &--active
-        background-color: $primary
-        box-shadow: 0 0 10px $primary
+        background-color: vars.$primary
+        box-shadow: 0 0 10px vars.$primary
     &-line
       width: 1px
       height: 100%
-      background-color: $primary
+      background-color: vars.$primary

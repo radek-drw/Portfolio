@@ -1,10 +1,13 @@
+@use '../mixins/mixins-media-queries' as mq
+@use '../utils/variables' as vars
+
 $transition-time: .4s
 $transition-delay: .4s
 $animation-time: .8s
 
 .navbar__mobile-nav
   display: none
-  @include tablet
+  @include mq.tablet
     display: block
     position: absolute
     top: 0
@@ -23,7 +26,7 @@ $animation-time: .8s
       &:last-child
         border: none
       a
-        color: $secondary
+        color: vars.$secondary
     &-toggle
       position: absolute
       top: 30px
@@ -70,7 +73,7 @@ $animation-time: .8s
             width: 30%
             transform: translateY(-50%) rotate(30deg)
             transform-origin: left center
-            background-color: $secondary
+            background-color: vars.$secondary
             animation: anime $animation-time
 
 @keyframes anime
