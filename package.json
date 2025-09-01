@@ -4,11 +4,5 @@
   "workspaces": [
     "frontend",
     "backend"
-  ],
-  "scripts": {
-    "install:all": "npm install"
-  },
-  "devDependencies": {
-   
-  }
+  ]
 }
