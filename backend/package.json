@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Radek Drweski",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.879.0"
+  }
 }
