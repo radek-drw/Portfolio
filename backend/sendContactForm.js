@@ -10,6 +10,12 @@ export const handler = async (event) => {
     const fromAddress = "rdrweski@gmail.com";
     const toAddress = "rdrweski@gmail.com";
 
+    const htmlBody = `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong><br/>${message}</p>
+    `;
+
     const params = {
       Destination: {
         ToAddresses: [toAddress],
@@ -18,11 +24,7 @@ export const handler = async (event) => {
         Subject: {
           Data: "New message from Contact Form",
         },
-        Body: {
-          Text: {
-            Data: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-          },
-        },
+        Body: { Html: { Data: htmlBody } },
       },
       Source: fromAddress,
       ReplyToAddresses: [email],
