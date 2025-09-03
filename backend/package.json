@@ -4,7 +4,8 @@
   "description": "Backend application (Node.js/AWS-SDK)",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:sendContactForm": "node test-sendContactForm"
   },
   "keywords": [],
   "author": "Radek Drweski",
