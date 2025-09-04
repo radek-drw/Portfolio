@@ -44,7 +44,10 @@ export const handler = async (event) => {
     console.error("SES Error:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, error: err.message }),
+      body: JSON.stringify({
+        success: false,
+        message: "Failed to send email",
+      }),
     };
   }
 };
