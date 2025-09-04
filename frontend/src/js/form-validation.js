@@ -2,11 +2,20 @@ import axios from "axios";
 
 // ERROR MESSAGES CONSTANTS
 const ERROR_MESSAGES = {
+  // Shown when the user has no internet connection (offline).
   NO_INTERNET: "No internet connection!",
+
+  // Generic fallback when the form could not be sent (non-specific error).
   FORM_SEND_ERROR:
     "An error occurred while sending the form. Please try again later.",
+
+  // Shown when the requested resource (API endpoint) is not found (HTTP 404).
   RESOURCE_NOT_FOUND: "The requested resource was not found.",
+
+  // Shown when the server returns an internal error (HTTP 500+).
   SERVER_ERROR: "An internal server error occurred. Please try again later.",
+
+  // Shown when something unexpected happens (e.g. network/JS error).
   UNEXPECTED_ERROR: "An unexpected error occurred. Please try again later.",
 };
 
@@ -78,7 +87,7 @@ function showErrorToast(message) {
   toast.textContent = message;
   setTimeout(() => {
     toast.style.display = "none";
-  }, 8000);
+  }, 4000);
 }
 
 function handleErrorResponse(status) {
@@ -136,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
           formData
         );
 
-        // parsing body (Lambda returns JSON)
+        // parsing body (cause Lambda returns JSON)
         const data = JSON.parse(response.data.body);
 
         if (response.status === 200 && data.success) {
