@@ -81,17 +81,20 @@ function showErrorToast(message) {
   }, 8000);
 }
 
-function handleServerError(status) {
-  let message = ERROR_MESSAGES.FORM_SEND_ERROR;
+function handleErrorResponse(status) {
+  let message;
+
   if (status === 404) {
     message = ERROR_MESSAGES.RESOURCE_NOT_FOUND;
   } else if (status >= 500) {
     message = ERROR_MESSAGES.SERVER_ERROR;
+  } else {
+    message = ERROR_MESSAGES.FORM_SEND_ERROR;
   }
   showErrorToast(message);
 }
 
-function handleError(error) {
+function handleNetworkError(error) {
   console.error("Error:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
@@ -139,10 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.status === 200 && data.success) {
           handleSuccessResponse();
         } else {
-          handleServerError(response.status);
+          handleErrorResponse(response.status);
         }
       } catch (error) {
-        handleError(error);
+        handleNetworkError(error);
       } finally {
         toggleLoading(false);
       }
