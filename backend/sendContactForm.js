@@ -2,10 +2,42 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 const sesClient = new SESClient({ region: "eu-west-1" });
 
+const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+function validateInput({ name, email, message }) {
+  const errors = {};
+
+  if (!name || name.trim() === "") {
+    errors.name = "Please enter a name";
+  }
+
+  if (!email || !emailPattern.test(email)) {
+    errors.email = "Please enter a valid email";
+  }
+
+  if (!message || message.trim() === "") {
+    errors.message = "Please enter a message";
+  }
+
+  return errors;
+}
+
 export const handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
     const { name, email, message } = body;
+
+    // validate inputs
+    const errors = validateInput({ name, email, message });
+    if (Object.keys(errors).length > 0) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          success: false,
+          errors,
+        }),
+      };
+    }
 
     const fromAddress = "rdrweski@gmail.com";
     const toAddress = "rdrweski@gmail.com";
