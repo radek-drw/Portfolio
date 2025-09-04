@@ -133,7 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
           formData
         );
 
-        if (response.status === 200) {
+        // parsing body (Lambda returns JSON)
+        const data = JSON.parse(response.data.body);
+
+        if (response.status === 200 && data.success) {
           handleSuccessResponse();
         } else {
           handleServerError(response.status);
