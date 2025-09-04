@@ -108,6 +108,20 @@ function handleNetworkError(error) {
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
+function showBackendValidationErrors(errors) {
+  fields.forEach((field) => {
+    const errorElement = document.querySelector(`.${field.errorClass}`);
+
+    if (errors[field.id]) {
+      errorElement.style.display = "block";
+      errorElement.textContent = errors[field.id];
+      errorElement.setAttribute("aria-live", "assertive");
+    } else {
+      errorElement.style.display = "none";
+    }
+  });
+}
+
 // EVENT LISTENER
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
@@ -154,7 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
           handleErrorResponse(response.status);
         }
       } catch (error) {
-        handleNetworkError(error);
+        if (error.response && error.response.status === 400) {
+          // Validation errors from backend
+          const errors = JSON.parse(error.response.data.body).errors;
+          showBackendValidationErrors(errors);
+        } else {
+          handleNetworkError(error);
+        }
       } finally {
         toggleLoading(false);
       }
