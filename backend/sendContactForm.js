@@ -73,7 +73,7 @@ export const handler = async (event) => {
       }),
     };
   } catch (err) {
-    console.error("SES Error:", err);
+    console.error("SES Error:", err.name, err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
