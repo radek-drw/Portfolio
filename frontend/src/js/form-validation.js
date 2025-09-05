@@ -29,7 +29,7 @@ const fields = [
     id: "email",
     errorClass: "contact__form-error-email",
     inputClass: "contact__form-inputs-item--email",
-    pattern: /^[^ ]+@[^ ]+\.[a-z]{2,3}$/,
+    emailPattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
   {
     id: "message",
