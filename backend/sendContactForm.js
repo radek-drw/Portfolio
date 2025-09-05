@@ -2,7 +2,7 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 const sesClient = new SESClient({ region: "eu-west-1" });
 
-const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validateInput({ name, email, message }) {
   const errors = {};
