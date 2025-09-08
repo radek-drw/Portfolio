@@ -8,15 +8,15 @@ function validateInput({ name, email, message }) {
   const errors = {};
 
   if (!name || name.trim() === "") {
-    errors.name = "Please enter a name";
+    errors.name = "REQUIRED";
   }
 
   if (!email || !emailPattern.test(email)) {
-    errors.email = "Please enter a valid email";
+    errors.email = "INVALID";
   }
 
   if (!message || message.trim() === "") {
-    errors.message = "Please enter a message";
+    errors.message = "REQUIRED";
   }
 
   return errors;
