@@ -24,17 +24,27 @@ const fields = [
     id: "name",
     errorClass: "contact__form-error-name",
     inputClass: "contact__form-inputs-item--name",
+    errorMessages: {
+      REQUIRED: "Please enter a name",
+    },
   },
   {
     id: "email",
     errorClass: "contact__form-error-email",
     inputClass: "contact__form-inputs-item--email",
     emailPattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    errorMessages: {
+      REQUIRED: "Please enter an email address",
+      INVALID: "Please enter a valid email address",
+    },
   },
   {
     id: "message",
     errorClass: "contact__form-error-message",
     inputClass: "contact__form-inputs-item--message",
+    errorMessages: {
+      REQUIRED: "Please enter a message",
+    },
   },
 ];
 
@@ -44,9 +54,18 @@ function validateForm() {
   fields.forEach((field) => {
     const value = document.getElementById(field.id).value;
     const errorElement = document.querySelector(`.${field.errorClass}`);
+    let errorMessage = "";
 
-    if (value === "" || (field.pattern && !field.pattern.test(value))) {
+    if (
+      value === "" ||
+      (field.emailPattern && !field.emailPattern.test(value))
+    ) {
+      errorMessage = field.errorMessage;
+    }
+
+    if (errorMessage) {
       errorElement.style.display = "block";
+      errorElement.textContent = errorMessage;
       errorElement.setAttribute("aria-live", "assertive");
       formIsValid = false;
     } else {
@@ -113,8 +132,11 @@ function showBackendValidationErrors(errors) {
     const errorElement = document.querySelector(`.${field.errorClass}`);
 
     if (errors[field.id]) {
+      const code = errors[field.id];
+      const message = field.errorMessages[code];
+
       errorElement.style.display = "block";
-      errorElement.textContent = errors[field.id];
+      errorElement.textContent = message;
       errorElement.setAttribute("aria-live", "assertive");
     } else {
       errorElement.style.display = "none";
