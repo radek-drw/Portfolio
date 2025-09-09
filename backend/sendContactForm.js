@@ -7,15 +7,22 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function validateInput({ name, email, message }) {
   const errors = {};
 
-  if (!name || name.trim() === "") {
+  // Normalize values: ensure strings, replace null/undefined with "", then trim whitespace
+  const safeName = String(name ?? "").trim();
+  const safeEmail = String(email ?? "").trim();
+  const safeMessage = String(message ?? "").trim();
+
+  if (!safeName) {
     errors.name = "REQUIRED";
   }
 
-  if (!email || !emailPattern.test(email)) {
+  if (!safeEmail) {
+    errors.email = "REQUIRED";
+  } else if (!emailPattern.test(safeEmail)) {
     errors.email = "INVALID";
   }
 
-  if (!message || message.trim() === "") {
+  if (!safeMessage) {
     errors.message = "REQUIRED";
   }
 
