@@ -48,19 +48,19 @@ const fields = [
   },
 ];
 
-// FORM VALIDATION FUNCTIONS
+// Validate form frontend
 function validateForm() {
   let formIsValid = true;
+
   fields.forEach((field) => {
-    const value = document.getElementById(field.id).value;
+    const value = document.getElementById(field.id).value.trim();
     const errorElement = document.querySelector(`.${field.errorClass}`);
     let errorMessage = "";
 
-    if (
-      value === "" ||
-      (field.emailPattern && !field.emailPattern.test(value))
-    ) {
-      errorMessage = field.errorMessage;
+    if (!value) {
+      errorMessage = field.errorMessages.REQUIRED;
+    } else if (field.emailPattern && !field.emailPattern.test(value)) {
+      errorMessage = field.errorMessages.INVALID;
     }
 
     if (errorMessage) {
@@ -73,6 +73,23 @@ function validateForm() {
     }
   });
   return formIsValid;
+}
+
+function showBackendValidationErrors(errors) {
+  fields.forEach((field) => {
+    const errorElement = document.querySelector(`.${field.errorClass}`);
+
+    if (errors[field.id]) {
+      const code = errors[field.id]; // e.g. "REQUIRED" or "INVALID"
+      const message = field.errorMessages[code];
+
+      errorElement.style.display = "block";
+      errorElement.textContent = `${message} (Backend)`;
+      errorElement.setAttribute("aria-live", "assertive");
+    } else {
+      errorElement.style.display = "none";
+    }
+  });
 }
 
 function toggleLoading(isLoading) {
@@ -125,23 +142,6 @@ function handleErrorResponse(status) {
 function handleNetworkError(error) {
   console.error("Error:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
-}
-
-function showBackendValidationErrors(errors) {
-  fields.forEach((field) => {
-    const errorElement = document.querySelector(`.${field.errorClass}`);
-
-    if (errors[field.id]) {
-      const code = errors[field.id];
-      const message = field.errorMessages[code];
-
-      errorElement.style.display = "block";
-      errorElement.textContent = message;
-      errorElement.setAttribute("aria-live", "assertive");
-    } else {
-      errorElement.style.display = "none";
-    }
-  });
 }
 
 // EVENT LISTENER
