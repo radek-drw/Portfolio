@@ -7,3 +7,12 @@
 - On the frontend, the function `showBackendValidationErrors` checks for these errors.
 - If an error exists, the function uses the same error message mapping as the frontend validation.
 - This ensures consistent error handling and improves maintainability.
+
+## Local Lambda Testing Flow
+
+- Lambda backend can be tested locally before deploying it to AWS.
+- A test script calls the Lambda handler directly with a mock event containing example form data.
+- The Lambda function processes the event as it would in production (validation, email sending, etc.).
+- The response includes statusCode and body, which can be inspected in the console.
+- This allows to catch errors early without deploying to Lambda.
+- Benefits: saves build time, reduces cloud usage costs, and ensures backend logic works as expected before integration with the frontend.
