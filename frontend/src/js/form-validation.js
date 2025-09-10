@@ -182,8 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
           { headers: { "Content-Type": "application/json" } }
         );
 
-        // parsing body (cause Lambda returns JSON)
-        const data = JSON.parse(response.data.body);
+        const data = response.data;
 
         if (response.status === 200 && data.success) {
           handleSuccessResponse();
