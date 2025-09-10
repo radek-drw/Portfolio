@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.recaptcha_token = token;
 
         const response = await axios.post(
-          "http://localhost:5000/send_email",
+          "https://r0du11twd4.execute-api.eu-west-1.amazonaws.com/contact",
           formData
         );
 
