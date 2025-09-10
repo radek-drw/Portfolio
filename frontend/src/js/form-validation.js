@@ -178,7 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const response = await axios.post(
           "https://r0du11twd4.execute-api.eu-west-1.amazonaws.com/contact",
-          formData
+          formData,
+          { headers: { "Content-Type": "application/json" } }
         );
 
         // parsing body (cause Lambda returns JSON)
