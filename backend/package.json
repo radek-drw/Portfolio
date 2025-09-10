@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test:sendContactForm": "node test-sendContactForm",
-    "deploy:sendContactForm": "powershell Compress-Archive -Path sendContactForm.js -DestinationPath sendContactForm.zip; aws lambda update-function-code --function-name send-contact-form --zip-file fileb://sendContactForm.zip --no-cli-pager; Remove-Item -Path ./sendContactForm.zip"
+    "deploy:sendContactForm": "powershell Compress-Archive -Path sendContactForm.mjs -DestinationPath sendContactForm.zip; aws lambda update-function-code --function-name send-contact-form --zip-file fileb://sendContactForm.zip --no-cli-pager; Remove-Item -Path ./sendContactForm.zip"
   },
   "keywords": [],
   "author": "Radek Drweski",
