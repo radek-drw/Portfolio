@@ -140,7 +140,7 @@ function handleErrorResponse(status) {
 }
 
 function handleNetworkError(error) {
-  console.error("Error:", error);
+  console.error("Error:", error.response.status);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         const data = response.data;
+        console.log("Response data:", data);
 
         if (response.status === 200 && data.success) {
           handleSuccessResponse();
