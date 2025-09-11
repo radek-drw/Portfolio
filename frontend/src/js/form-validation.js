@@ -140,7 +140,7 @@ function handleErrorResponse(status) {
 }
 
 function handleNetworkError(error) {
-  console.error("Error:", error.response.status);
+  console.error("Error:", error);
   showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
@@ -174,16 +174,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add the token to the form data
         const formData = Object.fromEntries(new FormData(form));
+
         formData.recaptcha_token = token;
 
         const response = await axios.post(
           "https://r0du11twd4.execute-api.eu-west-1.amazonaws.com/contact",
-          formData,
-          { headers: { "Content-Type": "application/json" } }
+          formData
         );
 
-        const data = response.data;
-        console.log("Response data:", data);
+        const data = JSON.parse(response.data.body);
 
         if (response.status === 200 && data.success) {
           handleSuccessResponse();
