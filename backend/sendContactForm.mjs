@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 const sesClient = new SESClient({ region: "eu-west-1" });
