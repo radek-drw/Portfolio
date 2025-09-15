@@ -162,11 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Execute reCAPTCHA to get the token
         const token = await window.grecaptcha.execute(
-          "6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP",
+          "6LeVl8orAAAAAJkAyH4MRlTaKwcAr_bZfYRH55vc",
           { action: "submit" }
         );
 
-        // Add the token to the form data
         const formData = Object.fromEntries(new FormData(form));
 
         formData.recaptchaToken = token;
