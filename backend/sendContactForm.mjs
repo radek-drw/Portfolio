@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 const sesClient = new SESClient({ region: "eu-west-1" });
@@ -32,9 +33,31 @@ function validateInput({ name, email, message }) {
 export const handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    const { name, email, message } = body;
+    const { name, email, message, recaptchaToken } = body;
 
-    // validate inputs
+    // 1. Verify reCAPTCHA token
+    const verifyResponse = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}`,
+      }
+    );
+
+    const recaptchaData = await verifyResponse.json();
+
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          success: false,
+          message: "reCAPTCHA verification failed",
+        }),
+      };
+    }
+
+    // 2. Validate inputs
     const errors = validateInput({ name, email, message });
     if (Object.keys(errors).length > 0) {
       return {
@@ -46,7 +69,7 @@ export const handler = async (event) => {
       };
     }
 
-    const fromAddress = "rdrweski@gmail.com";
+    const fromAddress = "rdrweski@outlook.com";
     const toAddress = "rdrweski@gmail.com";
 
     const htmlBody = `
