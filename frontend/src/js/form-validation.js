@@ -161,28 +161,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         // Execute reCAPTCHA to get the token
-        const token = await new Promise((resolve, reject) => {
-          grecaptcha.ready(() => {
-            grecaptcha
-              .execute("6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP", {
-                action: "submit",
-              })
-              .then(resolve)
-              .catch(reject);
-          });
-        });
+        const token = await window.grecaptcha.execute(
+          "6Ld_zIkqAAAAAD87jsWzmh0p7jWPxz7EZDzRZycP",
+          { action: "submit" }
+        );
 
         // Add the token to the form data
         const formData = Object.fromEntries(new FormData(form));
 
-        formData.recaptcha_token = token;
+        formData.recaptchaToken = token;
 
         const response = await axios.post(
           "https://r0du11twd4.execute-api.eu-west-1.amazonaws.com/contact",
           formData
         );
 
-        const data = JSON.parse(response.data.body);
+        const data = response.data;
 
         if (response.status === 200 && data.success) {
           handleSuccessResponse();
