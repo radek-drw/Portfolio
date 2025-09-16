@@ -48,7 +48,7 @@ export const handler = async (event) => {
 
     if (!recaptchaData.success || recaptchaData.score < 0.5) {
       return {
-        statusCode: 400,
+        statusCode: 403,
         body: JSON.stringify({
           success: false,
           message: "reCAPTCHA verification failed",
