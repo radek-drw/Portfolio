@@ -19,5 +19,12 @@
 
 ## to check ??
 
-- check backend form validation after successfully was sent from front
-- check if reCAPTCHA is working properly
+- check backend form validation after successfully was sent from front - CHECKED (succes)
+  - checked by inserting 'true' in
+    if (validateForm()) {
+    toggleLoading(true);
+    )
+- check if reCAPTCHA is working properly - CHECKED (success)
+  - checked by logging
+    console.log("reCAPTCHA response:", recaptchaData);
+    and reading data on AWS CloudWatch
