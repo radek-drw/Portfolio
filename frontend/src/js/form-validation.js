@@ -48,6 +48,18 @@ const fields = [
   },
 ];
 
+function showError(errorElement, message) {
+  errorElement.style.display = "block";
+  errorElement.textContent = message;
+  errorElement.setAttribute("aria-live", "assertive");
+}
+
+function hideError(errorElement) {
+  errorElement.style.display = "none";
+  errorElement.textContent = "";
+  errorElement.removeAttribute("aria-live");
+}
+
 // Validate form frontend
 function validateForm() {
   let formIsValid = true;
@@ -55,21 +67,19 @@ function validateForm() {
   fields.forEach((field) => {
     const value = document.getElementById(field.id).value.trim();
     const errorElement = document.querySelector(`.${field.errorClass}`);
-    let errorMessage = "";
+    let message = "";
 
     if (!value) {
-      errorMessage = field.errorMessages.REQUIRED;
+      message = field.errorMessages.REQUIRED;
     } else if (field.emailPattern && !field.emailPattern.test(value)) {
-      errorMessage = field.errorMessages.INVALID;
+      message = field.errorMessages.INVALID;
     }
 
-    if (errorMessage) {
-      errorElement.style.display = "block";
-      errorElement.textContent = errorMessage;
-      errorElement.setAttribute("aria-live", "assertive");
+    if (message) {
+      showError(errorElement, message);
       formIsValid = false;
     } else {
-      errorElement.style.display = "none";
+      hideError(errorElement);
     }
   });
   return formIsValid;
@@ -82,12 +92,9 @@ function showBackendValidationErrors(errors) {
     if (errors[field.id]) {
       const code = errors[field.id]; // e.g. "REQUIRED" or "INVALID"
       const message = field.errorMessages[code];
-
-      errorElement.style.display = "block";
-      errorElement.textContent = `${message} (Backend)`;
-      errorElement.setAttribute("aria-live", "assertive");
+      showError(errorElement, message);
     } else {
-      errorElement.style.display = "none";
+      hideError(errorElement);
     }
   });
 }
@@ -101,13 +108,11 @@ function toggleLoading(isLoading) {
 
 function handleSuccessResponse() {
   fields.forEach((field) => {
-    const inputElement =
-      document.querySelector(`.${field.inputClass} input`) ||
-      document.querySelector(`.${field.inputClass} textarea`);
-    if (inputElement) {
-      inputElement.value = "";
-    }
+    const errorElement = document.querySelector(`.${field.errorClass}`);
+    hideError(errorElement);
   });
+  document.getElementById("contact-form").reset();
+
   const successMessage = document.querySelector(
     ".contact__form-success-message"
   );
