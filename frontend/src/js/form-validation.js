@@ -183,10 +183,15 @@ document.addEventListener("DOMContentLoaded", () => {
           handleErrorResponse(response.status);
         }
       } catch (error) {
-        if (error.response && error.response.status === 400) {
-          // Validation errors from backend
+        const data = error.response?.data;
+
+        // Validation errors (invalid input fields)
+        if (error.response.status === 400 && !data.success) {
           const errors = JSON.parse(error.response.data.body).errors;
           showBackendValidationErrors(errors);
+          // Failed reCAPTCHA verification
+        } else if (error.response.status === 403 && !data.success) {
+          showErrorToast(data.message);
         } else {
           handleNetworkError(error);
         }
