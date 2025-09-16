@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (validateForm()) {
+    if (true) {
       toggleLoading(true);
 
       try {
