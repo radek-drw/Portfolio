@@ -16,3 +16,8 @@
 - The response includes statusCode and body, which can be inspected in the console.
 - This allows to catch errors early without deploying to Lambda.
 - Benefits: saves build time, reduces cloud usage costs, and ensures backend logic works as expected before integration with the frontend.
+
+## to check ??
+
+- check backend form validation after successfully was sent from front
+- check if reCAPTCHA is working properly
