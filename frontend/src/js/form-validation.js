@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
           { action: "submit" }
         );
 
-        // Add the token to the form data
         const formData = Object.fromEntries(new FormData(form));
 
         formData.recaptchaToken = token;
