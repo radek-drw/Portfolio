@@ -187,8 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Validation errors (invalid input fields)
         if (error.response.status === 400 && !data.success) {
-          const errors = JSON.parse(error.response.data.body).errors;
-          showBackendValidationErrors(errors);
+          showBackendValidationErrors(data.errors);
           // Failed reCAPTCHA verification
         } else if (error.response.status === 403 && !data.success) {
           showErrorToast(data.message);
