@@ -20,11 +20,11 @@
 ## to check ??
 
 - check backend form validation after successfully was sent from front - CHECKED (succes)
-  - checked by inserting 'true' in
-    if (validateForm()) {
-    toggleLoading(true);
-    )
 - check if reCAPTCHA is working properly - CHECKED (success)
-  - checked by logging
-    console.log("reCAPTCHA response:", recaptchaData);
-    and reading data on AWS CloudWatch
+  - checked by logging console.log("reCAPTCHA response:", recaptchaData) in lambda and reading data on AWS CloudWatch
+
+## Lambda Timeout (observed issue)
+
+Default Lambda timeout is 3s, which was too short for my function (reCAPTCHA + SES).  
+Increasing the timeout to 10s solved the issue with requests failing due to timeouts
+To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda duration metric to send notifications when execution time approaches the timeout limit
