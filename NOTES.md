@@ -28,3 +28,7 @@
 Default Lambda timeout is 3s, which was too short for my function (reCAPTCHA + SES).  
 Increasing the timeout to 10s solved the issue with requests failing due to timeouts
 To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda duration metric to send notifications when execution time approaches the timeout limit
+
+## Git Branch Workflow (Main / Dev)
+
+Work daily on **`dev`** branch for all changes and keep **`main`** stable for production. Use `git checkout` to switch branches and `git merge` to combine changes from `dev` into `main`. On AWS Amplify, only **`main`** is connected with auto-build, so deploying happens automatically from `main`
