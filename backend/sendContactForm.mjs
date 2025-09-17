@@ -12,19 +12,10 @@ function validateInput({ name, email, message }) {
   const safeEmail = String(email ?? "").trim();
   const safeMessage = String(message ?? "").trim();
 
-  if (!safeName) {
-    errors.name = "REQUIRED";
-  }
-
-  if (!safeEmail) {
-    errors.email = "REQUIRED";
-  } else if (!emailPattern.test(safeEmail)) {
-    errors.email = "INVALID";
-  }
-
-  if (!safeMessage) {
-    errors.message = "REQUIRED";
-  }
+  if (!safeName) errors.name = "REQUIRED";
+  if (!safeEmail) errors.email = "REQUIRED";
+  else if (!emailPattern.test(safeEmail)) errors.email = "INVALID";
+  if (!safeMessage) errors.message = "REQUIRED";
 
   return errors;
 }
