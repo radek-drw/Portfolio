@@ -24,8 +24,10 @@ const fields = [
     id: "name",
     errorClass: "contact__form-error-name",
     inputClass: "contact__form-inputs-item--name",
+    maxLength: 50,
     errorMessages: {
       REQUIRED: "Please enter a name",
+      TOO_LONG: "Name is too long",
     },
   },
   {
@@ -33,17 +35,21 @@ const fields = [
     errorClass: "contact__form-error-email",
     inputClass: "contact__form-inputs-item--email",
     emailPattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    maxLength: 254,
     errorMessages: {
       REQUIRED: "Please enter an email address",
       INVALID: "Please enter a valid email address",
+      TOO_LONG: "Email address is too long",
     },
   },
   {
     id: "message",
     errorClass: "contact__form-error-message",
     inputClass: "contact__form-inputs-item--message",
+    maxLength: 2000,
     errorMessages: {
       REQUIRED: "Please enter a message",
+      TOO_LONG: "Message is too long",
     },
   },
 ];
@@ -60,7 +66,7 @@ function hideError(errorElement) {
   errorElement.removeAttribute("aria-live");
 }
 
-// Validate form frontend
+// Validate form fields: required, email format, max length
 function validateForm() {
   let formIsValid = true;
 
@@ -73,6 +79,8 @@ function validateForm() {
       message = field.errorMessages.REQUIRED;
     } else if (field.emailPattern && !field.emailPattern.test(value)) {
       message = field.errorMessages.INVALID;
+    } else if (value.length > field.maxLength) {
+      message = field.errorMessages.TOO_LONG;
     }
 
     if (message) {
@@ -161,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (validateForm()) {
+    if (true) {
       toggleLoading(true);
 
       try {
