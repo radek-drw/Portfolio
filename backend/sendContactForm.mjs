@@ -4,6 +4,7 @@ const sesClient = new SESClient({ region: "eu-west-1" });
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Validate form fields: required, email format, max length
 function validateInput({ name, email, message }) {
   const errors = {};
 
