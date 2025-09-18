@@ -13,9 +13,12 @@ function validateInput({ name, email, message }) {
   const safeMessage = String(message ?? "").trim();
 
   if (!safeName) errors.name = "REQUIRED";
+  else if (safeName.length > 50) errors.name = "TOO_LONG";
   if (!safeEmail) errors.email = "REQUIRED";
+  else if (safeEmail.length > 254) errors.email = "TOO_LONG";
   else if (!emailPattern.test(safeEmail)) errors.email = "INVALID";
   if (!safeMessage) errors.message = "REQUIRED";
+  else if (safeMessage.length > 2000) errors.message = "TOO_LONG";
 
   return errors;
 }
