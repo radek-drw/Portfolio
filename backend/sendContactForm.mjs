@@ -63,7 +63,7 @@ export const handler = async (event) => {
       };
     }
 
-    const fromAddress = "rdrweski@outlook.com";
+    const fromAddress = process.env.SES_FROM_ADDRESS;
     const toAddress = "rdrweski@gmail.com";
 
     const htmlBody = `
