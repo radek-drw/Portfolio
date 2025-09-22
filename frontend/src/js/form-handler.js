@@ -1,21 +1,12 @@
 import axios from "axios";
 
-// ERROR MESSAGES CONSTANTS
+// ERROR MESSAGES
 const ERROR_MESSAGES = {
-  // Shown when the user has no internet connection (offline).
   NO_INTERNET: "No internet connection!",
-
-  // Generic fallback when the form could not be sent (non-specific error).
   FORM_SEND_ERROR:
     "An error occurred while sending the form. Please try again later.",
-
-  // Shown when the requested resource (API endpoint) is not found (HTTP 404).
   RESOURCE_NOT_FOUND: "The requested resource was not found.",
-
-  // Shown when the server returns an internal error (HTTP 500+).
   SERVER_ERROR: "An internal server error occurred. Please try again later.",
-
-  // Shown when something unexpected happens (e.g. network/JS error).
   UNEXPECTED_ERROR: "An unexpected error occurred. Please try again later.",
 };
 
@@ -54,6 +45,7 @@ const fields = [
   },
 ];
 
+// UI helpers
 function showError(errorElement, message) {
   errorElement.style.display = "block";
   errorElement.textContent = message;
@@ -66,13 +58,36 @@ function hideError(errorElement) {
   errorElement.removeAttribute("aria-live");
 }
 
-// Validate form fields: required, email format, max length
-function validateForm() {
+function toggleLoading(elements, isLoading) {
+  elements.loadingOverlay.style.display = isLoading ? "block" : "none";
+  elements.loader.style.display = isLoading ? "block" : "none";
+}
+
+function handleSuccessResponse(elements) {
+  Object.values(elements.errors).forEach(hideError);
+  elements.form.reset();
+
+  elements.successMessage.style.display = "block";
+  setTimeout(() => {
+    elements.successMessage.style.display = "none";
+  }, 4000);
+}
+
+function showErrorToast(elements, message) {
+  elements.toast.style.display = "block";
+  elements.toast.textContent = message;
+  setTimeout(() => {
+    elements.toast.style.display = "none";
+  }, 4000);
+}
+
+// Validation
+function validateForm(elements) {
   let formIsValid = true;
 
   fields.forEach((field) => {
-    const value = document.getElementById(field.id).value.trim();
-    const errorElement = document.querySelector(`.${field.errorClass}`);
+    const value = elements.inputs[field.id].value.trim();
+    const errorElement = elements.errors[field.id];
     let message = "";
 
     if (!value) {
@@ -93,9 +108,9 @@ function validateForm() {
   return formIsValid;
 }
 
-function showBackendValidationErrors(errors) {
+function showBackendValidationErrors(elements, errors) {
   fields.forEach((field) => {
-    const errorElement = document.querySelector(`.${field.errorClass}`);
+    const errorElement = elements.errors[field.id];
 
     if (errors[field.id]) {
       const code = errors[field.id]; // e.g. "REQUIRED" or "INVALID"
@@ -107,39 +122,8 @@ function showBackendValidationErrors(errors) {
   });
 }
 
-function toggleLoading(isLoading) {
-  const loadingOverlay = document.getElementById("loading-overlay");
-  const loader = document.getElementById("loader");
-  loadingOverlay.style.display = isLoading ? "block" : "none";
-  loader.style.display = isLoading ? "block" : "none";
-}
-
-function handleSuccessResponse() {
-  fields.forEach((field) => {
-    const errorElement = document.querySelector(`.${field.errorClass}`);
-    hideError(errorElement);
-  });
-  document.getElementById("contact-form").reset();
-
-  const successMessage = document.querySelector(
-    ".contact__form-success-message"
-  );
-  successMessage.style.display = "block";
-  setTimeout(() => {
-    successMessage.style.display = "none";
-  }, 4000);
-}
-
-function showErrorToast(message) {
-  const toast = document.getElementById("toast");
-  toast.style.display = "block";
-  toast.textContent = message;
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 4000);
-}
-
-function handleErrorResponse(status) {
+// Error handling
+function handleErrorResponse(elements, status) {
   let message;
 
   if (status === 404) {
@@ -149,28 +133,41 @@ function handleErrorResponse(status) {
   } else {
     message = ERROR_MESSAGES.FORM_SEND_ERROR;
   }
-  showErrorToast(message);
+  showErrorToast(elements, message);
 }
 
-function handleNetworkError(error) {
+function handleNetworkError(elements, error) {
   console.error("Error:", error);
-  showErrorToast(ERROR_MESSAGES.UNEXPECTED_ERROR);
+  showErrorToast(elements, ERROR_MESSAGES.UNEXPECTED_ERROR);
 }
 
 // EVENT LISTENER
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("contact-form");
+  // Cache elements once
+  const elements = {
+    form: document.getElementById("contact-form"),
+    toast: document.getElementById("toast"),
+    loadingOverlay: document.getElementById("loading-overlay"),
+    loader: document.getElementById("loader"),
+    successMessage: document.querySelector(".contact__form-success-message"),
+    errors: Object.fromEntries(
+      fields.map((f) => [f.id, document.querySelector(`.${f.errorClass}`)])
+    ),
+    inputs: Object.fromEntries(
+      fields.map((f) => [f.id, document.getElementById(f.id)])
+    ),
+  };
 
-  form.addEventListener("submit", async (e) => {
+  elements.form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (!navigator.onLine) {
-      showErrorToast(ERROR_MESSAGES.NO_INTERNET);
+      showErrorToast(elements, ERROR_MESSAGES.NO_INTERNET);
       return;
     }
 
-    if (validateForm()) {
-      toggleLoading(true);
+    if (validateForm(elements)) {
+      toggleLoading(elements, true);
 
       try {
         // Execute reCAPTCHA to get the token
@@ -179,8 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
           { action: "submit" }
         );
 
-        const formData = Object.fromEntries(new FormData(form));
-
+        const formData = Object.fromEntries(new FormData(elements.form));
         formData.recaptchaToken = token;
 
         const response = await axios.post(
@@ -191,24 +187,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = response.data;
 
         if (response.status === 200 && data.success) {
-          handleSuccessResponse();
+          handleSuccessResponse(elements);
         } else {
-          handleErrorResponse(response.status);
+          handleErrorResponse(elements, response.status);
         }
       } catch (error) {
         const data = error.response?.data;
 
-        // Validation errors (invalid input fields)
-        if (error.response.status === 400 && !data.success) {
-          showBackendValidationErrors(data.errors);
-          // Failed reCAPTCHA verification
-        } else if (error.response.status === 403 && !data.success) {
-          showErrorToast(data.message);
+        if (error.response?.status === 400 && !data.success) {
+          showBackendValidationErrors(elements, data.errors);
+        } else if (error.response?.status === 403 && !data.success) {
+          showErrorToast(elements, data.message);
         } else {
-          handleNetworkError(error);
+          handleNetworkError(elements, error);
         }
       } finally {
-        toggleLoading(false);
+        toggleLoading(elements, false);
       }
     }
   });
