@@ -32,3 +32,10 @@ To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda 
 ## Git Branch Workflow (Main / Dev)
 
 Work daily on **`dev`** branch for all changes and keep **`main`** stable for production. Use `git checkout` to switch branches and `git merge` to combine changes from `dev` into `main`. On AWS Amplify, only **`main`** is connected with auto-build, so deploying happens automatically from `main`
+
+## Cache DOM elements
+
+Instead of calling `document.getElementById` or `querySelector` multiple times
+during validation and error handling, I now cache all DOM elements once inside
+`DOMContentLoaded`. This improves performance (fewer DOM lookups), reduces
+repeated code, and makes the script easier to maintain.
