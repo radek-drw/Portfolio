@@ -62,3 +62,48 @@
       width: 1px
       height: 100%
       background-color: vars.$primary
+
+@mixin form-field($is-textarea: false)
+  padding: 10px
+  width: 100%
+  border-radius: 4px
+  font-size: 1.6rem
+  background-color: color.adjust(vars.$secondary, $lightness: 10%)
+  border: none
+  color: vars.$white
+
+  @if $is-textarea
+    resize: none
+    overfloqw-y: auto
+    min-height: 100px
+
+  @include mq.mobile
+    margin-bottom: 20px
+
+  // underline (span)
+  ~ span
+    position: absolute
+    display: block
+    bottom: 0
+    left: 0
+    width: 0
+    height: 3px
+    background: vars.$primary
+    transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
+
+    @include mq.mobile
+      bottom: 20px
+
+  &:focus
+    outline: 0
+
+    ~ label
+      @extend %label-movement
+
+    ~ span
+      width: 100%
+      transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
+
+  &:valid
+    ~ label
+      @extend %label-movement
