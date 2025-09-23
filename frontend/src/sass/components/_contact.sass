@@ -5,7 +5,6 @@
 @use '../mixins/mixins' as mix
 
 .contact
-  overflow-x: hidden
   padding-bottom: 12px
   &__title
     @include mix.title-style
@@ -21,10 +20,12 @@
       flex-basis: 100%
       margin-bottom: 60px
     &-item
-      margin-bottom: 35px
+      margin-bottom: 43px
       font-size: 1.6rem
       @include mq.mobile
         margin-bottom: 20px
+      @include mq.tablet
+        margin-bottom: 35px
       &>img
         margin-right: 40px
         @include mq.mobile
@@ -40,12 +41,14 @@
 
   // Form styles
   %label-movement
-    top: -40px
+    top: -35px
     font-size: 1.6rem
     color: vars.$primary
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
     @include mq.mobile
       top: -25px
+    @include mq.tablet
+      top: -28px
   &__form
     flex-grow: 1
     display: flex
@@ -74,36 +77,9 @@
           transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1)
           pointer-events: none
         input
-          padding: 10px
-          width: 100%
-          border-radius: 4px
-          font-size: 1.6rem
-          background-color: color.adjust(vars.$secondary, $lightness: 10%)
-          border: none
-          color: vars.$white
-          @include mq.mobile
-            margin-bottom: 20px
-          ~ span
-            position: absolute
-            display: block
-            bottom: 0
-            left: 0
-            width: 0
-            height: 3px
-            background: vars.$primary
-            transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
-            @include mq.mobile
-              bottom: 20px
-          &:focus
-            outline: 0
-            ~ label
-              @extend %label-movement
-            ~ span
-              width: 100%
-              transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1)
-          &:valid
-            ~ label
-              @extend %label-movement
+          @include mix.form-field
+        textarea
+          @include mix.form-field(true)
 
         &--name
           flex-basis: 35%
@@ -115,13 +91,14 @@
       // Error info styles
     &-error-info
       position: absolute
-      top: 50%
+      top: 105%
       right: 0
       text-align: right
-      transform: translateY(-50%)
+
       @include mq.mobile
         top: 100%
-        right: 34%
+        text-align: left
+        left: 0
         transform: translateY(0)
       p
         display: none
@@ -133,7 +110,7 @@
 
     &-button
       align-self: flex-end
-      padding: 1em 1.1em
+      padding: 0.7em 1.1em
       margin-right: 9px
       font-size: 1.8rem
       border: 1px solid vars.$primary
