@@ -158,6 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ),
   };
 
+  // Character counter for message textarea
+  const textarea = elements.inputs.message;
+  const charCount = document.getElementById("charCount");
+  const maxLength = textarea.getAttribute("maxlength");
+
+  textarea.addEventListener("input", () => {
+    charCount.textContent = `${textarea.value.length}/${maxLength}`;
+  });
+
   elements.form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
