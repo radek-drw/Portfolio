@@ -673,11 +673,14 @@
                   <textarea
                     id="message"
                     name="message"
-                    rows="5"
                     required
+                    maxlength="2000"
                   ></textarea>
                   <label>Message</label>
                   <span></span>
+                  <div id="charCount" class="contact__form-char-count">
+                    0/2000
+                  </div>
                 </div>
               </div>
               <!-- reCAPTCHA v3 Token -->
