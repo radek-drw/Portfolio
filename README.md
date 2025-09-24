@@ -63,10 +63,10 @@ The contact form has two layers of validation: frontend and backend.
 
 - **Required Fields**: All inputs must be filled to submit the form. If validation fails, a clear error message appears below the form
 - **Validation Rules**:
-- **Name**: max 50 characters
-- **Email**: max 254 characters, must match a valid email format (regex applied on frontend and backend)
-- **Message**: max 2000 characters, with a live character counter displayed below the field
-- **Backend Validation**: Once frontend validation passes, the backend applies the same rules for consistency. If validation fails, it responds with status 400 and an error object (e.g., { name: "REQUIRED" }, { email: "INVALID" }).
+  - **Name**: max 50 characters
+  - **Email**: max 254 characters, must match a valid email format (regex applied on frontend and backend)
+  - **Message**: max 2000 characters, with a live character counter displayed below the field
+- **Backend Validation**: Once frontend validation passes, the backend applies the same rules for consistency. If validation fails, it responds with status 400 and an error object (e.g., { name: "REQUIRED" }, { email: "INVALID" }). This approach improves maintainability, as validation logic is centralized—changes need to be made only once to affect both layers. Error messages are kept identical between frontend and backend so the user isn’t confused or frustrated by different wording. From the user’s perspective, an error is simply an error—the important part is knowing what to fix, not where the validation failed
 - **Error Handling**: On the frontend, `showBackendValidationErrors` maps backend error codes to the same messages as frontend validation, ensuring consistent and maintainable feedback.
 
 #### Form Submission
@@ -76,7 +76,15 @@ The contact form has two layers of validation: frontend and backend.
 - **SMTP Integration**: All sensitive data in the PHP file is storred in a `config.php` file.
 - **Server-Side Validation**: The form undergoes server-side validation to ensure all fields are correctly filled, mirroring client-side validation.
 - **Error Handling**: Users receive toast messages for server errors or internet connection issues.
-- **Submission Animation**: An animation is shown while waiting for the server response during form submission. Once a positive response is received, the animation disappears.
+<!-- below ok -->
+- **Loading & Feedback**: While sending, a loading overlay prevents further interaction and a spinner is displayed. On success, the form resets and a success message appears for 4 seconds.
+- **Data Transmission**: The form data is sent to the backend through AWS API Gateway using axios with the POST method. Axios simplifies request handling, while POST securely transmits the data in the request body
+- **Pre-check**: Before validation or submission, the internet connection is verified (`navigator.onLine`) to prevent sending the form without access.
+- **Error Handling**:
+  - 400 – form validation failed on the backend (e.g., missing required fields).
+  - 403 – reCAPTCHA verification failed (forbidden).
+  - 404 – resource not found (e.g., wrong API endpoint).
+  - 500+ – internal server error (e.g., unhandled exception or server failure).
 
 ### General
 
