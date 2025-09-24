@@ -20,7 +20,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ## Project Overview
 
-![Portfolio Website Screenshot](.frontend/src/assets/images/page_screenshot.jpg)
+![Portfolio Website Screenshot](./frontend/src/assets/images/page_screenshot.jpg)
 
 ## Features
 
