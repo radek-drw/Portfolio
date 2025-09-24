@@ -27,7 +27,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 ### Navigation
 
 - **Fixed Navigation Bar**: The navigation bar remains fixed at the top of the page while scrolling.
-- **Animated Navigation Links**: Links have a smooth animation effect using jQuery.
+- **Animated Navigation Buttons**: Navigation buttons feature smooth jQuery animations, seamlessly scrolling to each section on click.
 - **Responsive Burger Menu**:
   - When the page width is 480px or less, the navigation links transform into a burger menu.
   - The burger icon is animated with CSS: when closed, it shows three lines; when opened, it transforms into an arrow indicating how to close the menu.
@@ -42,11 +42,8 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - **Skills Display**: Skills are displayed with images (SVG's) and descriptions.
   - **Desktop View**: Displays 4 images per row.
   - **Mobile View**: Displays 2 rows with 2 images per row.
-- **Image Slider**:
-  - Images are displayed in a slider format using `setInterval` along with CSS animations.
-  - **Progress Bar**:
-    - Dots and connecting lines are generated automatically based on the number of images.
-    - Clicking on a dot highlights the corresponding set of images. Each set of 4 images has a dot that becomes highlighted when active.
+- **Skills Slider Functionality**:
+  - The skills section automatically cycles through groups of four skills every 4 seconds using `setInterval`. A progress bar with dots and connecting lines is generated dynamically—each dot represents one set of skills. Clicking on a dot resets the timer, highlights the selected dot, and displays the corresponding skills group, ensuring the animation continues smoothly from that point.
 
 ### Recent Works Section
 
@@ -63,6 +60,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 #### Form Submission
 
+- **Spam Protection:**: The contact form uses Google reCAPTCHA v3 to block spam and bots. Tokens are generated on the frontend and verified in an AWS Lambda function, with the secret key securely stored in Lambda environment variables.
 - **Email Submission**: When all fields are filled, the form submission is sent to the website owner's email address using PHP and PHPMailer with Composer.
 - **SMTP Integration**: All sensitive data in the PHP file is storred in a `config.php` file.
 - **Server-Side Validation**: The form undergoes server-side validation to ensure all fields are correctly filled, mirroring client-side validation.
