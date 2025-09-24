@@ -17,16 +17,10 @@
 - This allows to catch errors early without deploying to Lambda.
 - Benefits: saves build time, reduces cloud usage costs, and ensures backend logic works as expected before integration with the frontend.
 
-## to check ??
-
-- check backend form validation after successfully was sent from front - CHECKED (succes)
-- check if reCAPTCHA is working properly - CHECKED (success)
-  - checked by logging console.log("reCAPTCHA response:", recaptchaData) in lambda and reading data on AWS CloudWatch
-
 ## Lambda Timeout (observed issue)
 
-Default Lambda timeout is 3s, which was too short for my function (reCAPTCHA + SES).  
-Increasing the timeout to 10s solved the issue with requests failing due to timeouts
+Default Lambda timeout is 3s, which was too short for the function (reCAPTCHA + SES)
+When the execution exceeded 3 s, the Lambda was terminated before it could return a response to API Gateway. As a result, API Gateway returned an error to the client — even though the Lambda sometimes still managed to send the email via SES. Increasing the timeout to 10s solved the issue with requests failing due to timeouts
 To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda duration metric to send notifications when execution time approaches the timeout limit
 
 ## Git Branch Workflow (Main / Dev)
@@ -38,4 +32,4 @@ Work daily on **`dev`** branch for all changes and keep **`main`** stable for pr
 Instead of calling `document.getElementById` or `querySelector` multiple times
 during validation and error handling, I now cache all DOM elements once inside
 `DOMContentLoaded`. This improves performance (fewer DOM lookups), reduces
-repeated code, and makes the script easier to maintain.
+repeated code, and makes the script easier to maintain
