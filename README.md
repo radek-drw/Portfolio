@@ -35,7 +35,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ### Header
 
-- **Intro Section**: Includes an introductory message with a JavaScript animation effect using classes.
+- **Intro Section**: Includes an introductory message with a JavaScript animation effect using classes and canvas
 
 ### Skills Section
 
@@ -43,14 +43,14 @@ Welcome to my personal portfolio website. This website is designed to showcase m
   - **Desktop View**: Displays 4 images per row.
   - **Mobile View**: Displays 2 rows with 2 images per row.
 - **Image Slider**:
-  - Images are displayed in a slider format using `setInterval` in JavaScript along with CSS animations.
+  - Images are displayed in a slider format using `setInterval` along with CSS animations.
   - **Progress Bar**:
-    - Dots and connecting lines are generated automatically with JavaScript based on the number of images.
+    - Dots and connecting lines are generated automatically based on the number of images.
     - Clicking on a dot highlights the corresponding set of images. Each set of 4 images has a dot that becomes highlighted when active.
 
-### Projects Section
+### Recent Works Section
 
-- **Project Display**: Shows my work with the same progress bar functionality as the Skills section.
+- **Project Display**: Presents a list of my projects. Each project includes a screenshot, a short description, a list of the technologies used, and buttons linking to the source code and live demo.
 
 ### Contact Section
 
