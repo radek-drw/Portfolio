@@ -51,12 +51,23 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 ### Contact Section
 
-#### Form Validation
+#### Input Animations
 
-- Each input is validated upon clicking the submit button.
-- If an input is not filled, a message is displayed indicating which input needs attention.
-- Inputs have placeholders that move to the top when clicked (using CSS focus).
-- If an input is not filled and loses focus, the placeholder and bottom border return to their original state.
+- Floating Labels: Labels are styled as placeholders inside input fields.
+- Focus Animation: On focus, the label moves above the field and a bottom underline slides in from the left.
+- Blur Behavior: If the input is empty on blur, the label and underline revert; filled inputs keep the label above. All animations are handled purely with CSS
+
+#### Form Validation Flow
+
+The contact form has two layers of validation: frontend and backend.
+
+- **Required Fields**: All inputs must be filled to submit the form. If validation fails, a clear error message appears below the form
+- **Validation Rules**:
+- **Name**: max 50 characters
+- **Email**: max 254 characters, must match a valid email format (regex applied on frontend and backend)
+- **Message**: max 2000 characters, with a live character counter displayed below the field
+- **Backend Validation**: Once frontend validation passes, the backend applies the same rules for consistency. If validation fails, it responds with status 400 and an error object (e.g., { name: "REQUIRED" }, { email: "INVALID" }).
+- **Error Handling**: On the frontend, `showBackendValidationErrors` maps backend error codes to the same messages as frontend validation, ensuring consistent and maintainable feedback.
 
 #### Form Submission
 
