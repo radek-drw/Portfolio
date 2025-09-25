@@ -5,12 +5,12 @@
 - **Load the reCAPTCHA Script** in `head` of `HTML`
 
   ```html
-  <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=SITE_KEY"></script>
   ```
 
   This script activates passive tracking of user behavior (mouse movements, clicks, scrolling, etc.)
 
-- **Generate a Token**
+- **Generate a Token**  
   When the user clicks the "Submit" button, the following function is triggered:
 
   ```javascript
@@ -19,7 +19,7 @@
 
   This sends collected behavioral data to Google, which returns a token — a secure, encrypted string summarizing the session
 
-- **Send the Token to the Backend**  
+- **Send the token to the backend**  
   The token is added to the form data and sent to the server for verification
 
 ### Backend
@@ -39,6 +39,7 @@
 }
 ```
 
-- score: ranges from 0.0 (likely bot) to 1.0 (likely human)
-- action: should match the action you defined in execute()
-- success: indicates whether the token was valid
+- **Fields explanation**
+  - score: ranges from 0.0 (likely bot) to 1.0 (likely human)
+  - action: should match the action you defined in execute()
+  - success: indicates whether the token was valid
