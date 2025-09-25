@@ -1,4 +1,4 @@
-## Form Validation Flow
+<!-- ## Form Validation Flow
 
 - The form has two layers of validation: **frontend** and **backend**.
 - Once the frontend validation passes, the backend applies the same validation rules for consistency.
@@ -6,7 +6,7 @@
 - Errors are returned as codes (e.g., `{ name: "REQUIRED" }`, `{ email: "INVALID" }`).
 - On the frontend, the function `showBackendValidationErrors` checks for these errors.
 - If an error exists, the function uses the same error message mapping as the frontend validation.
-- This ensures consistent error handling and improves maintainability.
+- This ensures consistent error handling and improves maintainability. -->
 
 ## Local Lambda Testing Flow
 
@@ -17,11 +17,11 @@
 - This allows to catch errors early without deploying to Lambda.
 - Benefits: saves build time, reduces cloud usage costs, and ensures backend logic works as expected before integration with the frontend.
 
-## Lambda Timeout (observed issue)
+<!-- ## Lambda Timeout (observed issue)
 
 Default Lambda timeout is 3s, which was too short for the function (reCAPTCHA + SES)
 When the execution exceeded 3 s, the Lambda was terminated before it could return a response to API Gateway. As a result, API Gateway returned an error to the client — even though the Lambda sometimes still managed to send the email via SES. Increasing the timeout to 10s solved the issue with requests failing due to timeouts
-To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda duration metric to send notifications when execution time approaches the timeout limit
+To prevent unnoticed future timeouts, I set up a CloudWatch Alarm on the Lambda duration metric to send notifications when execution time approaches the timeout limit -->
 
 ## Git Branch Workflow (Main / Dev)
 
