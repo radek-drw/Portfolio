@@ -128,10 +128,11 @@ flowchart LR
 - **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms
 - **Webpack Configuration**: The project uses Webpack for bundling
 
-## Project Structure
+## Development Setup & Workflow
 
-This project is organized as a monorepo using `npm workspaces`.
-The root `package.json` defines two workspaces: frontend and backend. Each has its own `package.json` for dependency management, while all packages are installed centrally in the root `node_modules`. This avoids duplication and lets frontend and backend share common libraries.
+### Project Structure
+
+This project is organized as a monorepo using `npm workspaces`. The root `package.json` defines two workspaces: frontend and backend. Each has its own `package.json` for dependency management, while all packages are installed centrally in the root `node_modules`. This avoids duplication and lets frontend and backend share common libraries.
 
 Reasons I choose monorepo:
 
@@ -139,6 +140,16 @@ Reasons I choose monorepo:
 - Ensures a single source of dependencies in the root
 - Allows shared tooling/configs across frontend and backend
 - Simplifies repository and CI/CD management
+
+### Git Workflow
+
+This project uses two main branches:
+
+- **dev** – daily development happens here. All updates, bug fixes, and new features are committed and pushed to this branch  
+  Since I work on multiple computers, I push changes frequently to GitHub to make them available when switching machines
+
+- **main** – connected to AWS Amplify. Every push to main triggers an automatic build and deployment, which can generate costs  
+  To avoid unnecessary builds, only stable or significant changes are merged from dev into main
 
 ## Installation
 
