@@ -128,6 +128,18 @@ flowchart LR
 - **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms
 - **Webpack Configuration**: The project uses Webpack for bundling
 
+## Project Structure
+
+This project is organized as a monorepo using npm workspaces.
+The root package.json defines two workspaces: frontend and backend. Each has its own package.json for dependency management, while all packages are installed centrally in the root node_modules. This avoids duplication and lets frontend and backend share common libraries.
+
+Reasons I choose monorepo:
+
+- Maintain a clean and scalable project structure
+- Ensures a single source of dependencies in the root
+- Allows shared tooling/configs across frontend and backend
+- Simplifies repository and CI/CD management
+
 ## Installation
 
 ### Prerequisites
