@@ -107,7 +107,7 @@ The contact form has two layers of validation: frontend and backend.
   - **AWS Lambda (Node.js)** – serverless backend handling contact form submissions
   - **AWS API Gateway** – API entry point for `POST` requests from the frontend
   - **AWS SES** – sending emails with the submitted form data
-  - **AmaAWSzon Route 53** – DNS management and domain hosting
+  - **AWS Route 53** – DNS management and domain hosting
 
 - **Architecture Diagram**
 
@@ -116,7 +116,7 @@ flowchart LR
     U[User] -->|Form Submission| AGW["API Gateway"]
     AGW --> L["Lambda"]
     L --> SES["SES"]
-    U <-->|Success / Error Response| AGW
+    U <--|Success / Error Response| AGW
 
     %% Simple note without styling
     L -.-> N["⚠️ Timeout issue: Default 3s too short, increased to 10s"]
