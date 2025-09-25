@@ -76,16 +76,23 @@ The contact form has two layers of validation: frontend and backend.
 - **Data Transmission**: The form data is sent to the backend through AWS API Gateway using axios with the POST method. Axios simplifies request handling, while POST securely transmits the data in the request body
 - **Loading & Feedback**: While sending, a loading overlay prevents further interaction and a spinner is displayed. On success, the form resets and a success message appears for 4 seconds
 - **Error Handling**:
-  - 400 – form validation failed on the backend (e.g., missing required fields).
-  - 403 – reCAPTCHA verification failed (forbidden).
-  - 404 – resource not found (e.g., wrong API endpoint).
-  - 500+ – internal server error (e.g., unhandled exception or server failure).
+  - 400 – form validation failed on the backend (e.g., missing required fields)
+  - 403 – reCAPTCHA verification failed (forbidden)
+  - 404 – resource not found (e.g., wrong API endpoint)
+  - 500+ – internal server error (e.g., unhandled exception or server failure)
 
-### General
+## Troubleshooting
 
-- **Responsive Design**: The website is fully responsive and works on all devices.
-- **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms.
-- **Webpack Configuration**: The project uses Webpack for bundling.
+### Lambda Timeout
+
+- **Default timeout:** 3s
+- **Problem:** too short for function (reCAPTCHA + SES)
+- **Impact:**
+  - Lambda terminated before returning response to API Gateway
+  - API Gateway returned an error to the client
+  - In some cases SES still managed to send the email → inconsistent UX
+- **Solution:** increased timeout to **10s**
+- **Prevention:** set up **CloudWatch Alarm** on Lambda duration metric to notify by email if execution time approaches the limit
 
 ## Technology Stack
 
@@ -110,7 +117,18 @@ flowchart LR
     AGW --> L["AWS Lambda (Node.js)"]
     L --> SES["Amazon SES"]
     U <-->|Success / Error Response| AGW
+
+    note["⚠️ Timeout issue:<br/>Default 3s too short<br/>Increased to 10s"]:::issue
+    L -.-> note
+
+    classDef issue fill=#fff3cd,stroke=#ff9800,stroke-width=2px,color=#000;
 ```
+
+### General
+
+- **Responsive Design**: The website is fully responsive and works on all devices
+- **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms
+- **Webpack Configuration**: The project uses Webpack for bundling
 
 ## Installation
 
