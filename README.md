@@ -105,17 +105,17 @@ The contact form has two layers of validation: frontend and backend.
 - **Backend & Infrastructure**
 
   - **AWS Lambda (Node.js)** – serverless backend handling contact form submissions
-  - **Amazon API Gateway** – API entry point for `POST` requests from the frontend
-  - **Amazon SES** – sending emails with the submitted form data
-  - **Amazon Route 53** – DNS management and domain hosting
+  - **AWS API Gateway** – API entry point for `POST` requests from the frontend
+  - **AWS SES** – sending emails with the submitted form data
+  - **AmaAWSzon Route 53** – DNS management and domain hosting
 
 - **Architecture Diagram**
 
 ```mermaid
 flowchart LR
-    U[User] -->|Form Submission| AGW["AWS API Gateway"]
-    AGW --> L["AWS Lambda (Node.js)"]
-    L --> SES["AWS SES"]
+    U[User] -->|Form Submission| AGW["API Gateway"]
+    AGW --> L["Lambda"]
+    L --> SES["SES"]
     U <-->|Success / Error Response| AGW
 
     %% Simple note without styling
