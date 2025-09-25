@@ -53,9 +53,9 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 
 #### Input Animations
 
-- Floating Labels: Labels are styled as placeholders inside input fields.
-- Focus Animation: On focus, the label moves above the field and a bottom underline slides in from the left.
-- Blur Behavior: If the input is empty on blur, the label and underline revert; filled inputs keep the label above. All animations are handled purely with CSS
+- **Floating Labels**: Labels are styled as placeholders inside input fields.
+- **Focus Animation**: On focus, the label moves above the field and a bottom underline slides in from the left.
+- **Blur Behavior**: If the input is empty on blur, the label and underline revert; filled inputs keep the label above. All animations are handled purely with CSS
 
 #### Form Validation Flow
 
@@ -130,8 +130,8 @@ flowchart LR
 
 ## Project Structure
 
-This project is organized as a monorepo using npm workspaces.
-The root package.json defines two workspaces: frontend and backend. Each has its own package.json for dependency management, while all packages are installed centrally in the root node_modules. This avoids duplication and lets frontend and backend share common libraries.
+This project is organized as a monorepo using `npm workspaces`.
+The root `package.json` defines two workspaces: frontend and backend. Each has its own `package.json` for dependency management, while all packages are installed centrally in the root `node_modules`. This avoids duplication and lets frontend and backend share common libraries.
 
 Reasons I choose monorepo:
 
