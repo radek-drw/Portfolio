@@ -40,6 +40,6 @@
 ```
 
 - **Fields explanation**
-  - score: ranges from 0.0 (likely bot) to 1.0 (likely human)
-  - action: should match the action you defined in execute()
-  - success: indicates whether the token was valid
+  - **score**: ranges from 0.0 (likely bot) to 1.0 (likely human)
+  - **action**: should match the action you defined in execute()
+  - **success**: indicates whether the token was valid
