@@ -118,10 +118,8 @@ flowchart LR
     L --> SES["Amazon SES"]
     U <-->|Success / Error Response| AGW
 
-    note["⚠️ Timeout issue:<br/>Default 3s too short<br/>Increased to 10s"]:::issue
-    L -.-> note
-
-    classDef issue fill=#fff3cd,stroke=#ff9800,stroke-width=2px,color=#000;
+    %% Simple note without styling
+    L -.-> N["⚠️ Timeout issue: Default 3s too short, increased to 10s"]
 ```
 
 ### General
