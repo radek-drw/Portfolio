@@ -106,9 +106,9 @@ The contact form has two layers of validation: frontend and backend.
 
 ```mermaid
 flowchart LR
-    U[User] -->|Form Submission| AGW[Amazon API Gateway]
-    AGW --> L[AWS Lambda (Node.js)]
-    L --> SES[Amazon SES]
+    U[User] -->|Form Submission| AGW["Amazon API Gateway"]
+    AGW --> L["AWS Lambda (Node.js)"]
+    L --> SES["Amazon SES"]
     U <-->|Success / Error Response| AGW
 ```
 
