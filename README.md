@@ -71,15 +71,10 @@ The contact form has two layers of validation: frontend and backend.
 
 #### Form Submission
 
-- **Spam Protection:**: The contact form uses Google reCAPTCHA v3 to block spam and bots. Tokens are generated on the frontend and verified in an AWS Lambda function, with the secret key securely stored in Lambda environment variables.
-- **Email Submission**: When all fields are filled, the form submission is sent to the website owner's email address using PHP and PHPMailer with Composer.
-- **SMTP Integration**: All sensitive data in the PHP file is storred in a `config.php` file.
-- **Server-Side Validation**: The form undergoes server-side validation to ensure all fields are correctly filled, mirroring client-side validation.
-- **Error Handling**: Users receive toast messages for server errors or internet connection issues.
-<!-- below ok -->
-- **Loading & Feedback**: While sending, a loading overlay prevents further interaction and a spinner is displayed. On success, the form resets and a success message appears for 4 seconds.
+- **Pre-check**: Before validation or submission, the internet connection is verified (`navigator.onLine`) to prevent sending the form without access
+- **Spam Protection:**: The contact form uses Google reCAPTCHA v3 to block spam and bots. Tokens are generated on the frontend and verified in an AWS Lambda function, with the secret key securely stored in Lambda
 - **Data Transmission**: The form data is sent to the backend through AWS API Gateway using axios with the POST method. Axios simplifies request handling, while POST securely transmits the data in the request body
-- **Pre-check**: Before validation or submission, the internet connection is verified (`navigator.onLine`) to prevent sending the form without access.
+- **Loading & Feedback**: While sending, a loading overlay prevents further interaction and a spinner is displayed. On success, the form resets and a success message appears for 4 seconds
 - **Error Handling**:
   - 400 – form validation failed on the backend (e.g., missing required fields).
   - 403 – reCAPTCHA verification failed (forbidden).
@@ -94,9 +89,28 @@ The contact form has two layers of validation: frontend and backend.
 
 ## Technology Stack
 
-- **Frontend**: HTML, CSS, SASS, JavaScript, jQuery
-- **Backend**: PHP, PHPMailer, Composer
-- **Build Tool**: Webpack
+- **Frontend**
+
+  - **HTML5, CSS3, SASS** – structure, styling, and CSS preprocessing
+  - **JavaScript (ES6+) & jQuery** – client-side logic, form validation, and event handling
+  - **Webpack** – bundling and optimization of frontend assets
+
+- **Backend & Infrastructure**
+
+  - **AWS Lambda (Node.js)** – serverless backend handling contact form submissions
+  - **Amazon API Gateway** – API entry point for `POST` requests from the frontend
+  - **Amazon SES** – sending emails with the submitted form data
+  - **Amazon Route 53** – DNS management and domain hosting
+
+- **Architecture Diagram**
+
+```mermaid
+flowchart LR
+    U[User] -->|Form Submission| AGW[Amazon API Gateway]
+    AGW --> L[AWS Lambda (Node.js)]
+    L --> SES[Amazon SES]
+    U <-->|Success / Error Response| AGW
+```
 
 ## Installation
 
@@ -112,6 +126,8 @@ The contact form has two layers of validation: frontend and backend.
    git clone https://github.com/radek-drw/Portfolio.git
    cd radek-drweski-portfolio
    ```
+
+````
 
 2. **Install dependencies**:
 
@@ -155,3 +171,4 @@ This project is open source and available under the MIT License.
 If you have any questions or feedback, feel free to contact me at [rdrweski@gmail.com].
 
 Thank you for visiting my portfolio website!
+````
