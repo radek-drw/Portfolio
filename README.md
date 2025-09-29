@@ -1,28 +1,41 @@
 # Personal Portfolio Website
 
-Welcome to my personal portfolio website. This website is designed to showcase my skills, projects, and provide a way to contact me. Below you'll find a detailed description of the website's features and how to set it up on your local machine.
+This website showcases my skills, projects, and provides a way to contact me
 
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Live Demo](#live-demo)
 - [Features](#features)
+  - [General Features](#general-features)
   - [Navigation](#navigation)
   - [Header](#header)
   - [Skills Section](#skills-section)
   - [Projects Section](#projects-section)
   - [Contact Section](#contact-section)
+- [Troubleshooting](#troubleshooting)
 - [Technology Stack](#technology-stack)
-- [Installation](#installation)
+- [Development Setup & Workflow](#development-setup--workflow)
+  - [Project Structure](#project-structure)
+  - [Git Workflow](#git-workflow)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Project Overview
 
 ![Portfolio Website Screenshot](./frontend/src/assets/images/page_screenshot.jpg)
 
+## Live Demo
+
+Check out the live website here: [Portfolio Website](https://radek-drweski.com/)
+
 ## Features
+
+### General Features
+
+- **Responsive Design** – website works seamlessly on all devices
+- **SEO and Social Media Meta Tags** – better visibility on search engines and social media
+- **Custom Webpack Configuration** – optimized bundling and performance
 
 ### Navigation
 
@@ -122,24 +135,12 @@ flowchart LR
     L -.-> N["⚠️ Timeout issue: Default 3s too short, increased to 10s"]
 ```
 
-### General
-
-- **Responsive Design**: The website is fully responsive and works on all devices
-- **SEO and Social Media Meta Tags**: The website includes SEO enhancements and meta tags for better visibility on search engines and social media platforms
-- **Webpack Configuration**: The project uses Webpack for bundling
-
 ## Development Setup & Workflow
 
 ### Project Structure
 
-This project is organized as a monorepo using `npm workspaces`. The root `package.json` defines two workspaces: frontend and backend. Each has its own `package.json` for dependency management, while all packages are installed centrally in the root `node_modules`. This avoids duplication and lets frontend and backend share common libraries.
-
-Reasons I choose monorepo:
-
-- Maintain a clean and scalable project structure
-- Ensures a single source of dependencies in the root
-- Allows shared tooling/configs across frontend and backend
-- Simplifies repository and CI/CD management
+The project is organized as a monorepo using `npm workspaces`.  
+This keeps frontend and backend in one repository, simplifies dependency management, and allows sharing common tooling and configs.
 
 ### Git Workflow
 
@@ -151,55 +152,17 @@ This project uses two main branches:
 - **main** – connected to AWS Amplify. Every push to main triggers an automatic build and deployment, which can generate costs  
   To avoid unnecessary builds, only stable or significant changes are merged from dev into main
 
-## Installation
-
-### Prerequisites
-
-- Ensure you have Node.js, npm, PHP, and Composer installed on your machine.
-
-### Steps
-
-1. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/radek-drw/Portfolio.git
-   cd radek-drweski-portfolio
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   npm install
-   composer install
-   ```
-
-3. **Start the Development Server**:
-
-   ```bash
-   npm start
-   ```
-
-   This will start the development server and open the website in your default browser.
-
-4. **Build for Production**:
-
-   ```bash
-   npm run build
-   ```
-
-This will create an optimized production build in the dist folder.
-
 ## Usage
 
-- Navigation: Use the top navigation bar to jump to different sections of the website.
-- Skills and Projects: Click on the dots in the skills and projects sections to navigate through different items.
-- Contact Form: Fill in the contact form to get in touch with me. Ensure all fields are filled correctly before submitting.
+- **Navigation:** Use the top navigation bar to jump to different sections of the website
+- **Skills & Projects:** Click on the dots to navigate through skills and project items
+- **Contact Form:** Fill out the form to get in touch. Make sure all required fields are completed before submitting
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, feel free to reach out:
+Feel free to reach out:
 
 - **Email:** [rdrweski@gmail.com](mailto:rdrweski@gmail.com)
-- **LinkedIn:** [linkedin.com/in/rdrweski](www.linkedin.com/in/radek-drweski)
+- **LinkedIn:** [linkedin.com/in/rdrweski](https://www.linkedin.com/in/radek-drweski/)
 
-Thank you for visiting my portfolio website!
+Thanks for visiting my portfolio!
