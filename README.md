@@ -45,7 +45,7 @@ Welcome to my personal portfolio website. This website is designed to showcase m
 - **Skills Slider Functionality**:
   - The skills section automatically cycles through groups of four skills every 4 seconds using `setInterval`. A progress bar with dots and connecting lines is generated dynamically—each dot represents one set of skills. Clicking on a dot resets the timer, highlights the selected dot, and displays the corresponding skills group, ensuring the animation continues smoothly from that point.
 
-### Recent Works Section
+### Projects Section
 
 - **Project Display**: Presents a list of my projects. Each project includes a screenshot, a short description, a list of the technologies used, and buttons linking to the source code and live demo.
 
@@ -166,8 +166,6 @@ This project uses two main branches:
    cd radek-drweski-portfolio
    ```
 
-````
-
 2. **Install dependencies**:
 
    ```bash
@@ -197,17 +195,11 @@ This will create an optimized production build in the dist folder.
 - Skills and Projects: Click on the dots in the skills and projects sections to navigate through different items.
 - Contact Form: Fill in the contact form to get in touch with me. Ensure all fields are filled correctly before submitting.
 
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
-
-## License
-
-This project is open source and available under the MIT License.
-
 ## Contact
 
-If you have any questions or feedback, feel free to contact me at [rdrweski@gmail.com].
+If you have any questions, suggestions, or feedback, feel free to reach out:
+
+- **Email:** [rdrweski@gmail.com](mailto:rdrweski@gmail.com)
+- **LinkedIn:** [linkedin.com/in/rdrweski](www.linkedin.com/in/radek-drweski)
 
 Thank you for visiting my portfolio website!
-````
