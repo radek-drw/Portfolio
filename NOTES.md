@@ -9,7 +9,8 @@
 
 ## Cache DOM elements
 
-Instead of calling `document.getElementById` or `querySelector` multiple times
-during validation and error handling, I now cache all DOM elements once inside
-`DOMContentLoaded`. This improves performance (fewer DOM lookups), reduces
-repeated code, and makes the script easier to maintain
+All required form elements are selected and stored in variables once on DOMContentLoaded. This approach:
+
+- avoids repeated calls to `document.getElementById` / `querySelector` during validation and error handling
+- improves performance by reducing DOM lookups
+- keeps the code shorter, cleaner, and easier to maintain
