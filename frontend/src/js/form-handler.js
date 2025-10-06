@@ -137,8 +137,12 @@ function handleErrorResponse(elements, status) {
 }
 
 function handleNetworkError(elements, error) {
-  console.error("Error:", error);
-  showErrorToast(elements, ERROR_MESSAGES.UNEXPECTED_ERROR);
+  if (!error.response) {
+    // no response = no internet connection or network issue
+    showErrorToast(elements, ERROR_MESSAGES.NO_INTERNET);
+  } else {
+    showErrorToast(elements, ERROR_MESSAGES.SERVER_ERROR);
+  }
 }
 
 // EVENT LISTENER
@@ -170,11 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
   elements.form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    if (!navigator.onLine) {
-      showErrorToast(elements, ERROR_MESSAGES.NO_INTERNET);
-      return;
-    }
-
     if (validateForm(elements)) {
       toggleLoading(elements, true);
 
@@ -203,10 +202,13 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         const data = error.response?.data;
 
+        // Backend validation errors (e.g. invalid input)
         if (error.response?.status === 400 && !data.success) {
           showBackendValidationErrors(elements, data.errors);
+          // Forbidden or reCAPTCHA-related errors
         } else if (error.response?.status === 403 && !data.success) {
           showErrorToast(elements, data.message);
+          // Network or unexpected errors
         } else {
           handleNetworkError(elements, error);
         }
