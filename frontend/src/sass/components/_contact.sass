@@ -100,10 +100,12 @@
         text-align: left
         left: 0
         transform: translateY(0)
+        z-index: -2
       p
         display: none
         font-size: 1.6rem
         color: #ff0000
+
       h2
         display: none
         font-size: 1.6rem
@@ -127,8 +129,10 @@
         margin-left: 10px
 
     &-char-count
+      position: absolute
+      right: 0
+      margin-top: 4px
       font-size: 1.6rem
       color: #666
-      margin-top: 4px
-      right: 0
-      position: absolute
+      @include mq.mobile
+        margin-top: -35px
