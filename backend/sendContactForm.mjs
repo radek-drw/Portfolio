@@ -1,6 +1,6 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 
-const sesClient = new SESClient({ region: "eu-west-1" });
+const sesClient = new SESClient({ region: 'eu-west-1' });
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -9,17 +9,17 @@ function validateInput({ name, email, message }) {
   const errors = {};
 
   // Normalize values: ensure strings, replace null/undefined with "", then trim whitespace
-  const safeName = String(name ?? "").trim();
-  const safeEmail = String(email ?? "").trim();
-  const safeMessage = String(message ?? "").trim();
+  const safeName = String(name ?? '').trim();
+  const safeEmail = String(email ?? '').trim();
+  const safeMessage = String(message ?? '').trim();
 
-  if (!safeName) errors.name = "REQUIRED";
-  else if (safeName.length > 50) errors.name = "TOO_LONG";
-  if (!safeEmail) errors.email = "REQUIRED";
-  else if (safeEmail.length > 254) errors.email = "TOO_LONG";
-  else if (!emailPattern.test(safeEmail)) errors.email = "INVALID";
-  if (!safeMessage) errors.message = "REQUIRED";
-  else if (safeMessage.length > 2000) errors.message = "TOO_LONG";
+  if (!safeName) errors.name = 'REQUIRED';
+  else if (safeName.length > 50) errors.name = 'TOO_LONG';
+  if (!safeEmail) errors.email = 'REQUIRED';
+  else if (safeEmail.length > 254) errors.email = 'TOO_LONG';
+  else if (!emailPattern.test(safeEmail)) errors.email = 'INVALID';
+  if (!safeMessage) errors.message = 'REQUIRED';
+  else if (safeMessage.length > 2000) errors.message = 'TOO_LONG';
 
   return errors;
 }
@@ -30,14 +30,11 @@ export const handler = async (event) => {
     const { name, email, message, recaptchaToken } = body;
 
     // 1. Verify reCAPTCHA token
-    const verifyResponse = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}`,
-      }
-    );
+    const verifyResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}`,
+    });
 
     const recaptchaData = await verifyResponse.json();
 
@@ -46,7 +43,7 @@ export const handler = async (event) => {
         statusCode: 403,
         body: JSON.stringify({
           success: false,
-          message: "reCAPTCHA verification failed",
+          message: 'reCAPTCHA verification failed',
         }),
       };
     }
@@ -64,7 +61,7 @@ export const handler = async (event) => {
     }
 
     const fromAddress = process.env.SES_FROM_ADDRESS;
-    const toAddress = "rdrweski@gmail.com";
+    const toAddress = 'rdrweski@gmail.com';
 
     const htmlBody = `
       <p><strong>Name:</strong> ${name}</p>
@@ -78,7 +75,7 @@ export const handler = async (event) => {
       },
       Message: {
         Subject: {
-          Data: "New message from Contact Form",
+          Data: 'New message from Contact Form',
         },
         Body: { Html: { Data: htmlBody } },
       },
@@ -93,16 +90,16 @@ export const handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({
         success: true,
-        message: "Email sent successfully",
+        message: 'Email sent successfully',
       }),
     };
   } catch (err) {
-    console.error("SES Error:", err.name, err.message);
+    console.error('SES Error:', err.name, err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
         success: false,
-        message: "Failed to send email",
+        message: 'Failed to send email',
       }),
     };
   }

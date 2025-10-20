@@ -1,13 +1,13 @@
-import $ from "jquery";
+import $ from 'jquery';
 
-document.addEventListener("DOMContentLoaded", function () {
-  const nav = $(".navbar");
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = $('.navbar');
 
-  const line = $("<div />").addClass("navbar--line");
+  const line = $('<div />').addClass('navbar--line');
 
   line.appendTo(nav);
 
-  const active = nav.find(".navbar__main-nav-item--active");
+  const active = nav.find('.navbar__main-nav-item--active');
   let pos = 0;
   let wid = 0;
 
@@ -21,20 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  nav.on("click", ".navbar__main-nav-item a", function (e) {
+  nav.on('click', '.navbar__main-nav-item a', function (e) {
     e.preventDefault();
     // Check if the clicked item is not already active and animation is not in progress
-    if (
-      !$(this).parent().hasClass("navbar__main-nav-item--active") &&
-      !nav.hasClass("animate")
-    ) {
-      nav.addClass("animate");
+    if (!$(this).parent().hasClass('navbar__main-nav-item--active') && !nav.hasClass('animate')) {
+      nav.addClass('animate');
 
       const _this = $(this);
 
-      nav
-        .find(".navbar__main-nav-item")
-        .removeClass("navbar__main-nav-item--active");
+      nav.find('.navbar__main-nav-item').removeClass('navbar__main-nav-item--active');
 
       const position = _this.parent().position();
       const width = _this.parent().width();
@@ -54,10 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               150,
               function () {
-                nav.removeClass("animate");
+                nav.removeClass('animate');
               }
             );
-            _this.parent().addClass("navbar__main-nav-item--active");
+            _this.parent().addClass('navbar__main-nav-item--active');
           }
         );
       } else {
@@ -74,10 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               150,
               function () {
-                nav.removeClass("animate");
+                nav.removeClass('animate');
               }
             );
-            _this.parent().addClass("navbar__main-nav-item--active");
+            _this.parent().addClass('navbar__main-nav-item--active');
           }
         );
       }
