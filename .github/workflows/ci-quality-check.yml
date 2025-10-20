@@ -23,12 +23,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
       - name: Install dependencies (root & frontend)
         run: npm install --include-workspace-root --workspace=frontend --ignore-scripts
 
