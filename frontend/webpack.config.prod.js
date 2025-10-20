@@ -1,18 +1,19 @@
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import path from 'path';
 
-module.exports = {
+import TerserPlugin from 'terser-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+export default {
   mode: 'production',
   entry: {
     main: './src/index.js',
   },
   output: {
     filename: '[name]-[contenthash:4].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
   },
   module: {
     rules: [

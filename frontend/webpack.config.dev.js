@@ -1,15 +1,16 @@
-const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
 
-module.exports = {
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+export default {
   mode: 'development',
   entry: {
     main: './src/index.js',
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
     publicPath: '/',
   },
   module: {
@@ -35,17 +36,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-  ],
+  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin({ template: './src/index.html' })],
   devServer: {
     open: true,
-    static: {
-      directory: path.join(__dirname, 'src'),
-    },
+    static: { directory: path.join('src') },
     compress: true,
     port: 9000,
   },
