@@ -4,9 +4,11 @@ applications:
       phases:
         preBuild:
           commands:
-            - HUSKY=0 npm ci --cache .npm --prefer-offline
+            - npm ci --cache .npm --prefer-offline
             - echo "===== Installed packages ====="
             - npm ls --depth=0
+            - echo "===== Package.json dependencies ====="
+            - cat package.json | grep -A 20 '"dependencies"'
         build:
           commands:
             - npm run build
