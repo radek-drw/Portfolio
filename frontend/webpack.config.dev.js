@@ -1,35 +1,35 @@
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    main: "./src/index.js",
+    main: './src/index.js',
   },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(sass|scss)$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
-            plugins: ["@babel/plugin-proposal-class-properties"],
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
@@ -38,13 +38,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
   ],
   devServer: {
     open: true,
     static: {
-      directory: path.join(__dirname, "src"),
+      directory: path.join(__dirname, 'src'),
     },
     compress: true,
     port: 9000,

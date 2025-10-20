@@ -14,7 +14,7 @@
   When the user clicks the "Submit" button, the following function is triggered:
 
   ```javascript
-  const token = await grecaptcha.execute("SITE_KEY", { action: "submit" });
+  const token = await grecaptcha.execute('SITE_KEY', { action: 'submit' });
   ```
 
   This sends collected behavioral data to Google, which returns a token — a secure, encrypted string summarizing the session

@@ -1,12 +1,12 @@
-const particleColor = "#12f7d6";
+const particleColor = '#12f7d6';
 const particleSize = 4;
 const particlesGap = 20;
 const mouseRadius = 3000;
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-const animation = document.querySelector(".about__animation");
+const animation = document.querySelector('.about__animation');
 
 canvas.width = animation.offsetWidth * window.devicePixelRatio;
 canvas.height = animation.offsetHeight * window.devicePixelRatio;
@@ -74,13 +74,13 @@ class Effect {
       y: 0,
     };
 
-    animation.addEventListener("mousemove", (e) => {
+    animation.addEventListener('mousemove', (e) => {
       const rect = e.target.getBoundingClientRect();
       this.mouse.x = (e.clientX - rect.left) * window.devicePixelRatio;
       this.mouse.y = (e.clientY - rect.top) * window.devicePixelRatio;
     });
 
-    animation.addEventListener("resize", () => {
+    animation.addEventListener('resize', () => {
       canvas.width = animation.innerWidth * window.devicePixelRatio;
       canvas.height = animation.innerHeight * window.devicePixelRatio;
       this.width = canvas.width;
