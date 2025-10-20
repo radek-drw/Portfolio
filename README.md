@@ -110,13 +110,11 @@ The contact form has two layers of validation: frontend and backend.
 ## Technology Stack
 
 - **Frontend**
-
   - **HTML5, CSS3, SASS** – structure, styling, and CSS preprocessing
   - **JavaScript (ES6+) & jQuery** – client-side logic, form validation, and event handling
   - **Webpack** – bundling and optimization of frontend assets
 
 - **Backend & Infrastructure**
-
   - **AWS Lambda (Node.js)** – serverless backend handling contact form submissions
   - **AWS API Gateway** – API entry point for `POST` requests from the frontend
   - **AWS SES** – sending emails with the submitted form data
