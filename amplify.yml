@@ -3,8 +3,10 @@ applications:
     frontend:
       phases:
         preBuild:
+          env:
+            CI: true
           commands:
-            - HUSKY=0 npm ci --workspace=frontend --cache .npm --prefer-offline
+            - npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
           commands:
             - npm run build
