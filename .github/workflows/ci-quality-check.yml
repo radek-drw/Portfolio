@@ -28,6 +28,21 @@ jobs:
         env:
           HUSKY: 0
 
+      - name: Check installed dependencies in root
+        run: npm list --depth=0
+
+      - name: Verify only root & frontend workspaces installed
+        run: |
+          echo "Checking installed workspaces:"
+          npm ls --workspaces --depth=0 || true
+          echo "\nVerifying backend workspace is NOT installed:"
+          if npm ls --workspace=backend --depth=0 2>/dev/null; then
+            echo "❌ Backend workspace was installed (should not happen)"
+            exit 1
+          else
+            echo "✅ Backend workspace correctly NOT installed"
+          fi
+
       - name: Run ESLint
         run: npm run lint --if-present
 
