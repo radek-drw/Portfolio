@@ -4,7 +4,7 @@ applications:
       phases:
         preBuild:
           commands:
-            - npm ci --cache .npm --prefer-offline
+            - npm ci --workspace=frontend --cache .npm --prefer-offline
             - echo "=== Zainstalowane paczki w root (dla diagnostyki) ==="
             - cd .. && npm ls --depth=0 || true
             - cd frontend
