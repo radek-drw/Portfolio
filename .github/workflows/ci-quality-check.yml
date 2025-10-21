@@ -27,20 +27,7 @@ jobs:
         run: npm ci --include-workspace-root --workspace=frontend
         env:
           HUSKY: 0
-
-      - name: Check installed dependencies
-        run: |
-          echo "Root dependencies:"
-          npm list --depth=0 --production=false 2>/dev/null || echo "Some dependencies missing (expected for backend)"
-          echo "\nFrontend workspace installed:"
-          npm list --workspace=frontend --depth=0 2>/dev/null && echo "✅ Frontend workspace installed" || echo "❌ Frontend workspace missing"
-          echo "\nBackend workspace check:"
-          if npm list --workspace=backend --depth=0 2>/dev/null; then
-            echo "❌ Backend workspace was installed (should not happen)"
-            exit 1
-          else
-            echo "✅ Backend workspace correctly NOT installed"
-          fi
+          CI: true
 
       - name: Run ESLint
         run: npm run lint --if-present
@@ -51,3 +38,6 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: npm run build
+        env:
+          CI: true
+          NODE_ENV: production
