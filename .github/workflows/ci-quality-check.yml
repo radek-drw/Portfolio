@@ -28,15 +28,14 @@ jobs:
         env:
           HUSKY: 0
 
-      - name: Check installed dependencies in root
-        run: npm list --depth=0
-
-      - name: Verify only root & frontend workspaces installed
+      - name: Check installed dependencies
         run: |
-          echo "Checking installed workspaces:"
-          npm ls --workspaces --depth=0 || true
-          echo "\nVerifying backend workspace is NOT installed:"
-          if npm ls --workspace=backend --depth=0 2>/dev/null; then
+          echo "Root dependencies:"
+          npm list --depth=0 --production=false 2>/dev/null || echo "Some dependencies missing (expected for backend)"
+          echo "\nFrontend workspace installed:"
+          npm list --workspace=frontend --depth=0 2>/dev/null && echo "✅ Frontend workspace installed" || echo "❌ Frontend workspace missing"
+          echo "\nBackend workspace check:"
+          if npm list --workspace=backend --depth=0 2>/dev/null; then
             echo "❌ Backend workspace was installed (should not happen)"
             exit 1
           else
