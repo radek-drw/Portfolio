@@ -3,9 +3,8 @@ applications:
     frontend:
       phases:
         preBuild:
-          env:
-            CI: true
           commands:
+            - npm set-script prepare "" # Disable prepare script to avoid husky install during ci
             - npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
           commands:
