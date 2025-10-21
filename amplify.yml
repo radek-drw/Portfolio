@@ -4,13 +4,12 @@ applications:
       phases:
         preBuild:
           commands:
-            - npm ci --workspace=frontend --cache .npm --prefer-offline
-            - echo "=== Zainstalowane paczki w root (dla diagnostyki) ==="
-            - cd .. && npm ls --depth=0 || true
-            - cd frontend
+            - CI=true npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
           commands:
             - npm run build
+          env:
+            CI: true
       artifacts:
         baseDirectory: dist
         files:
