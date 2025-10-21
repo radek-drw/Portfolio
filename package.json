@@ -17,7 +17,8 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,mjs}": [
