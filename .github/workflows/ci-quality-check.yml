@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies (root & frontend)
         run: npm ci --include-workspace-root --workspace=frontend
         env:
-          HUSKY: 0
+          # CI=true disables husky hooks during install
           CI: true
 
       - name: Run ESLint
