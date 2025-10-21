@@ -24,7 +24,9 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies (root & frontend)
-        run: npm install --include-workspace-root --workspace=frontend --ignore-scripts
+        run: npm ci --include-workspace-root --workspace=frontend
+        env:
+          HUSKY: 0
 
       - name: Run ESLint
         run: npm run lint --if-present
