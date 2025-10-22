@@ -4,6 +4,7 @@ applications:
       phases:
         preBuild:
           commands:
+            - cd ..
             - npm pkg delete scripts.prepare
             - npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
