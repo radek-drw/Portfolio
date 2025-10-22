@@ -1,11 +1,10 @@
 applications:
   - appRoot: frontend
-    env:
-      HUSKY: 0
     frontend:
       phases:
         preBuild:
           commands:
+            - npm pkg delete scripts.prepare
             - npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
           commands:
