@@ -9,6 +9,7 @@ applications:
             - npm ci --workspace=frontend --cache .npm --prefer-offline
         build:
           commands:
+            - cd frontend
             - npm run build
           env:
             CI: true
