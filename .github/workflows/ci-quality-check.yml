@@ -1,4 +1,4 @@
-name: CI Quality Check (main)
+name: CI Quality Check
 
 on:
   pull_request:
