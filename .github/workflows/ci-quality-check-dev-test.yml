@@ -1,17 +1,16 @@
-name: CI Quality Check
+name: CI Quality Check (dev test)
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
-    types: [opened, synchronize, reopened]
+      - dev
 
 permissions:
   contents: read
-  pull-requests: read
 
 jobs:
   quality-check:
+    if: contains(github.event.head_commit.message, '[test]')
     runs-on: ubuntu-latest
 
     steps:
