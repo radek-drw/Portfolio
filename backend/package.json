@@ -14,5 +14,8 @@
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-ses": "^3.879.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.11"
   }
 }
