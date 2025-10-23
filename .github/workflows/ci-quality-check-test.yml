@@ -1,4 +1,4 @@
-name: CI Quality Check (dev test)
+name: CI Quality Check (test)
 
 on:
   push:
