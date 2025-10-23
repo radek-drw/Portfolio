@@ -1,4 +1,4 @@
-import { handler } from './sendContactForm.mjs';
+import { handler } from './sendContactForm.js';
 
 const event = {
   body: JSON.stringify({
