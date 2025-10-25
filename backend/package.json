@@ -4,6 +4,7 @@
   "description": "Backend application (Node.js/AWS-SDK)",
   "main": "server.js",
   "scripts": {
+    "build:lambda": "node esbuild.config.js",
     "start": "node server.js",
     "test:sendContactForm": "node test-sendContactForm",
     "deploy:sendContactForm": "powershell Compress-Archive -Path sendContactForm.mjs -DestinationPath sendContactForm.zip; aws lambda update-function-code --function-name send-contact-form --zip-file fileb://sendContactForm.zip --no-cli-pager; Remove-Item -Path ./sendContactForm.zip"
@@ -16,6 +17,7 @@
     "@aws-sdk/client-ses": "^3.879.0"
   },
   "devDependencies": {
+    "archiver": "^7.0.1",
     "esbuild": "^0.25.11"
   }
 }
