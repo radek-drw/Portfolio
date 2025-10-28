@@ -6,7 +6,7 @@
   "scripts": {
     "build:lambda": "node scripts/build-lambda.js",
     "start": "node server.js",
-    "test:sendContactForm": "node test-sendContactForm",
+    "test:sendContactForm": "node ./scripts/run-sendContactForm.js",
     "deploy:sendContactForm": "powershell Compress-Archive -Path sendContactForm.mjs -DestinationPath sendContactForm.zip; aws lambda update-function-code --function-name send-contact-form --zip-file fileb://sendContactForm.zip --no-cli-pager; Remove-Item -Path ./sendContactForm.zip"
   },
   "keywords": [],
