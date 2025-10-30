@@ -1,16 +1,34 @@
+# === Node / JS ===
 node_modules/
 dist/
 build/
 coverage/
-.DS_Store
 *.log
+
+# === Env / Secrets ===
 .env
-*.class
-*.pyc
+.env.*
+!.env.example  # (jeśli chcesz zostawić wzór pliku .env w repo)
+
+# === System / IDE ===
+.DS_Store
+Thumbs.db
 .vscode/
 .idea/
 *.tmp
 *.swp
-vendor
+
+# === Miscellaneous ===
+*.class
+*.pyc
+vendor/
 config.php
 .aws-sam/
+
+# === Terraform ===
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfvars.json
+crash.log
