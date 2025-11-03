@@ -14,3 +14,7 @@ All required form elements are selected and stored in variables once on DOMConte
 - avoids repeated calls to `document.getElementById` / `querySelector` during validation and error handling
 - improves performance by reducing DOM lookups
 - keeps the code shorter, cleaner, and easier to maintain
+
+## to do
+
+1. add locks i dynamodb for terraform state and add s3 versioning
