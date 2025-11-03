@@ -10,14 +10,14 @@ resource "aws_iam_role" "lambda_ses_role" {
   name = "lambda-ses-role"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
+        Effect    = "Allow"
         Principal = {
-          Service = "lambda.amazonaws.com"
+            Service   = "lambda.amazonaws.com"
         }
-        Action = "sts:AssumeRole"
+        Action    = "sts:AssumeRole"
       }
     ]
   })
@@ -32,7 +32,7 @@ resource "aws_iam_policy" "lambda_ses_policy" {
   description = "Allows Lambda to send emails using SES and write logs to CloudWatch"
 
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [
       # Allows sending emails via SES
       {
@@ -92,7 +92,18 @@ resource "aws_lambda_function" "send_contact_form" {
 # ============================================
 resource "aws_apigatewayv2_api" "contact_api" {
   name          = "contact-api"
-  protocol_type = "HTTP" # Modern, simpler type of API Gateway (instead of REST)
+  protocol_type = "HTTP"
+
+  cors_configuration {
+    allow_origins = [
+      "http://localhost:9000",  # Local testing
+      "https://radek-drweski.com/" 
+    ]
+    allow_methods = ["OPTIONS", "POST"]
+    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token"]
+    allow_credentials = false
+    max_age = 3600
+  }
 }
 
 # ============================================
@@ -100,9 +111,9 @@ resource "aws_apigatewayv2_api" "contact_api" {
 # ============================================
 resource "aws_apigatewayv2_integration" "lambda_integration" {
   api_id                 = aws_apigatewayv2_api.contact_api.id
-  integration_type       = "AWS_PROXY" # Sends the entire request directly to Lambda
+  integration_type       = "AWS_PROXY"
   integration_uri        = aws_lambda_function.send_contact_form.invoke_arn
-  payload_format_version = "2.0" # Required for HTTP API (Lambda proxy integration)
+  payload_format_version = "2.0" 
 }
 
 # ============================================
