@@ -73,7 +73,7 @@ resource "aws_iam_role_policy_attachment" "lambda_ses_attach" {
 resource "aws_lambda_function" "send_contact_form" {
   function_name    = "send-contact-form"
   handler          = "index.handler"
-  runtime          = "nodejs18.x"
+  runtime          = "nodejs20.x"
   timeout          = 10
   role             = aws_iam_role.lambda_ses_role.arn
   filename         = "${path.module}/../dist/sendContactForm.zip"
