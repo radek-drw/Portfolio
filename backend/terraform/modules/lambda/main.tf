@@ -1,3 +1,13 @@
+data "aws_ssm_parameter" "recaptcha_secret" {
+  name            = "recaptcha_secret"
+  with_decryption = true
+}
+
+data "aws_ssm_parameter" "ses_from_address" {
+  name            = "ses_from_address"
+  with_decryption = true
+}
+
 resource "aws_iam_role" "lambda_role" {
   name = "${var.env_name}-lambda-ses-role"
 
@@ -13,7 +23,7 @@ resource "aws_iam_role" "lambda_role" {
 
 resource "aws_iam_policy" "lambda_policy" {
   name = "${var.env_name}-lambda-ses-policy"
-  description = "Allows Lambda to send emails using SES and write logs"
+  description = "Allows Lambda to send emails via SES, write logs to CloudWatch, and read configuration parameters from SSM"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -27,7 +37,15 @@ resource "aws_iam_policy" "lambda_policy" {
         Effect = "Allow"
         Action = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
         Resource = "arn:aws:logs:*:*:*"
-      }
+      },
+      {
+        Effect = "Allow"
+        Action = ["ssm:GetParameter","ssm:GetParameters"]
+        Resource = [
+          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/recaptcha_secret",
+          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/ses_from_address"
+        ]
+      } 
     ]
   })
 }
@@ -47,9 +65,9 @@ resource "aws_lambda_function" "contact_form" {
   source_code_hash = filebase64sha256(var.lambda_zip_path)
 
   environment {
-    variables = {
-      RECAPTCHA_SECRET = var.recaptcha_secret
-      SES_FROM_ADDRESS = var.ses_from_address
-    }
+      variables = {
+        RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
+        SES_FROM_ADDRESS = data.aws_ssm_parameter.ses_from_address.value
+      }
   }
 }
