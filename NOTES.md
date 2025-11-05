@@ -18,3 +18,20 @@ All required form elements are selected and stored in variables once on DOMConte
 ## to do
 
 1. add locks i dynamodb for terraform state and add s3 versioning
+2. **terraform** write documentation about adding, removing, editing, reading secrets in AWS SSM
+
+```bash
+ `aws ssm put-parameter \
+  --name recaptcha_secret \
+  --value some_value \
+  --type SecureString \
+  --description ReCAPTCHA secret key for contact form`
+```
+
+```bash
+ `aws ssm put-parameter \
+ --name ses_from_address \
+ --value some_value \
+ --type SecureString \
+ --description Email address used as 'From' in the contact form`
+```
