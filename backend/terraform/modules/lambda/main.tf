@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 data "aws_ssm_parameter" "recaptcha_secret" {
   name            = "recaptcha_secret"
   with_decryption = true
