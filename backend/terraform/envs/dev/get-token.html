@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Get reCAPTCHA Token (Dev)</title>
+    <script src="https://www.google.com/recaptcha/api.js?render="""></script>
+  </head>
+  <body style="font-family: system-ui, sans-serif; padding: 16px; line-height: 1.5">
+    <h2>🧩 Get reCAPTCHA v3 Token (Dev)</h2>
+
+    <p><strong>How to test your backend with reCAPTCHA:</strong></p>
+    <ol>
+      <li>Make sure <code>localhost</code> is added in your Google reCAPTCHA console.</li>
+      <li>
+        Run a local server in this folder, for example:<br />
+        <code>npx serve . -p 4200</code> or <code>python3 -m http.server 4200</code>
+      </li>
+      <li>Open: <code>http://localhost:4200/get-token.html</code></li>
+      <li>
+        Click <strong>Get Token</strong> below — your reCAPTCHA token will appear and copy
+        automatically.
+      </li>
+      <li>
+        Paste it into Thunder Client (or Postman) request body:
+        <pre><code>{
+  "name": "Radek",
+  "email": "test@example.com",
+  "message": "Hello from dev",
+  "recaptchaToken": "🔑 paste token here"
+}</code></pre>
+      </li>
+    </ol>
+
+    <hr />
+
+    <button id="btn" style="margin-right: 8px">⚙️ Get Token</button>
+    <button id="copyBtn" disabled>📋 Copy Token</button>
+
+    <p>
+      <label>Token:</label><br />
+      <textarea id="out" rows="4" style="width: 100%; margin-top: 8px"></textarea>
+    </p>
+
+    <script>
+      const siteKey = '""';
+      const btn = document.getElementById('btn');
+      const copyBtn = document.getElementById('copyBtn');
+      const out = document.getElementById('out');
+
+      btn.addEventListener('click', async () => {
+        out.value = '...generating token...';
+        try {
+          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+          out.value = token;
+          copyBtn.disabled = false;
+
+          try {
+            await navigator.clipboard.writeText(token);
+            alert('✅ Token copied to clipboard automatically!');
+          } catch {
+            alert('Token generated! Click "Copy Token" or copy manually.');
+          }
+
+          console.log('Token:', token);
+        } catch (err) {
+          out.value = '❌ Error: ' + err.message;
+          console.error(err);
+        }
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(out.value);
+          alert('📋 Token copied to clipboard!');
+        } catch {
+          alert('Clipboard not available. Copy manually.');
+        }
+      });
+    </script>
+  </body>
+</html>
