@@ -8,11 +8,10 @@ const event = {
   }),
 };
 
-handler(event)
-  .then((response) => {
-    console.log('Status:', response.statusCode);
-    console.log('Body:', JSON.parse(response.body));
-  })
-  .catch((error) => {
-    console.error('Error during test:', error);
-  });
+try {
+  const response = await handler(event);
+  console.log('Status:', response.statusCode);
+  console.log('Body:', JSON.parse(response.body));
+} catch (error) {
+  console.error('Error during test:', error);
+}
