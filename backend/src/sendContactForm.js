@@ -32,22 +32,25 @@ export const handler = async (event) => {
     const { name, email, message, recaptchaToken } = body;
 
     // 1. Verify reCAPTCHA token
-    const verifyResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}`,
-    });
+    const bypass = process.env.RECAPTCHA_BYPASS === 'true';
+    if (!bypass) {
+      const verifyResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}`,
+      });
 
-    const recaptchaData = await verifyResponse.json();
+      const recaptchaData = await verifyResponse.json();
 
-    if (!recaptchaData.success || recaptchaData.score < 0.5) {
-      return {
-        statusCode: 403,
-        body: JSON.stringify({
-          success: false,
-          message: 'reCAPTCHA verification failed',
-        }),
-      };
+      if (!recaptchaData.success || recaptchaData.score < 0.5) {
+        return {
+          statusCode: 403,
+          body: JSON.stringify({
+            success: false,
+            message: 'reCAPTCHA verification failed',
+          }),
+        };
+      }
     }
 
     // 2. Validate inputs
