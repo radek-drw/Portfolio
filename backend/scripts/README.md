@@ -1,47 +1,27 @@
-# Local Backend Testing
+## Local Backend Lambda Testing
 
-This document describes local tests for backend Lambda functions. These tests allow to verify logic locally in Node.js without deploying to AWS.
+Local backend testing allows verifying Lambda logic before deployment to AWS. It minimizes AWS costs and time during development.
 
-## Why Local Testing?
+### Advantages:
 
-- ⚡ **Fast:** runs instantly without deployment
-- 💸 **Cost-free:** no AWS usage
-- 🪶 **Easy to debug:** inspect console output or use breakpoints
-- ✅ **Safe:** does not affect live AWS resources
+- **fast:** runs instantly, no deployment needed for every change
+- **easy to debug:** full access to console logs or use breakpoints
 
-> Local tests verify backend logic (validation, email sending, etc.) and skip external integrations like API Gateway, IAM, or real reCAPTCHA. Full integration tests live in terraform/envs/dev
+1. Test of `sendContactForm`
 
----
+**Script** in: `backend/package.json`
 
-## 1. `sendContactForm` Local Test
+```bash
+invoke:sendContactForm
+```
 
-**Script:** `invoke-sendContactForm.local.js`
+**Handler**: `backend/src/sendContactForm.js`
 
-**Purpose:**
+**Purpose**:
 
-- Test Lambda logic for handling contact form submissions
-- Validate inputs, send emails via SES
-- Skip API Gateway, IAM, and real reCAPTCHA
+- tests backend logic only: validation, SES email sending
+- minimal AWS usage: API Gateway and Lambda aren’t invoked; SES is invoked
+- requires valid AWS credentials `(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)` to send emails via SES
+- reCAPTCHA is skipped locally by setting `RECAPTCHA_BYPASS=true` (for testing without Google calls). This variable isn’t set in production — AWS Lambda uses its own environment variables, so the bypass doesn’t apply in the cloud.
 
-**Advantages:**
-
-- ⚡ Fast execution
-- 💸 Cost-free
-- 🪶 Easy to debug
-
----
-
-## 2. `reportProblem` Local Test
-
-**Script:** `invoke-reportProblem.local.js`
-
-**Purpose:**
-
-- [Describe what this Lambda does]
-- [Mention what is tested locally and what is skipped]
-
-**Advantages:**
-
-- ⚡ [Fast]
-- 💸 [Cost-free]
-- 🪶 [Easy to debug]
+> Full integration tests (API Gateway, IAM, reCAPTCHA, Lambda, SES) are described in `backend/terraform/envs/dev`
