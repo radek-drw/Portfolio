@@ -48,14 +48,14 @@
         color: #f5f5f5;
         border: 1px solid #444;
         border-radius: 8px;
-        padding: 10px 18px;
+        padding: 7px 16px;
         cursor: pointer;
         transition: all 0.2s ease;
-        font-size: 15px;
+        font-size: 14px;
       }
 
-      button#copyBtn {
-        min-width: 140px; /* możesz dopasować, np. 140 jeśli chcesz więcej luzu */
+      button#copyTokenBtn {
+        min-width: 110px;
         text-align: center;
       }
 
@@ -66,7 +66,7 @@
 
       button:disabled {
         opacity: 0.5;
-        cursor: not-allowed;
+        cursor: default;
       }
 
       textarea {
@@ -95,7 +95,7 @@
       <li>Make sure <code>localhost</code> is added in your Google reCAPTCHA console.</li>
       <li>
         Run a local server in this folder, for example:<br />
-        <code>npx serve . -p 4200</code> or <code>python3 -m http.server 4200</code>
+        <code>npx serve . -p 4200</code>
       </li>
       <li>Open: <code>http://localhost:4200/get-token.html</code></li>
       <li>
@@ -103,20 +103,21 @@
         automatically.
       </li>
       <li>
-        Paste it into Thunder Client (or Postman) request body:
-        <pre><code>{
-  "name": "Radek",
-  "email": "test@example.com",
-  "message": "Hello from dev",
-  "recaptchaToken": "🔑 paste token here"
+        Paste it into Thunder Client request body:
+        <pre><code id="exampleJson">{
+    "name": "Radek",
+    "email": "test@example.com",
+    "message": "Hello from dev",
+    "recaptchaToken": "paste token here"
 }</code></pre>
+        <button id="copyJsonBtn">Copy JSON</button>
       </li>
     </ol>
 
     <hr />
 
-    <button id="btn" style="margin-right: 8px">Get Token</button>
-    <button id="copyBtn" disabled>Copy Token</button>
+    <button id="getTokenBtn" style="margin-right: 8px">Get Token</button>
+    <button id="copyTokenBtn" disabled>Copy Token</button>
 
     <p>
       <label>Token:</label><br />
@@ -125,37 +126,48 @@
 
     <script>
       const siteKey = '6LeVl8orAAAAAJkAyH4MRlTaKwcAr_bZfYRH55vc';
-      const btn = document.getElementById('btn');
-      const copyBtn = document.getElementById('copyBtn');
+
+      const exampleJson = document.getElementById('exampleJson');
+      const copyJsonBtn = document.getElementById('copyJsonBtn');
+
+      const getTokenBtn = document.getElementById('getTokenBtn');
+      const copyTokenBtn = document.getElementById('copyTokenBtn');
       const out = document.getElementById('out');
 
-      btn.addEventListener('click', async () => {
+      const COPY_BUTTON_RESET_DELAY = 2000;
+
+      async function handleCopy(button, textToCopy) {
+        try {
+          await navigator.clipboard.writeText(textToCopy.trim());
+          const originalText = button.textContent;
+          button.textContent = 'Copied!';
+          button.disabled = true;
+
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, COPY_BUTTON_RESET_DELAY);
+        } catch {
+          alert('Clipboard not available. Copy manually.');
+        }
+      }
+
+      copyJsonBtn.addEventListener('click', () => {
+        handleCopy(copyJsonBtn, exampleJson.textContent);
+      });
+
+      copyTokenBtn.addEventListener('click', () => {
+        handleCopy(copyTokenBtn, out.value);
+      });
+
+      getTokenBtn.addEventListener('click', async () => {
         out.value = '...generating token...';
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'submit' });
           out.value = token;
-          copyBtn.disabled = false;
-
-          console.log('Token:', token);
+          copyTokenBtn.disabled = false;
         } catch (err) {
           out.value = '❌ Error: ' + err.message;
-          console.error(err);
-        }
-      });
-
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(out.value);
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied!';
-          copyBtn.disabled = true;
-
-          setTimeout(() => {
-            copyBtn.textContent = originalText;
-            copyBtn.disabled = false;
-          }, 2000);
-        } catch {
-          alert('Clipboard not available. Copy manually.');
         }
       });
     </script>
