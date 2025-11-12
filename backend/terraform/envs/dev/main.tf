@@ -6,8 +6,6 @@ module "lambda" {
   source           = "../../modules/lambda"
   env_name         = "dev"
   lambda_zip_path  = "../../../dist/sendContactForm.zip"
-  recaptcha_secret = "dev-secret"
-  ses_from_address = "rdrweski@outlook.com"
 }
 
 module "apigateway" {
