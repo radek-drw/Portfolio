@@ -1,3 +1,7 @@
+// dotenv loads local .env vars into process.env for local tests
+// In Lambda, SES_FROM_ADDRESS is set in environment variables with its own value
+// RECAPTCHA_BYPASS isn’t set in Lambda, so tokens are verified normally in the cloud
+
 import dotenv from 'dotenv';
 dotenv.config();
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
