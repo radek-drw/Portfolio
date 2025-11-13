@@ -1,26 +1,42 @@
-Integration Test for AWS Infrastructure and Lambda Backend (DEV)
-This integration test verifies the AWS infrastructure deployed via Terraform in the dev/ and the backend workflow. It covers the integration of:
+## Integration test for AWS Infrastructure and Lambda backend (DEV)
 
-API Gateway
-IAM
-Lambda
-SES
+This integration test verifies the AWS infrastructure deployed via Terraform in the dev/ and the backend workflow  
+It covers the integration of:
 
-Test Overview
+- API Gateway
+- IAM
+- Lambda
+- SES
+
+### Test Overview
 
 **Generate reCAPTCHA token**
 
-Make sure localhost is added in the Google reCAPTCHA console.
+- make sure localhost is added in the Google reCAPTCHA console
+- run a local server in this folder using `serve` npm package:
 
-Run a local server in this folder using the globally installed serve package:
-serve
+  ```bash
+  serve
+  ```
 
-Open the page in your browser:
-http://localhost:3000/get-token.html
+  **Tip**: if `serve` is not installed, it can be installed globally with:
 
-In the page click Get Token and the copy JSON
+  ```bash
+  npm install -g serve
+  ```
 
-Once you got JSON paste it in a Thunder Client in body
+  or run without installation using:
+
+  ```bash
+  npx serve
+  ```
+
+- open the page in browser:  
+  http://localhost:3000/get-token.html
+- in the page click 'Get Token' then 'Copy JSON'
+- once the JSON is obtained, paste into the request body in Thunder Client
+
+  > **Note**: Thunder Client is a lightweight REST API client for VS Code and can be installed from the Extensions
 
 **Get API_url**
 
