@@ -37,10 +37,11 @@
         overflow-x: auto;
       }
 
-      hr {
-        border: none;
-        border-top: 1px solid #333;
-        margin: 24px 0;
+      span {
+        display: inline-block;
+        /* max-width: 100%; */
+        word-break: break-word;
+        background-color: #e0e0e0;
       }
 
       button {
@@ -54,32 +55,15 @@
         font-size: 14px;
       }
 
-      button#copyTokenBtn {
-        min-width: 110px;
-        text-align: center;
-      }
-
       button:hover {
         background-color: #424242;
         border-color: #666;
       }
 
       button:disabled {
+        pointer-events: none;
         opacity: 0.5;
         cursor: default;
-      }
-
-      textarea {
-        background: #1e1e1e;
-        color: #f5f5f5;
-        border: 1px solid #333;
-        border-radius: 8px;
-        padding: 10px;
-        font-family: monospace;
-      }
-
-      textarea:focus {
-        outline: 1px solid #90caf9;
       }
 
       a {
@@ -108,66 +92,47 @@
     "name": "Radek",
     "email": "test@example.com",
     "message": "Hello from dev",
-    "recaptchaToken": "paste token here"
+    "recaptchaToken": "<span id="tokenOutput">iZbTRtKTF43EG0UFE0LOVY_GnA1G3cBNFstCCADZDZ2dWtOI1UwfmxfB0IdSgRQeFUkaiARd3gIREsrN14sEmMaNE0PajFuJWJ9HRJabmpqdB5LB0JpXT9daBg8QRFvEmJjcTxZYks-fzNSR1xpECBoIVB_WjYzYm1HVh1DB0k3B3plck4OWw5uSx9CRgZ7Yw9KZSlMDjwoMlNvYxU7fmwuB0JsElUWSx5iR2kGAx4IMkopMFUuf2IBNVgMDjEf</span>"
 }</code></pre>
-        <button id="copyJsonBtn">Copy JSON</button>
+        <button id="getTokenBtn" style="margin-right: 8px">Get Token</button>
+        <button id="copyJsonBtn" disabled>Copy JSON</button>
       </li>
     </ol>
-
-    <hr />
-
-    <button id="getTokenBtn" style="margin-right: 8px">Get Token</button>
-    <button id="copyTokenBtn" disabled>Copy Token</button>
-
-    <p>
-      <label>Token:</label><br />
-      <textarea id="out" rows="4" style="width: 100%; margin-top: 8px"></textarea>
-    </p>
 
     <script>
       const siteKey = '""';
 
       const exampleJson = document.getElementById('exampleJson');
-      const copyJsonBtn = document.getElementById('copyJsonBtn');
-
       const getTokenBtn = document.getElementById('getTokenBtn');
-      const copyTokenBtn = document.getElementById('copyTokenBtn');
-      const out = document.getElementById('out');
+      const copyJsonBtn = document.getElementById('copyJsonBtn');
+      const tokenOutput = document.getElementById('tokenOutput');
 
-      const COPY_BUTTON_RESET_DELAY = 2000;
+      const COPY_BUTTON_RESET_DELAY = 3000;
 
-      async function handleCopy(button, textToCopy) {
+      getTokenBtn.addEventListener('click', async () => {
+        tokenOutput.textContent = '...generating token...';
         try {
-          await navigator.clipboard.writeText(textToCopy.trim());
-          const originalText = button.textContent;
-          button.textContent = 'Copied!';
-          button.disabled = true;
+          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+          tokenOutput.textContent = token;
+          copyJsonBtn.disabled = false;
+        } catch (err) {
+          tokenOutput.textContent = '❌ Error: ' + err.message;
+        }
+      });
+
+      copyJsonBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(exampleJson.textContent.trim());
+          const originalText = copyJsonBtn.textContent;
+          copyJsonBtn.textContent = 'Copied!';
+          copyJsonBtn.disabled = true;
 
           setTimeout(() => {
-            button.textContent = originalText;
-            button.disabled = false;
+            copyJsonBtn.textContent = originalText;
+            copyJsonBtn.disabled = false;
           }, COPY_BUTTON_RESET_DELAY);
         } catch {
           alert('Clipboard not available. Copy manually.');
-        }
-      }
-
-      copyJsonBtn.addEventListener('click', () => {
-        handleCopy(copyJsonBtn, exampleJson.textContent);
-      });
-
-      copyTokenBtn.addEventListener('click', () => {
-        handleCopy(copyTokenBtn, out.value);
-      });
-
-      getTokenBtn.addEventListener('click', async () => {
-        out.value = '...generating token...';
-        try {
-          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-          out.value = token;
-          copyTokenBtn.disabled = false;
-        } catch (err) {
-          out.value = '❌ Error: ' + err.message;
         }
       });
     </script>
