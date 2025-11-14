@@ -25,16 +25,19 @@
 
       code,
       pre {
-        background: #1e1e1e;
-        color: #f5f5f5;
         padding: 2px 6px;
         border-radius: 6px;
+        background: #1e1e1e;
+        color: #f5f5f5;
       }
 
-      pre code {
+      code {
         display: block;
+        height: 175px;
         padding: 12px;
-        overflow-x: auto;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
       }
 
       button {
@@ -66,31 +69,14 @@
   </head>
   <body>
     <h2>🧩 Get reCAPTCHA v3 Token (Dev)</h2>
-
-    <p><strong>How to test your backend with reCAPTCHA:</strong></p>
-    <ol>
-      <li>Make sure <code>localhost</code> is added in your Google reCAPTCHA console.</li>
-      <li>
-        Run a local server in this folder, for example:<br />
-        <code>npx serve . -p 4200</code>
-      </li>
-      <li>Open: <code>http://localhost:4200/get-token.html</code></li>
-      <li>
-        Click <strong>Get Token</strong> below — your reCAPTCHA token will appear and copy
-        automatically.
-      </li>
-      <li>
-        Paste it into Thunder Client request body:
-        <pre><code id="exampleJson">{
+    <pre><code id="exampleJson">{
     "name": "Radek",
     "email": "test@example.com",
     "message": "Hello from dev",
-    "recaptchaToken": "<span id="tokenOutput">iZbTRtKTF43EG0UFE0LOVY_GnA1G3cBNFstCCADZDZ2dWtOI1UwfmxfB0IdSgRQeFUkaiARd3gIREsrN14sEmMaNE0PajFuJWJ9HRJabmpqdB5LB0JpXT9daBg8QRFvEmJjcTxZYks-fzNSR1xpECBoIVB_WjYzYm1HVh1DB0k3B3plck4OWw5uSx9CRgZ7Yw9KZSlMDjwoMlNvYxU7fmwuB0JsElUWSx5iR2kGAx4IMkopMFUuf2IBNVgMDjEf</span>"
+    "recaptchaToken": "<span id="tokenOutput"></span>"
 }</code></pre>
-        <button id="getTokenBtn" style="margin-right: 8px">Get Token</button>
-        <button id="copyJsonBtn" disabled>Copy JSON</button>
-      </li>
-    </ol>
+    <button id="getTokenBtn" style="margin-right: 8px">Get Token</button>
+    <button id="copyJsonBtn" disabled>Copy JSON</button>
 
     <script>
       const siteKey = '6LeVl8orAAAAAJkAyH4MRlTaKwcAr_bZfYRH55vc';
