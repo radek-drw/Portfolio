@@ -2,9 +2,9 @@ import { handler } from '../src/sendContactForm.js';
 
 const event = {
   body: JSON.stringify({
-    name: 'John Doe',
+    name: 'Radek',
     email: 'test@example.com',
-    message: 'This is a test message',
+    message: 'Hello from local test!',
   }),
 };
 
