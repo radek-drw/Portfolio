@@ -2,7 +2,7 @@
 
 This project includes two GitHub Actions workflows for automated quality checks and builds
 
-1.  Pull Request → `main` (Production)
+1.  **Pull Request** → `main` (Production)
     Triggered when a pull request targets the main branch.
     It:
     - installs all root and frontend dependencies
@@ -11,11 +11,11 @@ This project includes two GitHub Actions workflows for automated quality checks 
 
     Purpose: Verify that code merged into main is linted, formatted, and buildable.
 
-2.  Push → `dev` (Workflow Testing)
+2.  **Push** → `dev` (Workflow Testing)
 
-    Triggered on pushes to the dev branch only if the latest commit message contains [test]:
+    Triggered on pushes to the dev branch only if the latest commit message contains `[test]`:
 
-    ```yaml
+    ```bash
     if: contains(github.event.head_commit.message, '[test]')
     ```
 
