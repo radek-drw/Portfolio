@@ -1,3 +1,3 @@
-const recaptcha = '6Ld_zIkqAAAAAIWo39x4TCeD7vPX9rajgWaCmN0s';
+const recaptcha = '6LeVl8orAAAAAK3Fs9fxBK6fFHLjpZsvJ4E2S_ih';
 
 console.log(`Test: ${recaptcha}`);
