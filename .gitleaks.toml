@@ -1,0 +1,5 @@
+[allowlist]
+description = "Ignore Google reCAPTCHA site keys"
+regexes = [
+  '''6LeVl8orAAAAAJkAyH4MRlTaKwcAr_bZfYRH55vc'''
+]
