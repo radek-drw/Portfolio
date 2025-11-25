@@ -1,17 +1,3 @@
 #!/bin/sh
 npx lint-staged
-
-echo "Running Gitleaks pre-commit scan..."
-
-gitleaks protect --staged --verbose
-
-status=$?
-
-if [ $status -ne 0 ]; then
-  echo "❌ Gitleaks found secrets! Commit blocked."
-  exit 1
-fi
-
-echo "✅ No secrets found. Commit allowed."
-exit 0
-# ggshield secret scan pre-commit
+ggshield secret scan pre-commit
