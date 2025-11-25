@@ -36,47 +36,27 @@ All required form elements are selected and stored in variables once on DOMConte
  --description Email address used as 'From' in the contact form`
 ```
 
-## ggshield commands
-
-- `ggshield secret scan repo .` → scans the entire repository, including all files and commit history
-- `ggshield secret scan pre-commit` → scans only staged changes (files added to the staging area) before committing
-- `ggshield secret scan path ./config.json` → scans a specific file
-
 ## SECURITY
 
-This project is designed to prevent sensitive data from being accidentally exposed in the source code, including:
-
-- API keys
-- Passwords
-- Access tokens
-- SSH keys
-- Certificates
-- Database credentials
-- Connection URLs
-- - ...and other sensitive information
+This project helps prevent accidental exposure of sensitive information in source code, including API keys, passwords, access tokens, database credentials, and other secrets
 
 ### Security Setup
 
-**ggshield** (for local repository, in git pre-commit hook)
-
-For scanning secrets in the local repository, the project uses `ggshield` which runs on `Python`
-
-- ggshield install:
+- **Install Python**  
+  Python is required to run ggshield
 
   ```bash
-  winget install ggshield
+  winget install Python.Python
   ```
 
-- Python installation:
+- **Install ggshield**  
+  CLI tool that scans staged files for secrets in the `pre-commit` hook, preventing accidental leaks
 
   ```bash
-  winget install python
-  ggshield must be installed:
+  pipx install ggshield
   ```
 
-ggshield is integrated with a pre-commit hook, so any commit containing a secret will be blocked.
+  > **Note**: To use ggshield beyond local scans, a GitGuardian account is needed (`ggshield auth login`)
 
-To use ggshield, verification with a GitGuardian account is required.
-
-**GitGuardian** (remote repository)
-Additionally, the remote repository is monitored by GitGuardian, which scans the repository for potential secret leaks.
+- **GitGuardian**  
+   Is an additional security platform that detects and protects against accidentally exposed secrets across repositories and infrastructure
