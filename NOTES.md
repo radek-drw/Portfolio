@@ -35,3 +35,9 @@ All required form elements are selected and stored in variables once on DOMConte
  --type SecureString \
  --description Email address used as 'From' in the contact form`
 ```
+
+## ggshield commands
+
+- `ggshield secret scan repo .` → scans the entire repository, including all files and commit history
+- `ggshield secret scan pre-commit` → scans only staged changes (files added to the staging area) before committing
+- `ggshield secret scan path ./config.json` → scans a specific file
