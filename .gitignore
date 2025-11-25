@@ -32,3 +32,6 @@ terraform.tfstate.backup
 *.tfvars
 *.tfvars.json
 crash.log
+
+# === GGShield cache ===
+.cache_ggshield
