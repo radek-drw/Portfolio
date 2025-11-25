@@ -41,3 +41,42 @@ All required form elements are selected and stored in variables once on DOMConte
 - `ggshield secret scan repo .` → scans the entire repository, including all files and commit history
 - `ggshield secret scan pre-commit` → scans only staged changes (files added to the staging area) before committing
 - `ggshield secret scan path ./config.json` → scans a specific file
+
+## SECURITY
+
+This project is designed to prevent sensitive data from being accidentally exposed in the source code, including:
+
+- API keys
+- Passwords
+- Access tokens
+- SSH keys
+- Certificates
+- Database credentials
+- Connection URLs
+- - ...and other sensitive information
+
+### Security Setup
+
+**ggshield** (for local repository, in git pre-commit hook)
+
+For scanning secrets in the local repository, the project uses `ggshield` which runs on `Python`
+
+- ggshield install:
+
+  ```bash
+  winget install ggshield
+  ```
+
+- Python installation:
+
+  ```bash
+  winget install python
+  ggshield must be installed:
+  ```
+
+ggshield is integrated with a pre-commit hook, so any commit containing a secret will be blocked.
+
+To use ggshield, verification with a GitGuardian account is required.
+
+**GitGuardian** (remote repository)
+Additionally, the remote repository is monitored by GitGuardian, which scans the repository for potential secret leaks.
