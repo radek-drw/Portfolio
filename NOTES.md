@@ -35,3 +35,28 @@ All required form elements are selected and stored in variables once on DOMConte
  --type SecureString \
  --description Email address used as 'From' in the contact form`
 ```
+
+## SECURITY
+
+This project helps prevent accidental exposure of sensitive information in source code, including API keys, passwords, access tokens, database credentials, and other secrets
+
+### Security Setup
+
+- **Install Python**  
+  Python is required to run ggshield
+
+  ```bash
+  winget install Python.Python
+  ```
+
+- **Install ggshield**  
+  CLI tool that scans staged files for secrets in the `pre-commit` hook, preventing accidental leaks
+
+  ```bash
+  pipx install ggshield
+  ```
+
+  > **Note**: To use ggshield beyond local scans, a GitGuardian account is needed (`ggshield auth login`)
+
+- **GitGuardian**  
+   Is an additional security platform that detects and protects against accidentally exposed secrets across repositories and infrastructure
