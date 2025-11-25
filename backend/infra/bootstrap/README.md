@@ -1,17 +1,18 @@
 ## Backend Setup
 
-This folder is used only once to create the Terraform backend resources (S3 bucket + DynamoDB table).
+Folder `backend-setup/` is used only once to create the Terraform backend resources (S3 bucket + DynamoDB table).
 These resources store (S3) and lock (DynamoDB) the Terraform state file. It’s important that all developers have access to exactly the same state file.
 
-Setup Instructions:
+### Setup:
 
-1.  Initialize Terraform and create the backend resources:
-    `terraform init`
-    `terraform apply`
-
-2.  Once the resources are created, navigate to the folder containing `backend.tf` file and run:
-    `terraform init`
-    (optionally, use `terraform init -migrate-state` only if a local state exists and needs to be migrated to the S3 backend)
+- Initialize Terraform and create backend resources:
+  ```bash
+  terraform init
+  terraform apply
+  ```
+- Once the resources are created, navigate to the folder containing `backend.tf` file and run:
+  `terraform init`
+  (optionally, use `terraform init -migrate-state` only if a local state exists and needs to be migrated to the S3 backend)
 
 This will initialize the Terraform state to use the remote backend (S3), or migrate the local state if it exists.
 
