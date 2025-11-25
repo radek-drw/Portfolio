@@ -60,7 +60,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
 resource "aws_lambda_function" "contact_form" {
   function_name    = "${var.env_name}-send-contact-form"
   handler          = "index.handler"
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   timeout          = 10
   role             = aws_iam_role.lambda_role.arn
   filename         = var.lambda_zip_path
