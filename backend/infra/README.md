@@ -1,16 +1,15 @@
-⚠️ Before running any Terraform commands in this directory, make sure the backend is initialized:
+⚠️ Before running any Terraform commands in `envs/dev` or `env/prod` directory, make sure the backend (S3 and DynamoDB) is initialized to store state (`terraform.tfstate`) and locks:
 
-1. Navigate to `backend-setup/`:
+- Navigate to `bootstrap/`:
 
-   ```bash
-   cd backend-setup
-   terraform init
-   terraform apply
-   ```
+  ```bash
+  terraform init
+  terraform apply
+  ```
 
-   (This will create the remote backend resources in S3/DynamoDB)
+  > This will create the remote backend resources in S3 and DynamoDB based on `bootstrap/main.tf`
 
-2. Go back to the main directory and run:
-   ```bash
-   terraform init
-   ```
+- Now you can navigate to `envs/dev` or `env/prod` and run:
+  ```bash
+  terraform init
+  ```
