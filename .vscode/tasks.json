@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "LazyGit",
+      "type": "shell",
+      "command": "lazygit",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Terraform Apply",
+      "type": "shell",
+      "command": "terraform apply",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Open Dev + Terraform",
+      "dependsOn": ["LazyGit", "Server", "Terraform Apply"],
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}
