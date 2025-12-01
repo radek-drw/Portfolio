@@ -2,23 +2,39 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "LazyGit",
+      "label": "terraform dev",
       "type": "shell",
-      "command": "lazygit",
+      "command": "bash",
       "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend/infra/envs/dev"
+      },
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },
     {
-      "label": "Server",
+      "label": "terraform prod",
       "type": "shell",
-      "command": "npm run dev",
+      "command": "bash",
       "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend/infra/envs/prod"
+      },
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },
     {
-      "label": "Terraform Apply",
+      "label": "frontend",
       "type": "shell",
-      "command": "terraform apply",
+      "command": "bash",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "backend",
+      "type": "shell",
+      "command": "bash",
       "isBackground": true,
       "options": {
         "cwd": "${workspaceFolder}/backend"
@@ -26,8 +42,22 @@
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },
     {
-      "label": "Open Dev + Terraform",
-      "dependsOn": ["LazyGit", "Server", "Terraform Apply"],
+      "label": "bash",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "lazygit",
+      "type": "shell",
+      "command": "lazygit",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Open Dev Terminals",
+      "dependsOn": ["terraform dev", "terraform prod", "frontend", "backend", "bash", "lazygit"],
       "runOptions": { "runOn": "folderOpen" }
     }
   ]
