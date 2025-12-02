@@ -9,7 +9,7 @@
 
   > This will create the remote backend resources in S3 and DynamoDB based on `bootstrap/main.tf`
 
-- Now you can navigate to `envs/dev` or `env/prod` and run:
+- Now navigate to `envs/dev` or `env/prod` and run:
   ```bash
   terraform init
   ```
