@@ -30,7 +30,7 @@
 
   runs the build script from `package.json`
 
-- **artifacts**: defines what to deploy after the build.
+- **artifacts:** defines what to deploy after the build
   - **baseDirectory:**
     ```yaml
     dist
@@ -43,7 +43,6 @@
     ```
 
     include all files inside it
-    - **cache** specifies which files should be cached between builds to speed things up
-      - **.npm** folder (where npm stores downloaded packages) is cached, so Amplify doesn’t need to re-download everything every time
 
-  - **buildPath** serves the app from the root of the domain
+- **cache:** cache the `.npm` folder to speed up builds
+- **buildPath:** serve the app from the domain root
