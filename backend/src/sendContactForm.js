@@ -1,5 +1,5 @@
 // dotenv loads local .env vars into process.env for local tests
-// In Lambda, SES_FROM_ADDRESS is set in environment variables with its own value
+// In AWS Lambda, SES_FROM_ADDRESS is set in environment variables with its own value
 // RECAPTCHA_BYPASS isn’t set in Lambda, so tokens are verified normally in the cloud
 
 import dotenv from 'dotenv';
