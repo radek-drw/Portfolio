@@ -16,38 +16,38 @@ resource "aws_iam_role" "lambda_role" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect = "Allow"
+      Effect    = "Allow"
       Principal = { Service = "lambda.amazonaws.com" }
-      Action = "sts:AssumeRole"
+      Action    = "sts:AssumeRole"
     }]
   })
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name = "${var.env_name}-lambda-ses-policy"
+  name        = "${var.env_name}-lambda-ses-policy"
   description = "Allows Lambda to send emails via SES, write logs to CloudWatch, and read configuration parameters from SSM"
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = ["ses:SendEmail", "ses:SendRawEmail"]
+        Effect   = "Allow"
+        Action   = ["ses:SendEmail", "ses:SendRawEmail"]
         Resource = "*"
       },
       {
-        Effect = "Allow"
-        Action = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+        Effect   = "Allow"
+        Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
         Resource = "arn:aws:logs:*:*:*"
       },
       {
         Effect = "Allow"
-        Action = ["ssm:GetParameter","ssm:GetParameters"]
+        Action = ["ssm:GetParameter", "ssm:GetParameters"]
         Resource = [
           "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/recaptcha_secret",
           "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/ses_from_address"
         ]
-      } 
+      }
     ]
   })
 }
@@ -67,9 +67,9 @@ resource "aws_lambda_function" "contact_form" {
   source_code_hash = filebase64sha256(var.lambda_zip_path)
 
   environment {
-      variables = {
-        RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
-        SES_FROM_ADDRESS = data.aws_ssm_parameter.ses_from_address.value
-      }
+    variables = {
+      RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
+      SES_FROM_ADDRESS = data.aws_ssm_parameter.ses_from_address.value
+    }
   }
 }
