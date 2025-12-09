@@ -13,5 +13,5 @@ module "apigateway" {
   env_name          = "prod"
   lambda_invoke_arn = module.lambda.lambda_arn
   lambda_name       = module.lambda.lambda_arn
-  allow_origins     = ["https://radek-drweski.comw"]
+  allow_origins     = ["https://radek-drweski.com"]
 }
