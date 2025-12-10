@@ -1,4 +1,3 @@
 #!/bin/sh
 npx lint-staged
 ggshield secret scan pre-commit
-# pre-commit run --all-files
