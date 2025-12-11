@@ -5,4 +5,7 @@ variable "role_arn" {}
 variable "handler" { default = "index.handler" }
 variable "runtime" { default = "nodejs22.x" }
 variable "timeout" { default = 10 }
-variable "environment_variables" { type = map(string) default = {} }
+variable "environment_variables" {
+  type    = map(string)
+  default = {}
+}
