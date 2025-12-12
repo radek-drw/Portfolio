@@ -1,14 +1,9 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
 module "lambda_iam" {
   source             = "../../modules/lambda_iam"
   env_name           = "dev"
   lambda_name        = "contact-form"
-  policy_description = "IAM policy for contact lambda"
-  lambda_zip_path    = "../../../dist/sendContactForm.zip"
-  policy_json = {
+  policy_description = "IAM policy for contact-form Lambda"
+  policy_document = {
     Version = "2012-10-17"
     Statement = [
       {
@@ -22,15 +17,11 @@ module "lambda_iam" {
         Resource = "arn:aws:logs:*:*:*"
       },
       {
-        Effect = "Allow"
-        Action = ["ssm:GetParameter", "ssm:GetParameters"]
-        Resource = [
-          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/recaptcha_secret",
-          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/ses_from_address"
-        ]
+        Effect   = "Allow"
+        Action   = ["ssm:GetParameter", "ssm:GetParameters"]
+        Resource = "arn:aws:ssm:eu-west-1:*:parameter/*"
       }
     ]
-
   }
 }
 
