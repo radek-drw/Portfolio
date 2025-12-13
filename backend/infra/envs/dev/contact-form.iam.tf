@@ -1,4 +1,4 @@
-module "lambda_iam" {
+module "contact_form_iam" {
   source             = "../../modules/lambda_iam"
   env_name           = "dev"
   lambda_name        = "contact-form"
@@ -23,12 +23,4 @@ module "lambda_iam" {
       }
     ]
   }
-}
-
-module "apigateway" {
-  source            = "../../modules/apigateway"
-  env_name          = "dev"
-  lambda_invoke_arn = module.lambda.lambda_arn
-  lambda_name       = module.lambda.lambda_arn
-  allow_origins     = ["http://localhost:9000"]
 }
