@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda" {
-  function_name    = "${var.env_name}-${var.lambda_name}"
+  function_name    = "${var.env_name}-${var.lambda_name}-lambda"
   handler          = var.handler
   runtime          = var.runtime
   timeout          = var.timeout
