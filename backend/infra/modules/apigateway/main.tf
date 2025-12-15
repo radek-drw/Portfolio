@@ -4,8 +4,8 @@ resource "aws_apigatewayv2_api" "api" {
 
   cors_configuration {
     allow_origins = var.allow_origins
-    allow_methods = ["OPTIONS", "POST"]
-    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token"]
+    allow_methods = var.allow_methods
+    allow_headers = ["content-type"]
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_apigatewayv2_integration" "integration" {
 
 resource "aws_apigatewayv2_route" "route" {
   api_id    = aws_apigatewayv2_api.api.id
-  route_key = "POST /contact"
+  route_key = var.route_key
   target    = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
 
