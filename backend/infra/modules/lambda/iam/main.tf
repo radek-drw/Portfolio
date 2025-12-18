@@ -1,4 +1,4 @@
-resource "aws_iam_role" "lambda_role" {
+resource "aws_iam_role" "role" {
   name = "${var.env_name}-${var.lambda_name}-role"
 
   assume_role_policy = jsonencode({
@@ -11,13 +11,13 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
-resource "aws_iam_policy" "lambda_policy" {
+resource "aws_iam_policy" "policy" {
   name        = "${var.env_name}-${var.lambda_name}-policy"
   description = var.policy_description
   policy      = jsonencode(var.policy_document)
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.lambda_policy.arn
+resource "aws_iam_role_policy_attachment" "attach" {
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.policy.arn
 }
