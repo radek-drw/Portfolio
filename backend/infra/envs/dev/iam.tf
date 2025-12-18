@@ -1,5 +1,5 @@
 module "contact_form_iam" {
-  source             = "../../modules/lambda_iam"
+  source             = "../../modules/lambda/iam"
   env_name           = "dev"
   lambda_name        = module.contact_form_lambda.lambda_name
   policy_description = "IAM policy for ${module.contact_form_lambda.lambda_name} Lambda"
