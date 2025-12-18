@@ -1,15 +1,5 @@
-data "aws_ssm_parameter" "recaptcha_secret" {
-  name            = "recaptcha-secret"
-  with_decryption = true
-}
-
-data "aws_ssm_parameter" "ses_from_address" {
-  name            = "ses-from-address"
-  with_decryption = true
-}
-
 module "contact_form_lambda" {
-  source          = "../../modules/lambda_function"
+  source          = "../../modules/lambda/function"
   env_name        = "dev"
   lambda_name     = "contact-form"
   lambda_zip_path = "../../../dist/sendContactForm.zip"
