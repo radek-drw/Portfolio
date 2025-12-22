@@ -1,5 +1,6 @@
 variable "env_name" {}
 variable "lambda_name" {}
+variable "description" {}
 variable "lambda_zip_path" {}
 variable "handler" { default = "index.handler" }
 variable "runtime" { default = "nodejs22.x" }
