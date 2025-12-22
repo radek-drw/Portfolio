@@ -1,6 +1,7 @@
 resource "aws_apigatewayv2_api" "api" {
   name          = "${var.env_name}-myapp-api"
   protocol_type = "HTTP"
+  description   = var.description
 
   cors_configuration {
     allow_origins = var.allow_origins
