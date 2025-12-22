@@ -1,6 +1,6 @@
-## **invoke-sendContactForm.local.js**
+## **invoke-contact-form.local.js**
 
-This script enables local backend testing of `sendContactForm.js`. It allows verifying Lambda logic before deployment to AWS.
+This script enables local backend testing of `contact-form.js`. It allows verifying Lambda logic before deployment to AWS.
 
 **Advantages**
 
@@ -13,9 +13,9 @@ This script enables local backend testing of `sendContactForm.js`. It allows ver
 - script in: `backend/package.json`
 - run script:
   ```bash
-  npm run invoke:sendContactForm
+  npm run invoke:contact-form
   ```
-- handler: `backend/src/sendContactForm.js`
+- handler: `backend/src/contact-form.js`
 
 **Purpose**
 
