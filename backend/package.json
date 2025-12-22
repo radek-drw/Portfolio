@@ -6,7 +6,7 @@
   "scripts": {
     "build:lambda": "node scripts/build-lambda.js",
     "start": "node server.js",
-    "invoke:sendContactForm": "node ./scripts/invoke-sendContactForm.local.js"
+    "invoke:contact-form": "node ./scripts/invoke-contact-form.local.js"
   },
   "keywords": [],
   "author": "Radek Drweski",
