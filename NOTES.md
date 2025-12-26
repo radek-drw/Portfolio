@@ -60,3 +60,5 @@ This project helps prevent accidental exposure of sensitive information in sourc
 
 - **GitGuardian**  
    Is an additional security platform that detects and protects against accidentally exposed secrets across repositories and infrastructure
+
+change api name to dev-portoflio-api
