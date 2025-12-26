@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.recaptchaToken = token;
 
         const response = await axios.post(
-          'https://10j0mxewp9.execute-api.eu-west-1.amazonaws.com/dev/contact',
+          'https://vyv1rt79u4.execute-api.eu-west-1.amazonaws.com/prod/contact',
           formData
         );
 
