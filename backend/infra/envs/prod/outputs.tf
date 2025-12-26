@@ -1,4 +1,4 @@
-output "api_url" {
-  description = "Final URL of the deployed API Gateway (prod)"
-  value       = module.apigateway.api_url
+output "contact_api_url" {
+  value       = "${module.api.api_url}/contact"
+  description = "Endpoint used by the frontend to submit contact form data"
 }
