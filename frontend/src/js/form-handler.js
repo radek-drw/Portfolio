@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // ERROR MESSAGES
 const ERROR_MESSAGES = {
-  NO_INTERNET: 'No internet connection!',
   FORM_SEND_ERROR: 'An error occurred while sending the form. Please try again later.',
   RESOURCE_NOT_FOUND: 'The requested resource was not found.',
   SERVER_ERROR: 'An internal server error occurred. Please try again later.',
@@ -138,7 +137,7 @@ function handleErrorResponse(elements, status) {
 function handleNetworkError(elements, error) {
   if (!error.response) {
     // no response = no internet connection or network issue
-    showErrorToast(elements, ERROR_MESSAGES.NO_INTERNET);
+    showErrorToast(elements, ERROR_MESSAGES.UNEXPECTED_ERROR);
   } else {
     showErrorToast(elements, ERROR_MESSAGES.SERVER_ERROR);
   }
@@ -176,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         // Execute reCAPTCHA to get the token
-        const token = await window.grecaptcha.execute('""', {
+        const token = await window.grecaptcha.execute('6LeVl8orAAAAAJkAyH4MRlTaKwcAr_bZfYRH55vc', {
           action: 'submit',
         });
 
@@ -184,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.recaptchaToken = token;
 
         const response = await axios.post(
-          'https://266eu7t8cb.execute-api.eu-west-1.amazonaws.com/prod/contact',
+          'https://10j0mxewp9.execute-api.eu-west-1.amazonaws.com/dev/contact',
           formData
         );
 
@@ -192,6 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.status === 200 && data.success) {
           handleSuccessResponse(elements);
+          elements.form.reset();
+          charCount.textContent = `0/${maxLength}`;
         } else {
           handleErrorResponse(elements, response.status);
         }
