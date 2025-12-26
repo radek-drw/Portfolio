@@ -1,6 +1,7 @@
 # ⚠️ WARNING: This backend assumes that the S3 bucket and DynamoDB table already exist.
-# If creating a new project, first go to the `backend-setup/` folder
-# and run `terraform init && terraform apply`.
+# If creating a new project, first go to the `bootstrap/` folder
+# and run `terraform init && terraform apply`
+# See documentation in `infra/README.md` for more details
 
 terraform {
   backend "s3" {
