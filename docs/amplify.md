@@ -1,25 +1,48 @@
 # How `amplify.yml` workflow works?
 
-- **applications** defines one or more applications that Amplify should handle
-  - **appRoot: frontend** tells Amplify that the app is in the `frontend/` folder
-    - **phases** define the steps in the build process
-      - **preBuild** is the step before the actual build
+- **applications:** defines one or more applications that Amplify should handle
+- **appRoot: frontend** tells Amplify that the app is in the `frontend/` folder
+- **phases:** define the steps in the build process
+- **preBuild:** is the step before the actual build
+  - first three lines:
 
-        ```yaml
-        npm ci --cache .npm --prefer-offline
-        ```
+    ```yaml
+    cd ..
+    npm pkg delete scripts.prepare
+    cd frontend
+    ```
 
-        - **npm ci** installs dependencies based on `package-lock.json`
-        - **--cache** .npm tells npm to use .npm folder as cache
-        - **--prefer-offline** makes npm try to use cached packages first to speed up the build
+    These lines remove the prepare script, which would normally run Husky. This is unnecessary in a CI/CD environment because Git hooks (like Husky) don’t make sense in CI/CD builds and would cause errors if executed.
 
-      - **build** phase is where the actual app is compiled
-        - **npm run build** runs the build script from `package.json`
+    ```yaml
+    npm ci --cache .npm --prefer-offline
+    ```
 
-    - **artifacts** tells Amplify what files to deploy after the build
-      - **baseDirectory: dist** means Amplify will look in the dist folder for the build output
-      - **files**: `"**/*"` means all files in the dist folder will be deployed
-    - **cache** specifies which files should be cached between builds to speed things up
-      - **.npm** folder (where npm stores downloaded packages) is cached, so Amplify doesn’t need to re-download everything every time
+  - **npm ci:** installs dependencies based on `package-lock.json`
+  - **--cache .npm:** tells npm to use .npm folder as cache
+  - **--prefer-offline:** makes npm try to use cached packages first to speed up the build
 
-  - **buildPath** serves the app from the root of the domain
+- **build:** phase where the actual app is compiled
+
+  ```yaml
+  npm run build
+  ```
+
+  runs the build script from `package.json`
+
+- **artifacts:** defines what to deploy after the build
+  - **baseDirectory:**
+    ```yaml
+    dist
+    ```
+    look in the `dist/` folder
+  - **files:**
+
+    ```yaml
+    '**/*'
+    ```
+
+    include all files inside it
+
+- **cache:** cache the `.npm` folder to speed up builds
+- **buildPath:** serve the app from the domain root

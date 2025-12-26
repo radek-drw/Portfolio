@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "terraform dev",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend/infra/envs/dev"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "terraform prod",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend/infra/envs/prod"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "frontend",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "backend",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "bash",
+      "type": "shell",
+      "command": "bash",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "lazygit",
+      "type": "shell",
+      "command": "lazygit",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Open Dev Terminals",
+      "dependsOn": ["terraform dev", "terraform prod", "frontend", "backend", "bash", "lazygit"],
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}
