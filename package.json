@@ -28,7 +28,7 @@
     "**/*.{json,scss,css,md}": [
       "prettier --write"
     ],
-    "*.tf": [
+    "**/*.{tf,tfvars}": [
       "terraform fmt"
     ]
   }
