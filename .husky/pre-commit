@@ -1,3 +1,59 @@
 #!/bin/sh
-npx lint-staged
+set -e
+
+## ======================
+## SECRET SCAN | ggshield
+## ======================
 ggshield secret scan pre-commit
+
+## ===============================================
+## LINT & FORMAT | prettier, eslint, terraform
+## ===============================================
+npx lint-staged
+
+## =============================================
+## UPDATE TERRAFORM MODULE DOCS | terraform-docs
+## =============================================
+# Checks that terraform-docs is installed
+if ! command -v terraform-docs >/dev/null 2>&1; then
+  echo "❌ terraform-docs is not installed" >&2
+  echo "Install it from: https://terraform-docs.io/user-guide/installation/" >&2
+  echo ""
+  exit 1
+fi
+
+# Updates README.md for each module with staged .tf changes
+git diff --cached --name-only \
+  | grep '^backend/infra/modules/.*\.tf$' \
+  | xargs -r -n1 dirname \
+  | sort -u \
+  | while read -r module; do
+      echo "Updating docs for $module"
+      terraform-docs markdown table "$module" \
+        --output-file README.md \
+        --output-mode inject
+      git add "$module/README.md" # Manually stage the updated README.md
+      echo ""
+    done
+
+## =================================
+## VALIDATE TERRAFORM FILES | tflint
+## =================================
+# Checks that tflint is installed
+if ! command -v tflint >/dev/null 2>&1; then
+  echo "❌ tflint is not installed" >&2
+  echo "Install it from: https://github.com/terraform-linters/tflint" >&2
+  echo ""
+  exit 1
+fi
+
+# Runs tflint for each directory with staged .tf changes
+git diff --cached --name-only \
+  | grep '^backend/infra/.*\.tf$' \
+  | xargs -r -n1 dirname \
+  | sort -u \
+  | while read -r dir; do
+      echo "Running tflint for $dir"
+      (cd "$dir" && tflint)
+      echo ""
+    done
