@@ -21,7 +21,8 @@ This script enables local backend testing of `contact-form.js`. It allows verify
 
 - tests backend logic only: validation, SES email sending
 - minimal AWS usage: API Gateway and Lambda aren’t invoked; SES is invoked
-- reCAPTCHA is skipped locally by setting `RECAPTCHA_BYPASS=true` in `.env` (for testing without Google calls). This variable isn’t set in production — AWS Lambda uses its own environment variables, so the bypass doesn’t apply in the cloud
+- locally, reCAPTCHA is skipped via `RECAPTCHA_BYPASS=true` in `.env`.
+  In AWS Lambda the variable is not set, so the bypass resolves to `false` and reCAPTCHA verification is always executed
 
 > **Note:** Full integration tests (API Gateway, IAM, reCAPTCHA, Lambda, SES) are described in `infra/envs/dev`
 
