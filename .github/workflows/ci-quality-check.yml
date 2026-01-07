@@ -1,6 +1,10 @@
 name: CI Quality Check
 
 on:
+  push:
+    branches:
+      - dev
+
   pull_request:
     branches:
       - main
@@ -28,7 +32,7 @@ jobs:
         env:
           CI: true
 
-      - name: Run ESLint
+      - name: Static code analysis (ESLint)
         run: npm run lint --if-present
 
       - name: Check code formatting (Prettier)
