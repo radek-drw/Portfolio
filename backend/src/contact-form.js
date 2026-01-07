@@ -36,8 +36,8 @@ export const handler = async (event) => {
     const { name, email, message, recaptchaToken } = body;
 
     // 1. Verify reCAPTCHA token
-    const bypass = process.env.RECAPTCHA_BYPASS === 'true';
-    if (!bypass) {
+    const bypassRecaptcha = process.env.RECAPTCHA_BYPASS === 'true';
+    if (!bypassRecaptcha) {
       const verifyResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
