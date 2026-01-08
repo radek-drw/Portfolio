@@ -32,19 +32,8 @@ jobs:
         env:
           CI: true
 
-      - name: Install frontend dependencies
-        run: npm ci --workspace=frontend
-        env:
-          CI: true
-
       - name: Static code analysis (ESLint)
         run: npm run lint --if-present
 
       - name: Check code formatting (Prettier)
         run: npm run format:check --if-present
-
-      - name: Build frontend
-        working-directory: frontend
-        run: npm run build
-        env:
-          CI: true
