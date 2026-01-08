@@ -30,7 +30,7 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --workspace=frontend
         env:
-          CI: true
+          HUSKY: 0
 
       - name: Build frontend
         working-directory: frontend
