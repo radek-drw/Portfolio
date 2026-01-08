@@ -28,9 +28,7 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install frontend dependencies
-        run: npm ci --workspace=frontend
-        env:
-          HUSKY: 0
+        run: npm ci --workspace=frontend --ignore-scripts
 
       - name: Build frontend
         working-directory: frontend
