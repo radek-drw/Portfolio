@@ -27,8 +27,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies (root & frontend)
-        run: npm ci --include-workspace-root --workspace=frontend
+      - name: Install root dependencies
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Install frontend dependencies
+        run: npm ci --workspace=frontend
         env:
           CI: true
 
