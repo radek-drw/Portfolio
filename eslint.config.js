@@ -1,10 +1,21 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import importPlugin from 'eslint-plugin-import';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['node_modules', 'dist', 'build', 'coverage', 'out', '.tmp', '.cache', 'public']),
+  {
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/coverage/**',
+      '**/out/**',
+      '**/.tmp/**',
+      '**/.cache/**',
+      '**/public/**',
+    ],
+  },
 
   js.configs.recommended,
 
