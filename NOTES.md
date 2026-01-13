@@ -5,6 +5,7 @@
 3. change api name to dev-portoflio-api
 4. .github\workflows\README.md - change descritpion when ci-quality-check finished
 5. think to use pnpm while projects gets bigger
+6. write docs on enabling Corepack to manage package manager versions
 
 ## ISSUES
 
