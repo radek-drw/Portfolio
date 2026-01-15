@@ -9,4 +9,8 @@
 
 ## ISSUES
 
-1. switching from npm to pnpm due to issues with workspaces when installing dependencies in the CI workflow
+1. switching from npm to pnpm due to issues with workspaces when installing dependencies in the CI workflow (root - eslint, prettier)
+   Advantages: no versions conflicts
+2. how prevent using 'npm install xyz' due to conflicts with pnpm
+
+nanoid, lodash, allow-only
