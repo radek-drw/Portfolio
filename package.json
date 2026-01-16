@@ -2,10 +2,7 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
+  "packageManager": "pnpm@10.28.0",
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "eslint": "^9.38.0",
@@ -13,12 +10,14 @@
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4",
+    "only-allow": "^1.2.2",
     "prettier": "^3.6.2"
   },
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preinstall": "echo '❌ Use pnpm'"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,mjs}": [
