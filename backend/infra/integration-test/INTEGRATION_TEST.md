@@ -30,18 +30,6 @@ It covers the integration of:
   serve
   ```
 
-  > **Note**: if `serve` is not installed, it can be installed globally with:
-
-  ```bash
-  npm install -g serve
-  ```
-
-  > or run without installation using:
-
-  ```bash
-  npx serve
-  ```
-
 - open the page in browser:  
   http://localhost:3000/get-token.html
 - in the page click **'Get Token'** then **'Copy JSON'**
