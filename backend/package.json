@@ -2,10 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend application (Node.js/AWS-SDK)",
-  "main": "server.js",
   "scripts": {
     "build:lambda": "node scripts/build-lambda.js",
-    "start": "node server.js",
     "invoke:contact-form": "node ./scripts/invoke-contact-form.local.js"
   },
   "keywords": [],
@@ -18,6 +16,7 @@
   "devDependencies": {
     "archiver": "^7.0.1",
     "dotenv": "^17.2.3",
-    "esbuild": "^0.25.11"
+    "esbuild": "^0.25.11",
+    "serve": "^14.2.5"
   }
 }
