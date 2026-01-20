@@ -5,7 +5,7 @@
 3. change api name to dev-portoflio-api
 4. .github\workflows\README.md - change descritpion when ci-quality-check finished
 5. think to use pnpm while projects gets bigger
-6. write docs on enabling Corepack to manage package manager versions
+6. add to docs that project needs Volta (for managing and installing versions pnpm, node)
 7. find or try to build own solution - how to protect using 'npm install' while pnpm is used in project
 
 ## ISSUES
@@ -15,3 +15,15 @@
 2. how prevent using 'npm install xyz' due to conflicts with pnpm
 
 nanoid, lodash, allow-only
+
+## CLEAN NPM
+
+rm -rf node_modules frontend/node_modules backend/node_modules
+rm -f package-lock.json
+npm cache clean --force
+
+## CLEAN PNPM
+
+rm -rf node_modules frontend/node_modules backend/node_modules
+rm -f pnpm-lock.yaml
+pnpm store prune
