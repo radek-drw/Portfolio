@@ -1,12 +1,13 @@
 ## TO DO
 
-1. add locks i dynamodb for terraform state and add s3 versioning
-2. terraform - write documentation about adding, removing, editing, reading secrets in AWS SSM
-3. change api name to dev-portoflio-api
-4. .github\workflows\README.md - change descritpion when ci-quality-check finished
-5. think to use pnpm while projects gets bigger
-6. add to docs note - on Windows, `corepack enable pnpm` must be run as Administrator to enable pnpm with version control
-7. find or try to build own solution - how to protect using 'npm install' while pnpm is used in project
+1. add locks i dynamodb for terraform state and add s3 versioning - [x]
+2. terraform - write documentation about adding, removing, editing, reading secrets in AWS SSM - [ ]
+3. change api name to dev-portoflio-api - [ ]
+4. .github\workflows\README.md - change descritpion when ci-quality-check finished - [ ]
+5. think to use pnpm while projects gets bigger - [x]
+6. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable pnpm` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
+7. add to README.md - running `npm install` is intentionally blocked and will fail. Use `pnpm install` instead - [ ]
+8. find or try to build own solution - how to protect using 'npm install' while pnpm is used in project - [ ]
 
 ## ISSUES
 
