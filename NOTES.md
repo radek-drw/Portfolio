@@ -5,7 +5,7 @@
 3. change api name to dev-portoflio-api
 4. .github\workflows\README.md - change descritpion when ci-quality-check finished
 5. think to use pnpm while projects gets bigger
-6. add to docs that project needs Volta (for managing and installing versions pnpm, node)
+6. add to docs note - on Windows, `corepack enable pnpm` must be run as Administrator to enable pnpm with version control
 7. find or try to build own solution - how to protect using 'npm install' while pnpm is used in project
 
 ## ISSUES
