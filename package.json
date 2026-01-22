@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.28.1",
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "eslint": "^9.38.0",
@@ -17,7 +17,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "preinstall": "echo '❌ Use pnpm'"
+    "preinstall": "npx only-allow@1.2.2 pnpm"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,mjs}": [
