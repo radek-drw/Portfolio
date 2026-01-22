@@ -10,7 +10,6 @@
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4",
-    "only-allow": "^1.2.2",
     "prettier": "^3.6.2"
   },
   "scripts": {
