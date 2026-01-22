@@ -15,16 +15,34 @@
    Advantages: no versions conflicts
 2. how prevent using 'npm install xyz' due to conflicts with pnpm
 
-nanoid, lodash, allow-only
+**-----------------------------------------------------------------**
 
 ## CLEAN NPM
 
 rm -rf node_modules frontend/node_modules backend/node_modules
 rm -f package-lock.json
 npm cache clean --force
+remove 'npm-cache' - C:\Users\rdrwe\AppData\Local
+remove 'npm' - C:\Users\rdrwe\AppData\Roaming
+add to .gitignore 'package-lock.json'
 
 ## CLEAN PNPM
 
+corepack disable
 rm -rf node_modules frontend/node_modules backend/node_modules
 rm -f pnpm-lock.yaml
 pnpm store prune
+remove 'pnpm', 'pnpm-cache', 'pnpm-state' - C:\Users\rdrwe\AppData\Local
+
+## VOLTA
+
+win + r -> sysdm.cpl
+
+## NODE.JS uninstall
+
+## Checklist: Migration from npm to pnpm
+
+git grep -l npm
+git grep -l npx
+git grep package-lock
+git grep "npm install"
