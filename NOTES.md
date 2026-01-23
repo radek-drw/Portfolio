@@ -21,6 +21,7 @@
 
 rm -rf node_modules frontend/node_modules backend/node_modules
 rm -f package-lock.json
+npm cache verify
 npm cache clean --force
 remove 'npm-cache' - C:\Users\rdrwe\AppData\Local
 remove 'npm' - C:\Users\rdrwe\AppData\Roaming
