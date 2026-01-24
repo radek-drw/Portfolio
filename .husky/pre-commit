@@ -20,7 +20,7 @@ echo "----------------------------------------"
 ## LINT & FORMAT | prettier, eslint, terraform
 ## ===============================================
 echo "Running lint-staged..."
-npx lint-staged --quiet
+pnpm run lint-staged
 echo "----------------------------------------"
 
 ## =============================================
