@@ -16,7 +16,8 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "preinstall": "npx only-allow@1.2.2 pnpm"
+    "preinstall": "npx only-allow@1.2.2 pnpm",
+    "lint-staged": "lint-staged --quiet"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,mjs}": [
