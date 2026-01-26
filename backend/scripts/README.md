@@ -13,7 +13,7 @@ This script enables local backend testing of `contact-form.js`. It allows verify
 - script in: `backend/package.json`
 - run script:
   ```bash
-  npm run invoke:contact-form
+  pnpm invoke:contact-form
   ```
 - handler: `backend/src/contact-form.js`
 
@@ -41,7 +41,7 @@ This script builds and packages an AWS Lambda function into a ZIP ready for depl
 - script in `backend/package.json`
 - run script:
   ```bash
-  npm run build:lambda <function-name>
+  pnpm build:lambda <function-name>
   ```
 - source file (handler): `backend/src/<functionName>.js`
 - output ZIP: `backend/dist/<functionName>.zip`

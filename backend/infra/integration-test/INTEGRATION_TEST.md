@@ -24,7 +24,7 @@ It covers the integration of:
 **Generate reCAPTCHA token**
 
 - make sure `localhost` is added in the Google reCAPTCHA console
-- run a local server in the folder containing the `get-token.html` file using the `serve` npm package:
+- run a local static server in the folder containing the `get-token.html` file using `serve`
 
   ```bash
   serve

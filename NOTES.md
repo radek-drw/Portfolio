@@ -43,7 +43,7 @@ win + r -> sysdm.cpl
 
 ## Checklist: Migration from npm to pnpm
 
-git grep -l npm
+git grep -w -l npm
 git grep -l npx
 git grep package-lock
 git grep "npm install"

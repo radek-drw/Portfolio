@@ -143,7 +143,7 @@ flowchart LR
 
 ### Project Structure
 
-The project is organized as a monorepo using `npm workspaces`.  
+The project is organized as a monorepo using `pnpm workspaces`.  
 This keeps frontend and backend in one repository, simplifies dependency management, and allows sharing common tooling and configs.
 
 ### Git Workflow
