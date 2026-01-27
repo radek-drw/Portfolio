@@ -27,6 +27,15 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Debug versions
+        run: |
+          node -v
+          corepack --version
+          pnpm -v
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
