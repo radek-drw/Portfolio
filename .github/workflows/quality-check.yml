@@ -21,19 +21,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check default Node.js
+        run: node -v
+
+      - name: Enable pnpm
+        run: corepack enable
+
       - uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
-      - name: Enable pnpm
-        run: corepack enable
-
-      - name: Debug versions
-        run: |
-          node -v
-          pnpm -v
+      - name: Check new Node.js
+        run: node -v
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
