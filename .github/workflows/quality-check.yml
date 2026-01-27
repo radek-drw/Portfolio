@@ -21,19 +21,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable pnpm
-        run: corepack enable
-
       - uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
+      - name: Enable pnpm
+        run: corepack enable
+
       - name: Debug versions
         run: |
           node -v
-          corepack --version
           pnpm -v
 
       - name: Install dependencies
