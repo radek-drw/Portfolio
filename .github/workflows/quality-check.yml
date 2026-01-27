@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check default Node.js
         run: node -v
@@ -32,9 +32,6 @@ jobs:
           node-version: 24.13.0
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
-
-      - name: Check new Node.js
-        run: node -v
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
