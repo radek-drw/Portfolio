@@ -5,11 +5,11 @@
 3. change api name to dev-portoflio-api - [ ]
 4. .github\workflows\README.md - change descritpion when ci-quality-check finished - [ ]
 5. think to use pnpm while projects gets bigger - [x]
-6. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable pnpm` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
-7. add to README.md - running `npm install` is intentionally blocked and will fail. Use `pnpm install` instead - [ ]
-8. find or try to build own solution - how to protect using 'npm install' while pnpm is used in project - [ ]
+6. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
+7. add to README.md - running `npm install` is intentionally blocked and will alway fail, `preinstall` script using `only-allow` enforces it. Project requires `pnpm` - [ ]
+8. find or try to build own solution - how to protect using `npm install` while pnpm is used in project, `only-allow` package doesn't give clear message - [ ]
 9. add .nvmrc to keep the same Node version for all devs and CI - [x]
-10. add script to package.json 'postinstall' that checks if tools like tflint, lazygit, nvm etc are in project and if not instruction how to install (win, macos, linux)
+10. add script `postinstall` to `package.json` that checks if tools like tflint, lazygit, nvm etc are in project and if not instruction how to install (win, macos, linux)
 
 ## ISSUES
 
