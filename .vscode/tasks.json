@@ -42,7 +42,7 @@
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },
     {
-      "label": "bash",
+      "label": "root",
       "type": "shell",
       "command": "bash",
       "isBackground": true,
@@ -57,7 +57,7 @@
     },
     {
       "label": "Open Dev Terminals",
-      "dependsOn": ["terraform dev", "terraform prod", "frontend", "backend", "bash", "lazygit"],
+      "dependsOn": ["terraform dev", "terraform prod", "frontend", "backend", "root", "lazygit"],
       "runOptions": { "runOn": "folderOpen" }
     }
   ]
