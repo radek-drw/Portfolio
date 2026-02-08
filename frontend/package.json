@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Frontend application (HTML/SASS/JavaScript/Webpack/babel/jQuery)",
   "main": "index.js",
-  "engines": {
-    "node": ">=24.13.0 <25",
-    "npm": "project-uses-pnpm"
-  },
   "scripts": {
     "start": "webpack serve --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
