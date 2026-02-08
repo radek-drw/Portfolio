@@ -2,9 +2,10 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.1",
   "engines": {
-    "node": ">=24.13.0 <25"
+    "node": ">=24.13.0 <25",
+    "npm": "project-uses-pnpm"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
@@ -18,9 +19,8 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "format:check": "prettier --check .",
-    "prepare": "husky",
-    "preinstall": "npx only-allow@1.2.2 pnpm",
-    "lint-staged": "lint-staged --quiet"
+    "lint-staged": "lint-staged --quiet",
+    "prepare": "husky"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,mjs}": [
