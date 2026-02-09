@@ -33,14 +33,14 @@ export default defineConfig([
   },
 
   {
-    files: ['**/*.{js,mjs,ts}'],
+    files: ['**/*.{js,mjs}'],
     plugins: {
       import: importPlugin,
     },
     settings: {
       'import/resolver': {
         node: {
-          extensions: ['.js', '.mjs', '.ts'],
+          extensions: ['.js', '.mjs'],
         },
       },
     },
