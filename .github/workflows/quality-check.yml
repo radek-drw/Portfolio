@@ -24,6 +24,15 @@ jobs:
       - name: Node version before
         run: node --version
 
+      - name: Corepack version
+        run: corepack --version
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: PNPM version
+        run: pnpm --version
+
       - uses: actions/setup-node@v6
         with:
           node-version: 24.13.0
@@ -33,13 +42,19 @@ jobs:
       - name: Node version after
         run: node --version
 
-      - name: Enable pnpm
-        run: corepack enable
+      - name: Corepack version
+        run: corepack --version
+
+      - name: PNPM version
+        run: pnpm --version
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --filter .
         env:
           CI: true
+
+      - name: PNPM version
+        run: pnpm --version
 
       - name: Static code analysis (ESLint)
         run: pnpm run lint --if-present
