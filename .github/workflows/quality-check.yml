@@ -35,11 +35,8 @@ jobs:
         env:
           CI: true
 
-      - name: PNPM version
-        run: pnpm --version
-
       - name: Static code analysis (ESLint)
-        run: pnpm run lint --if-present
+        run: pnpm run lint
 
       - name: Check code formatting (Prettier)
-        run: pnpm run format:check --if-present
+        run: pnpm run format:check
