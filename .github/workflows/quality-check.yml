@@ -32,8 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --filter . --ignore-scripts
-        env:
-          CI: true
 
       - name: Static code analysis (ESLint)
         run: pnpm run lint
