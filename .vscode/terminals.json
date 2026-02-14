@@ -1,0 +1,49 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "Lazygit",
+      "description": "Lazygit terminal",
+      "cwd": "${workspaceFolder}",
+      "focus": true,
+      "command": "lazygit",
+      "color": "terminal.ansiMagenta",
+      "icon": "git-branch"
+    },
+    {
+      "name": "Root",
+      "description": "Root folder terminal",
+      "cwd": "${workspaceFolder}",
+      "color": "terminal.ansiYellow",
+      "icon": "folder"
+    },
+    {
+      "name": "Frontend",
+      "description": "Frontend development",
+      "cwd": "${workspaceFolder}/frontend",
+      "color": "terminal.ansiGreen",
+      "icon": "rocket"
+    },
+    {
+      "name": "Backend",
+      "description": "Backend development",
+      "cwd": "${workspaceFolder}/backend",
+      "color": "terminal.ansiCyan",
+      "icon": "database"
+    },
+    {
+      "name": "TF Dev",
+      "description": "Terraform Dev environment",
+      "cwd": "${workspaceFolder}/backend/infra/envs/dev",
+      "color": "terminal.ansiBlue",
+      "icon": "terminal"
+    },
+    {
+      "name": "TF Prod",
+      "description": "Terraform Prod environment",
+      "cwd": "${workspaceFolder}/backend/infra/envs/prod",
+      "color": "terminal.ansiRed",
+      "icon": "server"
+    }
+  ]
+}
