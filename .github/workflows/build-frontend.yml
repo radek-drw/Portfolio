@@ -6,20 +6,14 @@ on:
       - dev
     paths:
       - 'frontend/**'
-    paths-ignore:
-      - 'frontend/**/*.md'
-      - 'frontend/**/*.test.*'
-      - 'frontend/**/*.spec.*'
+      - '!frontend/**/*.md'
 
   pull_request:
     branches:
       - main
     paths:
       - 'frontend/**'
-    paths-ignore:
-      - 'frontend/**/*.md'
-      - 'frontend/**/*.test.*'
-      - 'frontend/**/*.spec.*'
+      - '!frontend/**/*.md'
     types: [opened, synchronize, reopened]
 
 permissions:
