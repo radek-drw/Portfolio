@@ -1,5 +1,4 @@
 module "contact_form_lambda" {
-  depends_on      = [null_resource.build_lambda]
   source          = "../../modules/lambda/function"
   env_name        = var.env_name
   lambda_name     = local.contact_form_lambda_name
