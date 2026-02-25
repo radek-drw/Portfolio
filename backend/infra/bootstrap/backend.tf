@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
 # ============================================
 # S3 Bucket for storing Terraform state files
 # ============================================
