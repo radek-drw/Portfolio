@@ -1,9 +1,10 @@
-name: Backend
+name: Backend Build & Deploy
 
 on:
   push:
     branches:
       - dev
+      - main
     paths:
       - 'backend/**'
       - '!backend/**/*.md'
@@ -19,18 +20,24 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  id-token: write
 
 jobs:
-  backend:
+  # ========================
+  # DEV workflow (push to dev)
+  # ========================
+  dev:
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
       - name: Enable pnpm
         run: corepack enable
 
-      - uses: actions/setup-node@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 24.13.0
           cache: 'pnpm'
@@ -42,19 +49,67 @@ jobs:
       - name: Build lambda
         run: pnpm --filter backend run build:lambda contact-form
 
-      - name: Setup terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Configure AWS credentials
+      - name: Configure AWS credentials (dev)
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::123456789012:role/github-actions-role
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-dev-role
           aws-region: eu-west-1
 
-      - name: Terraform Init
+      - name: Terraform Init (dev)
+        working-directory: ./backend/terraform/envs/dev
         run: terraform init
-        working-directory: ./backend/terraform/envs/dev
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Terraform Plan (dev)
         working-directory: ./backend/terraform/envs/dev
+        run: terraform plan
+
+      - name: Terraform Apply (dev)
+        working-directory: ./backend/terraform/envs/dev
+        run: terraform apply -auto-approve
+
+  # ========================
+  # PLAN for PROD (PR → main)
+  # ========================
+  plan-prod:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure AWS credentials (prod)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-prod-role
+          aws-region: eu-west-1
+
+      - name: Terraform Init (prod)
+        working-directory: ./backend/terraform/envs/prod
+        run: terraform init
+
+      - name: Terraform Plan (prod)
+        working-directory: ./backend/terraform/envs/prod
+        run: terraform plan
+
+  # ========================
+  # APPLY for PROD (push/merge → main)
+  # ========================
+  apply-prod:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production # manual approval in GitHub
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure AWS credentials (prod)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-prod-role
+          aws-region: eu-west-1
+
+      - name: Terraform Init (prod)
+        working-directory: ./backend/terraform/envs/prod
+        run: terraform init
+
+      - name: Terraform Apply (prod)
+        working-directory: ./backend/terraform/envs/prod
+        run: terraform apply
