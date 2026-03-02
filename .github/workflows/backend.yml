@@ -19,7 +19,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
   id-token: write
 
 jobs:
@@ -27,6 +26,9 @@ jobs:
   # DEV workflow (push to dev)
   # ========================
   dev:
+    concurrency:
+      group: terraform-dev
+      cancel-in-progress: true
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
@@ -44,7 +46,7 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --filter backend --ignore-scripts
+        run: pnpm install --frozen-lockfile --filter backend
 
       - name: Build lambda
         run: pnpm --filter backend run build:lambda contact-form
@@ -55,16 +57,21 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-dev-role
           aws-region: eu-west-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.5
+
       - name: Terraform Init (dev)
-        working-directory: ./backend/terraform/envs/dev
+        working-directory: ./backend/infra/envs/dev
         run: terraform init
 
       - name: Terraform Plan (dev)
-        working-directory: ./backend/terraform/envs/dev
+        working-directory: ./backend/infra/envs/dev
         run: terraform plan
 
       - name: Terraform Apply (dev)
-        working-directory: ./backend/terraform/envs/dev
+        working-directory: ./backend/infra/envs/dev
         run: terraform apply -auto-approve
 
   # ========================
@@ -74,7 +81,24 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.0
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter backend
+
+      - name: Build lambda
+        run: pnpm --filter backend run build:lambda contact-form
 
       - name: Configure AWS credentials (prod)
         uses: aws-actions/configure-aws-credentials@v6
@@ -82,23 +106,48 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-prod-role
           aws-region: eu-west-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.5
+
       - name: Terraform Init (prod)
-        working-directory: ./backend/terraform/envs/prod
+        working-directory: ./backend/infra/envs/prod
         run: terraform init
 
       - name: Terraform Plan (prod)
-        working-directory: ./backend/terraform/envs/prod
+        working-directory: ./backend/infra/envs/prod
         run: terraform plan
 
   # ========================
   # APPLY for PROD (push/merge → main)
   # ========================
   apply-prod:
+    concurrency:
+      group: terraform-prod
+      cancel-in-progress: false
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production # manual approval in GitHub
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.0
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter backend
+
+      - name: Build lambda
+        run: pnpm --filter backend run build:lambda contact-form
 
       - name: Configure AWS credentials (prod)
         uses: aws-actions/configure-aws-credentials@v6
@@ -106,10 +155,15 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-prod-role
           aws-region: eu-west-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.5
+
       - name: Terraform Init (prod)
-        working-directory: ./backend/terraform/envs/prod
+        working-directory: ./backend/infra/envs/prod
         run: terraform init
 
       - name: Terraform Apply (prod)
-        working-directory: ./backend/terraform/envs/prod
+        working-directory: ./backend/infra/envs/prod
         run: terraform apply
