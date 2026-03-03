@@ -1,22 +1,52 @@
-⚠️ Before running any Terraform commands in `envs/dev` or `env/prod` directory, make sure the backend is initialized. This includes:
+## Bootstrap
 
-- `DynamoDB` for state locking, so only one person can apply changes at a time
-- `S3` for remote state storage (terraform.tfstate)
+⚠️ Before running Terraform in `envs/dev` or `envs/prod`, the backend infrastructure must be created first.
 
-To initilalize backend navigate to `bootstrap/` directory and run:
+### 1. Create S3 bucket and DynamoDB table
+
+Navigate to the `bootstrap/` and run:
 
 ```bash
 terraform init
 terraform apply
 ```
 
-After backend has been initialized, Terraform commands can be run in the `envs/dev` or `envs/prod` directories.
+This creates:
 
-### Clean Up Local Backend Files
+- S3 bucket for remote state
+- DynamoDB table for state locking
+- Other bootstrap resources (OIDC, roles)
 
-After the backend resources are created, the local backend-related files generated during the bootstrap step are no longer needed.
-They can be safely removed by running:
+### 2. Configure remote backend for storing bootstrap `state`
+
+After `terraform apply`, create file `backend.tf` in `bootstrap/` with the following:
 
 ```bash
-rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup
+terraform {
+  backend "s3" {
+    bucket         = "radek-portfolio-terraform-state"
+    key            = "bootstrap/terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "terraform-locks-table"
+    encrypt        = true
+  }
+}
 ```
+
+Then run:
+
+```bash
+terraform init
+```
+
+Confirm migration of local state to S3. From now on, bootstrap uses remote state
+
+### 3. Clean up local files
+
+```bash
+rm -rf .terraform terraform.tfstate terraform.tfstate.backup
+```
+
+### 4. Continue with dev/prod
+
+Terraform commands in envs/dev or envs/prod can now be run normally
