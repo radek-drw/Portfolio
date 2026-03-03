@@ -1,6 +1,3 @@
-# ============================================
-# GitHub OIDC provider – allows CI workflow to assume AWS roles
-# ============================================
 resource "aws_iam_openid_connect_provider" "github" {
   url = "https://token.actions.githubusercontent.com"
 
@@ -13,9 +10,6 @@ resource "aws_iam_openid_connect_provider" "github" {
   ]
 }
 
-# ============================================
-# IAM Role for dev branch – only GitHub Actions from dev branch can assume
-# ============================================
 resource "aws_iam_role" "github_actions_dev" {
   name = "github-actions-terraform-dev-role"
 
@@ -41,9 +35,6 @@ resource "aws_iam_role" "github_actions_dev" {
   })
 }
 
-# ============================================
-# IAM Role for main branch – only GitHub Actions from main branch can assume
-# ============================================
 resource "aws_iam_role" "github_actions_prod" {
   name = "github-actions-terraform-prod-role"
 
@@ -61,7 +52,10 @@ resource "aws_iam_role" "github_actions_prod" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:radek-drw/Portfolio:ref:refs/heads/main",
+              "repo:radek-drw/Portfolio:ref:refs/pull/*"
+            ]
           }
         }
       }
@@ -69,9 +63,6 @@ resource "aws_iam_role" "github_actions_prod" {
   })
 }
 
-# ============================================
-# Attach AdministratorAccess policy to dev and prod roles
-# ============================================
 resource "aws_iam_role_policy_attachment" "dev_admin" {
   role       = aws_iam_role.github_actions_dev.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
