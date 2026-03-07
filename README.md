@@ -4,22 +4,28 @@ This website showcases my skills, projects, and provides a way to contact me
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Live Demo](#live-demo)
-- [Features](#features)
-  - [General Features](#general-features)
-  - [Navigation](#navigation)
-  - [Header](#header)
-  - [Skills Section](#skills-section)
-  - [Projects Section](#projects-section)
-  - [Contact Section](#contact-section)
-- [Troubleshooting](#troubleshooting)
-- [Technology Stack](#technology-stack)
-- [Development Setup & Workflow](#development-setup--workflow)
-  - [Project Structure](#project-structure)
-  - [Git Workflow](#git-workflow)
-- [Usage](#usage)
-- [Contact](#contact)
+- [Personal Portfolio Website](#personal-portfolio-website)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Live Demo](#live-demo)
+  - [Features](#features)
+    - [General Features](#general-features)
+    - [Navigation](#navigation)
+    - [Header](#header)
+    - [Skills Section](#skills-section)
+    - [Projects Section](#projects-section)
+    - [Contact Section](#contact-section)
+      - [Input Animations](#input-animations)
+      - [Form Validation Flow](#form-validation-flow)
+      - [Form Submission](#form-submission)
+  - [Troubleshooting](#troubleshooting)
+    - [Lambda Timeout](#lambda-timeout)
+  - [Technology Stack](#technology-stack)
+  - [Development Setup \& Workflow](#development-setup--workflow)
+    - [Project Structure](#project-structure)
+    - [Git Workflow](#git-workflow)
+  - [Usage](#usage)
+  - [Contact](#contact)
 
 ## Project Overview
 
@@ -137,7 +143,7 @@ flowchart LR
 
 ### Project Structure
 
-The project is organized as a monorepo using `npm workspaces`.  
+The project is organized as a monorepo using `pnpm workspaces`.  
 This keeps frontend and backend in one repository, simplifies dependency management, and allows sharing common tooling and configs.
 
 ### Git Workflow

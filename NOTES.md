@@ -1,64 +1,53 @@
-## Local Lambda Testing Flow
+## TO DO
 
-- Lambda backend can be tested locally before deploying it to AWS
-- A test script calls the handler with a sample event
-- The Lambda function processes the event as it would in production (validation, email sending, etc.).
-- The response includes statusCode and body, which can be inspected in the console.
-- This helps catch errors early, saving time and cloud costs
-- Benefits: saves build time, reduces cloud usage costs, and ensures backend logic works as expected before integration with the frontend.
+1. add locks i dynamodb for terraform state and add s3 versioning - [x]
+2. terraform - write documentation about adding, removing, editing, reading secrets in AWS SSM - [ ]
+3. change api name to dev-portoflio-api - [ ]
+4. .github\workflows\README.md - change descritpion when ci-quality-check finished - [ ]
+5. think to use pnpm while projects gets bigger - [x]
+6. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
+7. add to README.md - running `npm install` is intentionally blocked and will alway fail, `preinstall` script using `only-allow` enforces it. Project requires `pnpm` - [ ]
+8. find or try to build own solution - how to protect using `npm install` while pnpm is used in project, `only-allow` package doesn't give clear message - [ ]
+9. add .node-version to keep the same Node version for all devs and CI - [x]
+10. add to README.md how to setup `fnm` (Node version manager). Install fnm `choco install fnm`, configure bash `code ~/.bashrc` - add `eval "$(fnm env --use-on-cd --shell bash)"`, run `fnm use` to install version
+11. add script `postinstall` to `package.json` that checks if tools like tflint, terraform-docs, lazygit, nvm, ggshield etc are in project and if not instruction how to install (win, macos, linux)
+12. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
 
-## Cache DOM elements
+## ISSUES
 
-All required form elements are selected and stored in variables once on DOMContentLoaded. This approach:
+1. switching from npm to pnpm due to issues with workspaces when installing dependencies in the CI workflow (root - eslint, prettier)
+   Advantages: no versions conflicts
+2. how prevent using 'npm install xyz' due to conflicts with pnpm
 
-- avoids repeated calls to `document.getElementById` / `querySelector` during validation and error handling
-- improves performance by reducing DOM lookups
-- keeps the code shorter, cleaner, and easier to maintain
+**-----------------------------------------------------------------**
 
-## to do
+## CLEAN NPM
 
-1. add locks i dynamodb for terraform state and add s3 versioning
-2. **terraform** write documentation about adding, removing, editing, reading secrets in AWS SSM
+rm -rf node_modules frontend/node_modules backend/node_modules
+rm -f package-lock.json
+npm cache verify
+npm cache clean --force
+remove 'npm-cache' - C:\Users\rdrwe\AppData\Local
+remove 'npm' - C:\Users\rdrwe\AppData\Roaming
+add to .gitignore 'package-lock.json'
 
-```bash
- `aws ssm put-parameter \
-  --name recaptcha_secret \
-  --value some_value \
-  --type SecureString \
-  --description ReCAPTCHA secret key for contact form`
-```
+## CLEAN PNPM
 
-```bash
- `aws ssm put-parameter \
- --name ses_from_address \
- --value some_value \
- --type SecureString \
- --description Email address used as 'From' in the contact form`
-```
+corepack disable
+rm -rf node_modules frontend/node_modules backend/node_modules
+rm -f pnpm-lock.yaml
+pnpm store prune
+remove 'pnpm', 'pnpm-cache', 'pnpm-state' - C:\Users\rdrwe\AppData\Local
 
-## SECURITY
+## VOLTA
 
-This project helps prevent accidental exposure of sensitive information in source code, including API keys, passwords, access tokens, database credentials, and other secrets
+win + r -> sysdm.cpl
 
-### Security Setup
+## NODE.JS uninstall
 
-- **Install Python**  
-  Python is required to run ggshield
+## Checklist: Migration from npm to pnpm
 
-  ```bash
-  winget install Python.Python
-  ```
-
-- **Install ggshield**  
-  CLI tool that scans staged files for secrets in the `pre-commit` hook, preventing accidental leaks
-
-  ```bash
-  pipx install ggshield
-  ```
-
-  > **Note**: To use ggshield beyond local scans, a GitGuardian account is needed (`ggshield auth login`)
-
-- **GitGuardian**  
-   Is an additional security platform that detects and protects against accidentally exposed secrets across repositories and infrastructure
-
-change api name to dev-portoflio-api
+git grep -w -l npm
+git grep -l npx
+git grep package-lock
+git grep "npm install"

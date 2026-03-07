@@ -1,0 +1,40 @@
+name: Quality Check
+
+on:
+  push:
+    branches:
+      - dev
+
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.0
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter . --ignore-scripts
+
+      - name: Static code analysis (ESLint)
+        run: pnpm run lint
+
+      - name: Check code formatting (Prettier)
+        run: pnpm run format:check

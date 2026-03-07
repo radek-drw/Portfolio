@@ -2,10 +2,11 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
+  "packageManager": "pnpm@10.29.1",
+  "engines": {
+    "node": ">=24.13.0 <25",
+    "npm": "project-uses-pnpm"
+  },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "eslint": "^9.38.0",
@@ -16,19 +17,20 @@
     "prettier": "^3.6.2"
   },
   "scripts": {
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "lint": "eslint .",
     "format:check": "prettier --check .",
+    "lint-staged": "lint-staged --quiet",
     "prepare": "husky"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,mjs}": [
+    "**/*.{js,jsx,mjs}": [
       "eslint --fix",
       "prettier --write"
     ],
     "**/*.{json,scss,css,md}": [
       "prettier --write"
     ],
-    "*.tf": [
+    "**/*.{tf,tfvars}": [
       "terraform fmt"
     ]
   }

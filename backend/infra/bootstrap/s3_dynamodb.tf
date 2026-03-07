@@ -1,17 +1,7 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
-# ============================================
-# S3 Bucket for storing Terraform state files
-# ============================================
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "radek-portfolio-terraform-state"
 }
 
-# ============================================
-# Enable versioning on the Terraform state bucket
-# ============================================
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.terraform_state.id
   versioning_configuration {
@@ -19,9 +9,6 @@ resource "aws_s3_bucket_versioning" "versioning" {
   }
 }
 
-# ============================================
-# Enable server-side encryption (SSE) on the bucket
-# ============================================
 resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
   bucket = aws_s3_bucket.terraform_state.bucket
   rule {
@@ -31,9 +18,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
   }
 }
 
-# ============================================
-# DynamoDB Table for Terraform state locks
-# ============================================
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "terraform-locks-table"
   billing_mode = "PAY_PER_REQUEST"
@@ -46,9 +30,6 @@ resource "aws_dynamodb_table" "terraform_locks" {
   hash_key = "LockID"
 }
 
-# ============================================
-# Terraform backend outputs
-# ============================================
 output "s3_bucket_name" {
   value = aws_s3_bucket.terraform_state.bucket
 }
