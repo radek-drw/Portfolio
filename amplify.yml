@@ -4,6 +4,8 @@ applications:
       phases:
         preBuild:
           commands:
+            - nvm install 24.13.0
+            - nvm use 24.13.0
             - corepack enable
             - pnpm install --frozen-lockfile --ignore-scripts
         build:
