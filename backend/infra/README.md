@@ -4,7 +4,7 @@
 
 ### 1. Create S3 bucket and DynamoDB table
 
-Navigate to the `bootstrap/` and run:
+Navigate to `bootstrap/` and run:
 
 ```bash
 terraform init
