@@ -62,9 +62,16 @@ jobs:
         with:
           terraform_version: 1.14.5
 
+      - name: Terraform Format
+        run: terraform fmt -check -recursive backend/infra
+
       - name: Terraform Init (dev)
         working-directory: ./backend/infra/envs/dev
         run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./backend/infra/envs/dev
+        run: terraform validate
 
       - name: Terraform Apply (dev)
         working-directory: ./backend/infra/envs/dev
@@ -107,9 +114,16 @@ jobs:
         with:
           terraform_version: 1.14.5
 
+      - name: Terraform Format
+        run: terraform fmt -check -recursive backend/infra
+
       - name: Terraform Init (prod)
         working-directory: ./backend/infra/envs/prod
         run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./backend/infra/envs/prod
+        run: terraform validate
 
       - name: Terraform Plan (prod)
         working-directory: ./backend/infra/envs/prod
@@ -156,9 +170,16 @@ jobs:
         with:
           terraform_version: 1.14.5
 
+      - name: Terraform Format
+        run: terraform fmt -check -recursive backend/infra
+
       - name: Terraform Init (prod)
         working-directory: ./backend/infra/envs/prod
         run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./backend/infra/envs/prod
+        run: terraform validate
 
       - name: Terraform Apply (prod)
         working-directory: ./backend/infra/envs/prod
