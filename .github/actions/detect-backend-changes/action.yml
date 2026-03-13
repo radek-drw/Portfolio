@@ -1,0 +1,21 @@
+name: Detect backend changes
+description: Detect changes in backend code and infrastructure
+
+outputs:
+  lambda:
+    value: ${{ steps.filter.outputs.lambda }}
+  terraform:
+    value: ${{ steps.filter.outputs.terraform }}
+
+runs:
+  using: composite
+  steps:
+    - name: Detect changes
+      uses: dorny/paths-filter@v4
+      id: changes
+      with:
+        filters: |
+          lambda:
+            - 'backend/src/**'
+          terraform:
+            - 'backend/infra/**'
