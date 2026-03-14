@@ -5,7 +5,7 @@ module "contact_form_lambda" {
   lambda_zip_path = "../../../dist/contact-form.zip"
   handler         = "index.handler"
   runtime         = "nodejs22.x"
-  timeout         = 10
+  timeout         = 11
   role_arn        = module.contact_form_iam.role_arn
   description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
   environment_variables = {
