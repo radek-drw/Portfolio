@@ -1,11 +1,9 @@
 name: Detect backend changes
-description: Detect changes in backend code and infrastructure
+description: Detect changes in backend code
 
 outputs:
   lambda:
     value: ${{ steps.filter.outputs.lambda }}
-  terraform:
-    value: ${{ steps.filter.outputs.terraform }}
 
 runs:
   using: composite
@@ -17,5 +15,3 @@ runs:
         filters: |
           lambda:
             - 'backend/src/**'
-          terraform:
-            - 'backend/infra/**'
