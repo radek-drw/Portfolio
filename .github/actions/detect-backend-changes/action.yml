@@ -3,7 +3,7 @@ description: Detect changes in backend code
 
 outputs:
   lambda:
-    value: ${{ steps.filter.outputs.lambda }}
+    value: ${{ steps.changes.outputs.lambda }}
 
 runs:
   using: composite
