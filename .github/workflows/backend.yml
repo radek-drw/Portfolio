@@ -119,12 +119,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Detect backend changes
-        uses: ./.github/actions/detect-backend-changes
-        id: changes
-
       - name: Setup backend
-        if: steps.changes.outputs.lambda == 'true'
         uses: ./.github/actions/setup-backend
 
       - name: Configure AWS credentials (prod)
