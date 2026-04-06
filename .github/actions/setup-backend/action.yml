@@ -18,6 +18,8 @@ runs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile --filter backend
       shell: bash
+      env:
+        CI: true
 
     - name: Build lambda
       run: pnpm --filter backend run build:lambda contact-form
