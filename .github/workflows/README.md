@@ -16,7 +16,7 @@ This project includes two GitHub Actions workflows for automated quality checks 
     Triggered on pushes to the dev branch only if the latest commit message contains `[test]`:
 
     ```bash
-    if: contains(github.event.head_commit.message, '[test]')
+    if: contains(toLower(join(github.event.commits.*.message, ' ')), '[test]')
     ```
 
     This workflow mirrors the production CI but is used to safely test workflow changes without creating pull requests to main.
