@@ -1,23 +1,35 @@
 ## GitHub Actions Workflows
 
-This project includes two GitHub Actions workflows for automated quality checks and builds
+This project uses automated CI/CD pipelines for backend and frontend.
 
-1.  **Pull Request** → `main` (Production)
-    Triggered when a pull request targets the main branch.
-    It:
-    - installs all root and frontend dependencies
-    - runs ESLint and Prettier checks
-    - builds the frontend to ensure error-free code
+1. **Pull Request** - main (Production validation)
 
-    Purpose: Verify that code merged into main is linted, formatted, and buildable.
+   Triggered when a PR targets main.
 
-2.  **Push** → `dev` (Workflow Testing)
+   It:
+   - runs ESLint and Prettier checks
+   - builds the frontend
+   - runs Terraform plan for production
 
-    Triggered on pushes to the dev branch only if the latest commit message contains `[test]`:
+   Purpose: Ensure production changes are safe, valid, and buildable before merge.
 
-    ```bash
-    if: contains(toLower(join(github.event.commits.*.message, ' ')), '[test]')
-    ```
+2. **Push** - dev (Development environment)
 
-    This workflow mirrors the production CI but is used to safely test workflow changes without creating pull requests to main.
-    Once the test run succeeds, the verified configuration can be copied to the main workflow.
+   Triggered on every push to dev.
+
+   It:
+   - runs lint and formatting checks
+   - builds the frontend
+   - deploys backend infrastructure to dev using Terraform
+
+   Purpose: Continuous integration and automatic deployment to development environment.
+
+3. **Push** - main (Production deployment)
+
+   Triggered after merge to main.
+
+   It:
+   - runs Terraform apply for production
+   - requires manual approval via GitHub environments
+
+   Purpose: Controlled production deployment
