@@ -1,4 +1,4 @@
-## **invoke-contact-form.local.js**
+## invoke-contact-form.local.js
 
 This script enables local backend testing of `contact-form.js`. It allows verifying Lambda logic before deployment to AWS.
 
