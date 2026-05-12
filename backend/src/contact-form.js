@@ -84,7 +84,7 @@ export const handler = async (event) => {
       },
       Message: {
         Subject: {
-          Data: 'New message from Contact Form',
+          Data: 'New message from Portfolio-Website',
         },
         Body: { Html: { Data: htmlBody } },
       },
