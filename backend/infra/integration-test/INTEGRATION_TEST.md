@@ -27,7 +27,7 @@ It covers the integration of:
 - run a local static server in the folder containing the `get-token.html` file using `serve`
 
   ```bash
-  serve
+  npx serve
   ```
 
 - open the page in browser:  
