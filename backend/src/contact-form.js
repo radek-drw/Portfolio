@@ -10,7 +10,7 @@ const sesClient = new SESClient({ region: 'eu-west-1' });
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Validate form fields: required, email format, max length
+// Validate inputs
 function validateInput({ name, email, message }) {
   const errors = {};
 
@@ -30,12 +30,43 @@ function validateInput({ name, email, message }) {
   return errors;
 }
 
+// Build email content
+function buildEmailParams({ name, email, message }) {
+  const fromAddress = process.env.SES_FROM_ADDRESS;
+  const toAddress = 'rdrweski@gmail.com';
+
+  const htmlBody = `
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Message:</strong><br/>${message}</p>
+  `;
+
+  return {
+    Destination: {
+      ToAddresses: [toAddress],
+    },
+    Message: {
+      Subject: {
+        Data: 'New message from Portfolio-Website',
+      },
+      Body: {
+        Html: {
+          Data: htmlBody,
+        },
+      },
+    },
+    Source: fromAddress,
+    ReplyToAddresses: [email],
+  };
+}
+
 export const handler = async (event) => {
   try {
+    // 1. Parse request body
     const body = JSON.parse(event.body);
     const { name, email, message, recaptchaToken } = body;
 
-    // 1. Verify reCAPTCHA token
+    // 2. Verify reCAPTCHA token
     const bypassRecaptcha = process.env.RECAPTCHA_BYPASS === 'true';
     if (!bypassRecaptcha) {
       const verifyResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
@@ -57,7 +88,7 @@ export const handler = async (event) => {
       }
     }
 
-    // 2. Validate inputs
+    // 3. Validate inputs
     const errors = validateInput({ name, email, message });
     if (Object.keys(errors).length > 0) {
       return {
@@ -69,32 +100,17 @@ export const handler = async (event) => {
       };
     }
 
-    const fromAddress = process.env.SES_FROM_ADDRESS;
-    const toAddress = 'rdrweski@gmail.com';
+    // 4. Build email content
+    const emailParams = buildEmailParams({
+      name,
+      email,
+      message,
+    });
 
-    const htmlBody = `
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong><br/>${message}</p>
-    `;
+    // 5. Send email via SES
+    await sesClient.send(new SendEmailCommand(emailParams));
 
-    const params = {
-      Destination: {
-        ToAddresses: [toAddress],
-      },
-      Message: {
-        Subject: {
-          Data: 'New message from Portfolio-Website',
-        },
-        Body: { Html: { Data: htmlBody } },
-      },
-      Source: fromAddress,
-      ReplyToAddresses: [email],
-    };
-
-    const command = new SendEmailCommand(params);
-    await sesClient.send(command);
-
+    // 6. Return success response
     return {
       statusCode: 200,
       body: JSON.stringify({
@@ -104,6 +120,7 @@ export const handler = async (event) => {
     };
   } catch (err) {
     console.error('SES Error:', err.name, err.message);
+    // Return server error response
     return {
       statusCode: 500,
       body: JSON.stringify({
