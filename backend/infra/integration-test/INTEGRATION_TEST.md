@@ -12,11 +12,13 @@ It covers the integration of:
 
 **Get api_url**
 
-- run Terraform in `infra/envs/dev/`
+- run
 
   ```bash
   terraform output
   ```
+
+  in `infra/envs/dev/`
 
 - copy `api_url` and paste in Thunder Client with method POST
   > **Note**: Thunder Client is a lightweight REST API client for VS Code and can be installed from the extensions
