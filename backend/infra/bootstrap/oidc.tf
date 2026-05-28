@@ -10,24 +10,28 @@ resource "aws_iam_openid_connect_provider" "github" {
   ]
 }
 
-resource "aws_iam_role" "github_actions_dev" {
-  name = "github-actions-terraform-dev-role"
+resource "aws_iam_role" "github_actions_lambda_dev" {
+  name = "github-actions-lambda-dev-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
+
         Principal = {
           Federated = aws_iam_openid_connect_provider.github.arn
         }
+
         Action = "sts:AssumeRoleWithWebIdentity"
+
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
+
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/dev"
+            "token.actions.githubusercontent.com:sub": "repo:radek-drw/Portfolio:ref:refs/heads/dev"
           }
         }
       }
@@ -35,40 +39,26 @@ resource "aws_iam_role" "github_actions_dev" {
   })
 }
 
-resource "aws_iam_role" "github_actions_prod" {
-  name = "github-actions-terraform-prod-role"
+resource "aws_iam_policy" "lambda_deploy" {
+  name = "lambda-deploy-policy"
 
-  assume_role_policy = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
-        Principal = {
-          Federated = aws_iam_openid_connect_provider.github.arn
-        }
-        Action = "sts:AssumeRoleWithWebIdentity"
-        Condition = {
-          StringEquals = {
-            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-          }
-          StringLike = {
-            "token.actions.githubusercontent.com:sub" = [
-              "repo:radek-drw/Portfolio:ref:refs/heads/main",
-              "repo:radek-drw/Portfolio:ref:refs/pull/*"
-            ]
-          }
-        }
+
+        Action = [
+          "lambda:UpdateFunctionCode"
+        ]
+
+        Resource = "arn:aws:lambda:eu-west-1:123456789012:function:contact-form-dev"
       }
     ]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "dev_admin" {
-  role       = aws_iam_role.github_actions_dev.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-}
-
-resource "aws_iam_role_policy_attachment" "prod_admin" {
-  role       = aws_iam_role.github_actions_prod.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+resource "aws_iam_role_policy_attachment" "attach_lambda_deploy" {
+  role       = aws_iam_role.github_actions_lambda_dev.name
+  policy_arn = aws_iam_policy.lambda_deploy.arn
 }
