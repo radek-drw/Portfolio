@@ -52,7 +52,7 @@ resource "aws_iam_policy" "lambda_deploy" {
           "lambda:UpdateFunctionCode"
         ]
 
-        Resource = "arn:aws:lambda:eu-west-1:123456789012:function:contact-form-dev"
+        Resource = "arn:aws:lambda:eu-west-1:123456789012:function:dev-contact-form-lambda"
       }
     ]
   })
