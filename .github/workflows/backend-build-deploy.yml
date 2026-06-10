@@ -17,11 +17,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # checkout repo
       - name: Checkout code
         uses: actions/checkout@v6
 
-      # node setup
+      - name: Enable pnpm
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -29,26 +30,22 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
-      # install dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --filter backend
         shell: bash
         env:
           CI: true
 
-      # build lambda
       - name: Build lambda
         run: pnpm --filter backend run build:lambda contact-form
         shell: bash
 
-      # login to AWS via OIDC
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-lambda-dev-role
           aws-region: eu-west-1
 
-      # deploy new lambda code
       - name: Deploy Lambda
         run: |
           aws lambda update-function-code \
