@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Backend application (Node.js/AWS-SDK)test",
+  "description": "Backend application (Node.js/AWS-SDK)",
   "scripts": {
     "build:lambda": "node scripts/build-lambda.js",
     "invoke:contact-form": "node ./scripts/invoke-contact-form.local.js"
