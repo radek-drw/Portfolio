@@ -6,7 +6,6 @@ on:
       - dev
     paths:
       - 'backend/src/**'
-
 permissions:
   contents: read
   id-token: write
@@ -40,7 +39,7 @@ jobs:
         run: pnpm --filter backend run build:lambda contact-form
         shell: bash
 
-      # AWS login via OIDC
+      # login to AWS via OIDC
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
