@@ -6,6 +6,8 @@ on:
       - dev
     paths:
       - 'backend/src/**'
+      - 'backend/package.json'
+      - 'backend/scripts/build-lambda.js'
 permissions:
   contents: read
   id-token: write
