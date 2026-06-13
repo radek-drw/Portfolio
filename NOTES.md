@@ -51,3 +51,9 @@ git grep -w -l npm
 git grep -l npx
 git grep package-lock
 git grep "npm install"
+
+1. change names for dev and prod api_url
+
+2. change date in footer 2025->2026 (automatic using JS)
+3. fix readme in infra/bootstrap according OIDC
+4. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
