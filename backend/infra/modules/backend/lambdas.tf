@@ -1,5 +1,5 @@
 module "contact_form_lambda" {
-  source          = "../../modules/lambda/function"
+  source          = "../lambda/function"
   env_name        = var.env_name
   lambda_name     = local.contact_form_lambda_name
   lambda_zip_path = "../../../dist/contact-form.zip"

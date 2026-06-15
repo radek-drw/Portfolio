@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 module "contact_form_iam" {
-  source             = "../../modules/lambda/iam"
+  source             = "../lambda/iam"
   env_name           = var.env_name
   lambda_name        = local.contact_form_lambda_name
   policy_description = "Allows Lambda to send emails (SES), write logs (CloudWatch), and read config from SSM"
