@@ -7,7 +7,7 @@ import archiver from 'archiver';
 // Get function name from CLI args
 const fnName = process.argv[2];
 if (!fnName) {
-  console.error('❌ Please provide a function name, e.g. `pnpm build:lambda contact-form`');
+  console.error('❌ Please provide a function name, e.g. `pnpm build:lambda send-email`');
   process.exit(1);
 }
 
