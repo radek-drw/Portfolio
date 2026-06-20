@@ -1,7 +1,13 @@
-module "backend" {
-  source = "../../modules/backend"
+module "api" {
+  source        = "../../stacks/api"
 
-  aws_region    = "eu-west-1"
-  env_name      = "dev"
-  allow_origins = ["http://localhost:9000"]
+  env_name      = local.env_name
+  allow_origins = local.allow_origins
+}
+
+module "contact" {
+  source        = "../../stacks/contact"
+
+  aws_region    = local.aws_region
+  env_name      = local.env_name
 }
