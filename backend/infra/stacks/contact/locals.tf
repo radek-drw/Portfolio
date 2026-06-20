@@ -1,3 +1,3 @@
 locals {
-  contact_form_lambda_name = "contact-form"
+  send_email_lambda_name = "send-email"
 }
