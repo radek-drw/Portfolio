@@ -10,4 +10,7 @@ module "contact" {
 
   aws_region    = local.aws_region
   env_name      = local.env_name
+  api_id        = module.api.api_id
+  execution_arn = module.api.execution_arn
+  api_url       = module.api.api_url
 }
