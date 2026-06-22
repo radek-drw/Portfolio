@@ -7,3 +7,18 @@ variable "aws_region" {
   description = "AWS region to deploy resources in"
   type        = string
 }
+
+variable "api_id" {
+  description = "API Gateway ID from api stack"
+  type        = string
+}
+
+variable "execution_arn" {
+  description = "API Gateway execution ARN from api stack"
+  type        = string
+}
+
+variable "api_url" {
+  description = "API Gateway endpoint URL from api stack"
+  type        = string
+}
