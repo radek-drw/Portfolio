@@ -1,4 +1,4 @@
-resource "aws_apigatewayv2_api" "api" {
+resource "aws_apigatewayv2_api" "this" {
   name          = "${var.env_name}-portfolio-api"
   protocol_type = "HTTP"
   description   = var.description
@@ -10,8 +10,8 @@ resource "aws_apigatewayv2_api" "api" {
   }
 }
 
-resource "aws_apigatewayv2_stage" "stage" {
-  api_id      = aws_apigatewayv2_api.api.id
+resource "aws_apigatewayv2_stage" "this" {
+  api_id      = aws_apigatewayv2_api.this.id
   name        = var.env_name
   auto_deploy = true
 }
