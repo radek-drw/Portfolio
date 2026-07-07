@@ -14,3 +14,11 @@ module "contact" {
   execution_arn = module.api.execution_arn
   api_url       = module.api.api_url
 }
+
+module "frontend" {
+  source         = "../../stacks/frontend"
+
+  bucket_name    = local.bucket_name
+  tags           = local.tags
+  project_name   = local.project_name
+}
