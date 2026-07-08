@@ -1,4 +1,5 @@
 data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
 module "send_email_iam" {
   source             = "../../modules/lambda/iam"
@@ -22,8 +23,8 @@ module "send_email_iam" {
         Effect = "Allow"
         Action = ["ssm:GetParameter"]
         Resource = [
-          "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/recaptcha_secret",
-          "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/ses-from-address"
+          "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/recaptcha_secret",
+          "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/ses-from-address"
         ]
       }
     ]
