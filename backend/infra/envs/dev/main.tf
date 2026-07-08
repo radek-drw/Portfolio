@@ -1,12 +1,12 @@
 module "api" {
-  source        = "../../stacks/api"
+  source = "../../stacks/api"
 
   env_name      = local.env_name
   allow_origins = local.allow_origins
 }
 
 module "contact" {
-  source        = "../../stacks/contact"
+  source = "../../stacks/contact"
 
   aws_region    = local.aws_region
   env_name      = local.env_name
@@ -16,9 +16,9 @@ module "contact" {
 }
 
 module "frontend" {
-  source         = "../../stacks/frontend"
+  source = "../../stacks/frontend"
 
-  bucket_name    = local.bucket_name
-  tags           = local.tags
-  project_name   = local.project_name
+  bucket_name  = local.bucket_name
+  tags         = local.tags
+  project_name = local.project_name
 }
