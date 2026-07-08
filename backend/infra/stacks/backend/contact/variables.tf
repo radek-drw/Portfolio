@@ -3,11 +3,6 @@ variable "env_name" {
   type        = string
 }
 
-variable "aws_region" {
-  description = "AWS region to deploy resources in"
-  type        = string
-}
-
 variable "api_id" {
   description = "API Gateway ID from api stack"
   type        = string
