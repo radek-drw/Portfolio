@@ -5,10 +5,9 @@ module "api" {
   allow_origins = local.allow_origins
 }
 
-module "contact" {
-  source = "../../stacks/contact"
+module "contact_form" {
+  source = "../../stacks/contact-form"
 
-  aws_region    = local.aws_region
   env_name      = local.env_name
   api_id        = module.api.api_id
   execution_arn = module.api.execution_arn
