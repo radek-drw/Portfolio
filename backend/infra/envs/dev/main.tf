@@ -18,7 +18,7 @@ module "contact" {
 module "frontend" {
   source = "../../stacks/frontend"
 
-  bucket_name  = local.bucket_name
-  tags         = local.tags
-  project_name = local.project_name
+  frontend_bucket_name = local.frontend_bucket_name
+  tags                 = local.tags
+  project_name         = local.project_name
 }
