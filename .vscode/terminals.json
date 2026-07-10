@@ -34,14 +34,14 @@
     {
       "name": "TF Dev",
       "description": "Terraform Dev environment",
-      "cwd": "${workspaceFolder}/backend/infra/envs/dev",
+      "cwd": "${workspaceFolder}/infra/envs/dev",
       "color": "terminal.ansiBlue",
       "icon": "terminal"
     },
     {
       "name": "TF Prod",
       "description": "Terraform Prod environment",
-      "cwd": "${workspaceFolder}/backend/infra/envs/prod",
+      "cwd": "${workspaceFolder}/infra/envs/prod",
       "color": "terminal.ansiRed",
       "icon": "server"
     }
