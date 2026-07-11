@@ -33,7 +33,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_distribution_arn"></a> [distribution\_arn](#output\_distribution\_arn) | n/a |
-| <a name="output_distribution_domain_name"></a> [distribution\_domain\_name](#output\_distribution\_domain\_name) | n/a |
-| <a name="output_distribution_id"></a> [distribution\_id](#output\_distribution\_id) | n/a |
+| <a name="output_distribution_arn"></a> [distribution\_arn](#output\_distribution\_arn) | CloudFront distribution ARN |
+| <a name="output_distribution_domain_name"></a> [distribution\_domain\_name](#output\_distribution\_domain\_name) | CloudFront distribution domain name |
+| <a name="output_distribution_id"></a> [distribution\_id](#output\_distribution\_id) | CloudFront distribution ID |
 <!-- END_TF_DOCS -->
