@@ -29,5 +29,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_certificate_arn"></a> [certificate\_arn](#output\_certificate\_arn) | ARN of the ACM certificate |
+| <a name="output_certificate_arn"></a> [certificate\_arn](#output\_certificate\_arn) | ARN of ACM certificate |
+| <a name="output_domain_validation_options"></a> [domain\_validation\_options](#output\_domain\_validation\_options) | DNS validation records |
 <!-- END_TF_DOCS -->
