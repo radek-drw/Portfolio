@@ -1,12 +1,12 @@
 module "api" {
-  source = "../../stacks/api"
+  source = "../../stacks/backend/api"
 
   env_name      = local.env_name
   allow_origins = local.allow_origins
 }
 
 module "contact_form" {
-  source = "../../stacks/contact-form"
+  source = "../../stacks/backend/contact-form"
 
   env_name      = local.env_name
   api_id        = module.api.api_id
