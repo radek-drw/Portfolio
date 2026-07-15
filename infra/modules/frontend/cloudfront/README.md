@@ -36,4 +36,5 @@ No modules.
 | <a name="output_distribution_arn"></a> [distribution\_arn](#output\_distribution\_arn) | CloudFront distribution ARN |
 | <a name="output_distribution_domain_name"></a> [distribution\_domain\_name](#output\_distribution\_domain\_name) | CloudFront distribution domain name |
 | <a name="output_distribution_id"></a> [distribution\_id](#output\_distribution\_id) | CloudFront distribution ID |
+| <a name="output_distribution_zone_id"></a> [distribution\_zone\_id](#output\_distribution\_zone\_id) | CloudFront distribution hosted zone ID |
 <!-- END_TF_DOCS -->
