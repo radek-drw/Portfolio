@@ -17,3 +17,8 @@ variable "project_name" {
 variable "certificate_arn" {
   type = string
 }
+
+variable "domain_name" {
+  description = "Custom domain name"
+  type        = string
+}
