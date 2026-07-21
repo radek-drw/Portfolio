@@ -14,6 +14,10 @@ resource "aws_cloudfront_distribution" "this" {
   enabled             = true
   wait_for_deployment = true
 
+  aliases = [
+    var.domain_name
+  ]
+
   comment             = "${var.project_name} frontend"
   default_root_object = "index.html"
 
