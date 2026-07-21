@@ -20,10 +20,7 @@ resource "aws_route53_record" "certificate_validation" {
 resource "aws_acm_certificate_validation" "this" {
   certificate_arn = var.certificate_arn
 
-  validation_record_fqdns = [
-    for record in aws_route53_record.certificate_validation :
-    record.fqdn
-  ]
+  validation_record_fqdns = [for record in aws_route53_record.certificate_validation : record.fqdn]
 }
 
 resource "aws_route53_record" "alias_a" {
