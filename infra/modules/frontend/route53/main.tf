@@ -17,6 +17,15 @@ resource "aws_route53_record" "certificate_validation" {
   ttl             = 60
 }
 
+resource "aws_acm_certificate_validation" "this" {
+  certificate_arn = var.certificate_arn
+
+  validation_record_fqdns = [
+    for record in aws_route53_record.certificate_validation :
+    record.fqdn
+  ]
+}
+
 resource "aws_route53_record" "alias_a" {
   zone_id = data.aws_route53_zone.this.zone_id
   name    = var.domain_name
