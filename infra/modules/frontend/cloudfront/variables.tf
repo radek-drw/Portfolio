@@ -13,3 +13,7 @@ variable "project_name" {
   description = "Name of the project"
   type        = string
 }
+
+variable "certificate_arn" {
+  type = string
+}
