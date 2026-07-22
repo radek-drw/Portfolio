@@ -1,6 +1,6 @@
 output "api_id" {
   description = "API Gateway ID used for route creation and integrations"
-  value       = aws_apigatewayv2_api.this
+  value       = aws_apigatewayv2_api.this.id
 }
 
 output "execution_arn" {
