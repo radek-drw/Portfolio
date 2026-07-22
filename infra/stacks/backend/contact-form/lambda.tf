@@ -12,7 +12,7 @@ module "send_email_lambda" {
   source          = "../../../modules/backend/lambda/function"
   env_name        = var.env_name
   lambda_name     = local.send_email_lambda_name
-  lambda_zip_path = "../../../../backend/dist/send-email.zip"
+  lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
   handler         = "index.handler"
   runtime         = "nodejs22.x"
   timeout         = 10
