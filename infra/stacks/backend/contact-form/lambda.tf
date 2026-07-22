@@ -9,10 +9,10 @@ data "aws_ssm_parameter" "ses_from_address" {
 }
 
 module "send_email_lambda" {
-  source          = "../../modules/lambda/function"
+  source          = "../../../modules/backend/lambda/function"
   env_name        = var.env_name
   lambda_name     = local.send_email_lambda_name
-  lambda_zip_path = "../../../dist/send-email.zip"
+  lambda_zip_path = "../../../../backend/dist/send-email.zip"
   handler         = "index.handler"
   runtime         = "nodejs22.x"
   timeout         = 10

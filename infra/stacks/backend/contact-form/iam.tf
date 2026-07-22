@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 module "send_email_iam" {
-  source             = "../../modules/lambda/iam"
+  source             = "../../../modules/backend/lambda/iam"
   env_name           = var.env_name
   lambda_name        = local.send_email_lambda_name
   policy_description = "Allows Lambda to send emails (SES), write logs (CloudWatch), and read config from SSM"
