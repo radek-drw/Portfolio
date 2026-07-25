@@ -22,4 +22,8 @@ module "frontend" {
   project_name         = local.project_name
   domain_name          = local.domain_name
   hosted_zone_name     = local.hosted_zone_name
+  providers = {
+    aws           = aws
+    aws.us_east_1 = aws.us_east_1
+  }
 }
