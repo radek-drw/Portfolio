@@ -1,6 +1,6 @@
 locals {
   env_name      = "dev"
-  allow_origins = ["http://localhost:9000"]
+  allow_origins = ["http://localhost:9000", "https://dev.radek-drweski.com"]
   frontend_bucket_name   = "dev-portfolio-static-site"
   project_name  = "portfolio"
   domain_name   = "dev.radek-drweski.com"
@@ -10,5 +10,4 @@ locals {
     Project     = "portfolio"
     ManagedBy   = "Terraform"
   }
-
 }
