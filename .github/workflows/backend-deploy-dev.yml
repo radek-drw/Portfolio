@@ -50,5 +50,5 @@ jobs:
       - name: Deploy Lambda
         run: |
           aws lambda update-function-code \
-            --function-name dev-contact-form-lambda \
-            --zip-file fileb://backend/dist/contact-form.zip
+            --function-name dev-send-email-lambda \
+            --zip-file fileb://backend/dist/send-email.zip
