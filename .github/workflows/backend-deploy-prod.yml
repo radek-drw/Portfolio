@@ -8,6 +8,7 @@ on:
       - 'backend/src/**'
       - 'backend/package.json'
       - 'backend/scripts/build-lambda.js'
+      - '!backend/**/*.md'
 permissions:
   contents: read
   id-token: write
