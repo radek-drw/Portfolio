@@ -18,11 +18,11 @@ locals {
   environments = {
     dev = {
       branch_name = "dev"
-      lambda_name = "dev-contact-form-lambda"
+      lambda_name = "dev-send-email-lambda"
     }
     prod = {
       branch_name = "main"
-      lambda_name = "prod-contact-form-lambda"
+      lambda_name = "prod-send-email-lambda"
     }
   }
 }
