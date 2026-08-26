@@ -115,7 +115,7 @@ export const handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({
         success: true,
-        message: 'Email sent successfully',
+        message: 'Email sent successfully. thank youn for reaching out!',
       }),
     };
   } catch (err) {
