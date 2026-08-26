@@ -38,7 +38,7 @@ jobs:
           CI: true
 
       - name: Build lambda
-        run: pnpm --filter backend run build:lambda contact-form
+        run: pnpm --filter backend run build:lambda send-email
         shell: bash
 
       - name: Configure AWS credentials
