@@ -57,3 +57,5 @@ git grep "npm install"
 2. change date in footer 2025->2026 (automatic using JS)
 3. fix readme in infra/bootstrap according OIDC
 4. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
+5. IAM users -> create by terraform not in console
+6. add readme to infra/bootstrap with explanation of responsibility od files
