@@ -8,7 +8,7 @@ data "aws_ssm_parameter" "ses_from_address" {
   with_decryption = true
 }
 
-module "send_email_lambda" {
+module "lambda" {
   source          = "../../../modules/backend/lambda/function"
   env_name        = var.env_name
   lambda_name     = local.send_email_lambda_name
@@ -16,7 +16,7 @@ module "send_email_lambda" {
   handler         = "index.handler"
   runtime         = "nodejs22.x"
   timeout         = 10
-  role_arn        = module.send_email_iam.role_arn
+  role_arn        = module.iam.role_arn
   description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
   environment_variables = {
     RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
