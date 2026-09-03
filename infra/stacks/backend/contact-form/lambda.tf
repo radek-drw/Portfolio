@@ -11,7 +11,7 @@ data "aws_ssm_parameter" "ses_from_address" {
 module "lambda" {
   source          = "../../../modules/backend/lambda/function"
   env_name        = var.env_name
-  lambda_name     = local.send_email_lambda_name
+  lambda_name     = local.lambda_name
   lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
   handler         = "index.handler"
   runtime         = "nodejs22.x"
