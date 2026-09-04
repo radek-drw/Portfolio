@@ -16,7 +16,7 @@ module "lambda" {
   handler         = "index.handler"
   runtime         = "nodejs22.x"
   timeout         = 10
-  role_arn        = module.iam.role_arn
+  role_arn        = module.iam.arn
   description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
   environment_variables = {
     RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
