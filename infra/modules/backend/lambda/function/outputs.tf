@@ -7,3 +7,8 @@ output "invoke_arn" {
   description = "Lambda function invoke ARN, used for API Gateway integrations"
   value       = aws_lambda_function.this.invoke_arn
 }
+
+output "arn" {
+  description = "ARN of the Lambda function"
+  value       = aws_lambda_function.this.arn
+}
