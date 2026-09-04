@@ -47,7 +47,7 @@ function buildEmailParams({ name, email, message }) {
     },
     Message: {
       Subject: {
-        Data: 'NEW!!! message from Portfolio Website',
+        Data: 'NEW!!!! message from Portfolio Website',
       },
       Body: {
         Html: {
