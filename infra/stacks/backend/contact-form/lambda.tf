@@ -14,7 +14,7 @@ module "lambda" {
   lambda_name     = local.lambda_name
   lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
   handler         = "index.handler"
-  runtime         = "nodejs22.x"
+  runtime         = "nodejs24.x"
   timeout         = 10
   role_arn        = module.iam.arn
   description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
