@@ -1,4 +1,4 @@
-import { handler } from '../src/contact-form.js';
+import { handler } from '../src/send-email.js';
 
 const event = {
   body: JSON.stringify({
