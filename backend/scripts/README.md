@@ -1,47 +1,42 @@
-## invoke-contact-form.local.js
-
-This script enables local backend testing of `contact-form.js`. It allows verifying Lambda logic before deployment to AWS.
-
-**Advantages**
-
-- fast to run, no need to redeploy after every change
-- easy to debug with full access to console logs and breakpoints
-- reduces development time and AWS costs
-
-**Usage**
-
-- script in: `backend/package.json`
-- run script:
-  ```bash
-  pnpm invoke:contact-form
-  ```
-- handler: `backend/src/contact-form.js`
-
-**Purpose**
-
-- tests backend logic only: validation, SES email sending
-- minimal AWS usage: API Gateway and Lambda aren’t invoked; SES is invoked
-- locally, reCAPTCHA is skipped via `RECAPTCHA_BYPASS=true` in `.env`.
-  In AWS Lambda the variable is not set, so the bypass resolves to `false` and reCAPTCHA verification is always executed
-
-> **Note:** Full integration tests (API Gateway, IAM, reCAPTCHA, Lambda, SES) are described in `infra/envs/dev`
+# Backend Scripts — What they do & How to use them
 
 ## build-lambda.js
 
-This script builds and packages an AWS Lambda function into a ZIP ready for deployment.
+Builds and packages all AWS Lambda functions from `backend/src/` into individual ZIP files ready for deployment
 
-**Key features**
+**Features**
 
-- bundles the Lambda function with `esbuild` (minified)
-- bundles dependencies, excluding `aws-sdk` already available in Lambda
-- produces a ZIP ready to upload to AWS (deployed via Terraform)
+- automatically discovers all `.js` Lambda entry files
+- bundles and minifies code with `esbuild`
+- creates individual ZIP files in `backend/dist/` ready to upload to AWS
+- measures the build time of each Lambda and the complete build to monitor build performance in GitHub Actions. Currently, the project is small enough that building all Lambdas takes only ~1 second, so there is no need to add script to detect which Lambda has changed. If the number of Lambdas grows and the build time becomes significant, the timing will help determine when it is worth developing a script to detect which Lambda has changed and build only that one
 
 **Usage**
 
-- script in `backend/package.json`
-- run script:
-  ```bash
-  pnpm build:lambda <function-name>
-  ```
-- source file (handler): `backend/src/<functionName>.js`
-- output ZIP: `backend/dist/<functionName>.zip`
+Run from the `backend/` directory:
+
+```bash
+pnpm build:lambda
+```
+
+Output ZIP: `backend/dist/<functionName>.zip`
+
+## invoke-send-email.local.js
+
+Locally invokes the Lambda handler to test backend logic before deployment to AWS
+
+**Features**
+
+- tests validation and email sending locally
+- skips API Gateway and Lambda invocation; SES is still used
+
+**Usage**
+
+Run from the `backend/` directory:
+
+```bash
+pnpm invoke:send-email
+```
+
+> **Note** when testing locally, reCAPTCHA is skipped via `RECAPTCHA_BYPASS=true` in `.env`.
+> In AWS Lambda the variable is not set, so the bypass resolves to `false` and reCAPTCHA verification is always executed
