@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import { performance } from 'node:perf_hooks';
 
 import { build } from 'esbuild';
 import archiver from 'archiver';
@@ -7,7 +8,7 @@ import archiver from 'archiver';
 const srcDir = 'src';
 const distDir = 'dist';
 
-// Find all Lambda files in src/
+// Find all Lambda entry files in src/
 const lambdaFiles = fs.readdirSync(srcDir).filter((file) => file.endsWith('.js'));
 
 if (lambdaFiles.length === 0) {
@@ -21,6 +22,8 @@ for (const file of lambdaFiles) {
   console.log(`   • ${file}`);
 }
 
+const totalStart = performance.now();
+
 for (const file of lambdaFiles) {
   const fnName = path.basename(file, '.js');
 
@@ -28,6 +31,8 @@ for (const file of lambdaFiles) {
   const outDir = path.join(distDir, fnName);
   const outFile = path.join(outDir, 'index.js');
   const zipFile = path.join(distDir, `${fnName}.zip`);
+
+  const start = performance.now();
 
   // Clean previous build
   fs.rmSync(outDir, { recursive: true, force: true });
@@ -42,7 +47,7 @@ for (const file of lambdaFiles) {
     entryPoints: [entry],
     bundle: true,
     platform: 'node',
-    target: 'node20',
+    target: 'node24',
     outfile: outFile,
     minify: true,
     external: ['aws-sdk'],
@@ -53,12 +58,17 @@ for (const file of lambdaFiles) {
   await zipLambda(outDir, zipFile);
 
   const stats = fs.statSync(zipFile);
+  const duration = ((performance.now() - start) / 1000).toFixed(2);
 
   console.log(`✅ ZIP file created: ${zipFile}`);
   console.log(`📦 ZIP size: ${(stats.size / 1024).toFixed(2)} KB`);
+  console.log(`⏱️ Total time: ${duration}s`);
 }
 
-console.log('\n🎉 All Lambda functions built successfully!');
+const totalDuration = ((performance.now() - totalStart) / 1000).toFixed(2);
+
+console.log('\n✅ All Lambda functions built successfully!');
+console.log(`⏱️ Total build time: ${totalDuration}s`);
 
 async function zipLambda(sourceDir, zipPath) {
   return new Promise((resolve, reject) => {
