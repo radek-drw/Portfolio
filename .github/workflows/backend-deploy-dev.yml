@@ -39,7 +39,7 @@ jobs:
           CI: true
 
       - name: Build lambda
-        run: pnpm --filter backend run build:lambda send-email
+        run: pnpm --filter backend run build:lambda
         shell: bash
 
       - name: Configure AWS credentials
@@ -48,19 +48,16 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/dev-github-actions-lambda-deploy-role
           aws-region: eu-west-1
 
-      - name: Deploy all Lambdas
+      - name: Deploy Lambdas
         run: |
           for zip in backend/dist/*.zip; do
             lambda_name=$(basename "$zip" .zip)
             aws_name="dev-${lambda_name}-lambda"
 
             echo "🚀 Deploying $lambda_name..."
-            echo "   AWS Lambda: $aws_name"
-            echo "   Artifact: $zip"
 
             aws lambda update-function-code \
               --function-name "$aws_name" \
               --zip-file "fileb://$zip"
 
-            echo "✅ Deployed $lambda_name"
           done
