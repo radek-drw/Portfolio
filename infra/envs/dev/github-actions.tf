@@ -34,7 +34,6 @@ resource "aws_iam_role" "github_actions_lambda_deploy" {
 }
 
 resource "aws_iam_policy" "github_actions_lambda_deploy" {
-
   name = "${local.env_name}-github-actions-lambda-deploy-policy"
 
   policy = jsonencode({
@@ -48,8 +47,10 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
           "lambda:UpdateFunctionCode"
         ]
 
-        Resource = module.contact_form.lambda_arn
-        Resource = module.test_lambda.lambda_arn
+        Resource = [
+          module.contact_form.lambda_arn,
+          module.test_lambda.lambda_arn
+        ]
       }
     ]
   })
