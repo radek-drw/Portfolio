@@ -49,6 +49,7 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
         ]
 
         Resource = module.contact_form.lambda_arn
+        Resource = module.test_lambda.lambda_arn
       }
     ]
   })
