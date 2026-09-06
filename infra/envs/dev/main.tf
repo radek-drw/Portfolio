@@ -14,12 +14,6 @@ module "contact_form" {
   api_url       = module.api.api_url
 }
 
-module "test_lambda" {
-  source = "../../stacks/backend/test-lambda"
-
-  env_name      = local.env_name
-}
-
 module "frontend" {
   source = "../../stacks/frontend"
 
