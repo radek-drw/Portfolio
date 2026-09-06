@@ -48,8 +48,19 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/dev-github-actions-lambda-deploy-role
           aws-region: eu-west-1
 
-      - name: Deploy Lambda
+      - name: Deploy all Lambdas
         run: |
-          aws lambda update-function-code \
-            --function-name dev-send-email-lambda \
-            --zip-file fileb://backend/dist/send-email.zip
+          for zip in backend/dist/*.zip; do
+            lambda_name=$(basename "$zip" .zip)
+            aws_name="dev-${lambda_name}-lambda"
+
+            echo "🚀 Deploying $lambda_name..."
+            echo "   AWS Lambda: $aws_name"
+            echo "   Artifact: $zip"
+
+            aws lambda update-function-code \
+              --function-name "$aws_name" \
+              --zip-file "fileb://$zip"
+
+            echo "✅ Deployed $lambda_name"
+          done
