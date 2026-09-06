@@ -62,7 +62,7 @@ for (const file of lambdaFiles) {
 
   console.log(`✅ ZIP file created: ${zipFile}`);
   console.log(`📦 ZIP size: ${(stats.size / 1024).toFixed(2)} KB`);
-  console.log(`⏱️ Total time: ${duration}s`);
+  console.log(`⏱️ Total time: ${duration}s\n`);
 }
 
 const totalDuration = ((performance.now() - totalStart) / 1000).toFixed(2);
