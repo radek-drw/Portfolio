@@ -30,7 +30,7 @@ No modules.
 | <a name="input_lambda_name"></a> [lambda\_name](#input\_lambda\_name) | Logical name of the Lambda function | `string` | n/a | yes |
 | <a name="input_lambda_zip_path"></a> [lambda\_zip\_path](#input\_lambda\_zip\_path) | Path to the Lambda deployment ZIP file | `string` | n/a | yes |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | IAM role ARN assumed by the Lambda function | `string` | n/a | yes |
-| <a name="input_runtime"></a> [runtime](#input\_runtime) | Runtime environment for the Lambda function | `string` | `"nodejs22.x"` | no |
+| <a name="input_runtime"></a> [runtime](#input\_runtime) | Runtime environment for the Lambda function | `string` | `"nodejs24.x"` | no |
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | Maximum execution time of the Lambda function in seconds | `number` | `3` | no |
 
 ## Outputs
