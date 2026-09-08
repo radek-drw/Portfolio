@@ -7,6 +7,7 @@ on:
     paths:
       - 'backend/src/**'
       - 'backend/package.json'
+      - 'pnpm-lock.yaml'
       - 'backend/scripts/build-lambda.js'
       - '!backend/**/*.md'
 permissions:
@@ -37,18 +38,25 @@ jobs:
         env:
           CI: true
 
-      - name: Build lambda
-        run: pnpm --filter backend run build:lambda contact-form
+      - name: Build Lambdas
+        run: pnpm --filter backend run build:lambda
         shell: bash
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-lambda-prod-role
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/prod-github-actions-lambda-deploy-role
           aws-region: eu-west-1
 
-      - name: Deploy Lambda
+      - name: Deploy Lambdas
         run: |
-          aws lambda update-function-code \
-            --function-name prod-contact-form-lambda \
-            --zip-file fileb://backend/dist/contact-form.zip
+          for zip in backend/dist/*.zip; do
+            lambda_name=$(basename "$zip" .zip)
+            aws_name="prod-${lambda_name}-lambda"
+
+            echo "🚀 Deploying $lambda_name..."
+
+            aws lambda update-function-code \
+              --function-name "$aws_name" \
+              --zip-file "fileb://$zip"
+          done
