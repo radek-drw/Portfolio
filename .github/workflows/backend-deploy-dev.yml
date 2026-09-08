@@ -7,6 +7,7 @@ on:
     paths:
       - 'backend/src/**'
       - 'backend/package.json'
+      - 'pnpm-lock.yaml'
       - 'backend/scripts/build-lambda.js'
       - '!backend/**/*.md'
   workflow_dispatch:
@@ -38,7 +39,7 @@ jobs:
         env:
           CI: true
 
-      - name: Build lambda
+      - name: Build Lambdas
         run: pnpm --filter backend run build:lambda
         shell: bash
 
@@ -59,5 +60,4 @@ jobs:
             aws lambda update-function-code \
               --function-name "$aws_name" \
               --zip-file "fileb://$zip"
-
           done
