@@ -1,4 +1,4 @@
-output "name" {
+output "lambda_name" {
   description = "Lambda function name"
   value       = aws_lambda_function.this.function_name
 }
@@ -8,7 +8,7 @@ output "invoke_arn" {
   value       = aws_lambda_function.this.invoke_arn
 }
 
-output "arn" {
+output "lambda_arn" {
   description = "ARN of the Lambda function"
   value       = aws_lambda_function.this.arn
 }

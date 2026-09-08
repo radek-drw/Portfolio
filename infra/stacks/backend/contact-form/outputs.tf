@@ -5,5 +5,5 @@ output "contact_api_url" {
 
 output "lambda_arn" {
   description = "ARN of the Lambda function"
-  value       = module.lambda.arn
+  value       = module.lambda.lambda_arn
 }

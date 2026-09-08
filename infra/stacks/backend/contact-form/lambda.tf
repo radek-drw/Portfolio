@@ -14,7 +14,7 @@ module "lambda" {
   lambda_name     = local.lambda_name
   lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
   timeout         = 10
-  role_arn        = module.iam.arn
+  role_arn        = module.iam.role_arn
   description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
   environment_variables = {
     RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
