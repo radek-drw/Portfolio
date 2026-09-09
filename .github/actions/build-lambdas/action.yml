@@ -1,5 +1,5 @@
-name: Setup Backend
-description: Install deps and build lambda
+name: Build Lambdas
+description: Install backend dependencies and build Lambdas
 
 runs:
   using: 'composite'
@@ -21,6 +21,6 @@ runs:
       env:
         CI: true
 
-    - name: Build lambda
-      run: pnpm --filter backend run build:lambda contact-form
+    - name: Build Lambdas
+      run: pnpm --filter backend run build:lambda
       shell: bash
