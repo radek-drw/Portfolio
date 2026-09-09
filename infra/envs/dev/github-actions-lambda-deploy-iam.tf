@@ -1,7 +1,3 @@
-data "aws_iam_openid_connect_provider" "github" {
-  url = "https://token.actions.githubusercontent.com"
-}
-
 resource "aws_iam_role" "github_actions_lambda_deploy" {
 
   name = "${local.env_name}-github-actions-lambda-deploy-role"
