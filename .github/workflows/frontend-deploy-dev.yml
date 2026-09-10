@@ -7,6 +7,7 @@ on:
     paths:
       - 'frontend/**'
       - '!frontend/**/*.md'
+  workflow_dispatch:
 permissions:
   contents: read
   id-token: write
