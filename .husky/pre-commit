@@ -23,49 +23,45 @@
 # pnpm run lint-staged
 # echo "----------------------------------------"
 
-# ## =============================================
-# ## UPDATE TERRAFORM MODULE DOCS | terraform-docs
-# ## =============================================
-# # Checks that terraform-docs is installed
-# if ! command -v terraform-docs >/dev/null 2>&1; then
-#   echo "❌ terraform-docs is not installed" >&2
-#   echo "Install it from: https://terraform-docs.io/user-guide/installation/" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+# =================================
+# VALIDATE TERRAFORM FILES | tflint
+# =================================
+# Checks that TFLint is installed
+if ! command -v tflint; then
+  echo "TFLint is not installed"
+  exit 1
+fi
 
-# # Updates README.md for each module with staged .tf changes
-# git diff --cached --name-only \
-#   | grep '^backend/infra/modules/.*\.tf$' \
-#   | xargs -r -n1 dirname -- \
-#   | sort -u \
-#   | while read -r module; do
-#       echo "Updating docs for $module"
-#       terraform-docs markdown table "$module" \
-#         --output-file README.md \
-#         --output-mode inject
-#       git add "$module/README.md" # Manually stage the updated README.md
-#       echo "----------------------------------------"
-#     done
+# Run TFLint only in Terraform directories affected by staged changes. 
+# This avoids scanning the entire infra/ directory on every commit, making the pre-commit check faster
+for dir in $(git diff --cached --name-only \
+  | grep '^infra/.*\.tf$' \
+  | xargs -r -n1 dirname \
+  | sort -u); do
+  (cd "$dir" && tflint)
+done
 
-# ## =================================
-# ## VALIDATE TERRAFORM FILES | tflint
-# ## =================================
-# # Checks that tflint is installed
-# if ! command -v tflint >/dev/null 2>&1; then
-#   echo "❌ tflint is not installed" >&2
-#   echo "Install it from: https://github.com/terraform-linters/tflint" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+# =============================================
+# UPDATE TERRAFORM MODULE DOCS | terraform-docs
+# =============================================
+# Checks that terraform-docs is installed
+if ! command -v terraform-docs; then
+  echo "terraform-docs is not installed"
+  exit 1
+fi
 
-# # Runs tflint for each directory with staged .tf changes
-# git diff --cached --name-only \
-#   | grep '^backend/infra/.*\.tf$' \
-#   | xargs -r -n1 dirname -- \
-#   | sort -u \
-#   | while read -r dir; do
-#       echo "Running tflint for $dir"
-#       (cd "$dir" && tflint)
-#       echo "----------------------------------------"
-#     done
+# Update documentation only for Terraform modules affected by staged changes.
+# This avoids regenerating documentation for every module on every commit.
+# terraform-docs modifies README.md files, so the updated files must be staged again
+# before the commit. This script automatically stages the updated README.md files
+for dir in $(git diff --cached --name-only \
+  | grep '^infra/modules/.*\.tf$' \
+  | xargs -r -n1 dirname \
+  | sort -u); do
+
+  terraform-docs markdown table "$dir" \
+    --output-file README.md \
+    --output-mode inject
+
+  git add "$dir/README.md"
+done
