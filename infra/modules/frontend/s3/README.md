@@ -32,7 +32,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bucket_arn"></a> [bucket\_arn](#output\_bucket\_arn) | Bucket ARN |
+| <a name="output_bucket_arn"></a> [bucket\_arn](#output\_bucket\_arn) | ARN of the S3 bucket |
 | <a name="output_bucket_id"></a> [bucket\_id](#output\_bucket\_id) | Bucket ID |
 | <a name="output_bucket_name"></a> [bucket\_name](#output\_bucket\_name) | Bucket name |
 | <a name="output_bucket_regional_domain_name"></a> [bucket\_regional\_domain\_name](#output\_bucket\_regional\_domain\_name) | Regional domain name of the bucket |

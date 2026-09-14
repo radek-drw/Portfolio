@@ -37,9 +37,9 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_arn"></a> [arn](#output\_arn) | ARN of the Lambda function |
 | <a name="output_invoke_arn"></a> [invoke\_arn](#output\_invoke\_arn) | Lambda function invoke ARN, used for API Gateway integrations |
-| <a name="output_name"></a> [name](#output\_name) | Lambda function name |
+| <a name="output_lambda_arn"></a> [lambda\_arn](#output\_lambda\_arn) | ARN of the Lambda function |
+| <a name="output_lambda_name"></a> [lambda\_name](#output\_lambda\_name) | Lambda function name |
 <!-- END_TF_DOCS -->
 
 ## Usage
