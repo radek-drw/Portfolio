@@ -40,7 +40,7 @@ resource "aws_cloudfront_distribution" "this" {
   default_cache_behavior {
     target_origin_id       = "frontend"
     viewer_protocol_policy = "redirect-to-https"
-    allowed_methods         = [
+    allowed_methods = [
       "GET",
       "HEAD",
       "OPTIONS"
@@ -59,9 +59,9 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
- viewer_certificate {
-  acm_certificate_arn      = var.certificate_arn
-  ssl_support_method       = "sni-only"
-  minimum_protocol_version = "TLSv1.2_2021"
-}
+  viewer_certificate {
+    acm_certificate_arn      = var.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
+  }
 }

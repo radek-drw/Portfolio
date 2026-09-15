@@ -6,7 +6,7 @@ module "s3" {
 }
 
 module "acm" {
-  source = "../../modules/frontend/acm"
+  source      = "../../modules/frontend/acm"
   domain_name = var.domain_name
   providers = {
     aws = aws.us_east_1
@@ -40,6 +40,6 @@ module "acm_validation" {
   providers = {
     aws = aws.us_east_1
   }
-  certificate_arn = module.acm.certificate_arn
+  certificate_arn         = module.acm.certificate_arn
   validation_record_fqdns = module.route53.validation_record_fqdns
 }
