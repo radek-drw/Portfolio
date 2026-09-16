@@ -1,27 +1,21 @@
-# #!/bin/sh
-# set -e
+#!/usr/bin/env bash
+set -e
 
-# ## ======================
-# ## SECRET SCAN | ggshield
-# ## ======================
-# # Checks that ggshield is installed
-# if ! command -v ggshield >/dev/null 2>&1; then
-#   echo "❌ ggshield is not installed" >&2
-#   echo "Install it from: https://github.com/GitGuardian/ggshield" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+## ======================
+## SECRET SCAN | gitleaks
+## ======================
+# Checks that gitleaks is installed
+if ! command -v gitleaks; then
+  echo "gitleaks is not installed"
+  exit 1
+fi
+# Scan staged files for secrets. Redact secret values and show detailed findings
+gitleaks protect --staged --redact --verbose
 
-# echo "Running secret scan with ggshield..."
-# ggshield secret scan pre-commit
-# echo "----------------------------------------"
-
-# ## ===============================================
-# ## LINT & FORMAT | prettier, eslint, terraform
-# ## ===============================================
-# echo "Running lint-staged..."
-# pnpm run lint-staged
-# echo "----------------------------------------"
+## ===============================================
+## LINT & FORMAT | prettier, eslint, terraform
+## ===============================================
+pnpm run lint-staged
 
 # =================================
 # VALIDATE TERRAFORM FILES | tflint
@@ -34,11 +28,21 @@ fi
 
 # Run TFLint only in Terraform directories affected by staged changes. 
 # This avoids scanning the entire infra/ directory on every commit, making the pre-commit check faster
+# Use the correct '--config' depending on the directory
 for dir in $(git diff --cached --name-only \
   | grep '^infra/.*\.tf$' \
   | xargs -r -n1 dirname \
   | sort -u); do
-  (cd "$dir" && tflint)
+
+  if [[ "$dir" == infra/modules/* ]]; then
+    config="$(pwd)/infra/modules/.tflint.hcl"
+  elif [[ "$dir" == infra/stacks/* ]]; then
+    config="$(pwd)/infra/stacks/.tflint.hcl"
+  else
+    config="$(pwd)/infra/.tflint.hcl"
+  fi
+
+  (cd "$dir" && tflint --config "$config")
 done
 
 # =============================================
