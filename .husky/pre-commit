@@ -10,11 +10,13 @@ if ! command -v gitleaks; then
   exit 1
 fi
 # Scan staged files for secrets. Redact secret values and show detailed findings
+echo "Running 'gitleaks'"
 gitleaks protect --staged --redact --verbose
 
-## ===============================================
+## ===========================================
 ## LINT & FORMAT | prettier, eslint, terraform
-## ===============================================
+## ===========================================
+echo "Running 'lint-staged'"
 pnpm run lint-staged
 
 # =================================
@@ -25,7 +27,6 @@ if ! command -v tflint; then
   echo "TFLint is not installed"
   exit 1
 fi
-
 # Run TFLint only in Terraform directories affected by staged changes. 
 # This avoids scanning the entire infra/ directory on every commit, making the pre-commit check faster
 # Use the correct '--config' depending on the directory
@@ -33,6 +34,8 @@ for dir in $(git diff --cached --name-only \
   | grep '^infra/.*\.tf$' \
   | xargs -r -n1 dirname \
   | sort -u); do
+
+  echo "Running 'TFLint' for $dir"
 
   if [[ "$dir" == infra/modules/* ]]; then
     config="$(pwd)/infra/modules/.tflint.hcl"
@@ -62,6 +65,8 @@ for dir in $(git diff --cached --name-only \
   | grep '^infra/modules/.*\.tf$' \
   | xargs -r -n1 dirname \
   | sort -u); do
+
+  echo "Running 'terraform-docs' for $dir"
 
   terraform-docs markdown table "$dir" \
     --output-file README.md \
