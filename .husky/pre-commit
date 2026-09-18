@@ -22,9 +22,22 @@ gitleaks protect --staged --redact --verbose
 echo "Running 'lint-staged'"
 pnpm run lint-staged
 
-# =================================
+# =======================================
+# VALIDATE TERRAFORM | terraform validate
+# =======================================
+# Validate the dev environment when Terraform files are affected by staged changes
+run_terraform_validate() {
+  if git diff --cached --name-only | grep -q '^infra/.*\.tf$'; then
+
+    echo "Running 'terraform validate' for dev..."
+    terraform -chdir=infra/envs/dev validate
+
+  fi
+}
+
+# ==========================
 # TERRAFORM LINTING | tflint
-# =================================
+# ==========================
 # Run TFLint only in Terraform directories affected by staged changes
 # Uses the appropriate TFLint config for each directory
 run_tflint() {
@@ -80,5 +93,6 @@ run_terraform_docs() {
   fi
 }
 
+run_terraform_validate
 run_tflint
 run_terraform_docs
