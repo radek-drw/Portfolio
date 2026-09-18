@@ -21,6 +21,16 @@ jobs:
   terraform-quality-check:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - path: infra/envs
+            config: infra/.tflint.hcl
+          - path: infra/modules
+            config: infra/modules/.tflint.hcl
+          - path: infra/stacks
+            config: infra/stacks/.tflint.hcl
+
     steps:
       - uses: actions/checkout@v6
 
@@ -49,6 +59,10 @@ jobs:
           cache: true
           tflint_config_path: '**/.tflint.hcl'
 
-      - name: Lint Terraform
+      - name: Init TFLint
         working-directory: infra
-        run: tflint --recursive --init && tflint --recursive -f compact
+        run: tflint --init
+
+      - name: Lint Terraform
+        working-directory: ${{ matrix.path }}
+        run: tflint --recursive -f compact --config "$GITHUB_WORKSPACE/${{ matrix.config }}"
