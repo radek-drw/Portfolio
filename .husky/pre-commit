@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
+# Checks that a required tool is installed
+check_tool() {
+  if ! command -v "$1" >/dev/null; then
+    echo "❌ $1 is not installed"
+    exit 1
+  fi
+}
 ## ======================
 ## SECRET SCAN | gitleaks
 ## ======================
-# Checks that gitleaks is installed
-if ! command -v gitleaks; then
-  echo "gitleaks is not installed"
-  exit 1
-fi
-# Scan staged files for secrets. Redact secret values and show detailed findings
+# Scans staged files for secrets and redacts secret values in the output
+check_tool "gitleaks"
 echo "Running 'gitleaks'"
 gitleaks protect --staged --redact --verbose
 
@@ -20,57 +23,62 @@ echo "Running 'lint-staged'"
 pnpm run lint-staged
 
 # =================================
-# VALIDATE TERRAFORM FILES | tflint
+# TERRAFORM LINTING | tflint
 # =================================
-# Checks that TFLint is installed
-if ! command -v tflint; then
-  echo "TFLint is not installed"
-  exit 1
-fi
-# Run TFLint only in Terraform directories affected by staged changes. 
-# This avoids scanning the entire infra/ directory on every commit, making the pre-commit check faster
-# Use the correct '--config' depending on the directory
-for dir in $(git diff --cached --name-only \
-  | grep '^infra/.*\.tf$' \
-  | xargs -r -n1 dirname \
-  | sort -u); do
+# Run TFLint only in Terraform directories affected by staged changes
+# Uses the appropriate TFLint config for each directory
+run_tflint() {
+  terraform_dirs=$(git diff --cached --name-only \
+    | grep '^infra/.*\.tf$' \
+    | xargs -r -n1 dirname \
+    | sort -u)
 
-  echo "Running 'TFLint' for $dir"
+  if [[ -n "$terraform_dirs" ]]; then
 
-  if [[ "$dir" == infra/modules/* ]]; then
-    config="$(pwd)/infra/modules/.tflint.hcl"
-  elif [[ "$dir" == infra/stacks/* ]]; then
-    config="$(pwd)/infra/stacks/.tflint.hcl"
-  else
-    config="$(pwd)/infra/.tflint.hcl"
+    check_tool "tflint"
+
+    for dir in $terraform_dirs; do
+      echo "Running 'TFLint' for $dir"
+
+      if [[ "$dir" == infra/modules/* ]]; then
+        config="$(pwd)/infra/modules/.tflint.hcl"
+      elif [[ "$dir" == infra/stacks/* ]]; then
+        config="$(pwd)/infra/stacks/.tflint.hcl"
+      else
+        config="$(pwd)/infra/.tflint.hcl"
+      fi
+
+      (cd "$dir" && tflint --config "$config")
+    done
   fi
-
-  (cd "$dir" && tflint --config "$config")
-done
+}
 
 # =============================================
 # UPDATE TERRAFORM MODULE DOCS | terraform-docs
 # =============================================
-# Checks that terraform-docs is installed
-if ! command -v terraform-docs; then
-  echo "terraform-docs is not installed"
-  exit 1
-fi
-
 # Update documentation only for Terraform modules affected by staged changes.
-# This avoids regenerating documentation for every module on every commit.
-# terraform-docs modifies README.md files, so the updated files must be staged again
-# before the commit. This script automatically stages the updated README.md files
-for dir in $(git diff --cached --name-only \
-  | grep '^infra/modules/.*\.tf$' \
-  | xargs -r -n1 dirname \
-  | sort -u); do
+# Re-stage generated README files before the commit.
+run_terraform_docs() {
+  module_dirs=$(git diff --cached --name-only \
+    | grep '^infra/modules/.*\.tf$' \
+    | xargs -r -n1 dirname \
+    | sort -u)
 
-  echo "Running 'terraform-docs' for $dir"
+  if [[ -n "$module_dirs" ]]; then
 
-  terraform-docs markdown table "$dir" \
-    --output-file README.md \
-    --output-mode inject
+    check_tool "terraform-docs"
 
-  git add "$dir/README.md"
-done
+    for dir in $module_dirs; do
+      echo "Running 'terraform-docs' for $dir"
+
+      terraform-docs markdown table "$dir" \
+        --output-file README.md \
+        --output-mode inject
+
+      git add "$dir/README.md"
+    done
+  fi
+}
+
+run_tflint
+run_terraform_docs
