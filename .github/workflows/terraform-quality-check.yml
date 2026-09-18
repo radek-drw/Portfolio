@@ -1,0 +1,54 @@
+name: Terraform Quality Check
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - 'infra/**'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-quality-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.0
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive infra
+
+      - name: Validate Terraform (DEV)
+        if: github.event_name == 'push'
+        working-directory: infra/envs/dev
+        run: terraform init -backend=false && terraform validate
+
+      - name: Validate Terraform (PROD)
+        if: github.event_name == 'pull_request'
+        working-directory: infra/envs/prod
+        run: terraform init -backend=false && terraform validate
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: v0.64.0
+          cache: true
+          tflint_config_path: '**/.tflint.hcl'
+
+      - name: Lint Terraform
+        working-directory: infra
+        run: tflint --recursive --init && tflint --recursive -f compact
