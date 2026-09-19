@@ -14,6 +14,7 @@ export default defineConfig([
       '**/.tmp/**',
       '**/.cache/**',
       '**/public/**',
+      'infra/**',
     ],
   },
 

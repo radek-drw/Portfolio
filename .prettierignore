@@ -1,2 +1,4 @@
 # terraform-docs generated files
 **/modules/**/README.md
+
+infra/
