@@ -59,3 +59,9 @@ git grep "npm install"
 4. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
 5. IAM users -> create by terraform not in console
 6. add readme to infra/bootstrap with explanation of responsibility od files
+7. add setup.sh for instalation and initializationS
+8. consider changing iam in infra/envs/dev/github-actions-terraform-iam.tf from role, policy, attachment to
+   data "aws_iam_policy_document" "example" {
+   ...
+   }
+9.
