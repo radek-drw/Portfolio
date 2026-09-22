@@ -38,5 +38,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_hosted_zone_id"></a> [hosted\_zone\_id](#output\_hosted\_zone\_id) | Route 53 hosted zone ID |
 | <a name="output_validation_record_fqdns"></a> [validation\_record\_fqdns](#output\_validation\_record\_fqdns) | n/a |
 <!-- END_TF_DOCS -->
