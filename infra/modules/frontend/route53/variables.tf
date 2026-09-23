@@ -22,8 +22,3 @@ variable "domain_validation_options" {
   description = "ACM domain validation options"
   type        = any
 }
-
-variable "certificate_arn" {
-  description = "ARN of ACM certificate"
-  type        = string
-}
