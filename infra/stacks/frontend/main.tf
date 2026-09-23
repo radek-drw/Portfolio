@@ -31,7 +31,6 @@ module "route53" {
   distribution_domain_name  = module.cloudfront.distribution_domain_name
   distribution_zone_id      = module.cloudfront.distribution_zone_id
   domain_validation_options = module.acm.domain_validation_options
-  certificate_arn           = module.acm.certificate_arn
 }
 
 module "acm_validation" {
