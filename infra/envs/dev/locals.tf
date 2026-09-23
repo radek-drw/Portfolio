@@ -1,5 +1,6 @@
 locals {
   env_name             = "dev"
+  git_branch           = "dev"
   allow_origins        = ["http://localhost:9000", "https://dev.radek-drweski.com"]
   frontend_bucket_name = "dev-portfolio-static-site"
   project_name         = "portfolio"

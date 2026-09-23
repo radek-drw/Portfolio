@@ -21,7 +21,7 @@ resource "aws_iam_role" "github_actions_lambda_deploy" {
           }
 
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/${local.env_name}"
+            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/${local.git_branch}"
           }
         }
       }
