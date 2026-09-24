@@ -6,6 +6,11 @@ on:
       - dev
     paths:
       - 'infra/**'
+      - 'backend/src/**'
+      - 'backend/package.json'
+      - 'pnpm-lock.yaml'
+      - 'backend/scripts/build-lambda.js'
+      - '!backend/**/*.md'
 
   workflow_dispatch:
 
@@ -24,6 +29,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+
+      - name: Build Lambdas
+        uses: ./.github/actions/build-lambdas
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v4
