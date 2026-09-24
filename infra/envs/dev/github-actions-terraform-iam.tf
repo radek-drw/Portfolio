@@ -42,7 +42,6 @@ resource "aws_iam_policy" "github_actions_terraform" {
       # LAMBDA
       {
         Effect = "Allow"
-
         Action = [
           "lambda:CreateFunction",
           "lambda:GetFunction",
@@ -53,7 +52,6 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "lambda:RemovePermission",
           "lambda:DeleteFunction"
         ]
-
         Resource = [
           "arn:aws:lambda:eu-west-1:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
         ]
@@ -61,16 +59,13 @@ resource "aws_iam_policy" "github_actions_terraform" {
       # IAM
       {
         Effect = "Allow"
-
         Action = [
           "iam:CreatePolicy",
         ]
-
         Resource = ["*"]
       },
       {
         Effect = "Allow"
-
         Action = [
           "iam:DeletePolicy",
           "iam:GetPolicy",
@@ -79,45 +74,37 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "iam:GetPolicyVersion",
           "iam:ListPolicyVersions"
         ]
-
         Resource = [
           "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/dev-*-policy"
         ]
       },
       {
         Effect = "Allow"
-
         Action = [
           "iam:CreateRole"
         ]
-
         Resource = "*"
       },
       {
         Effect = "Allow"
-
         Action = [
           "iam:DeleteRole",
           "iam:GetRole",
           "iam:UpdateAssumeRolePolicy"
         ]
-
         Resource = [
           "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
         ]
       },
       {
         Effect = "Allow"
-
         Action = [
           "iam:AttachRolePolicy",
           "iam:DetachRolePolicy"
         ]
-
         Resource = [
           "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
         ]
-
         Condition = {
           "ArnLike" = {
             "iam:PolicyARN" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/dev-*-policy"
@@ -127,11 +114,9 @@ resource "aws_iam_policy" "github_actions_terraform" {
       # APIGATEWAY
       {
         Effect = "Allow"
-
         Action = [
           "apigateway:POST"
         ]
-
         Resource = [
           "arn:aws:apigateway:eu-west-1::/apis",
           "arn:aws:apigateway:eu-west-1::/apis/*/stages",
@@ -141,13 +126,11 @@ resource "aws_iam_policy" "github_actions_terraform" {
       },
       {
         Effect = "Allow"
-
         Action = [
           "apigateway:DELETE",
           "apigateway:GET",
           "apigateway:PATCH"
         ]
-
         Resource = [
           "arn:aws:apigateway:eu-west-1::/apis/*",
           "arn:aws:apigateway:eu-west-1::/apis/*/stages/*",
@@ -158,37 +141,30 @@ resource "aws_iam_policy" "github_actions_terraform" {
       # ACM
       {
         Effect = "Allow"
-
         Action = [
           "acm:RequestCertificate"
         ]
-
         Resource = "*"
       },
       {
         Effect = "Allow"
-
         Action = [
           "acm:DescribeCertificate",
           "acm:DeleteCertificate"
         ]
-
         Resource = "arn:aws:acm:us-east-1:${data.aws_caller_identity.current.account_id}:certificate/*"
       },
       # CLOUDFRONT
       {
         Effect = "Allow"
-
         Action = [
           "cloudfront:CreateDistribution",
           "cloudfront:CreateOriginAccessControl"
         ]
-
         Resource = "*"
       },
       {
         Effect = "Allow"
-
         Action = [
           "cloudfront:GetDistribution",
           "cloudfront:UpdateDistribution",
@@ -199,43 +175,34 @@ resource "aws_iam_policy" "github_actions_terraform" {
       },
       {
         Effect = "Allow"
-
         Action = [
           "cloudfront:GetOriginAccessControl",
           "cloudfront:UpdateOriginAccessControl",
           "cloudfront:DeleteOriginAccessControl"
         ]
-
         Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:origin-access-control/*"
       },
       {
         Effect = "Allow"
-
         Action = [
           "cloudfront:GetCachePolicy"
         ]
-
         Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:cache-policy/*"
       },
       # ROUTE53
       {
         Effect = "Allow"
-
         Action = [
           "route53:ListHostedZonesByName"
         ]
-
         Resource = "*"
       },
       {
         Effect = "Allow"
-
         Action = [
           "route53:ChangeResourceRecordSets"
         ]
-
         Resource = "arn:aws:route53:::hostedzone/${module.frontend.hosted_zone_id}"
-
         Condition = {
           "ForAllValues:StringEquals" = {
             "route53:ChangeResourceRecordSetsActions" = [
@@ -265,7 +232,38 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "s3:DeleteBucket"
         ]
         Resource = "arn:aws:s3:::bucket*"
-      }
+      },
+      # S3 - Terraform state
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::radek-portfolio-terraform-state"
+        Condition = {
+          StringLike = {
+            "s3:prefix" = "dev/*"
+          }
+        }
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = "arn:aws:s3:::radek-portfolio-terraform-state/dev/terraform.tfstate"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = "arn:aws:s3:::radek-portfolio-terraform-state/dev/terraform.tfstate.tflock"
+      },
     ]
   })
 }
