@@ -246,12 +246,28 @@ resource "aws_iam_policy" "github_actions_terraform" {
         Action = [
           "s3:ListBucket",
           "s3:GetBucketAcl",
-          "s3:PutBucketTagging",
-          "s3:GetBucketPublicAccessBlock",
-          "s3:PutBucketPublicAccessBlock",
-          "s3:GetEncryptionConfiguration",
-          "s3:PutEncryptionConfiguration",
+          "s3:GetBucketCORS",
+          "s3:GetBucketWebsite",
+          "s3:GetBucketVersioning",
+          "s3:GetAccelerateConfiguration",
+          "s3:GetBucketRequestPayment",
+          "s3:GetBucketLocation",
+          "s3:GetLifecycleConfiguration",
+          "s3:GetReplicationConfiguration",
+          "s3:GetBucketLogging",
+          "s3:GetBucketNotification",
+          "s3:GetBucketTagging",
+          "s3:GetBucketOwnershipControls",
+          "s3:GetBucketObjectLockConfiguration",
           "s3:GetBucketPolicy",
+          "s3:GetBucketPolicyStatus",
+          "s3:GetBucketPublicAccessBlock",
+          "s3:GetEncryptionConfiguration",
+
+          "s3:PutBucketTagging",
+          "s3:PutBucketPublicAccessBlock",
+          "s3:PutEncryptionConfiguration",
+
           "s3:DeleteBucketPolicy",
           "s3:DeleteBucket"
         ]
