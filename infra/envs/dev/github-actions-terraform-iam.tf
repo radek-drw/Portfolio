@@ -95,7 +95,8 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
           "iam:UpdateAssumeRolePolicy",
-          "iam:DeleteRole"
+          "iam:DeleteRole",
+          "iam:PassRole"
         ]
         Resource = [
           "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
