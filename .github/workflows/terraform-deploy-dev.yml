@@ -44,6 +44,9 @@ jobs:
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/dev-github-actions-terraform-role
           aws-region: eu-west-1
 
+      - name: Terraform Init
+        run: terraform init
+
       - name: Terraform Detach Lambda IAM Policy
         run: terraform destroy -target=module.contact_form.module.iam.aws_iam_role_policy_attachment.this -auto-approve
 
