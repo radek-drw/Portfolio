@@ -64,16 +64,17 @@ resource "aws_iam_policy" "github_actions_terraform" {
         Effect = "Allow"
         Action = [
           "iam:CreatePolicy",
+          "iam:TagPolicy"
         ]
         Resource = ["*"]
       },
       {
         Effect = "Allow"
         Action = [
-          "iam:CreatePolicyVersion",
           "iam:GetPolicy",
           "iam:GetPolicyVersion",
           "iam:ListPolicyVersions",
+          "iam:CreatePolicyVersion",
           "iam:DeletePolicyVersion",
           "iam:DeletePolicy"
         ]
