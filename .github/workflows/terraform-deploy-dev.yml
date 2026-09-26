@@ -47,8 +47,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Detach Lambda IAM Policy
-        run: terraform destroy -target=module.contact_form.module.iam.aws_iam_role_policy_attachment.this -auto-approve
+      - name: Terraform Plan
+        run: terraform plan
 
-      - name: Terraform Destroy Lambda IAM Role
-        run: terraform destroy -target=module.contact_form.module.iam.aws_iam_role.this -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
