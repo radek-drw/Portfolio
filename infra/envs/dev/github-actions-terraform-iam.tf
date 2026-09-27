@@ -85,9 +85,12 @@ resource "aws_iam_policy" "github_actions_terraform" {
       {
         Effect = "Allow"
         Action = [
-          "iam:CreateRole"
+          "iam:CreateRole",
+          "iam:TagRole"
         ]
-        Resource = "*"
+        Resource = [
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
+        ]
       },
       {
         Effect = "Allow"
@@ -95,7 +98,7 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "iam:GetRole",
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
-          "iam:UpdateAssumeRolePolicy",
+          "iam:ListInstanceProfilesForRole",
           "iam:DeleteRole",
           "iam:PassRole"
         ]
