@@ -131,7 +131,8 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "arn:aws:apigateway:eu-west-1::/apis",
           "arn:aws:apigateway:eu-west-1::/apis/*/stages",
           "arn:aws:apigateway:eu-west-1::/apis/*/integrations",
-          "arn:aws:apigateway:eu-west-1::/apis/*/routes"
+          "arn:aws:apigateway:eu-west-1::/apis/*/routes",
+          "arn:aws:apigateway:eu-west-1::/tags/*"
         ]
       },
       {
@@ -146,6 +147,15 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "arn:aws:apigateway:eu-west-1::/apis/*/stages/*",
           "arn:aws:apigateway:eu-west-1::/apis/*/integrations/*",
           "arn:aws:apigateway:eu-west-1::/apis/*/routes/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "apigateway:TagResource"
+        ]
+        Resource = [
+          "arn:aws:apigateway:eu-west-1::/apis/*/stages"
         ]
       },
       # ACM
