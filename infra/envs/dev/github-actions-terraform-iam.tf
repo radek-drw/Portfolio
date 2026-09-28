@@ -169,6 +169,7 @@ resource "aws_iam_policy" "github_actions_terraform" {
       {
         Effect = "Allow"
         Action = [
+          "acm:AddTagsToCertificate",
           "acm:DescribeCertificate",
           "acm:ListTagsForCertificate",
           "acm:DeleteCertificate"
@@ -218,6 +219,13 @@ resource "aws_iam_policy" "github_actions_terraform" {
         ]
         Resource = "*"
       },
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudfront:TagResource"
+        ]
+        Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/*"
+      },
       # ROUTE53
       {
         Effect = "Allow"
@@ -247,6 +255,13 @@ resource "aws_iam_policy" "github_actions_terraform" {
             "route53:ChangeResourceRecordSetsRecordTypes" = ["A", "AAAA", "CNAME"]
           }
         }
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "route53:GetChange"
+        ]
+        Resource = "arn:aws:route53:::change/*"
       },
       # S3
       {
@@ -280,6 +295,7 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "s3:GetEncryptionConfiguration",
 
           "s3:PutBucketTagging",
+          "s3:PutBucketPolicy",
           "s3:PutBucketPublicAccessBlock",
           "s3:PutEncryptionConfiguration",
 
