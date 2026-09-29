@@ -7,8 +7,3 @@ output "distribution_arn" {
   description = "ARN of the CloudFront distribution"
   value       = module.cloudfront.distribution_arn
 }
-
-output "hosted_zone_id" {
-  description = "Route 53 hosted zone ID"
-  value       = module.route53.hosted_zone_id
-}
