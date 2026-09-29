@@ -1,8 +1,8 @@
 data "aws_caller_identity" "current" {}
 
-resource "aws_iam_role" "github_actions_terraform" {
+resource "aws_iam_role" "dev_github_actions_terraform" {
 
-  name = "${local.env_name}-github-actions-terraform-role"
+  name = "dev-github-actions-terraform-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -12,7 +12,7 @@ resource "aws_iam_role" "github_actions_terraform" {
         Effect = "Allow"
 
         Principal = {
-          Federated = data.aws_iam_openid_connect_provider.github.arn
+          Federated = aws_iam_openid_connect_provider.github.arn
         }
 
         Action = "sts:AssumeRoleWithWebIdentity"
@@ -23,7 +23,7 @@ resource "aws_iam_role" "github_actions_terraform" {
           }
 
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/${local.git_branch}"
+            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/dev"
           }
         }
       }
@@ -31,9 +31,9 @@ resource "aws_iam_role" "github_actions_terraform" {
   })
 }
 
-resource "aws_iam_policy" "github_actions_terraform" {
+resource "aws_iam_policy" "dev_github_actions_terraform" {
 
-  name = "${local.env_name}-github-actions-terraform-policy"
+  name = "dev-github-actions-terraform-policy"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -241,14 +241,14 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "route53:ListTagsForResource",
           "route53:ListResourceRecordSets"
         ]
-        Resource = "arn:aws:route53:::hostedzone/${module.frontend.hosted_zone_id}"
+        Resource = "arn:aws:route53:::hostedzone/*"
       },
       {
         Effect = "Allow"
         Action = [
           "route53:ChangeResourceRecordSets"
         ]
-        Resource = "arn:aws:route53:::hostedzone/${module.frontend.hosted_zone_id}"
+        Resource = "arn:aws:route53:::hostedzone/*"
         Condition = {
           "ForAllValues:StringEquals" = {
             "route53:ChangeResourceRecordSetsActions"     = ["CREATE", "UPSERT", "DELETE"]
@@ -302,7 +302,7 @@ resource "aws_iam_policy" "github_actions_terraform" {
           "s3:DeleteBucketPolicy",
           "s3:DeleteBucket"
         ]
-        Resource = module.frontend.bucket_arn
+        Resource = "arn:aws:s3:::dev-portfolio-static-site"
       },
       # S3 - Terraform state
       {
@@ -365,8 +365,8 @@ resource "aws_iam_policy" "github_actions_terraform" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "github_actions_terraform" {
+resource "aws_iam_role_policy_attachment" "dev_github_actions_terraform" {
 
-  role       = aws_iam_role.github_actions_terraform.name
-  policy_arn = aws_iam_policy.github_actions_terraform.arn
+  role       = aws_iam_role.dev_github_actions_terraform.name
+  policy_arn = aws_iam_policy.dev_github_actions_terraform.arn
 }
