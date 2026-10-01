@@ -274,6 +274,8 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
       {
         Effect = "Allow"
         Action = [
+          "s3:ListBucket",
+
           "s3:GetBucketOwnershipControls",
           "s3:GetReplicationConfiguration",
           "s3:GetLifecycleConfiguration",
