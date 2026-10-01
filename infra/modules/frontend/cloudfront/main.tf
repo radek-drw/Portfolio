@@ -31,10 +31,6 @@ resource "aws_cloudfront_distribution" "this" {
     domain_name              = var.bucket_regional_domain_name
     origin_id                = "frontend"
     origin_access_control_id = aws_cloudfront_origin_access_control.this.id
-
-    s3_origin_config {
-      origin_access_identity = ""
-    }
   }
 
   default_cache_behavior {
