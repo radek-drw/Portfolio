@@ -18,7 +18,6 @@ module "frontend" {
   source = "../../stacks/frontend"
 
   frontend_bucket_name = local.frontend_bucket_name
-  tags                 = local.tags
   project_name         = local.project_name
   domain_name          = local.domain_name
   hosted_zone_name     = local.hosted_zone_name

@@ -25,7 +25,6 @@ resource "aws_cloudfront_distribution" "this" {
   http_version    = "http2and3"
 
   price_class = "PriceClass_100"
-  tags        = var.tags
 
   origin {
     domain_name              = var.bucket_regional_domain_name

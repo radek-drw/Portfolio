@@ -3,11 +3,6 @@ variable "frontend_bucket_name" {
   type        = string
 }
 
-variable "tags" {
-  description = "Tags to apply to the bucket"
-  type        = map(string)
-}
-
 variable "project_name" {
   description = "Name of the project"
   type        = string

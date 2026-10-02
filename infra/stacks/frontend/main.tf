@@ -2,7 +2,6 @@ module "s3" {
   source = "../../modules/frontend/s3"
 
   bucket_name = var.frontend_bucket_name
-  tags        = var.tags
 }
 
 module "acm" {
@@ -18,7 +17,6 @@ module "cloudfront" {
 
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
   project_name                = var.project_name
-  tags                        = var.tags
   certificate_arn             = module.acm.certificate_arn
   domain_name                 = var.domain_name
 }

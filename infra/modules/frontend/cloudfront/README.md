@@ -29,7 +29,6 @@ No modules.
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Custom domain name | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of the project | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags applied to the distribution | `map(string)` | `{}` | no |
 
 ## Outputs
 
