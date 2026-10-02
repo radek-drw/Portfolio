@@ -1,5 +1,5 @@
 variable "frontend_bucket_name" {
-  description = "Name of the S3 bucket"
+  description = "S3 bucket containing frontend static files and assets"
   type        = string
 }
 

@@ -1,4 +1,4 @@
-variable "bucket_name" {
-  description = "Name of the S3 bucket"
+variable "frontend_bucket_name" {
+  description = "S3 bucket containing frontend static files and assets"
   type        = string
 }
