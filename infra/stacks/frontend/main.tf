@@ -1,7 +1,7 @@
 module "s3" {
   source = "../../modules/frontend/s3"
 
-  bucket_name = var.frontend_bucket_name
+  frontend_bucket_name = var.frontend_bucket_name
 }
 
 module "acm" {
