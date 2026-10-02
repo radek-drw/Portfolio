@@ -13,11 +13,6 @@ variable "description" {
   type        = string
 }
 
-variable "lambda_zip_path" {
-  description = "Path to the Lambda deployment ZIP file"
-  type        = string
-}
-
 variable "handler" {
   description = "Lambda function entrypoint handler"
   type        = string
@@ -45,4 +40,14 @@ variable "environment_variables" {
   description = "Environment variables passed to the Lambda function"
   type        = map(string)
   default     = {}
+}
+
+variable "lambda_artifacts_bucket_name" {
+  description = "S3 bucket containing Lambda deployment artifacts"
+  type        = string
+}
+
+variable "lambda_s3_key" {
+  description = "S3 object key of the Lambda deployment artifact"
+  type        = string
 }

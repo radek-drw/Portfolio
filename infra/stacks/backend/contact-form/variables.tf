@@ -17,3 +17,13 @@ variable "api_url" {
   description = "API Gateway endpoint URL from api stack"
   type        = string
 }
+
+variable "lambda_artifacts_bucket_name" {
+  description = "S3 bucket containing Lambda deployment artifacts"
+  type        = string
+}
+
+variable "lambda_s3_key" {
+  description = "S3 object key of the Lambda deployment artifact"
+  type        = string
+}
