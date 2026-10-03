@@ -52,7 +52,8 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
           "lambda:UpdateFunctionConfiguration",
           "lambda:AddPermission",
           "lambda:RemovePermission",
-          "lambda:DeleteFunction"
+          "lambda:DeleteFunction",
+          "lambda:TagResource"
         ]
         Resource = [
           "arn:aws:lambda:eu-west-1:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
@@ -327,6 +328,14 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::radek-portfolio-terraform-state/dev/terraform.tfstate.tflock"
+      },
+      # S3 - Lambda artifacts
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject"
+        ]
+        Resource = "arn:aws:s3:::radek-portfolio-lambda-artifacts/dev/*"
       },
       # OIDC
       {
