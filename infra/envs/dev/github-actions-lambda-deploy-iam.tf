@@ -38,13 +38,21 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
     Statement = [
       {
         Effect = "Allow"
-
         Action = [
           "lambda:UpdateFunctionCode"
         ]
-
         Resource = [
           module.contact_form.lambda_arn
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject"
+        ]
+        Resource = [
+          "arn:aws:s3:::${local.lambda_artifacts_bucket_name}/${local.env_name}/*"
         ]
       }
     ]
