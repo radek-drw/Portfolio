@@ -1,4 +1,4 @@
-name: Backend Deploy (PROD)
+name: Lambda Deploy (PROD)
 
 on:
   push:

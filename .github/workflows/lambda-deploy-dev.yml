@@ -1,4 +1,4 @@
-name: Backend Deploy (DEV)
+name: Lambda Deploy (DEV)
 
 on:
   push:
