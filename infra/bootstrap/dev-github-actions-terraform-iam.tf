@@ -49,7 +49,6 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
           "lambda:GetFunctionCodeSigningConfig",
           "lambda:GetPolicy",
           "lambda:ListVersionsByFunction",
-          "lambda:UpdateFunctionCode",
           "lambda:UpdateFunctionConfiguration",
           "lambda:AddPermission",
           "lambda:RemovePermission",
@@ -276,7 +275,6 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
         Action = [
           "s3:ListBucket",
 
-          "s3:GetBucketOwnershipControls",
           "s3:GetReplicationConfiguration",
           "s3:GetLifecycleConfiguration",
           "s3:GetEncryptionConfiguration",
@@ -290,12 +288,9 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
           "s3:GetBucketTagging",
           "s3:GetBucketObjectLockConfiguration",
           "s3:GetBucketPolicy",
-          "s3:GetBucketPublicAccessBlock",
 
-          "s3:PutEncryptionConfiguration",
           "s3:PutBucketPolicy",
           "s3:PutBucketTagging",
-          "s3:PutBucketPublicAccessBlock",
 
           "s3:DeleteBucketPolicy",
           "s3:DeleteBucket"
