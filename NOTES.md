@@ -64,4 +64,5 @@ git grep "npm install"
    data "aws_iam_policy_document" "example" {
    ...
    }
-9.
+9. change documentation Adding New Lambda (now includes github actions)
+10. when lambda removed it also should be removed from s3 lmabda artifacts
