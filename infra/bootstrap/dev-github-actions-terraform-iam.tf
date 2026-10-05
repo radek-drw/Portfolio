@@ -333,6 +333,13 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
       {
         Effect = "Allow"
         Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::radek-portfolio-lambda-artifacts"
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "s3:GetObject"
         ]
         Resource = "arn:aws:s3:::radek-portfolio-lambda-artifacts/dev/*"
