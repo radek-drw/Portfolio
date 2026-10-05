@@ -1,27 +1,24 @@
 # How to add a new Lambda function
 
-Terraform creates the Lambda infrastructure and provides the initial deployment package. Subsequent Lambda code updates are handled by **GitHub Actions**
-
-Terraform ignores changes to `filename` and `source_code_hash`, so changing the Lambda code locally doesn't cause Terraform to update the deployed code
-
 ## 1. Create the Lambda source
 
-`backend/src/my-function.js/`
+`backend/src/my-function.js`
 
 ## 2. Add the Terraform configuration
 
-`infra/stacks/backend/my-function/`
+`infra/stacks/backend/my-function`
 
 **lambda.tf**
 
 ```
 module "lambda" {
-  source          = "../../../modules/backend/lambda/function"
-  env_name        = var.env_name
-  lambda_name     = local.lambda_name
-  lambda_zip_path = "${path.root}/../../../backend/dist/my-function.zip"
-  role_arn        = module.iam.arn
-  description     = "Example Lambda function"
+  source                       = "../../../modules/backend/lambda/function"
+  env_name                     = var.env_name
+  lambda_name                  = local.lambda_name
+  lambda_artifacts_bucket_name = var.lambda_artifacts_bucket_name
+  lambda_s3_key                = var.lambda_s3_key
+  role_arn                     = module.iam.role_arn
+  description                  = "Example Lambda function"
 }
 ```
 
@@ -69,7 +66,7 @@ locals {
 ```
 output "lambda_arn" {
   description = "ARN of the Lambda function"
-  value = module.lambda.arn
+  value       = module.lambda.lambda_arn
 }
 ```
 
@@ -82,75 +79,64 @@ variable "env_name" {
   description = "Environment name (dev, prod)"
   type        = string
 }
+
+variable "lambda_artifacts_bucket_name" {
+  description = "S3 bucket containing Lambda deployment artifacts"
+  type        = string
+}
+
+variable "lambda_s3_key" {
+  description = "S3 object key of the Lambda deployment artifact"
+  type        = string
+}
 ```
 
-## 3. Build the Lambda
-
-Run from `backend/` directory:
-
-```
-pnpm build:lambda
-```
-
-This will create a ZIP file required by Terraform when creating the Lambda for the first time
-
-## 4. Add the Lambda stack to the environment
+## 3. Add the Lambda stack to the environment
 
 `envs/dev/main.tf`
 
 ```
 module "my_function" {
   source = "../../stacks/backend/my-function"
-  env_name = local.env_name
+
+  lambda_artifacts_bucket_name = local.lambda_artifacts_bucket_name
+  lambda_s3_key                = "${local.env_name}/my-function.zip"
+  env_name                     = local.env_name
 }
 ```
 
 Do the same in `envs/prod/main.tf`
 
-## 5. Add GitHub Actions deployment permission
+## 4. Add an API Gateway route (if required)
 
-Add the new Lambda ARN to the GitHub Actions deployment policy in:
+Add an API Gateway route if the Lambda function needs to be invoked through API Gateway.
 
-`infra/envs/dev/github-actions.tf`
+Create:
 
-```
-Resource = [
-  module.other_function.lambda_arn,
-  module.my_function.lambda_arn
-]
-```
-
-Make the same change in `envs/prod/github-actions.tf`
-
-## 6. Create the infrastructure
-
-Run Terraform from the appropriate environment directory:
-
-```
-terraform init
-terraform plan
-terraform apply
-```
-
-This creates the Lambda infrastructure and performs the initial code deployment
-
-After that, changes to the Lambda code should be deployed through GitHub Actions rather than Terraform
-
-## 7. Add an API Gateway route (if required)
-
-Lambda only needs an API Gateway route if it is invoked through API Gateway
+`stacks/backend/my-function/route.tf`
 
 For example:
 
 ```
 module "route" {
-source = "../../../modules/backend/apigateway/route"
-api_id = var.api_id
-execution_arn = var.execution_arn
-route_key = "POST /my-function"
-lambda_name = module.lambda.name
-lambda_invoke_arn = module.lambda.invoke_arn
+  source = "../../../modules/backend/apigateway/route"
+  api_id = var.api_id
+  execution_arn = var.execution_arn
+  route_key = "POST /my-function"
+  lambda_name = module.lambda.name
+  lambda_invoke_arn = module.lambda.invoke_arn
 }
 ```
 
-Lambdas triggered by other AWS services, such as S3, SQS, or EventBridge, don't need an API Gateway route
+In the environment `main.tf`:
+
+```
+module "my_functions" {
+  # ...
+
+  api_id                       = module.api.api_id
+  execution_arn                = module.api.execution_arn
+}
+```
+
+If the Lambda is invoked by another AWS service, an API Gateway route is not required. For example, Lambdas triggered by S3, SQS, or EventBridge use their respective AWS integrations instead.
