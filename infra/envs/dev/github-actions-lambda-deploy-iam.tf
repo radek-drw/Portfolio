@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "github_actions_lambda_deploy" {
 
   name = "${local.env_name}-github-actions-lambda-deploy-role"
@@ -42,7 +44,7 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
           "lambda:UpdateFunctionCode"
         ]
         Resource = [
-          module.contact_form.lambda_arn
+          "arn:aws:lambda:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
         ]
       },
       {
