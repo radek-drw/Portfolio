@@ -44,7 +44,7 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
           "lambda:UpdateFunctionCode"
         ]
         Resource = [
-          "arn:aws:lambda:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
+          "arn:aws:lambda:eu-west-1:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
         ]
       },
       {
