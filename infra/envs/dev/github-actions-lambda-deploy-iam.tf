@@ -46,16 +46,6 @@ resource "aws_iam_policy" "github_actions_lambda_deploy" {
         Resource = [
           "arn:aws:lambda:eu-west-1:${data.aws_caller_identity.current.account_id}:function:dev-*-lambda"
         ]
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:PutObject",
-          "s3:GetObject"
-        ]
-        Resource = [
-          "arn:aws:s3:::${local.lambda_artifacts_bucket_name}/${local.env_name}/*"
-        ]
       }
     ]
   })

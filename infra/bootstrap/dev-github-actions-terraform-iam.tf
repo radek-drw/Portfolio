@@ -329,21 +329,6 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
         ]
         Resource = "arn:aws:s3:::radek-portfolio-terraform-state/dev/terraform.tfstate.tflock"
       },
-      # S3 - Lambda artifacts
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:ListBucket"
-        ]
-        Resource = "arn:aws:s3:::radek-portfolio-lambda-artifacts"
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject"
-        ]
-        Resource = "arn:aws:s3:::radek-portfolio-lambda-artifacts/dev/*"
-      },
       # OIDC
       {
         Effect = "Allow"
