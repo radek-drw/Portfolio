@@ -32,9 +32,6 @@ jobs:
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/dev-github-actions-lambda-deploy-role
           aws-region: eu-west-1
 
-      - name: Upload Lambdas to S3
-        run: aws s3 cp backend/dist/ s3://radek-portfolio-lambda-artifacts/dev/ --recursive --exclude "*" --include "*.zip"
-
       - name: Deploy Lambdas
         run: |
           for zip in backend/dist/*.zip; do
@@ -45,6 +42,5 @@ jobs:
 
             aws lambda update-function-code \
               --function-name "$aws_name" \
-              --s3-bucket "radek-portfolio-lambda-artifacts" \
-              --s3-key "dev/$(basename "$zip")"
+              --zip-file "fileb://$zip"
           done
