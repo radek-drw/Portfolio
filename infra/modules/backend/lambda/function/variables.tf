@@ -41,13 +41,3 @@ variable "environment_variables" {
   type        = map(string)
   default     = {}
 }
-
-variable "lambda_artifacts_bucket_name" {
-  description = "S3 bucket containing Lambda deployment artifacts"
-  type        = string
-}
-
-variable "lambda_s3_key" {
-  description = "S3 object key of the Lambda deployment artifact"
-  type        = string
-}
