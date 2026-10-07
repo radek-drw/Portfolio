@@ -5,8 +5,13 @@ resource "aws_lambda_function" "this" {
   runtime       = var.runtime
   timeout       = var.timeout
   role          = var.role_arn
-  s3_bucket     = var.lambda_artifacts_bucket_name
-  s3_key        = var.lambda_s3_key
+  filename      = "${path.module}/placeholder.zip"
+
+  lifecycle {
+    ignore_changes = [
+      filename,
+    ]
+  }
 
   environment {
     variables = var.environment_variables
