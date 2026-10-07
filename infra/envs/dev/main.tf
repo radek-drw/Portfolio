@@ -8,12 +8,10 @@ module "api" {
 module "contact_form" {
   source = "../../stacks/backend/contact-form"
 
-  lambda_artifacts_bucket_name = local.lambda_artifacts_bucket_name
-  lambda_s3_key                = "${local.env_name}/send-email.zip"
-  env_name                     = local.env_name
-  api_id                       = module.api.api_id
-  execution_arn                = module.api.execution_arn
-  api_url                      = module.api.api_url
+  env_name      = local.env_name
+  api_id        = module.api.api_id
+  execution_arn = module.api.execution_arn
+  api_url       = module.api.api_url
 }
 
 module "frontend" {
