@@ -79,7 +79,12 @@ async function zipLambda(sourceDir, zipPath) {
     output.on('close', resolve);
 
     archive.pipe(output);
-    archive.directory(sourceDir, false);
+
+    archive.file(path.join(sourceDir, 'index.js'), {
+      name: 'index.js',
+      date: new Date(0),
+    });
+
     archive.finalize();
   });
 }
