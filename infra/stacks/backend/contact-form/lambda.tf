@@ -9,12 +9,13 @@ data "aws_ssm_parameter" "ses_from_address" {
 }
 
 module "lambda" {
-  source      = "../../../modules/backend/lambda/function"
-  env_name    = var.env_name
-  lambda_name = local.lambda_name
-  timeout     = 10
-  role_arn    = module.iam.role_arn
-  description = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
+  source          = "../../../modules/backend/lambda/function"
+  env_name        = var.env_name
+  lambda_name     = local.lambda_name
+  timeout         = 10
+  role_arn        = module.iam.role_arn
+  lambda_zip_path = var.lambda_zip_path
+  description     = "Handles contact form submissions. Validates inputs, verifies reCAPTCHA, and sends emails via SES"
   environment_variables = {
     RECAPTCHA_SECRET = data.aws_ssm_parameter.recaptcha_secret.value
     SES_FROM_ADDRESS = data.aws_ssm_parameter.ses_from_address.value
