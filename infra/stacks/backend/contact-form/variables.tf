@@ -17,3 +17,8 @@ variable "api_url" {
   description = "API Gateway endpoint URL from api stack"
   type        = string
 }
+
+variable "lambda_zip_path" {
+  description = "Path to the Lambda deployment package"
+  type        = string
+}

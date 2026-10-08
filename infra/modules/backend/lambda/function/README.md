@@ -28,6 +28,7 @@ No modules.
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | Environment variables passed to the Lambda function | `map(string)` | `{}` | no |
 | <a name="input_handler"></a> [handler](#input\_handler) | Lambda function entrypoint handler | `string` | `"index.handler"` | no |
 | <a name="input_lambda_name"></a> [lambda\_name](#input\_lambda\_name) | Logical name of the Lambda function | `string` | n/a | yes |
+| <a name="input_lambda_zip_path"></a> [lambda\_zip\_path](#input\_lambda\_zip\_path) | Path to the Lambda deployment package | `string` | n/a | yes |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | IAM role ARN assumed by the Lambda function | `string` | n/a | yes |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | Runtime environment for the Lambda function | `string` | `"nodejs24.x"` | no |
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | Maximum execution time of the Lambda function in seconds | `number` | `3` | no |
