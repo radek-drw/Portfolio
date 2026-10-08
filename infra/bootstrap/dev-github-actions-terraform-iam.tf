@@ -45,6 +45,7 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
         Action = [
           "lambda:CreateFunction",
           "lambda:GetFunction",
+          "lambda:UpdateFunctionCode",
           "lambda:GetFunctionConfiguration",
           "lambda:GetFunctionCodeSigningConfig",
           "lambda:GetPolicy",
