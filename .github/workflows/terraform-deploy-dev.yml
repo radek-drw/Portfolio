@@ -10,7 +10,6 @@ on:
       - 'backend/package.json'
       - 'pnpm-lock.yaml'
       - 'backend/scripts/build-lambda.js'
-      - '!backend/**/*.md'
 
   workflow_dispatch:
 
@@ -35,26 +34,14 @@ jobs:
         with:
           terraform_version: 1.14.0
 
+      - name: Build Lambdas
+        uses: ./.github/actions/build-lambdas
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/dev-github-actions-terraform-role
           aws-region: eu-west-1
-
-      - name: Check for Lambda changes
-        uses: dorny/paths-filter@v4
-        id: changes
-        with:
-          filters: |
-            lambda:
-              - 'backend/src/**'
-              - 'backend/package.json'
-              - 'pnpm-lock.yaml'
-              - 'backend/scripts/build-lambda.js'
-
-      - name: Build Lambdas
-        if: steps.changes.outputs.lambda == 'true'
-        uses: ./.github/actions/build-lambdas
 
       - name: Terraform Init
         run: terraform init
