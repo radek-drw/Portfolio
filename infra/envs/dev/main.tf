@@ -8,10 +8,11 @@ module "api" {
 module "contact_form" {
   source = "../../stacks/backend/contact-form"
 
-  env_name      = local.env_name
-  api_id        = module.api.api_id
-  execution_arn = module.api.execution_arn
-  api_url       = module.api.api_url
+  env_name        = local.env_name
+  api_id          = module.api.api_id
+  execution_arn   = module.api.execution_arn
+  api_url         = module.api.api_url
+  lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
 }
 
 module "frontend" {
