@@ -10,24 +10,63 @@ on:
       - 'backend/package.json'
       - 'pnpm-lock.yaml'
       - 'backend/scripts/build-lambda.js'
-
   workflow_dispatch:
-
 permissions:
   contents: read
   id-token: write
-
 jobs:
-  deploy-terraform:
+  # --- Quality Checks ---
+  terraform-quality-check:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.0
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive infra
+
+      - name: Validate Terraform
+        working-directory: infra/envs/dev
+        run: terraform init -backend=false && terraform validate
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: v0.64.0
+          cache: true
+          tflint_config_path: '**/.tflint.hcl'
+
+      - name: Init TFLint
+        working-directory: infra
+        run: tflint --init
+
+      - name: Lint Terraform envs
+        working-directory: infra/envs
+        run: tflint --recursive -f compact --config "$GITHUB_WORKSPACE/infra/.tflint.hcl"
+
+      - name: Lint Terraform modules
+        working-directory: infra/modules
+        run: tflint --recursive -f compact --config "$GITHUB_WORKSPACE/infra/modules/.tflint.hcl"
+
+      - name: Lint Terraform stacks
+        working-directory: infra/stacks
+        run: tflint --recursive -f compact --config "$GITHUB_WORKSPACE/infra/stacks/.tflint.hcl"
+
+  # --- Deployment ---
+  deploy-terraform:
+    needs: terraform-quality-check
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: infra/envs/dev
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v4
