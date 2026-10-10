@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { CONFIG } from './config.js';
+
 // ERROR MESSAGES
 const ERROR_MESSAGES = {
   FORM_SEND_ERROR: 'An error occurred while sending the form. Please try again later.',
@@ -182,10 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = Object.fromEntries(new FormData(elements.form));
         formData.recaptchaToken = token;
 
-        const response = await axios.post(
-          'https://6ywz8mq7wf.execute-api.eu-west-1.amazonaws.com/dev/contact',
-          formData
-        );
+        const response = await axios.post(CONFIG.API_URL, formData);
 
         const data = response.data;
 
