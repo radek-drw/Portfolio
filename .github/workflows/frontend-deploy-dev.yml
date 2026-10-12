@@ -13,9 +13,37 @@ permissions:
   id-token: write
 
 jobs:
-  deploy-frontend:
+  # --- Code Quality Check ---
+  code-quality-check:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
 
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.0
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter . --ignore-scripts
+
+      - name: Lint code
+        run: pnpm run lint
+
+      - name: Check code formatting
+        run: pnpm run format:check
+
+  # --- Deployment ---
+  deploy-frontend:
+    needs:
+      - code-quality-check
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

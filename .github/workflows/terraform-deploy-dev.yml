@@ -15,7 +15,7 @@ permissions:
   contents: read
   id-token: write
 jobs:
-  # --- Quality Checks ---
+  # --- Terraform Quality Checks ---
   terraform-quality-check:
     runs-on: ubuntu-latest
     steps:
@@ -57,9 +57,37 @@ jobs:
         working-directory: infra/stacks
         run: tflint --recursive -f compact --config "$GITHUB_WORKSPACE/infra/stacks/.tflint.hcl"
 
+  # --- Code Quality Checks ---
+  code-quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.0
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter . --ignore-scripts
+
+      - name: Lint code
+        run: pnpm run lint
+
+      - name: Check code formatting
+        run: pnpm run format:check
+
   # --- Deployment ---
   deploy-terraform:
-    needs: terraform-quality-check
+    needs:
+      - terraform-quality-check
+      - code-quality-check
     runs-on: ubuntu-latest
     defaults:
       run:
