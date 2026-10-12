@@ -1,4 +1,4 @@
-# terraform-docs generated files
-**/modules/**/README.md
-
+# Terraform configuration
 infra/
+
+pnpm-lock.yaml
