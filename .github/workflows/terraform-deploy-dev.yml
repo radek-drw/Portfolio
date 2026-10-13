@@ -64,24 +64,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Enable pnpm
-        run: corepack enable
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.13.0
-          cache: 'pnpm'
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --filter . --ignore-scripts
-
-      - name: Lint code
-        run: pnpm run lint
-
-      - name: Check code formatting
-        run: pnpm run format:check
+      - name: Code Quality Checks
+        uses: ./.github/actions/code-quality
 
   # --- Deployment ---
   deploy-terraform:
