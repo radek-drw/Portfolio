@@ -6,22 +6,17 @@ resource "aws_iam_role" "dev_github_actions_terraform" {
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-
     Statement = [
       {
         Effect = "Allow"
-
         Principal = {
           Federated = aws_iam_openid_connect_provider.github.arn
         }
-
         Action = "sts:AssumeRoleWithWebIdentity"
-
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
-
           StringLike = {
             "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/dev"
           }
@@ -37,7 +32,6 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-
     Statement = [
       # LAMBDA
       {
@@ -361,7 +355,6 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
 }
 
 resource "aws_iam_role_policy_attachment" "dev_github_actions_terraform" {
-
   role       = aws_iam_role.dev_github_actions_terraform.name
   policy_arn = aws_iam_policy.dev_github_actions_terraform.arn
 }
