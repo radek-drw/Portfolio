@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 resource "aws_iam_role" "dev_github_actions_terraform" {
 
   name = "dev-github-actions-terraform-role"
