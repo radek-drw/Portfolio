@@ -68,9 +68,8 @@ jobs:
       - name: Code Quality Checks
         uses: ./.github/actions/code-quality
 
-  # --- Deployment ---
-  deploy-terraform:
-    environment: production
+  # --- Terraform Plan ---
+  terraform-plan:
     needs:
       - terraform-quality-check
       - code-quality-check
@@ -100,7 +99,54 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -out=tfplan
+
+      - name: Show Terraform Plan
+        run: terraform show -no-color tfplan
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v7
+        with:
+          name: prod-tfplan
+          path: infra/envs/prod/tfplan
+          if-no-files-found: error
+          retention-days: 1
+
+  # --- Deployment ---
+  deploy-terraform:
+    environment: production
+    needs:
+      - terraform-plan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/envs/prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.14.0
+
+      - name: Build Lambdas
+        uses: ./.github/actions/build-lambdas
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/prod-github-actions-terraform-role
+          aws-region: eu-west-1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v8
+        with:
+          name: prod-tfplan
+          path: infra/envs/prod
 
       - name: Terraform Apply
-        run: terraform apply
+        run: terraform apply tfplan
