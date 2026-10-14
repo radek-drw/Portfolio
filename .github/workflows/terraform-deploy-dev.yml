@@ -6,6 +6,7 @@ on:
       - dev
     paths:
       - 'infra/**'
+      - '!infra/envs/prod/**'
       - 'backend/src/**'
       - 'backend/package.json'
       - 'pnpm-lock.yaml'
