@@ -16,3 +16,8 @@ variable "domain_name" {
   description = "Custom domain name"
   type        = string
 }
+
+variable "env_name" {
+  description = "Environment name used for resource naming (e.g., dev, prod)"
+  type        = string
+}
