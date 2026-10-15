@@ -16,7 +16,10 @@ resource "aws_iam_role" "prod_github_actions_terraform" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:environment:production"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:radek-drw/Portfolio:ref:refs/heads/main",
+              "repo:radek-drw/Portfolio:environment:production"
+            ]
           }
         }
       }
