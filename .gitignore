@@ -9,7 +9,7 @@ package-lock.json
 # === Env / Secrets ===
 .env
 .env.*
-!.env.example  # (jeśli chcesz zostawić wzór pliku .env w repo)
+!.env.example
 
 # === System / IDE ===
 .DS_Store

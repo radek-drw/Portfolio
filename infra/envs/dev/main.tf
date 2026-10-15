@@ -1,0 +1,29 @@
+module "api" {
+  source = "../../stacks/backend/api"
+
+  env_name      = local.env_name
+  allow_origins = local.allow_origins
+}
+
+module "contact_form" {
+  source = "../../stacks/backend/contact-form"
+
+  env_name        = local.env_name
+  api_id          = module.api.api_id
+  execution_arn   = module.api.execution_arn
+  api_url         = module.api.api_url
+  lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
+}
+
+module "frontend" {
+  source = "../../stacks/frontend"
+
+  frontend_bucket_name = local.frontend_bucket_name
+  project_name         = local.project_name
+  domain_name          = local.domain_name
+  hosted_zone_name     = local.hosted_zone_name
+  providers = {
+    aws           = aws
+    aws.us_east_1 = aws.us_east_1
+  }
+}

@@ -1,53 +1,74 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import { performance } from 'node:perf_hooks';
 
 import { build } from 'esbuild';
 import archiver from 'archiver';
 
-// Get function name from CLI args
-const fnName = process.argv[2];
-if (!fnName) {
-  console.error('❌ Please provide a function name, e.g. `pnpm build:lambda contact-form`');
+const srcDir = 'src';
+const distDir = 'dist';
+
+// Find all Lambda entry files in src/
+const lambdaFiles = fs.readdirSync(srcDir).filter((file) => file.endsWith('.js'));
+
+if (lambdaFiles.length === 0) {
+  console.error('❌ No Lambda functions found in src/');
   process.exit(1);
 }
 
-// Define paths
-const entry = `src/${fnName}.js`;
-const outDir = `dist/${fnName}`;
-const outFile = path.join(outDir, 'index.js');
-const zipFile = `dist/${fnName}.zip`;
+console.log(`🚀 Found ${lambdaFiles.length} Lambda function(s):`);
 
-// Validate entry file
-if (!fs.existsSync(entry)) {
-  console.error(`❌ Entry file not found: ${entry}`);
-  process.exit(1);
+for (const file of lambdaFiles) {
+  console.log(`   • ${file}`);
 }
 
-// Ensure dist folder exists
-fs.mkdirSync(outDir, { recursive: true });
+const totalStart = performance.now();
 
-// BUILD PHASE
-console.log(`📦 Building Lambda function: ${fnName}...`);
+for (const file of lambdaFiles) {
+  const fnName = path.basename(file, '.js');
 
-await build({
-  entryPoints: [entry],
-  bundle: true,
-  platform: 'node',
-  target: 'node20',
-  outfile: outFile,
-  minify: true,
-  external: ['aws-sdk'],
-});
+  const entry = path.join(srcDir, file);
+  const outDir = path.join(distDir, fnName);
+  const outFile = path.join(outDir, 'index.js');
+  const zipFile = path.join(distDir, `${fnName}.zip`);
 
-console.log(`✅ Build completed for ${fnName}. Creating ZIP...`);
+  const start = performance.now();
 
-// ZIP PHASE
-await zipLambda(outDir, zipFile);
+  // Clean previous build
+  fs.rmSync(outDir, { recursive: true, force: true });
+  fs.rmSync(zipFile, { force: true });
 
-// Log ZIP size
-const stats = fs.statSync(zipFile);
-console.log(`✅ ZIP file created: ${zipFile}`);
-console.log(`📦 ZIP size: ${(stats.size / 1024).toFixed(2)} KB`);
+  // Create output directory
+  fs.mkdirSync(outDir, { recursive: true });
+
+  console.log(`\n📦 Building Lambda function: ${fnName}...`);
+
+  await build({
+    entryPoints: [entry],
+    bundle: true,
+    platform: 'node',
+    target: 'node24',
+    outfile: outFile,
+    minify: true,
+    external: ['aws-sdk'],
+  });
+
+  console.log(`✅ Build completed for ${fnName}. Creating ZIP...`);
+
+  await zipLambda(outDir, zipFile);
+
+  const stats = fs.statSync(zipFile);
+  const duration = ((performance.now() - start) / 1000).toFixed(2);
+
+  console.log(`✅ ZIP file created: ${zipFile}`);
+  console.log(`📦 ZIP size: ${(stats.size / 1024).toFixed(2)} KB`);
+  console.log(`⏱️ Total time: ${duration}s`);
+}
+
+const totalDuration = ((performance.now() - totalStart) / 1000).toFixed(2);
+
+console.log('\n✅ All Lambda functions built successfully!');
+console.log(`⏱️ Total build time: ${totalDuration}s`);
 
 async function zipLambda(sourceDir, zipPath) {
   return new Promise((resolve, reject) => {
@@ -58,7 +79,12 @@ async function zipLambda(sourceDir, zipPath) {
     output.on('close', resolve);
 
     archive.pipe(output);
-    archive.directory(sourceDir, false);
+
+    archive.file(path.join(sourceDir, 'index.js'), {
+      name: 'index.js',
+      date: new Date(0),
+    });
+
     archive.finalize();
   });
 }

@@ -1,0 +1,28 @@
+name: Code Quality Checks
+description: Run ESLint and Prettier checks
+
+runs:
+  using: composite
+  steps:
+    - name: Enable pnpm
+      shell: bash
+      run: corepack enable
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24.13.0
+        cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile --filter . --ignore-scripts
+
+    - name: Lint code
+      shell: bash
+      run: pnpm run lint
+
+    - name: Check code formatting
+      shell: bash
+      run: pnpm run format:check

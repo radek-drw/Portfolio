@@ -14,6 +14,7 @@ export default defineConfig([
       '**/.tmp/**',
       '**/.cache/**',
       '**/public/**',
+      'infra/**',
     ],
   },
 
@@ -52,7 +53,7 @@ export default defineConfig([
           'newlines-between': 'always',
         },
       ],
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
     },
   },

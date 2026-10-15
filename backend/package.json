@@ -4,7 +4,7 @@
   "description": "Backend application (Node.js/AWS-SDK)",
   "scripts": {
     "build:lambda": "node scripts/build-lambda.js",
-    "invoke:contact-form": "node ./scripts/invoke-contact-form.local.js"
+    "invoke:send-email": "node ./scripts/invoke-send-email.local.js"
   },
   "keywords": [],
   "author": "Radek Drweski",

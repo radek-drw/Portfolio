@@ -1,71 +1,98 @@
-# #!/bin/sh
-# set -e
+#!/usr/bin/env bash
+set -e
 
-# ## ======================
-# ## SECRET SCAN | ggshield
-# ## ======================
-# # Checks that ggshield is installed
-# if ! command -v ggshield >/dev/null 2>&1; then
-#   echo "❌ ggshield is not installed" >&2
-#   echo "Install it from: https://github.com/GitGuardian/ggshield" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+# Checks that a required tool is installed
+check_tool() {
+  if ! command -v "$1" >/dev/null; then
+    echo "❌ $1 is not installed"
+    exit 1
+  fi
+}
+## ======================
+## SECRET SCAN | gitleaks
+## ======================
+# Scans staged files for secrets and redacts secret values in the output
+check_tool "gitleaks"
+echo "Running 'gitleaks'"
+gitleaks protect --staged --redact --verbose
 
-# echo "Running secret scan with ggshield..."
-# ggshield secret scan pre-commit
-# echo "----------------------------------------"
+## ===========================================
+## LINT & FORMAT | prettier, eslint, terraform fmt
+## ===========================================
+echo "Running 'lint-staged'"
+pnpm run lint-staged
 
-# ## ===============================================
-# ## LINT & FORMAT | prettier, eslint, terraform
-# ## ===============================================
-# echo "Running lint-staged..."
-# pnpm run lint-staged
-# echo "----------------------------------------"
+# =======================================
+# VALIDATE TERRAFORM | terraform validate
+# =======================================
+# Validate the dev environment when Terraform files are affected by staged changes
+run_terraform_validate() {
+  if git diff --cached --name-only | grep -q '^infra/.*\.tf$'; then
 
-# ## =============================================
-# ## UPDATE TERRAFORM MODULE DOCS | terraform-docs
-# ## =============================================
-# # Checks that terraform-docs is installed
-# if ! command -v terraform-docs >/dev/null 2>&1; then
-#   echo "❌ terraform-docs is not installed" >&2
-#   echo "Install it from: https://terraform-docs.io/user-guide/installation/" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+    echo "Running 'terraform validate' for dev..."
+    terraform -chdir=infra/envs/dev validate
 
-# # Updates README.md for each module with staged .tf changes
-# git diff --cached --name-only \
-#   | grep '^backend/infra/modules/.*\.tf$' \
-#   | xargs -r -n1 dirname -- \
-#   | sort -u \
-#   | while read -r module; do
-#       echo "Updating docs for $module"
-#       terraform-docs markdown table "$module" \
-#         --output-file README.md \
-#         --output-mode inject
-#       git add "$module/README.md" # Manually stage the updated README.md
-#       echo "----------------------------------------"
-#     done
+  fi
+}
 
-# ## =================================
-# ## VALIDATE TERRAFORM FILES | tflint
-# ## =================================
-# # Checks that tflint is installed
-# if ! command -v tflint >/dev/null 2>&1; then
-#   echo "❌ tflint is not installed" >&2
-#   echo "Install it from: https://github.com/terraform-linters/tflint" >&2
-#   echo "----------------------------------------"
-#   exit 1
-# fi
+# ==========================
+# TERRAFORM LINTING | tflint
+# ==========================
+# Run TFLint only in Terraform directories affected by staged changes
+# Uses the appropriate TFLint config for each directory
+run_tflint() {
+  terraform_dirs=$(git diff --cached --name-only \
+    | grep '^infra/.*\.tf$' \
+    | xargs -r -n1 dirname \
+    | sort -u)
 
-# # Runs tflint for each directory with staged .tf changes
-# git diff --cached --name-only \
-#   | grep '^backend/infra/.*\.tf$' \
-#   | xargs -r -n1 dirname -- \
-#   | sort -u \
-#   | while read -r dir; do
-#       echo "Running tflint for $dir"
-#       (cd "$dir" && tflint)
-#       echo "----------------------------------------"
-#     done
+  if [[ -n "$terraform_dirs" ]]; then
+
+    check_tool "tflint"
+
+    for dir in $terraform_dirs; do
+      echo "Running 'TFLint' for $dir"
+
+      if [[ "$dir" == infra/modules/* ]]; then
+        config="$(pwd)/infra/modules/.tflint.hcl"
+      elif [[ "$dir" == infra/stacks/* ]]; then
+        config="$(pwd)/infra/stacks/.tflint.hcl"
+      else
+        config="$(pwd)/infra/.tflint.hcl"
+      fi
+
+      (cd "$dir" && tflint --config "$config")
+    done
+  fi
+}
+
+# =============================================
+# UPDATE TERRAFORM MODULE DOCS | terraform-docs
+# =============================================
+# Update documentation only for Terraform modules affected by staged changes.
+# Re-stage generated README files before the commit.
+run_terraform_docs() {
+  module_dirs=$(git diff --cached --name-only \
+    | grep '^infra/modules/.*\.tf$' \
+    | xargs -r -n1 dirname \
+    | sort -u)
+
+  if [[ -n "$module_dirs" ]]; then
+
+    check_tool "terraform-docs"
+
+    for dir in $module_dirs; do
+      echo "Running 'terraform-docs' for $dir"
+
+      terraform-docs markdown table "$dir" \
+        --output-file README.md \
+        --output-mode inject
+
+      git add "$dir/README.md"
+    done
+  fi
+}
+
+run_terraform_validate
+run_tflint
+run_terraform_docs

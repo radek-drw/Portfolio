@@ -51,3 +51,18 @@ git grep -w -l npm
 git grep -l npx
 git grep package-lock
 git grep "npm install"
+
+1. change names for dev and prod api_url
+
+2. change date in footer 2025->2026 (automatic using JS)
+3. fix readme in infra/bootstrap according OIDC
+4. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
+5. IAM users -> create by terraform not in console
+6. add readme to infra/bootstrap with explanation of responsibility od files
+7. add setup.sh for instalation and initializationS
+8. consider changing iam in infra/envs/dev/github-actions-terraform-iam.tf from role, policy, attachment to
+   data "aws_iam_policy_document" "example" {
+   ...
+   }
+9. change documentation Adding New Lambda (now includes github actions)
+10. when lambda removed it also should be removed from s3 lmabda artifacts
