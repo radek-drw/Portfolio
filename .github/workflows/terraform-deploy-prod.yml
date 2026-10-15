@@ -101,9 +101,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
-      - name: Show Terraform Plan
-        run: terraform show -no-color tfplan
-
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v7
         with:
