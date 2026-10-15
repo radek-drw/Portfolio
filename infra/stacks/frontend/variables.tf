@@ -17,3 +17,8 @@ variable "hosted_zone_name" {
   description = "Route53 hosted zone name"
   type        = string
 }
+
+variable "env_name" {
+  description = "Environment name used for resource naming (e.g., dev, prod)"
+  type        = string
+}

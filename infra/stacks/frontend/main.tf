@@ -15,6 +15,7 @@ module "acm" {
 module "cloudfront" {
   source = "../../modules/frontend/cloudfront"
 
+  env_name                    = var.env_name
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
   project_name                = var.project_name
   certificate_arn             = module.acm.certificate_arn

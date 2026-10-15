@@ -18,6 +18,7 @@ module "contact_form" {
 module "frontend" {
   source = "../../stacks/frontend"
 
+  env_name             = local.env_name
   frontend_bucket_name = local.frontend_bucket_name
   project_name         = local.project_name
   domain_name          = local.domain_name

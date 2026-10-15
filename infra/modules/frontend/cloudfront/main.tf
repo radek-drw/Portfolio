@@ -3,7 +3,7 @@ data "aws_cloudfront_cache_policy" "caching_optimized" {
 }
 
 resource "aws_cloudfront_origin_access_control" "this" {
-  name                              = "${var.project_name}-oac"
+  name                              = "${var.env_name}-${var.project_name}-oac"
   description                       = "OAC for S3"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
