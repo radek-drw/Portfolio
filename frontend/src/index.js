@@ -6,3 +6,5 @@ import './js/navbar-links-scroll.js';
 import './js/skills-slider.js';
 import './js/form-handler.js';
 import './js/mobile-menu.js';
+
+document.getElementById('current-year').textContent = new Date().getFullYear();
