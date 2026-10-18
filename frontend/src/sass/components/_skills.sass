@@ -1,7 +1,7 @@
 @use '../mixins/mixins' as mix
 @use '../mixins/mixins-media-queries' as mq
 
-$skills-animation-time: 4s
+$skills-animation-time: 5s
 
 .skills
   &__title
@@ -9,8 +9,10 @@ $skills-animation-time: 4s
   &__list
     display: flex
     flex-wrap: wrap
-    padding: 140px 0
+    padding: 50px 0
+    height: 500px
     position: relative
+    align-content: space-around
     @include mq.mobile
       min-height: 400px
       padding: 70px 0
@@ -42,7 +44,11 @@ $skills-animation-time: 4s
       &--stylus>img,
       &--php>img,
       &--jest>img,
-      &--tailwindcss>img
+      &--tailwindcss>img,
+      &--aws>img,
+      &--terraform>img,
+      &--github-actions>img,
+      &--bash>img
         position: relative
       &--nodejs>img
         top: 20%
@@ -61,6 +67,17 @@ $skills-animation-time: 4s
         width: 90px
       &--tailwindcss>img
         top: 3%
+        width: 80px
+      &--aws>img
+        top: -10%
+        width: 80px
+      &--terraform>img
+        top: -10%
+        width: 180px
+      &--github-actions>img
+        width: 65px
+      &--bash>img
+        top: -7%
         width: 80px
 
     &-progress-bar
