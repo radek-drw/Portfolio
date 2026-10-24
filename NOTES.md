@@ -47,10 +47,6 @@ rm -f pnpm-lock.yaml
 pnpm store prune
 remove 'pnpm', 'pnpm-cache', 'pnpm-state' - C:\Users\rdrwe\AppData\Local
 
-## VOLTA
-
-win + r -> sysdm.cpl
-
 ## NODE.JS uninstall
 
 ## Checklist: Migration from npm to pnpm
