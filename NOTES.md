@@ -11,7 +11,15 @@
 9. add .node-version to keep the same Node version for all devs and CI - [x]
 10. add to README.md how to setup `fnm` (Node version manager). Install fnm `choco install fnm`, configure bash `code ~/.bashrc` - add `eval "$(fnm env --use-on-cd --shell bash)"`, run `fnm use` to install version
 11. add script `postinstall` to `package.json` that checks if tools like tflint, terraform-docs, lazygit, nvm, ggshield etc are in project and if not instruction how to install (win, macos, linux)
-12. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
+12. change date in footer 2025->2026 (automatic using JS) - [x]
+13. fix readme in infra/bootstrap according OIDC
+14. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
+15. IAM users -> create by terraform not in console
+16. add readme to infra/bootstrap with explanation of responsibility od files
+17. add setup.sh for instalation and initialization
+18. change documentation Adding New Lambda (now includes github actions)
+19. when lambda removed it also should be removed from s3 lmabda artifacts
+20. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
 
 ## ISSUES
 
@@ -39,10 +47,6 @@ rm -f pnpm-lock.yaml
 pnpm store prune
 remove 'pnpm', 'pnpm-cache', 'pnpm-state' - C:\Users\rdrwe\AppData\Local
 
-## VOLTA
-
-win + r -> sysdm.cpl
-
 ## NODE.JS uninstall
 
 ## Checklist: Migration from npm to pnpm
@@ -51,18 +55,3 @@ git grep -w -l npm
 git grep -l npx
 git grep package-lock
 git grep "npm install"
-
-1. change names for dev and prod api_url
-
-2. change date in footer 2025->2026 (automatic using JS)
-3. fix readme in infra/bootstrap according OIDC
-4. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
-5. IAM users -> create by terraform not in console
-6. add readme to infra/bootstrap with explanation of responsibility od files
-7. add setup.sh for instalation and initializationS
-8. consider changing iam in infra/envs/dev/github-actions-terraform-iam.tf from role, policy, attachment to
-   data "aws_iam_policy_document" "example" {
-   ...
-   }
-9. change documentation Adding New Lambda (now includes github actions)
-10. when lambda removed it also should be removed from s3 lmabda artifacts
