@@ -2,24 +2,23 @@
 
 1. add locks i dynamodb for terraform state and add s3 versioning - [x]
 2. terraform - write documentation about adding, removing, editing, reading secrets in AWS SSM - [ ]
-3. change api name to dev-portoflio-api - [ ]
-4. .github\workflows\README.md - change descritpion when ci-quality-check finished - [ ]
-5. think to use pnpm while projects gets bigger - [x]
-6. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
-7. add to README.md - running `npm install` is intentionally blocked and will alway fail, `preinstall` script using `only-allow` enforces it. Project requires `pnpm` - [ ]
-8. find or try to build own solution - how to protect using `npm install` while pnpm is used in project, `only-allow` package doesn't give clear message - [ ]
-9. add .node-version to keep the same Node version for all devs and CI - [x]
-10. add to README.md how to setup `fnm` (Node version manager). Install fnm `choco install fnm`, configure bash `code ~/.bashrc` - add `eval "$(fnm env --use-on-cd --shell bash)"`, run `fnm use` to install version
-11. add script `postinstall` to `package.json` that checks if tools like tflint, terraform-docs, lazygit, nvm, ggshield etc are in project and if not instruction how to install (win, macos, linux)
-12. change date in footer 2025->2026 (automatic using JS) - [x]
-13. fix readme in infra/bootstrap according OIDC
-14. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
-15. IAM users -> create by terraform not in console
-16. add readme to infra/bootstrap with explanation of responsibility od files
-17. add setup.sh for instalation and initialization
-18. change documentation Adding New Lambda (now includes github actions)
-19. when lambda removed it also should be removed from s3 lmabda artifacts
-20. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
+3. .github\workflows\README.md - change descritpion when ci-quality-check finished - [ ]
+4. think to use pnpm while projects gets bigger - [x]
+5. add to README.md - project uses pnpm package manager instead of npm, to enable pnpm run `corepack enable` in PowerShell as Administrator. Corepack is used for package manager (pnpm) version control, (starting with Node.js 25, Corepack must be installed as a separate package) - [ ]
+6. add to README.md - running `npm install` is intentionally blocked and will alway fail, `preinstall` script using `only-allow` enforces it. Project requires `pnpm` - [ ]
+7. find or try to build own solution - how to protect using `npm install` while pnpm is used in project, `only-allow` package doesn't give clear message - [ ]
+8. add .node-version to keep the same Node version for all devs and CI - [x]
+9. add to README.md how to setup `fnm` (Node version manager). Install fnm `choco install fnm`, configure bash `code ~/.bashrc` - add `eval "$(fnm env --use-on-cd --shell bash)"`, run `fnm use` to install version
+10. add script `postinstall` to `package.json` that checks if tools like tflint, terraform-docs, lazygit, nvm, ggshield etc are in project and if not instruction how to install (win, macos, linux)
+11. change date in footer 2025->2026 (automatic using JS) - [x]
+12. fix readme in infra/bootstrap according OIDC
+13. remove locals from env/dev, lambda name i lambda.tf is fine no need to move to locals.tf
+14. IAM users -> create by terraform not in console
+15. add readme to infra/bootstrap with explanation of responsibility od files
+16. add setup.sh for instalation and initialization
+17. change documentation Adding New Lambda (now includes github actions)
+18. when lambda removed it also should be removed from s3 lmabda artifacts
+19. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
 
 ## ISSUES
 
