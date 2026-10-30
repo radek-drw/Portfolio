@@ -19,6 +19,7 @@
 17. change documentation Adding New Lambda (now includes github actions)
 18. when lambda removed it also should be removed from s3 lmabda artifacts
 19. **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
+20. add 'www' subdomain do production
 
 ## ISSUES
 
