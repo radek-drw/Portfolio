@@ -30,7 +30,7 @@ module "route53" {
 
   hosted_zone_name          = var.hosted_zone_name
   domain_name               = var.domain_name
-  www_domain_name           = var.domain_name
+  www_domain_name           = var.www_domain_name
   distribution_domain_name  = module.cloudfront.distribution_domain_name
   distribution_zone_id      = module.cloudfront.distribution_zone_id
   domain_validation_options = module.acm.domain_validation_options
