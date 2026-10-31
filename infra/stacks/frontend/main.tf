@@ -5,8 +5,10 @@ module "s3" {
 }
 
 module "acm" {
-  source      = "../../modules/frontend/acm"
-  domain_name = var.domain_name
+  source          = "../../modules/frontend/acm"
+  domain_name     = var.domain_name
+  www_domain_name = var.www_domain_name
+
   providers = {
     aws = aws.us_east_1
   }
@@ -20,6 +22,7 @@ module "cloudfront" {
   project_name                = var.project_name
   certificate_arn             = module.acm.certificate_arn
   domain_name                 = var.domain_name
+  www_domain_name             = var.www_domain_name
 }
 
 module "route53" {
@@ -27,6 +30,7 @@ module "route53" {
 
   hosted_zone_name          = var.hosted_zone_name
   domain_name               = var.domain_name
+  www_domain_name           = var.domain_name
   distribution_domain_name  = module.cloudfront.distribution_domain_name
   distribution_zone_id      = module.cloudfront.distribution_zone_id
   domain_validation_options = module.acm.domain_validation_options

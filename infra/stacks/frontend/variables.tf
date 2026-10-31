@@ -13,6 +13,11 @@ variable "domain_name" {
   type        = string
 }
 
+variable "www_domain_name" {
+  description = "WWW subdomain name for frontend"
+  type        = string
+}
+
 variable "hosted_zone_name" {
   description = "Route53 hosted zone name"
   type        = string

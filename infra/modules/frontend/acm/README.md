@@ -24,6 +24,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name for the ACM certificate | `string` | n/a | yes |
+| <a name="input_www_domain_name"></a> [www\_domain\_name](#input\_www\_domain\_name) | WWW domain name for the ACM certificate | `string` | n/a | yes |
 
 ## Outputs
 

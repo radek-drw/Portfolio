@@ -30,6 +30,7 @@ No modules.
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Custom domain name | `string` | n/a | yes |
 | <a name="input_env_name"></a> [env\_name](#input\_env\_name) | Environment name used for resource naming (e.g., dev, prod) | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of the project | `string` | n/a | yes |
+| <a name="input_www_domain_name"></a> [www\_domain\_name](#input\_www\_domain\_name) | WWW subdomain name for frontend | `string` | n/a | yes |
 
 ## Outputs
 
