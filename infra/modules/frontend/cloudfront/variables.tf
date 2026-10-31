@@ -17,6 +17,11 @@ variable "domain_name" {
   type        = string
 }
 
+variable "www_domain_name" {
+  description = "WWW subdomain name for frontend"
+  type        = string
+}
+
 variable "env_name" {
   description = "Environment name used for resource naming (e.g., dev, prod)"
   type        = string

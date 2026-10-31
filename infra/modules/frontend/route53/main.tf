@@ -18,8 +18,13 @@ resource "aws_route53_record" "certificate_validation" {
 }
 
 resource "aws_route53_record" "alias_a" {
+  for_each = toset([
+    var.domain_name,
+    var.www_domain_name
+  ])
+
   zone_id = data.aws_route53_zone.this.zone_id
-  name    = var.domain_name
+  name    = each.value
   type    = "A"
 
   alias {
@@ -30,8 +35,13 @@ resource "aws_route53_record" "alias_a" {
 }
 
 resource "aws_route53_record" "alias_aaaa" {
+  for_each = toset([
+    var.domain_name,
+    var.www_domain_name
+  ])
+
   zone_id = data.aws_route53_zone.this.zone_id
-  name    = var.domain_name
+  name    = each.value
   type    = "AAAA"
 
   alias {

@@ -8,6 +8,11 @@ variable "domain_name" {
   type        = string
 }
 
+variable "www_domain_name" {
+  description = "WWW domain name to create Route53 alias record for"
+  type        = string
+}
+
 variable "distribution_domain_name" {
   description = "CloudFront distribution domain name"
   type        = string

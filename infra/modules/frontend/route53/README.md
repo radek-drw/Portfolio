@@ -31,6 +31,7 @@ No modules.
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name to create Route53 alias record for | `string` | n/a | yes |
 | <a name="input_domain_validation_options"></a> [domain\_validation\_options](#input\_domain\_validation\_options) | ACM domain validation options | `any` | n/a | yes |
 | <a name="input_hosted_zone_name"></a> [hosted\_zone\_name](#input\_hosted\_zone\_name) | Hosted Zone name | `string` | n/a | yes |
+| <a name="input_www_domain_name"></a> [www\_domain\_name](#input\_www\_domain\_name) | WWW domain name to create Route53 alias record for | `string` | n/a | yes |
 
 ## Outputs
 

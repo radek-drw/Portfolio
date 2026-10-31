@@ -25,12 +25,14 @@ pnpm run lint-staged
 # =======================================
 # VALIDATE TERRAFORM | terraform validate
 # =======================================
-# Validate the dev environment when Terraform files are affected by staged changes
+# Validate the environments when Terraform files are affected by staged changes
 run_terraform_validate() {
   if git diff --cached --name-only | grep -q '^infra/.*\.tf$'; then
 
-    echo "Running 'terraform validate' for dev..."
-    terraform -chdir=infra/envs/dev validate
+    for env in dev prod; do
+      echo "Running 'terraform validate' for $env..."
+      terraform -chdir="infra/envs/$env" validate
+    done
 
   fi
 }

@@ -15,7 +15,8 @@ resource "aws_cloudfront_distribution" "this" {
   wait_for_deployment = true
 
   aliases = [
-    var.domain_name
+    var.domain_name,
+    var.www_domain_name
   ]
 
   comment             = "${var.project_name} frontend"
