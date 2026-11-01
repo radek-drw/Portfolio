@@ -25,6 +25,7 @@ jobs:
 
   # --- Deployment ---
   deploy-frontend:
+    environment: production
     needs:
       - code-quality-check
     runs-on: ubuntu-latest
