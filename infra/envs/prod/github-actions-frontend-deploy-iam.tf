@@ -20,7 +20,10 @@ resource "aws_iam_role" "github_actions_frontend_deploy" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:radek-drw/Portfolio:ref:refs/heads/${local.git_branch}"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:radek-drw/Portfolio:ref:refs/heads/${local.git_branch}",
+              "repo:radek-drw/Portfolio:environment:production"
+            ]
           }
         }
       }
