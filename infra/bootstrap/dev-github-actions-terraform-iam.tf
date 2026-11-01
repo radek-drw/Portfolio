@@ -79,15 +79,7 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
         Effect = "Allow"
         Action = [
           "iam:CreateRole",
-          "iam:TagRole"
-        ]
-        Resource = [
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
-        ]
-      },
-      {
-        Effect = "Allow"
-        Action = [
+          "iam:TagRole",
           "iam:GetRole",
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
@@ -97,6 +89,15 @@ resource "aws_iam_policy" "dev_github_actions_terraform" {
         ]
         Resource = [
           "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-*-role"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "iam:UpdateAssumeRolePolicy"
+        ]
+        Resource = [
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dev-github-actions-frontend-deploy-role"
         ]
       },
       {
