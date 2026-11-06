@@ -22,3 +22,8 @@ variable "lambda_zip_path" {
   description = "Path to the Lambda deployment package"
   type        = string
 }
+
+variable "alarm_email" {
+  description = "E-mail address receiving CloudWatch alarm notifications"
+  type        = string
+}
