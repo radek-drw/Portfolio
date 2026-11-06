@@ -36,7 +36,7 @@ resource "aws_cloudwatch_metric_alarm" "lambda_duration_warning" {
 }
 
 resource "aws_sns_topic" "lambda_alerts" {
-  name = "${local.lambda_name}-${var.env_name}-alerts"
+  name = "${var.env_name}-${local.lambda_name}-alerts"
 }
 
 resource "aws_sns_topic_subscription" "lambda_errors_email" {
