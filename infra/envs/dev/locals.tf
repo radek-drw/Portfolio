@@ -6,6 +6,7 @@ locals {
   project_name         = "portfolio"
   domain_name          = "dev.radek-drweski.com"
   hosted_zone_name     = "radek-drweski.com"
+  alarm_email          = "rdrweski@gmail.com"
   tags = {
     Environment = "dev"
     Project     = "portfolio"

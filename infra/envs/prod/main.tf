@@ -12,6 +12,7 @@ module "contact_form" {
   api_id          = module.api.api_id
   execution_arn   = module.api.execution_arn
   api_url         = module.api.api_url
+  alarm_email     = local.alarm_email
   lambda_zip_path = "${path.root}/../../../backend/dist/send-email.zip"
 }
 

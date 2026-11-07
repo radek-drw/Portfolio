@@ -7,6 +7,7 @@ locals {
   domain_name          = "radek-drweski.com"
   www_domain_name      = "www.radek-drweski.com"
   hosted_zone_name     = "radek-drweski.com"
+  alarm_email          = "rdrweski@gmail.com"
   tags = {
     Environment = "prod"
     Project     = "portfolio"
