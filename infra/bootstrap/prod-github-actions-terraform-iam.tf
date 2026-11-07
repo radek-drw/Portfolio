@@ -352,6 +352,43 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/ses-from-address"
         ]
       },
+      # SNS
+      {
+        Effect = "Allow"
+        Action = [
+          "sns:CreateTopic",
+          "sns:GetTopicAttributes",
+          "sns:SetTopicAttributes",
+          "sns:ListTagsForResource",
+          "sns:TagResource",
+          "sns:DeleteTopic",
+          "sns:Subscribe",
+          "sns:GetSubscriptionAttributes",
+          "sns:Unsubscribe"
+        ]
+        Resource = [
+          "arn:aws:sns:eu-west-1:${data.aws_caller_identity.current.account_id}:prod-send-email-alerts"
+        ]
+      },
+      # CLOUDWATCH
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudwatch:DescribeAlarms"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudwatch:PutMetricAlarm",
+          "cloudwatch:ListTagsForResource",
+          "cloudwatch:DeleteAlarms"
+        ]
+        Resource = [
+          "arn:aws:cloudwatch:eu-west-1:${data.aws_caller_identity.current.account_id}:alarm:prod-send-email-*"
+        ]
+      }
     ]
   })
 }
