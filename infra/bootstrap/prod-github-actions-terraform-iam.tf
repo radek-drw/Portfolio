@@ -52,7 +52,7 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "lambda:TagResource"
         ]
         Resource = [
-          "arn:aws:lambda:eu-west-1:${data.aws_caller_identity.current.account_id}:function:prod-*-lambda"
+          "arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:function:prod-*-lambda"
         ]
       },
       # IAM
@@ -125,11 +125,11 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "apigateway:POST"
         ]
         Resource = [
-          "arn:aws:apigateway:eu-west-1::/apis",
-          "arn:aws:apigateway:eu-west-1::/apis/*/stages",
-          "arn:aws:apigateway:eu-west-1::/apis/*/integrations",
-          "arn:aws:apigateway:eu-west-1::/apis/*/routes",
-          "arn:aws:apigateway:eu-west-1::/tags/*"
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/stages",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/integrations",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/routes",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/tags/*"
         ]
       },
       {
@@ -140,10 +140,10 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "apigateway:PATCH"
         ]
         Resource = [
-          "arn:aws:apigateway:eu-west-1::/apis/*",
-          "arn:aws:apigateway:eu-west-1::/apis/*/stages/*",
-          "arn:aws:apigateway:eu-west-1::/apis/*/integrations/*",
-          "arn:aws:apigateway:eu-west-1::/apis/*/routes/*"
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/stages/*",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/integrations/*",
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/routes/*"
         ]
       },
       {
@@ -152,7 +152,7 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "apigateway:TagResource"
         ]
         Resource = [
-          "arn:aws:apigateway:eu-west-1::/apis/*/stages"
+          "arn:aws:apigateway:${data.aws_region.current.name}::/apis/*/stages"
         ]
       },
       # ACM
@@ -171,7 +171,7 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "acm:ListTagsForCertificate",
           "acm:DeleteCertificate"
         ]
-        Resource = "arn:aws:acm:us-east-1:${data.aws_caller_identity.current.account_id}:certificate/*"
+        Resource = "arn:aws:acm:${data.aws_region.us_east_1.name}:${data.aws_caller_identity.current.account_id}:certificate/*"
       },
       # CLOUDFRONT
       {
@@ -348,8 +348,8 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "ssm:GetParameter"
         ]
         Resource = [
-          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/recaptcha-secret",
-          "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/ses-from-address"
+          "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/recaptcha-secret",
+          "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/ses-from-address"
         ]
       },
       # SNS
@@ -367,7 +367,7 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "sns:Unsubscribe"
         ]
         Resource = [
-          "arn:aws:sns:eu-west-1:${data.aws_caller_identity.current.account_id}:prod-send-email-alerts"
+          "arn:aws:sns:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:prod-send-email-alerts"
         ]
       },
       # CLOUDWATCH
@@ -386,7 +386,7 @@ resource "aws_iam_policy" "prod_github_actions_terraform" {
           "cloudwatch:DeleteAlarms"
         ]
         Resource = [
-          "arn:aws:cloudwatch:eu-west-1:${data.aws_caller_identity.current.account_id}:alarm:prod-send-email-*"
+          "arn:aws:cloudwatch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:alarm:prod-send-email-*"
         ]
       }
     ]
