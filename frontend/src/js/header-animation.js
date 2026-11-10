@@ -1,4 +1,4 @@
-const particleColor = '#12f7d6';
+const particleColor = '#75C9F2';
 const particleSize = 4;
 const particlesGap = 20;
 const mouseRadius = 3000;
