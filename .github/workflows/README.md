@@ -1,35 +1,52 @@
-## GitHub Actions Workflows
+# GitHub Actions Workflows
 
-This project uses automated CI/CD pipelines for backend and frontend.
+This directory contains GitHub Actions workflows responsible for automating code quality checks, builds, deployments, and other CI/CD processes.
 
-1. **Pull Request** - main (Production validation)
+## Workflows
 
-   Triggered when a PR targets main.
+### 1. Frontend Deployment (DEV / PROD)
 
-   It:
-   - runs ESLint and Prettier checks
-   - builds the frontend
-   - runs Terraform plan for production
+**Purpose:** Builds and deploys the frontend application to the selected environment
 
-   Purpose: Ensure production changes are safe, valid, and buildable before merge.
+**Triggers:**
 
-2. **Push** - dev (Development environment)
+- Push to the `dev` or `main` branch when frontend files are changed (excluding Markdown files)
+- Manual execution via `workflow_dispatch`
 
-   Triggered on every push to dev.
+**What it does:**
 
-   It:
-   - runs lint and formatting checks
-   - builds the frontend
-   - deploys backend infrastructure to dev using Terraform
+1. Runs code quality checks using ESLint and Prettier
+2. Builds the frontend application
+3. Authenticates with AWS using OIDC and an environment-specific IAM Role, providing temporary credentials
+4. Deploys the build to the corresponding AWS S3 bucket
+5. Invalidates the corresponding CloudFront cache to make the latest changes available
 
-   Purpose: Continuous integration and automatic deployment to development environment.
+**Deployment dependency:** Deployment starts only after the code quality checks pass. If they fail, the deployment is skipped.
 
-3. **Push** - main (Production deployment)
+**Additional configuration:** The PROD deployment uses the GitHub `production` environment, which requires manual approval before deploying changes to S3 and CloudFront. This adds an extra safeguard for the main branch
 
-   Triggered after merge to main.
+### 2. Terraform Deployment (DEV / PROD)
 
-   It:
-   - runs Terraform apply for production
-   - requires manual approval via GitHub environments
+**Purpose**: Validates and deploys infrastructure changes to the selected AWS environment using Terraform
 
-   Purpose: Controlled production deployment
+**Triggers**:
+
+- Push to the `dev` or `main` branch when relevant infrastructure or backend files are changed
+- Manual execution via `workflow_dispatch`
+
+**What it does:**
+
+- Checks Terraform formatting, validates the configuration, and runs TFLint
+- Runs ESLint and Prettier checks on JavaScript-related files
+- Builds Lambda functions (required by Terraform on every fresh runner, even when Lambda code is unchanged)
+- Authenticates with AWS using OIDC and an environment-specific IAM Role, providing temporary credentials
+- Deploys infrastructure changes using Terraform
+
+**Deployment dependency:** Terraform deployment starts only after both `terraform-quality-check` and ` code-quality-check` pass
+
+**Environment differences:**
+
+- **DEV**: Runs terraform apply -auto-approve directly after all checks pass
+- **PROD**: First generates a Terraform plan and saves it as a GitHub Actions artifact. After manual approval, Terraform applies the previously generated plan
+
+**Additional configuration:** The PROD deployment uses the GitHub `production` environment, which requires manual approval before applying infrastructure changes. This adds an extra safeguard for the AWS production environment
