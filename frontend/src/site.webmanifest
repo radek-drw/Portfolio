@@ -1,6 +1,8 @@
 {
+  "id": "/",
   "name": "Radek Drweski Portfolio",
   "short_name": "Portfolio",
+  "start_url": "/",
   "icons": [
     {
       "src": "/assets/images/favicons/android-chrome-192x192.png",
