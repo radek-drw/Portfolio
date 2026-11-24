@@ -1,4 +1,4 @@
-# === Node / JS ===
+# Node / JS
 node_modules/
 dist/
 build/
@@ -6,31 +6,38 @@ coverage/
 *.log
 package-lock.json
 
-# === Env / Secrets ===
+# Env / Secrets
 .env
 .env.*
 !.env.example
 
-# === System / IDE ===
+# System / IDE
 .DS_Store
 Thumbs.db
 .idea/
 *.tmp
 *.swp
 
-# === Miscellaneous ===
+# Miscellaneous
 *.class
 *.pyc
 vendor/
 config.php
 .aws-sam/
 
-# === Terraform ===
+# Terraform
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
 *.tfvars.json
 crash.log
 
-# === GGShield cache ===
+# GGShield cache
 .cache_ggshield
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

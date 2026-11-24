@@ -47,7 +47,10 @@ export default {
       filename: '[name]-[contenthash:4].css',
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: './src/assets', to: './assets' }],
+      patterns: [
+        { from: './src/assets', to: './assets' },
+        { from: './src/site.webmanifest', to: './site.webmanifest' },
+      ],
     }),
   ],
   optimization: {

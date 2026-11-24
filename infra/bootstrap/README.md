@@ -1,78 +1,65 @@
-# Terraform S3 Backend Bootstrap — Quick Guide
+# Terraform Bootstrap
 
-When Terraform uses S3 bucket as its backend, the bucket must already exist **before** Terraform can initialize the S3 backend.
+### Contents
 
-## The solution: Bootstrap in two phases
+- [Terraform Bootstrap](#terraform-bootstrap)
+    - [Contents](#contents)
+  - [Terraform State Bucket](#terraform-state-bucket)
+    - [Purpose](#purpose)
+    - [Initial Setup](#initial-setup)
+      - [1. Create the S3 Bucket](#1-create-the-s3-bucket)
+      - [2. Migrate state to S3](#2-migrate-state-to-s3)
+  - [GitHub Actions IAM](#github-actions-iam)
+    - [Purpose](#purpose-1)
 
-### Phase 1 — Use the local backend
+## Terraform State Bucket
+### Purpose
+Creates the S3 bucket used to store Terraform state files
 
-Temporarily comment out the S3 backend configuration:
+### Initial Setup
+Since the bootstrap configuration also uses this bucket to store its own state, the initial setup requires two steps:
 
-```hcl
-# terraform {
-#   backend "s3" {
-#     bucket       = "my-terraform-state-bucket"
-#     key          = "bootstrap/terraform.tfstate"
-#     region       = "eu-west-1"
-#     use_lockfile = true
-#     encrypt      = true
-#   }
-# }
-```
+#### 1. Create the S3 Bucket
 
-Run:
+Temporarily comment out the S3 backend configuration in `backend.tf`.  
+Initialize Terraform using the local backend and create the bucket:
 
 ```bash
 terraform init
 terraform apply
 ```
 
-Terraform uses the default **local backend** and creates the S3 bucket.
+Terraform temporarily stores the bootstrap state locally in `terraform.tfstate`
 
-The Terraform state is temporarily stored locally:
+#### 2. Migrate state to S3
 
-```text
-terraform.tfstate
-```
-
-### Phase 2 — Move state to S3
-
-Once the bucket exists, uncomment the S3 backend configuration:
-
-```
-terraform {
-  backend "s3" {
-    bucket       = "my-terraform-state-bucket"
-    key          = "bootstrap/terraform.tfstate"
-    region       = "eu-west-1"
-    use_lockfile = true
-    encrypt      = true
-  }
-}
-```
-
-Then run:
+Uncomment the S3 backend configuration in `backend.tf`  
+Migrate the local state to S3:
 
 ```
 terraform init -migrate-state
 ```
 
-Terraform migrates the existing local state to S3.
+Verify that the state exists in S3:
 
-From this point onward, Terraform uses S3 as the backend.
-
-### Phase 3 — Remove the local state
-
-After confirming that the state exists in S3 and Terraform works correctly, manually delete the local state file:
-
-```
-terraform.tfstate
+```bash
+aws s3 ls s3://radek-portfolio-terraform-state/bootstrap
 ```
 
-Also check for:
+After successful verification, remove the temporary local state files:
 
+```bash
+rm -f terraform.tfstate terraform.tfstate.backup
 ```
-terraform.tfstate.backup
-```
+Notes:
+- S3 bucket versioning is enabled
+- S3 native state locking is enabled with `use_lockfile = true`
+- The bootstrap process only needs to be performed once
 
-and remove it if it is no longer needed
+## GitHub Actions IAM
+### Purpose
+Creates IAM roles for GitHub Actions to access AWS
+
+- Follows the Least Privilege principle, granting only the permissions required by Terraform
+- Permissions were identified and verified through manual testing and AWS CloudTrail analysis
+- IAM roles and policies must be created using `terraform apply` before running GitHub Actions workflows

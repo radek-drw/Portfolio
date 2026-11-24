@@ -10,17 +10,18 @@
 8. [ ] add to README.md how to setup `fnm` (Node version manager). Install fnm `choco install fnm`, configure bash `code ~/.bashrc` - add `eval "$(fnm env --use-on-cd --shell bash)"`, run `fnm use` to install version
 9. [ ] add script `postinstall` to `package.json` that checks if tools like tflint, terraform-docs, lazygit, nvm, ggshield etc are in project and if not instruction how to install (win, macos, linux)
 10. [x] change date in footer 2025->2026 (automatic using JS)
-11. [ ] fix readme in infra/bootstrap according OIDC
+11. [x] fix readme in infra/bootstrap regarding OIDC
 12. [x] remove Lambda locals from envs/dev, keep `lambda_name` in the contact-form stack because Lambda and IAM share it
 13. [ ] IAM users -> create by terraform not in console
-14. [ ] add readme to infra/bootstrap with explanation of responsibility od files
+14. [x] add readme to infra/bootstrap with explanation of responsibility of files
 15. [ ] add setup.sh for instalation and initialization
 16. [ ] change documentation Adding New Lambda (now includes github actions)
 17. [ ] when lambda removed it also should be removed from s3 lmabda artifacts
-18. [ ] **ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)**
-19. [ ] add 'www' subdomain do production
-20. [ ] AWS Budgets - add to terraform (infra/globa)
-21. [ ] CloudWatch Alarm na Errors, SNS Topic send alerts
+18. [ ] ONE GLOBAL INSTALL OF NODE(choco) + ENGINES(package.json)
+19. [x] add 'www' subdomain do production
+20. [ ] AWS Budgets - add to terraform (infra/global)
+21. [x] CloudWatch Alarm on Errors, SNS Topic send alerts
+22. [x] update website logo
 
 ## ISSUES
 
